@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { apiURL } from "./util/apiURL.js";
+import api from "./util/apiCalls";
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
 import Event from "./Pages/Event.js";
@@ -11,45 +11,41 @@ import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
 
-
-
 function App() {
-  
   return (
     <div>
       <Switch>
         <Route exact path="/">
-          <Landing/>
+          <Landing />
         </Route>
-        
+
         <Route path="/signup">
-          <SignUp/>
+          <SignUp />
         </Route>
 
         <Route path="/dashboard">
-          <Dashboard/>
+          <Dashboard />
         </Route>
 
         <Route path="/event/:event_id">
-          <Event/>
+          <Event />
         </Route>
-        
+
         <Route path="/:category/:provider_id">
-          <VendorShow/>
+          <VendorShow />
         </Route>
 
         <Route path="/:category">
-          <VendorIndex/>
+          <VendorIndex />
         </Route>
 
         <Route path="/favorites">
-          <Favorites/>
+          <Favorites />
         </Route>
 
         <Route path="/booked/:event_id">
-          <Booked/>
+          <Booked />
         </Route>
-
       </Switch>
     </div>
   );
