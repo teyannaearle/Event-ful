@@ -15,7 +15,7 @@ const config = () => {
 
 const getVendors = async (category, zip) => {
   const { data } = await axios.get(
-    `${proxy}/${yelpBase}/search?term=${category}&location=${zip}&category=${category}&radius=8046`,
+    `${proxy}/${yelpBase}/search?term=${category}&location=${zip}&category=${category}&radius=16093`,
     config()
   );
 
