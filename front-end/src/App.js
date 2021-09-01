@@ -1,26 +1,56 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { apiURL } from "./util/apiURL.js";
-const API = apiURL();
+import Booked from "./Pages/Booked.js";
+import Dashboard from "./Pages/Dashboard.js";
+import Event from "./Pages/Event.js";
+import Favorites from "./Pages/Favorites.js";
+import Landing from "./Pages/Landing.js";
+import SignUp from "./Pages/SignUp.js";
+import VendorIndex from "./Pages/VendorIndex.js";
+import VendorShow from "./Pages/VendorShow.js";
+import { Route, Switch } from "react-router-dom";
+
+
 
 function App() {
-  const [days, setDays] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`${API}/test`)
-      .then(
-        (response) => setDays(response.data),
-        (error) => console.log("get", error)
-      )
-      .catch((c) => console.warn("catch", c));
-  }, []);
+  
   return (
     <div>
-      <ul>
-        {days.map((day) => (
-          <li key={day.name}>{day.name}</li>
-        ))}
-      </ul>
+      <Switch>
+        <Route exact path="/">
+          <Landing/>
+        </Route>
+        
+        <Route path="/signup">
+          <SignUp/>
+        </Route>
+
+        <Route path="/dashboard">
+          <Dashboard/>
+        </Route>
+
+        <Route path="/event/:event_id">
+          <Event/>
+        </Route>
+        
+        <Route path="/:category/:provider_id">
+          <VendorShow/>
+        </Route>
+
+        <Route path="/:category">
+          <VendorIndex/>
+        </Route>
+
+        <Route path="/favorites">
+          <Favorites/>
+        </Route>
+
+        <Route path="/booked/:event_id">
+          <Booked/>
+        </Route>
+
+      </Switch>
     </div>
   );
 }
