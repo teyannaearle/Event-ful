@@ -1,52 +1,35 @@
-import React, { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
-import api from '../util/apiCalls'
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import api from "../util/apiCalls";
 
 export default function VendorShow() {
-    const [business, setbusiness] = useState({
-        name:"",
-           photos:"",
-           price:"",
-           hours:"",         
-url:"",
-display_phone:"",
-categories:"",
-rating:"",
-location:""
-    })
+  const [business, setbusiness] = useState({
+    photos: [],
+    categories: [{title: ""}],
+    location: {display_address: []},
+  });
 
-    const {provider_id} = useParams()
-    
-    useEffect(()=>{
-(async ()=>{
-const data = await api.getVendor(provider_id)
-// setbusiness(data)
-setbusiness({name:data.name,
-photos:data.photos,
-price:data.price,
-hours:data.hours,
-url:data.url,
-display_phone:data.display_phone,
-categories:data.categories,
-rating:data.rating,
-location:data.location,})
+  const { provider_id } = useParams();
 
-})() },[])
+  useEffect(() => {
+    (async () => {
+      const data = await api.getVendor(provider_id);
+      setbusiness(data);
+    })();
+  }, [provider_id]);
 
-    return (
-        <div>
-            Vendor Show Page
-            {/* {business.photos.map(photo =><img src={photo}/>)} */}
-            {/* name
-           photos(there's multiple)
-           price
-           hours
-            
-url
-display_phone
-categories.title(there are multiple)
-rating
-location.display_address */}
-        </div>
-    )
+  return (
+    <div>
+      <h1>{business.name} </h1>
+
+      {business.photos.map((photo, i) => (
+        <img src={photo} key={i} alt="service" width="250px" />
+      ))}
+      <p>{business.price}</p>
+      <p>{business.location.display_address.join(",")}</p>
+      <p>{business.display_phone}</p>
+      <p>{business.rating}</p> 
+      {business.categories.map((category, i) => <p key={i}>{category.title}</p>)}
+    </div>
+  );
 }
