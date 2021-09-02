@@ -27,6 +27,10 @@ function App() {
         <Route path="/dashboard">
           <Dashboard />
         </Route>
+        
+        <Route path="/favorites">
+          <Favorites />
+        </Route>
 
         <Route path="/event/:event_id">
           <Event />
@@ -40,9 +44,6 @@ function App() {
           <VendorIndex />
         </Route>
 
-        <Route path="/favorites">
-          <Favorites />
-        </Route>
 
         <Route path="/booked/:event_id">
           <Booked />
