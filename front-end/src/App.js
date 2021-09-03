@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 import api from "./util/apiCalls";
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
-import Event from "./Pages/Event.js";
+import Event from "./Pages/EventPage";
 import Favorites from "./Pages/Favorites.js";
 import Landing from "./Pages/Landing.js";
 import SignUp from "./Pages/SignUp.js";
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
+import "./App.css"
 
 function App() {
   

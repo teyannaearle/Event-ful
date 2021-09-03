@@ -39,16 +39,17 @@ function Timer() {
 
   const countDown = () => {
     const finish = new Date(`${date}T${time}`);
-    const startTime = Date.now() / 1000; 
-    const endTime = finish.getTime() / 1000; 
+    const startTime = Date.now() / 1000;
+    const endTime = finish.getTime() / 1000;
     const remainingTime = Math.ceil(endTime - startTime);
     const days = Math.ceil(remainingTime / daySeconds);
     const daysDuration = days * daySeconds;
 
     return (
-      <div>
+      <div className="countdown">
         <CountdownCircleTimer
           {...timerProps}
+          size={100}
           colors={[["#191970"]]}
           duration={daysDuration}
           initialRemainingTime={remainingTime}
@@ -59,6 +60,7 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
+          size={100}
           colors={[["#0047AB"]]}
           duration={daySeconds}
           initialRemainingTime={remainingTime % daySeconds}
@@ -72,6 +74,7 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
+          size={100}
           colors={[["#007FFF"]]}
           duration={hourSeconds}
           initialRemainingTime={remainingTime % hourSeconds}
@@ -85,6 +88,7 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
+          size={100}
           colors={[["#00B7EB"]]}
           duration={minuteSeconds}
           initialRemainingTime={remainingTime % minuteSeconds}
