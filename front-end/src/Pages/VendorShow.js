@@ -1,52 +1,88 @@
-import React, { useEffect, useState } from 'react'
-import {useParams} from 'react-router-dom'
-import api from '../util/apiCalls'
+import Ratings from "react-ratings-declarative";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import api from "../util/apiCalls";
 
 export default function VendorShow() {
-    const [business, setbusiness] = useState({
-        name:"",
-           photos:"",
-           price:"",
-           hours:"",         
-url:"",
-display_phone:"",
-categories:"",
-rating:"",
-location:""
-    })
+  const [business, setbusiness] = useState({
+    photos: [],
+    categories: [{ title: "" }],
+    location: { display_address: [] },
+  });
 
-    const {provider_id} = useParams()
-    
-    useEffect(()=>{
-(async ()=>{
-const data = await api.getVendor(provider_id)
-// setbusiness(data)
-setbusiness({name:data.name,
-photos:data.photos,
-price:data.price,
-hours:data.hours,
-url:data.url,
-display_phone:data.display_phone,
-categories:data.categories,
-rating:data.rating,
-location:data.location,})
+  const [reviews, setReviews] = useState([
+    {
+      user: { image_url: "", name: "" },
+    },
+  ]);
 
-})() },[])
+  const { provider_id } = useParams();
 
-    return (
+  useEffect(() => {
+    (async () => {
+      const data = await api.getVendor(provider_id);
+      const reviewData = await api.getReviews(provider_id);
+      setReviews(reviewData);
+      setbusiness(data);
+    })();
+  }, [provider_id]);
+
+  return (
+    <div>
+      <h1>{business.name} </h1>
+
+      {business.photos.map((photo, i) => (
+        <img src={photo} key={i} alt="service" width="250px" />
+      ))}
+
+      <div>
+        <p>{business.price}</p>
+
         <div>
-            Vendor Show Page
-            {/* {business.photos.map(photo =><img src={photo}/>)} */}
-            {/* name
-           photos(there's multiple)
-           price
-           hours
-            
-url
-display_phone
-categories.title(there are multiple)
-rating
-location.display_address */}
+          {business.location.display_address.map((point) => (
+            <p>{point}</p>
+          ))}
         </div>
-    )
+
+        <p>{business.display_phone}</p>
+        <Ratings rating={business.rating} widgetRatedColors="steelblue">
+          <Ratings.Widget widgetDimension="40px" />
+          <Ratings.Widget widgetDimension="40px" />
+          <Ratings.Widget widgetDimension="50px" />
+          <Ratings.Widget widgetDimension="40px" />
+          <Ratings.Widget widgetDimension="40px" />
+        </Ratings>
+
+        <div>
+          {business.categories.map((category, i) => (
+            <p key={i}>{category.title}</p>
+          ))}
+        </div>
+
+      </div>
+
+      <div>
+        <h2>Reviews</h2>
+        {reviews.map((review, i) => {
+          return (
+            <div key={i}>
+              <p>{review.user.name}</p>
+              <img width="50px" src={review.user.image_url} alt="Reviewer" />
+              <p>{review.time_created}</p>
+              <p>
+                <Ratings rating={review.rating} widgetRatedColors="steelblue">
+                  <Ratings.Widget widgetDimension="40px" />
+                  <Ratings.Widget widgetDimension="40px" />
+                  <Ratings.Widget widgetDimension="50px" />
+                  <Ratings.Widget widgetDimension="40px" />
+                  <Ratings.Widget widgetDimension="40px" />
+                </Ratings>
+              </p>
+              <p>{review.text}</p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }

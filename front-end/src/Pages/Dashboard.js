@@ -1,9 +1,10 @@
-import React from 'react'
+import React from "react";
+import EventList from "../Components/EventList";
 
 export default function Dashboard() {
-    return (
-        <div>
-            We did Dashboard
-        </div>
-    )
+  return (
+    <div>
+      <EventList />
+    </div>
+  );
 }
