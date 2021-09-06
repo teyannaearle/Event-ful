@@ -2,8 +2,9 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Event from "./Event";
+import api from "../util/apiCalls"; // edit after backend/database is created
 
-const API = apiURL(); //Edit when database for events is created
+const API = api; //Edit when database for events is created
 
 function EventList() {
   const [events, setEvents] = useState([]);
