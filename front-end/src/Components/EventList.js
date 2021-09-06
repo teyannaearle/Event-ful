@@ -3,14 +3,14 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Event from "./Event";
 
-const API = apiURL(); //Edit when database for events is created
+// const API = apiURL(); //Edit when database for events is created
 
 function EventList() {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${API}/events`)
+      // .get(`${API}/events`)
       .then(
         (res) => {
           setEvents(res.data);
