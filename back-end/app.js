@@ -1,10 +1,10 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
-const bookedController = require("./controllers/bookedController.js")
-const checklistController = require("./controllers/checklistController.js")
-const eventsController = require("./controllers/eventsController.js")
-const favoritesController = require("./controllers/favoritesController.js")
+const bookedcontroller = require("./Controllers/bookedcontroller.js")
+const checklistcontroller = require("./Controllers/checklistcontroller.js")
+const eventcontroller = require("./Controllers/eventcontroller.js")
+const favoritescontroller = require("./Controllers/favoritescontroller.js")
 
 // CONFIGURATION
 const app = express();
@@ -15,16 +15,16 @@ app.use(express.json()); // Parse incoming JSON
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Welcome to event(ful)");
+  res.send("Hello, world!");
 });
 
-app.use("/events", eventsController)
+app.use("/events", eventcontroller)
 
-app.use("/checklist", checklistController)
+app.use("/checklist", checklistcontroller)
 
-app.use("/favorites", favoritesController)
+app.use("/favorites", favoritescontroller)
 
-app.use("/booked", bookedController)
+app.use("/booked", bookedcontroller)
 
 app.get("*", (req,res)=>{
   res.send("page not found")
@@ -34,17 +34,16 @@ app.get("*", (req,res)=>{
 /////////////////////////////////////
 // REMOVE AFTER SUCCESSFUL DEPLOYMENT
 /////////////////////////////////////
-//const db = require("./db/dbConfig.js");
+const db = require("./db/dbConfig.js");
 
-//app.get("/", async (req, res) => {
-  // try {
-  //   const allDays = await db.any("SELECT * FROM test");
-  //   res.json(allDays);
-  // } catch (err) {
-  //   res.json(err);
-  // }
- // res.send("Welcome to event(ful)")
-//});
+app.get("/test", async (req, res) => {
+  try {
+    const allDays = await db.any("SELECT * FROM test");
+    res.json(allDays);
+  } catch (err) {
+    res.json(err);
+  }
+});
 
 /////////////////////////////////////
 // REMOVE AFTER SUCCESSFUL DEPLOYMENT
