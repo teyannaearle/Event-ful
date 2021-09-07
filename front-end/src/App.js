@@ -10,17 +10,9 @@ import SignUp from "./Pages/SignUp.js";
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
-// import useGeoLocation from './hooks/useGeoLocation'
 import "./App.css";
 
 function App() {
-  // const location = useGeoLocation()
-  // const [coords, setCoords] = useState({})
-
-  // useEffect(() => {
-  //   setCoords(location)
-  // }, []);
-
 
   return (
     <div>
