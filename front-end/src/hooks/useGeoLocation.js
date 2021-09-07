@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 function useGeoLocation() {
     const [location, setLocation] = useState({
         loaded: false,
-        coord: { lat: "" , long: ""}
+        coordinates: { latitude: "" , longitude: ""}
     })
 
     const onSuccess = (location) => {
         setLocation({
             loaded:true,
             coordinates:{
-                lat: location.coords.latitude,
-                long: location.coords.longitude,
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
             }
         })
     }
@@ -26,7 +26,6 @@ function useGeoLocation() {
     useEffect(()=>{
         if (!("geolocation" in navigator)){
             onError({
-                code: 0,
                 message: "Geolocation not supported"
             })
         }
