@@ -8,7 +8,8 @@ const {
 const db = require("../db/dbConfig")
 
 checklist.get("/:user_id/:event_id", async (req, res) => {
-    const checklist = await getChecklist()
+    const {user_id , event_id} = req.params
+    const checklist = await getChecklist(user_id, event_id)
     res.status(200).json({
         success: true,
         payload: checklist
