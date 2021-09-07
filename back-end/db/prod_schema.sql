@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS events CASCADE;
 CREATE TABLE events (
     event_id SERIAL PRIMARY KEY,
     event_name VARCHAR (255) NOT NULL, 
-    event_zip INT,
+    event_zip VARCHAR (5) NOT NULL,
     event_budget INTEGER DEFAULT 0 ,
     event_date DATE,
     event_time TIME,
