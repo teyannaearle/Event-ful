@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import useGeoLocation from "../hooks/useGeoLocation";
 import api from "../util/apiCalls";
 
+
 export default function VendorIndex() {
   const [vendors, setVendors] = useState({});
   const [lat, setLat] = useState("");
