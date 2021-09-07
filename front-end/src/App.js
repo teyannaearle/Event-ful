@@ -10,10 +10,9 @@ import SignUp from "./Pages/SignUp.js";
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
-import "./App.css"
+import "./App.css";
 
 function App() {
-  
   return (
     <div>
       <Switch>
@@ -37,12 +36,12 @@ function App() {
           <VendorShow />
         </Route>
 
-        <Route path="/:category">
-          <VendorIndex />
-        </Route>
-
         <Route path="/favorites">
           <Favorites />
+        </Route>
+        
+        <Route path="/:category">
+          <VendorIndex />
         </Route>
 
         <Route path="/booked/:event_id">
