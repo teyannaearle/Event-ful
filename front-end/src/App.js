@@ -13,6 +13,7 @@ import { Route, Switch } from "react-router-dom";
 import "./App.css";
 
 function App() {
+
   return (
     <div>
       <Switch>
@@ -32,7 +33,7 @@ function App() {
           <Event />
         </Route>
 
-        <Route path="vendor/:category/:provider_id">
+        <Route path="/vendor/:category/:provider_id">
           <VendorShow />
         </Route>
 
