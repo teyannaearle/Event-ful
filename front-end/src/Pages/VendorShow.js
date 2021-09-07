@@ -22,8 +22,13 @@ export default function VendorShow() {
     (async () => {
       const data = await api.getVendor(provider_id);
       const reviewData = await api.getReviews(provider_id);
-      setReviews(reviewData);
-      setbusiness(data);
+
+      if (data && reviewData) {
+        setReviews(reviewData);
+        setbusiness(data);
+      } else {
+        // ---------- ERROR PAGE  ---------------
+      }
     })();
   }, [provider_id]);
 
@@ -39,7 +44,7 @@ export default function VendorShow() {
         <p>{business.price}</p>
 
         <div>
-          {business.location.display_address.map((point,i) => (
+          {business.location.display_address.map((point, i) => (
             <p key={i}>{point}</p>
           ))}
         </div>
@@ -58,7 +63,6 @@ export default function VendorShow() {
             <p key={i}>{category.title}</p>
           ))}
         </div>
-
       </div>
 
       <div>
@@ -70,13 +74,13 @@ export default function VendorShow() {
               <img width="50px" src={review.user.image_url} alt="Reviewer" />
               <p>{review.time_created}</p>
               {/* <p> */}
-                <Ratings rating={review.rating} widgetRatedColors="steelblue">
-                  <Ratings.Widget widgetDimension="40px" />
-                  <Ratings.Widget widgetDimension="40px" />
-                  <Ratings.Widget widgetDimension="50px" />
-                  <Ratings.Widget widgetDimension="40px" />
-                  <Ratings.Widget widgetDimension="40px" />
-                </Ratings>
+              <Ratings rating={review.rating} widgetRatedColors="steelblue">
+                <Ratings.Widget widgetDimension="40px" />
+                <Ratings.Widget widgetDimension="40px" />
+                <Ratings.Widget widgetDimension="50px" />
+                <Ratings.Widget widgetDimension="40px" />
+                <Ratings.Widget widgetDimension="40px" />
+              </Ratings>
               {/* </p> */}
               <p>{review.text}</p>
             </div>

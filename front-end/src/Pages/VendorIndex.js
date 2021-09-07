@@ -1,31 +1,32 @@
-import React, {useEffect, useState} from 'react'
-import { useParams } from 'react-router'
-import useGeoLocation from '../hooks/useGeoLocation'
-import api from "../util/apiCalls"
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import useGeoLocation from "../hooks/useGeoLocation";
+import api from "../util/apiCalls";
 
 export default function VendorIndex() {
-    const [vendors , setVendors] = useState({})
-    const { category } = useParams()
-    const location = useGeoLocation()
+  const [vendors, setVendors] = useState({});
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const { category } = useParams();
+  const location = useGeoLocation();
 
-    useEffect(()=>{
-        (async () => {
-            if (! location.error){
-                const {longitude, latitude} = location.coordinates
-                const data = await api.getVendorsLongLag(longitude,latitude,category);
-                setVendors(data)
-            } else {
-                // EITHER PULL ZIP FROM EVENT OR ASK USER FOR ZIP --- STILL UNSURE 
-                // const data = await api.getVendorsZip(category, zip)
-                // setVendors(data)
-            }
-      
-          })()
-    }, [location])
+  useEffect(() => {
+    setLat(location.coordinates.latitude);
+    setLng(location.coordinates.longitude);
+  }, [location]);
 
-    return (
-        <div>
-            Vector Index Page
-        </div>
-    )
+  useEffect(() => {
+    (async () => {
+      if (lng && lat) {
+        const data = await api.getVendorsLongLag(lng, lat, category);
+        setVendors(data);
+      } else {
+        // EITHER PULL ZIP FROM EVENT OR ASK USER FOR ZIP --- STILL UNSURE
+        // const data = await api.getVendorsZip(category, zip)
+        // setVendors(data)
+      }
+    })();
+  }, [category, lng, lat]);
+
+  return <div>Vector Index Page</div>;
 }
