@@ -1,11 +1,11 @@
 import React from 'react'
-import BookedVendorsList from "./Components/BookedVendorsList"
+import BookedVendorsList from "../Components/BookedVendorsList"
 
 export default function Booked() {
     return (
         <div>
             We Did Booked Page
-            <BookedVendorList />
+            <BookedVendorsList />
         </div>
     )
 }
