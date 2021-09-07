@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const bookedcontroller = require("./Controllers/bookedcontroller.js")
 const checklistcontroller = require("./Controllers/checklistcontroller.js")
-const eventcontroller = require("./Controllers/eventcontroller.js")
+const eventcontroller = require("./Controllers/eventscontroller")
 const favoritescontroller = require("./Controllers/favoritescontroller.js")
 
 // CONFIGURATION
@@ -34,16 +34,16 @@ app.get("*", (req,res)=>{
 /////////////////////////////////////
 // REMOVE AFTER SUCCESSFUL DEPLOYMENT
 /////////////////////////////////////
-const db = require("./db/dbConfig.js");
+// const db = require("./db/dbConfig.js");
 
-app.get("/test", async (req, res) => {
-  try {
-    const allDays = await db.any("SELECT * FROM test");
-    res.json(allDays);
-  } catch (err) {
-    res.json(err);
-  }
-});
+// app.get("/test", async (req, res) => {
+//   try {
+//     const allDays = await db.any("SELECT * FROM test");
+//     res.json(allDays);
+//   } catch (err) {
+//     res.json(err);
+//   }
+// });
 
 /////////////////////////////////////
 // REMOVE AFTER SUCCESSFUL DEPLOYMENT
