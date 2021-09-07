@@ -32,7 +32,7 @@ function App() {
           <Event />
         </Route>
 
-        <Route path="/:category/:provider_id">
+        <Route path="vendor/:category/:provider_id">
           <VendorShow />
         </Route>
 
@@ -40,7 +40,7 @@ function App() {
           <Favorites />
         </Route>
         
-        <Route path="/:category">
+        <Route path="/vendors/:category">
           <VendorIndex />
         </Route>
 
