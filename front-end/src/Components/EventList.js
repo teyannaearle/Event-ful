@@ -11,6 +11,7 @@ function EventList() {
   useEffect(() => {
     axios
       // .get(`${API}/events`)
+      .get(``)
       .then(
         (res) => {
           setEvents(res.data);

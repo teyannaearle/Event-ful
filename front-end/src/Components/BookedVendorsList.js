@@ -1,20 +1,19 @@
 import React from "react";
-import Favorite from "./Favorite";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import BookedVendor from "./BookedVendor"
 
 // const API = apiURL() // edit after database setup
 
 export default function FavoriteList() {
-  const [favoriteVendors, setFavoriteVendors] = useState([]);
+  const [bookedVendors, setBookedVendors] = useState([]);
 
   useEffect(() => {
-    // axios.get(`${API}/favorites`)
-    axios
-      .get(``)
+   // axios.get(`${API}/bookedvendors`)
+   axios.get(``)
       .then(
         (res) => {
-          setFavoriteVendors(res.data);
+          setBookedVendors(res.data);
         },
         (e) => {
           console.error(e);
@@ -27,7 +26,7 @@ export default function FavoriteList() {
 
   return (
     <div>
-      {favoriteVendors.length > 0 && (
+      {bookedVendors.length > 0 && (
         <section>
           <table>
             <thead>
@@ -38,8 +37,8 @@ export default function FavoriteList() {
               </tr>
             </thead>
             <tbody>
-              {favoriteVendors.map((vendor) => {
-                return <Favorite vendor={vendor} />;
+              {bookedVendors.map((vendor) => {
+                return <BookedVendor vendor={vendor} />;
               })}
             </tbody>
           </table>

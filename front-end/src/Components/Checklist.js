@@ -45,7 +45,7 @@ function Checklist({categories}) {
       {categories.map((category, i) => {
         return (
           <li key={i}>
-            <Link to={category}>{listItem(category)}</Link>
+            <Link to={`/vendors/${category}`}>{listItem(category)}</Link>
           </li>
         );
       })}
