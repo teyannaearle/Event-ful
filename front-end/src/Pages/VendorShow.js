@@ -53,11 +53,11 @@ export default function VendorShow() {
           <Ratings.Widget widgetDimension="40px" />
         </Ratings>
 
-        {/* <div>
+        <div>
           {business.categories.map((category, i) => (
             <p key={i}>{category.title}</p>
           ))}
-        </div> */}
+        </div>
 
       </div>
 
