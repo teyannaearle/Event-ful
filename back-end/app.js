@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const bookedcontroller = require("./Controllers/bookedcontroller.js")
 const checklistcontroller = require("./Controllers/checklistcontroller.js")
-const eventcontroller = require("./Controllers/eventcontroller.js")
+const eventcontroller = require("./controllers/eventsController.js")
 const favoritescontroller = require("./Controllers/favoritescontroller.js")
 
 // CONFIGURATION
