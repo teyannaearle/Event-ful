@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Checklist from "../Components/Checklist";
 import Budget from "../Components/Budget";
 import Timer from "../Components/Timer";
+import axios from "axios";
 
 export default function Event() {
   const [eventName, setEventName] = useState();
