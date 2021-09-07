@@ -1,5 +1,5 @@
 const express = require("express");
-const products = express.Router({ mergeParams: true });
+const events = express.Router({ mergeParams: true });
 
 const {
     getAllEvents,
@@ -10,4 +10,5 @@ const {
   } = require("../queries/events.js");
 
   
-
+  
+  module.exports = events
