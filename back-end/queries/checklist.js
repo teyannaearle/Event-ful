@@ -1,8 +1,8 @@
 const db = require("../db/dbConfig")
 
-const getChecklist = async (userid, eventid) => {
+const getChecklist = async (user_id, event_id) => {
     try {
-        const checklist = await db.any("SELECT * FROM tasklist WHERE userid=$1 AND eventid=$1", [userid, eventid])
+        const checklist = await db.any("SELECT * FROM tasklist WHERE user_id=$1 AND event_id=$1", [user_id, event_id]);
         return checklist
     } catch (err) {
         return err

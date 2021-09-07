@@ -39,8 +39,8 @@ export default function VendorShow() {
         <p>{business.price}</p>
 
         <div>
-          {business.location.display_address.map((point) => (
-            <p>{point}</p>
+          {business.location.display_address.map((point,i) => (
+            <p key={i}>{point}</p>
           ))}
         </div>
 
@@ -53,11 +53,11 @@ export default function VendorShow() {
           <Ratings.Widget widgetDimension="40px" />
         </Ratings>
 
-        <div>
+        {/* <div>
           {business.categories.map((category, i) => (
             <p key={i}>{category.title}</p>
           ))}
-        </div>
+        </div> */}
 
       </div>
 
@@ -69,7 +69,7 @@ export default function VendorShow() {
               <p>{review.user.name}</p>
               <img width="50px" src={review.user.image_url} alt="Reviewer" />
               <p>{review.time_created}</p>
-              <p>
+              {/* <p> */}
                 <Ratings rating={review.rating} widgetRatedColors="steelblue">
                   <Ratings.Widget widgetDimension="40px" />
                   <Ratings.Widget widgetDimension="40px" />
@@ -77,7 +77,7 @@ export default function VendorShow() {
                   <Ratings.Widget widgetDimension="40px" />
                   <Ratings.Widget widgetDimension="40px" />
                 </Ratings>
-              </p>
+              {/* </p> */}
               <p>{review.text}</p>
             </div>
           );

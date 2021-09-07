@@ -18,7 +18,7 @@ INSERT INTO tasklist (task_name , is_completed , user_id, event_id ) VALUES
 ('floraldesigners', false, 1, 1);
 
 INSERT INTO booked ( user_id, event_id, task_id, vendor_name , vendor_address , vendor_phone_number, amount ) VALUES
-(1, 1, 1, 'Dave & Busters' , '234 west 42nd street', 6464952015, 400);
+(1, 1, 1, 'Dave & Busters' , '234 west 42nd street', "6464952015", 400);
 
 INSERT INTO favorites ( user_id , vendor_name , vendor_address ,  vendor_phone_number) VALUES
-(1, 'Dave & Busters' , '234 west 42nd street', 6464952015);
+(1, 'Dave & Busters' , '234 west 42nd street', "6464952015");
