@@ -1,9 +1,10 @@
 import React from 'react'
+import VendorList from "../Components/VendorList"
 
 export default function VendorIndex() {
     return (
         <div>
-            Vector Index Page
+            <VendorList />
         </div>
     )
 }
