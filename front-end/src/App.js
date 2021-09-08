@@ -29,7 +29,7 @@ function App() {
           <Dashboard />
         </Route>
 
-        <Route path="/event/:event_id">
+        <Route path="/event/:user_id/:event_id">
           <Event />
         </Route>
 

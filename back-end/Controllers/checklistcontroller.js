@@ -1,6 +1,6 @@
 const express = require("express");
 const checklist = express.Router({ mergeParams: true });
-// ----- STILL NEED TO DO REQ.BODY VALIDATION && CORRECT 404 PAYLOADS ----
+// ----- STILL NEED TO DO REQ.BODY VALIDATION  ----
 const {
   getChecklist,
   addToList,
@@ -27,7 +27,7 @@ checklist.get("/:user_id/:event_id", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       success: false,
-      payload: e,
+      message: e,
     });
   }
 });
