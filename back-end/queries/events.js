@@ -1,93 +1,75 @@
-const db = require("../db/dbConfig.js");
+const db = require("../db/dbConfig");
 
-//index
-const getAllEvents = async () => {
+const getAllEvents = async (user_id) => {
   try {
-    const allEvents = await db.any(
-      "SELECT * FROM events ORDER BY name ASC"
+    const events = await db.any(
+      "SELECT * FROM events WHERE user_id=$1 ORDER BY event_name ASC",
+      user_id
     );
-    return allEvent
-s;
+    return events;
   } catch (err) {
     return err;
   }
 };
-//Show
-const getEvent = async (id) => {
+
+const getEvent = async (user_id, event_id) => {
   try {
-    const oneEvent
- = await db.one("SELECT * FROM Events WHERE id=$1", id);
-    return oneEvent
-;
+    const event = await db.one(
+      "SELECT * FROM events WHERE user_id=$1 AND event_id=$2",
+      [user_id, event_id]
+    );
+    return event;
   } catch (err) {
     return err;
   }
 };
-//create
-const createEvent = async (Event
-) => {
+
+const createEvent = async (body, user_id) => {
   try {
-    const newEvent
- = await db.one(
-      "INSERT INTO Events (name, price, category, is_popular, img) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    const newEvent = await db.one(
+      "INSERT INTO events (event_name , event_zip, event_budget, event_date, event_time, user_id) VALUES($1, $2, $3, $4, $5, $6)  RETURNING *",
       [
-        Event
-    .name,
-        Event
-    .price,
-        Event
-    .category,
-        Event
-    .is_popular,
-        Event
-    .img,
+        body.event_name,
+        body.event_zip,
+        body.event_budget,
+        body.event_date,
+        body.event_time,
+        user_id,
       ]
     );
-    return newEvent
-;
+    return newEvent;
   } catch (err) {
     return err;
   }
 };
 
-//delete
-const deleteEvent = async (id) => {
+const deleteEvent = async (user_id, event_id) => {
   try {
-    const deletedEvent
- = await db.one(
-      "DELETE FROM Events WHERE id=$1 RETURNING *",
-      id
+    const deletedEvent = await db.one(
+      "DELETE FROM events WHERE user_id=$1 AND event_id=$2 RETURNING *",
+      [user_id, event_id]
     );
-    return deletedEvent
-;
+    return deletedEvent;
   } catch (err) {
     return err;
   }
 };
 
-//update
-const updateEvent = async (id, Event
-) => {
+const updateEvent = async (body, user_id, event_id) => {
   try {
-    const updatedEvent
- = await db.one(
-      "UPDATE Events SET name=$1, price=$2, category=$3, is_popular=$4, img=$5 WHERE id=$6 RETURNING *",
+    const updated = await db.one(
+      "UPDATE events SET event_name=$1 , event_zip=$2 , event_budget=$3 , event_date=$4 , event_time=$5 WHERE user_id=$6 AND event_id=$7 RETURNING *",
       [
-        Event
-    .name,
-        Event
-    .price,
-        Event
-    .category,
-        Event
-    .is_popular,
-        Event
-    .img,
-        id,
+        body.event_name,
+        body.event_zip,
+        body.event_budget,
+        body.event_date,
+        body.event_time,
+        user_id,
+        event_id,
       ]
     );
-    return updatedEvent
-;
+    return updated;
   } catch (err) {
     return err;
   }

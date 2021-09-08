@@ -129,7 +129,7 @@ function Budget({ categories, budget }) {
       <ul>
         {categories.map((category, i) => {
           return (
-            <li key={i}>
+            <li key={i} className="budget-item">
               <p>{listItem(category)} </p>
               <p> { formatter.format(shownCost[category]) }</p>
               <button
