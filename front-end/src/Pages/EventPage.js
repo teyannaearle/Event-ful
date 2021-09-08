@@ -6,7 +6,7 @@ import Timer from "../Components/Timer";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
 
-const api = apiURL()
+const api = apiURL();
 
 export default function Event() {
   const [eventName, setEventName] = useState();
@@ -16,45 +16,40 @@ export default function Event() {
 
   useEffect(() => {
     try {
-      axios.get(`${api}/events/${user_id}/${event_id}`)
-        .then ((response) => {
-          const data = response.data.payload
-          setEventName(data.event_name)
-          setBudget(data.event_budget)
-        }) 
-    } catch {
-
-    }
+      axios.get(`${api}/events/${user_id}/${event_id}`).then((response) => {
+        const data = response.data.payload;
+        setEventName(data.event_name);
+        setBudget(data.event_budget);
+      });
+    } catch {}
 
     try {
-      axios.get(`${api}/checklist/${user_id}/${event_id}`)
-        .then((response) => {
-          const data = response.data.payload
-          const vendorCategories = data.map(point => point.task_name)
-          setCategories(vendorCategories)
-        })
-    } catch {
-
-    }
+      axios.get(`${api}/checklist/${user_id}/${event_id}`).then((response) => {
+        const data = response.data.payload;
+        const vendorCategories = data.map((point) => point.task_name);
+        setCategories(vendorCategories);
+      });
+    } catch {}
   }, [event_id, user_id]);
 
   return (
-    <div>
+    <div className="event-page">
       <h1>{eventName}</h1>
+      <div className="eventpage-container">
+        <div id="checklist-container">
+          <h2>Vendor Checklist:</h2>
+          <Checklist categories={categories} />
+        </div>
 
-      <div>
-        <h2>Vendor Checklist:</h2>
-        <Checklist categories={categories} />
-      </div>
+        <div id="budget-container">
+          <h2>Budget</h2>
+          <Budget categories={categories} budget={budget} />
+        </div>
 
-      <div>
-        <h2>Budget</h2>
-        <Budget categories={categories} budget={budget} />
-      </div>
-
-      <div>
-        <h2>Countdown to {eventName} !</h2>
-        <Timer />
+        <div id="countdown-container">
+          <h2>Countdown to {eventName} !</h2>
+          <Timer />
+        </div>
       </div>
     </div>
   );
