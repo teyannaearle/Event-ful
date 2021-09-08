@@ -25,7 +25,7 @@ function App() {
           <SignUp />
         </Route>
 
-        <Route path="/dashboard">
+        <Route path="/dashboard/:user_id">
           <Dashboard />
         </Route>
 
@@ -37,7 +37,7 @@ function App() {
           <VendorShow />
         </Route>
 
-        <Route path="/favorites">
+        <Route path="/favorites/:user_id">
           <Favorites />
         </Route>
         
@@ -45,7 +45,7 @@ function App() {
           <VendorIndex />
         </Route>
 
-        <Route path="/booked/:event_id">
+        <Route path="/booked/:user_id/:event_id">
           <Booked />
         </Route>
       </Switch>
