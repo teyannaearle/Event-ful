@@ -9,16 +9,6 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
   const [bookedStatus, setBookedStatus] = useState({});
   const [showForm, setShowForm] = useState({});
   const [costInput, setCostInput] = useState({});
-  
-  // useEffect(() => {
-  //   const show = categories.map((category) => {
-  //     return {
-  //       [category.name]: showForm[category] ? showForm[category] : false,
-  //     };
-  //   });
-
-  //   setShowForm(show)
-  // },[categories, showForm])
 
 
   useEffect(()=>{
@@ -106,7 +96,7 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
     };
 
     setShowForm({ ...showForm, [category]: false });
-    updateCost(body);
+    updateCost(body, category);
   };
 
   const form = (category) => {
