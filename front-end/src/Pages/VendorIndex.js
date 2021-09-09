@@ -12,6 +12,7 @@ export default function VendorIndex() {
   const location = useGeoLocation();
 
   useEffect(() => {
+    // IF (location.coordinates.lattitude) //
     setLat(location.coordinates.latitude);
     setLng(location.coordinates.longitude);
   }, [location]);

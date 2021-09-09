@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 function Budget({ categories, budget }) {
   const [showForm, setShowForm] = useState({});
-  const [costs, setCosts] = useState({});
+  // const [costs, setCosts] = useState({});
   const [shownCost, setShownCost] = useState({})
   const [budgetStatus, setBudgetStatus] = useState(0)
   const formatter = new Intl.NumberFormat("en-US" , {
@@ -19,7 +19,7 @@ function Budget({ categories, budget }) {
     }
 
     setShowForm(categoryStates);
-    setCosts(categoryCosts);
+    // setCosts(categoryCosts);
     setShownCost(categoryCosts)
   }, [categories]);
 
@@ -35,17 +35,17 @@ function Budget({ categories, budget }) {
 
 
 
-  const handleFormChange = (e) => {
-    setCosts({ ...costs, [e.target.id]: e.target.value });
-  };
+  // const handleFormChange = (e) => {
+  //   setCosts({ ...costs, [e.target.id]: e.target.value });
+  // };
 
 
-  const handleFormSubmit = (e, category) => {
-    e.preventDefault();
-    setShownCost(costs)
-    setShowForm({ ...showForm, [category]: false })
+  // const handleFormSubmit = (e, category) => {
+  //   e.preventDefault();
+  //   // setShownCost(costs)
+  //   setShowForm({ ...showForm, [category]: false })
 
-  }
+  // }
 
 
   const listItem = (category) => {
@@ -85,22 +85,22 @@ function Budget({ categories, budget }) {
     return item;
   };
 
-  const form = (category) => {
-    return (
-      <form onSubmit={(e) => handleFormSubmit(e, category)}>
-        <input
-          id={category}
-          placeholder="cost"
-          value={costs[category]}
-          onChange={handleFormChange}
-          type="number"
-          min="0"
-          step=".01"
-        />
-        <input type="submit" value="Update"/>
-      </form>
-    );
-  };
+  // const form = (category) => {
+  //   return (
+  //     <form onSubmit={(e) => handleFormSubmit(e, category)}>
+  //       <input
+  //         id={category}
+  //         placeholder="cost"
+  //         value={costs[category]}
+  //         onChange={handleFormChange}
+  //         type="number"
+  //         min="0"
+  //         step=".01"
+  //       />
+  //       <input type="submit" value="Update"/>
+  //     </form>
+  //   );
+  // };
 
 
   const budgetUpdate = () => {
@@ -139,7 +139,7 @@ function Budget({ categories, budget }) {
               >
                 Edit Cost
               </button> */}
-              {showForm[category.name] ? form(category.name) : null}
+              {/* {showForm[category.name] ? form(category.name) : null} */}
             </li>
           );
         })}
