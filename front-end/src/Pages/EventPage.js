@@ -14,6 +14,8 @@ export default function Event() {
   const [budget, setBudget] = useState(0);
   const { user_id, event_id } = useParams();
 
+  
+
   useEffect(() => {
     try {
       axios.get(`${api}/events/${user_id}/${event_id}`).then((response) => {
@@ -26,11 +28,21 @@ export default function Event() {
     try {
       axios.get(`${api}/checklist/${user_id}/${event_id}`).then((response) => {
         const data = response.data.payload;
-        const vendorCategories = data.map((point) => point.task_name);
+        const vendorCategories = data.map((point) => { return {name: point.task_name, booked: point.is_completed, cost: point.task_cost}});
         setCategories(vendorCategories);
       });
     } catch {}
   }, [event_id, user_id]);
+
+  const updateCost = (body) => {
+      try {
+        axios.put(`${api}/checklist/cost/${user_id}/${event_id}`, body)
+        .then((response) => {
+        })
+      } catch {
+
+      }
+  }
 
   return (
     <div className="event-page">
@@ -38,7 +50,8 @@ export default function Event() {
       <div className="eventpage-container">
         <div id="checklist-container">
           <h2>Vendor Checklist:</h2>
-          <Checklist categories={categories} />
+          <h2>Booked?</h2>
+          <Checklist categories={categories} user_id={user_id} event_id={event_id} updateCost={updateCost}/>
         </div>
 
         <div id="budget-container">

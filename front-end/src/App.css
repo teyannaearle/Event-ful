@@ -25,6 +25,18 @@
 #checklist-container{
     width: 100%;
     border: black 1px solid;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.checklist-list{
+    grid-column: span 2;
+}
+
+.checklist-list-item{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    padding: 5px;
 }
 
 #budget-container{
@@ -35,7 +47,7 @@
 
 .budget-item{
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr ;
     padding: 5px;
     text-align: left;
 }
