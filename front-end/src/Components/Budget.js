@@ -14,8 +14,8 @@ function Budget({ categories, budget }) {
     let categoryStates = {};
     let categoryCosts = {};
     for (let category of categories) {
-      categoryStates[category] = false;
-      categoryCosts[category] = 0;
+      categoryStates[category.name] = false;
+      categoryCosts[category.name] = category.cost;
     }
 
     setShowForm(categoryStates);
@@ -130,16 +130,16 @@ function Budget({ categories, budget }) {
         {categories.map((category, i) => {
           return (
             <li key={i} className="budget-item">
-              <p>{listItem(category)} </p>
-              <p> { formatter.format(shownCost[category]) }</p>
-              <button
+              <p>{listItem(category.name)} </p>
+              <p> { formatter.format(shownCost[category.name]) }</p>
+              {/* <button
                 onClick={() =>
-                  setShowForm({ ...showForm, [category]: !showForm[category] })
+                  setShowForm({ ...showForm, [category.name]: !showForm[category.name] })
                 }
               >
                 Edit Cost
-              </button>
-              {showForm[category] ? form(category) : null}
+              </button> */}
+              {showForm[category.name] ? form(category.name) : null}
             </li>
           );
         })}

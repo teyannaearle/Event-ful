@@ -48,6 +48,7 @@ const updateTask = async (is_completed, task_name , user_id, event_id) => {
     }
 }
 
+
 module.exports = {
     getChecklist,
     addToList,

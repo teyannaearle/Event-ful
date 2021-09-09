@@ -26,7 +26,8 @@ export default function Event() {
     try {
       axios.get(`${api}/checklist/${user_id}/${event_id}`).then((response) => {
         const data = response.data.payload;
-        const vendorCategories = data.map((point) => point.task_name);
+        const vendorCategories = data.map((point) => { return {name: point.task_name, booked: point.is_completed, cost: point.task_cost}});
+        // const vendorCategorie = data.map(point => point.task_name)
         setCategories(vendorCategories);
       });
     } catch {}
@@ -38,7 +39,8 @@ export default function Event() {
       <div className="eventpage-container">
         <div id="checklist-container">
           <h2>Vendor Checklist:</h2>
-          <Checklist categories={categories} />
+          <h2>Booked?</h2>
+          <Checklist categories={categories} user_id={user_id} event_id={event_id} />
         </div>
 
         <div id="budget-container">

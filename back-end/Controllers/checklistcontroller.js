@@ -70,7 +70,7 @@ checklist.delete("/:user_id/:event_id", async (req, res) => {
     res.status(404).json({
       success: false,
       message: e,
-    });
+    }); 
   }
 });
 
