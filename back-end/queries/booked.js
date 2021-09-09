@@ -1,95 +1,87 @@
 const db = require("../db/dbConfig.js");
 
-DROP TABLE IF EXISTS booked CASCADE;
-CREATE TABLE booked (
-    -- user_id FOREIGN KEY REFERENCES users(user_id)(ON UPDATE CASCADE ON DELETE CASCADE),
-    -- event_id FOREIGN KEY REFERENCES events(event_id)(ON UPDATE CASCADE ON DELETE CASCADE),
-    -- task_id FOREIGN KEY REFERENCES tasklist(task_id),
-    user_id  SERIAL, CONSTRAINT fk_booked_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    event_id SERIAL, CONSTRAINT fk_booked_events FOREIGN KEY(event_id) REFERENCES events(event_id) ON DELETE CASCADE,
-    task_id SERIAL, CONSTRAINT fk_booked_tasklist FOREIGN KEY(task_id) REFERENCES tasklist(task_id) ON DELETE CASCADE,
-    vendor_name VARCHAR (255) NOT NULL, 
-    vendor_address VARCHAR (255) NOT NULL,
-    vendor_phone_number VARCHAR (10) NOT NULL,
-    amount INTEGER
-);
-
 //index
-const getAllBooked = async () => {
+const getAllBookedVendors = async (user_id) => {
   try {
-    const allBooked = await db.any(
-      "SELECT * FROM booked ORDER BY name ASC"
+    const allBookedVendors = await db.any(
+      "SELECT * FROM booked WHERE user_id=$1 ORDER BY vendor_name"
     );
-    return allProducts;
+    return allBookedVendors;
   } catch (err) {
     return err;
   }
 };
+
 //Show
-const getProduct = async (id) => {
+const getOneBookedVendor = async (user_id, event_id, vendor_name) => {
   try {
-    const oneProduct = await db.one("SELECT * FROM products WHERE id=$1", id);
-    return oneProduct;
+    const oneBookedVendor = await db.one(
+      "SELECT * FROM booked WHERE user_id=$1 AND event_id=$2 AND vendor_name=$3",
+      [user_id, event_id, vendor_name]
+    );
+    return oneBookedVendor;
   } catch (err) {
     return err;
   }
 };
+
 //create
-const createProduct = async (product) => {
+const createBookedVendor = async (vendor, user_id, event_id) => {
   try {
-    const newProduct = await db.one(
-      "INSERT INTO products (name, price, category, is_popular, img) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+    const newBookedVendor = await db.one(
+      "INSERT INTO booked (user_id, event_id, vendor_name, vendor_address, vendor_phone_number, amount) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       [
-        product.name,
-        product.price,
-        product.category,
-        product.is_popular,
-        product.img,
+        user_id,
+        event_id,
+        vendor.name,
+        vendor.address,
+        vendor.phoneNumber,
+        vendor.amount,
       ]
     );
-    return newProduct;
+    return newBookedVendor;
   } catch (err) {
     return err;
   }
 };
 
 //delete
-const deleteProduct = async (id) => {
+const deleteBookedVendor = async (user_id, event_id, vendorName) => {
   try {
-    const deletedProduct = await db.one(
-      "DELETE FROM products WHERE id=$1 RETURNING *",
-      id
+    const deletedBookedVendor = await db.one(
+      "DELETE FROM booked WHERE user_id=$1 AND event_id=$2 AND vendor_name=$3 RETURNING *",
+      [user_id, event_id, vendorName]
     );
-    return deletedProduct;
+    return deletedBookedVendor;
   } catch (err) {
     return err;
   }
 };
 
 //update
-const updateProduct = async (id, product) => {
+const updateBookedVendor = async (vendor, event_id, user_id) => {
   try {
-    const updatedProduct = await db.one(
-      "UPDATE products SET name=$1, price=$2, category=$3, is_popular=$4, img=$5 WHERE id=$6 RETURNING *",
+    const updatedBookedVendor = await db.one(
+      "UPDATE booked SET vendor_name=$1, vendor_address=$2, vendor_phone_number=$3, amount=$4 WHERE user_id=$5 AND event_id=$6 RETURNING *",
       [
-        product.name,
-        product.price,
-        product.category,
-        product.is_popular,
-        product.img,
-        id,
+        vendor.name,
+        vendor.address,
+        vendor.phoneNumber,
+        vendor.amount,
+        user_id,
+        event_id,
       ]
     );
-    return updatedProduct;
+    return updatedBookedVendor;
   } catch (err) {
     return err;
   }
 };
 
 module.exports = {
-  getAllProducts,
-  getProduct,
-  createProduct,
-  deleteProduct,
-  updateProduct,
+  getAllBookedVendors,
+  getOneBookedVendor,
+  createBookedVendor,
+  deleteBookedVendor,
+  updateBookedVendor,
 };
