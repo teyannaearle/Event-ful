@@ -22,10 +22,10 @@ export default function VendorShow() {
     (async () => {
       const data = await api.getVendor(provider_id);
       const reviewData = await api.getReviews(provider_id);
-
       if (data && reviewData) {
         setReviews(reviewData);
         setbusiness(data);
+        console.log(data)
       } else {
         // ---------- ERROR PAGE  ---------------
       }
@@ -33,13 +33,14 @@ export default function VendorShow() {
   }, [provider_id]);
 
   return (
-    <div>
+    <div id="vendor-showpage">
       <h1>{business.name} </h1>
 
-      {business.photos.map((photo, i) => (
-        <img src={photo} key={i} alt="service" width="250px" />
-      ))}
-
+      <div id="vendorimg-container">
+        {business.photos.map((photo, i) => (
+          <img src={photo} key={i} alt="service" className="vendor-imgs" />
+        ))}
+      </div>
       <div>
         <p>{business.price}</p>
 
@@ -51,11 +52,11 @@ export default function VendorShow() {
 
         <p>{business.display_phone}</p>
         <Ratings rating={business.rating} widgetRatedColors="steelblue">
+          <Ratings.Widget widgetDimension="30px" />
+          <Ratings.Widget widgetDimension="30px" />
           <Ratings.Widget widgetDimension="40px" />
-          <Ratings.Widget widgetDimension="40px" />
-          <Ratings.Widget widgetDimension="50px" />
-          <Ratings.Widget widgetDimension="40px" />
-          <Ratings.Widget widgetDimension="40px" />
+          <Ratings.Widget widgetDimension="30px" />
+          <Ratings.Widget widgetDimension="30px" />
         </Ratings>
 
         <div>
@@ -69,20 +70,25 @@ export default function VendorShow() {
         <h2>Reviews</h2>
         {reviews.map((review, i) => {
           return (
-            <div key={i}>
+            <div key={i} className="review">
+              <div> 
               <p>{review.user.name}</p>
-              <img width="50px" src={review.user.image_url} alt="Reviewer" />
               <p>{review.time_created}</p>
+              <img width="50px" src={review.user.image_url} alt="Reviewer" />
+              </div>
+
+           <div>
               {/* <p> */}
               <Ratings rating={review.rating} widgetRatedColors="steelblue">
-                <Ratings.Widget widgetDimension="40px" />
-                <Ratings.Widget widgetDimension="40px" />
-                <Ratings.Widget widgetDimension="50px" />
-                <Ratings.Widget widgetDimension="40px" />
-                <Ratings.Widget widgetDimension="40px" />
+                <Ratings.Widget widgetDimension="20px" />
+                <Ratings.Widget widgetDimension="20px" />
+                <Ratings.Widget widgetDimension="30px" />
+                <Ratings.Widget widgetDimension="20px" />
+                <Ratings.Widget widgetDimension="20px" />
               </Ratings>
               {/* </p> */}
               <p>{review.text}</p>
+              </div>
             </div>
           );
         })}

@@ -59,7 +59,7 @@ function Timer() {
       <div className="countdown">
         <CountdownCircleTimer
           {...timerProps}
-          size={100}
+          size={125}
           colors={[["#191970"]]}
           duration={daysDuration}
           initialRemainingTime={remainingTime}
@@ -70,7 +70,7 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
-          size={100}
+          size={125}
           colors={[["#0047AB"]]}
           duration={daySeconds}
           initialRemainingTime={remainingTime % daySeconds}
@@ -84,7 +84,7 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
-          size={100}
+          size={125}
           colors={[["#007FFF"]]}
           duration={hourSeconds}
           initialRemainingTime={remainingTime % hourSeconds}
@@ -98,7 +98,7 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
-          size={100}
+          size={125}
           colors={[["#00B7EB"]]}
           duration={minuteSeconds}
           initialRemainingTime={remainingTime % minuteSeconds}
@@ -114,7 +114,7 @@ function Timer() {
     );
   };
 
-  return <div>{updated ? countDown() : null}</div>;
+  return <>{updated ? countDown() : null}</>;
 }
 
 export default Timer;
