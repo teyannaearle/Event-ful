@@ -2,16 +2,17 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Event from "./Event";
+import { apiURL } from "../util/apiURL";
 
-// const API = apiURL(); //Edit when database for events is created
+const API = apiURL();
 
-function EventList() {
+function EventList({ match }) {
   const [events, setEvents] = useState([]);
+  const { user_id } = match.params;
 
   useEffect(() => {
     axios
-      // .get(`${API}/events`)
-      .get(``)
+      .get(`${API}/events/${user_id}`)
       .then(
         (res) => {
           setEvents(res.data);
@@ -29,7 +30,7 @@ function EventList() {
     <ul>
       {events.map((event) => {
         return (
-          <li key={event.id}>
+          <li key={event.user_id}>
             <Event event={event} />
           </li>
         );
