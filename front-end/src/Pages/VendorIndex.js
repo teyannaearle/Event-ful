@@ -1,4 +1,3 @@
-import VendorList from "../Components/VendorList"
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useGeoLocation from "../hooks/useGeoLocation";
