@@ -13,8 +13,7 @@ export default function Event() {
   const [categories, setCategories] = useState([]);
   const [budget, setBudget] = useState(0);
   const { user_id, event_id } = useParams();
-
-  
+  const [shownCost, setShownCost] = useState({});
 
   useEffect(() => {
     try {
@@ -28,22 +27,37 @@ export default function Event() {
     try {
       axios.get(`${api}/checklist/${user_id}/${event_id}`).then((response) => {
         const data = response.data.payload;
-        const vendorCategories = data.map((point) => { return {name: point.task_name, booked: point.is_completed, cost: point.task_cost}});
+        const vendorCategories = data.map((point) => {
+          return {
+            name: point.task_name,
+            booked: point.is_completed,
+            cost: point.task_cost,
+          };
+        });
+        let vendorCategories2 = {};
+        for (let category of data) {
+          vendorCategories2[category.task_name] = category.task_cost;
+        }
+
+        setShownCost(vendorCategories2);
         setCategories(vendorCategories);
       });
     } catch {}
+
   }, [event_id, user_id]);
 
-  const updateCost = (body) => {
-      try {
-        axios.put(`${api}/checklist/cost/${user_id}/${event_id}`, body)
+
+  const updateCost = (body, category) => {
+    try {
+      axios
+        .put(`${api}/checklist/cost/${user_id}/${event_id}`, body)
         .then((response) => {
-        })
-      } catch {
+          setShownCost({ ...shownCost, [category]: body.task_cost });
+        });
+    } catch {}
+  };
 
-      }
-  }
-
+  
   return (
     <div className="event-page">
       <h1>{eventName}</h1>
@@ -51,12 +65,21 @@ export default function Event() {
         <div id="checklist-container">
           <h2>Vendor Checklist:</h2>
           <h2>Booked?</h2>
-          <Checklist categories={categories} user_id={user_id} event_id={event_id} updateCost={updateCost}/>
+          <Checklist
+            categories={categories}
+            user_id={user_id}
+            event_id={event_id}
+            updateCost={updateCost}
+          />
         </div>
 
         <div id="budget-container">
           <h2>Budget</h2>
-          <Budget categories={categories} budget={budget} />
+          <Budget
+            categories={categories}
+            budget={budget}
+            shownCost={shownCost}
+          />
         </div>
 
         <div id="countdown-container">

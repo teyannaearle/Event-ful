@@ -11,8 +11,10 @@ import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
+import Test from "./Pages/Test";
 
 function App() {
+
 
   return (
     <div>
@@ -43,6 +45,7 @@ function App() {
         
         <Route path="/vendors/:category">
           <VendorIndex />
+          {/* <Test /> */}
         </Route>
 
         <Route path="/booked/:user_id/:event_id">

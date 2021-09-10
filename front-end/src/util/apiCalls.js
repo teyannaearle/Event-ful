@@ -19,7 +19,6 @@ const getVendorsZip = async (category, zip) => {
       `${proxy}/${yelpBase}/search?term=${category}&location=${zip}&category=${category}&radius=16093`,
       config()
     );
-
     return data.businesses;
   } catch (e) {
     return console.warn(e);

@@ -5,38 +5,26 @@ import { apiURL } from "../util/apiURL";
 
 const api = apiURL();
 
-function Checklist({ categories, user_id, event_id, updateCost}) {
+function Checklist({ categories, user_id, event_id, updateCost }) {
   const [bookedStatus, setBookedStatus] = useState({});
   const [showForm, setShowForm] = useState({});
   const [costInput, setCostInput] = useState({});
-  
-  // useEffect(() => {
-  //   const show = categories.map((category) => {
-  //     return {
-  //       [category.name]: showForm[category] ? showForm[category] : false,
-  //     };
-  //   });
 
-  //   setShowForm(show)
-  // },[categories, showForm])
+  useEffect(() => {
+    const booked = {};
+    const show = {};
+    const cost = {};
 
+    for (let category of categories) {
+      booked[category.name] = category.booked;
+      show[category.name] = false;
+      cost[category.name] = category.cost;
+    }
 
-  useEffect(()=>{
-  const booked = {}
-  const show = {}
-  const cost = {}
-
-  for (let category of categories ){
-    booked[category.name] = category.booked
-    show[category.name] = false
-    cost[category.name] = category.cost
-  }
-
-  setBookedStatus(booked)
-  setShowForm(show)
-  setCostInput(cost)
-  },[categories])
-
+    setBookedStatus(booked);
+    setShowForm(show);
+    setCostInput(cost);
+  }, [categories]);
 
   const listItem = (category) => {
     let item = "";
@@ -50,8 +38,8 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
       case "musicians":
         item = "Find a Musician";
         break;
-      case "partyequipmentrentals":
-        item = "Find Eqipment Rentals";
+      case "party rental":
+        item = "Find Equipment Rentals";
         break;
       case "eventphotography":
         item = "Find a Photographer";
@@ -62,7 +50,7 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
       case "venues":
         item = "Find a Venue";
         break;
-      case "balloonservices":
+      case "balloons":
         item = "Find Balloon Services";
         break;
       case "floraldesigners":
@@ -106,7 +94,7 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
     };
 
     setShowForm({ ...showForm, [category]: false });
-    updateCost(body);
+    updateCost(body, category);
   };
 
   const form = (category) => {
