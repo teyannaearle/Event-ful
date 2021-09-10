@@ -87,6 +87,8 @@ function Test() {
         <input type="number" placeholder="Event zip code" onChange={handleZipChange} value={zip}/>
         <input type="submit" value="Search" />
         </form>
+
+        {vendors ? <p>all the vendors</p> : <p>sorry couldn't find vendors in this area</p>}
     </div>;
 }
 
