@@ -6,6 +6,7 @@ const {
   addToList,
   deleteFromList,
   updateTask,
+  updateCost
 } = require("../queries/checklist");
 
 const db = require("../db/dbConfig");
@@ -70,7 +71,7 @@ checklist.delete("/:user_id/:event_id", async (req, res) => {
     res.status(404).json({
       success: false,
       message: e,
-    });
+    }); 
   }
 });
 
@@ -99,7 +100,35 @@ checklist.put("/:user_id/:event_id", async (req, res) => {
       success: false,
       message: e,
     });
-  }
+  } 
+});
+
+checklist.put("/cost/:user_id/:event_id", async (req, res) => {
+  const { user_id, event_id } = req.params;
+  const { task_cost, task_name } = req.body;
+
+  try {
+    const updated = await updateCost(
+      task_cost,
+      task_name,
+      user_id,
+      event_id
+    );
+
+    if (updated.user_id) {
+      res.status(200).json({
+        success: true,
+        payload: updated,
+      });
+    } else {
+      throw updated;
+    }
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      message: e,
+    });
+  } 
 });
 
 module.exports = checklist;

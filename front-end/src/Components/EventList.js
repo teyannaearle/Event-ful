@@ -24,7 +24,7 @@ function EventList({ match }) {
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [user_id]);
 
   return (
     <ul>

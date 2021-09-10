@@ -14,10 +14,10 @@ const {
 const db = require("../db/dbConfig");
 
 // INDEX
-booked.get("/:user_id", async (req, res) => {
-  const { user_id } = req.params;
+booked.get("/:user_id/:event_id", async (req, res) => {
+  const { user_id, event_id } = req.params;
   try {
-    const allBookedVendors = await getAllBookedVendors(user_id);
+    const allBookedVendors = await getAllBookedVendors(user_id, event_id);
     if (allBookedVendors[0].user_id) {
       res.status(200).json({
         success: true,
@@ -85,10 +85,10 @@ booked.post("/:user_id/:event_id", async (req, res) => {
   }
 });
 
+// DELETE
 booked.delete("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-  const vendorName = req.body.name;
-  // GET VENDOR NAME
+  const vendorName = req.body.vendor_name;
   try {
     const deletedBookedVendor = await deleteBookedVendor(
       user_id,
@@ -108,9 +108,11 @@ booked.delete("/:user_id/:event_id", async (req, res) => {
   }
 });
 
+// UPDATE
 booked.put("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-  const { vendor } = req.body;
+  const vendor  = req.body;
+  console.log(req.body)
   try {
     const updatedBookedVendor = await updateBookedVendor(vendor, user_id, event_id);
     if (updatedBookedVendor.user_id) {
@@ -119,7 +121,8 @@ booked.put("/:user_id/:event_id", async (req, res) => {
         payload: updatedBookedVendor,
       });
     } else {
-      throw `No vendor was updated with ${vendor.name}`;
+      console.log(updatedBookedVendor)
+      throw `No vendor was updated with ${vendor.vendor_name}`;
     }
   } catch (e) {
     res.status(404).json({
