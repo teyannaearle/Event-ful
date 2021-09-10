@@ -1,10 +1,10 @@
 const db = require("../db/dbConfig.js");
 
 //index
-const getAllBookedVendors = async (user_id) => {
+const getAllBookedVendors = async (user_id, event_id) => {
   try {
     const allBookedVendors = await db.any(
-      "SELECT * FROM booked WHERE user_id=$1 ORDER BY vendor_name"
+      "SELECT * FROM booked WHERE user_id=$1 AND event_id=$2 ORDER BY vendor_name", [user_id, event_id]
     );
     return allBookedVendors;
   } catch (err) {
@@ -33,9 +33,9 @@ const createBookedVendor = async (vendor, user_id, event_id) => {
       [
         user_id,
         event_id,
-        vendor.name,
-        vendor.address,
-        vendor.phoneNumber,
+        vendor.vendor_name,
+        vendor.vendor_address,
+        vendor.vendor_phone_number,
         vendor.amount,
       ]
     );
@@ -59,17 +59,17 @@ const deleteBookedVendor = async (user_id, event_id, vendorName) => {
 };
 
 //update
-const updateBookedVendor = async (vendor, event_id, user_id) => {
+const updateBookedVendor = async (vendor, user_id, event_id) => {
   try {
     const updatedBookedVendor = await db.one(
-      "UPDATE booked SET vendor_name=$1, vendor_address=$2, vendor_phone_number=$3, amount=$4 WHERE user_id=$5 AND event_id=$6 RETURNING *",
+      "UPDATE booked SET vendor_address=$1, vendor_phone_number=$2, amount=$3 WHERE user_id=$4 AND event_id=$5 AND vendor_name=$6 RETURNING *",
       [
-        vendor.name,
-        vendor.address,
-        vendor.phoneNumber,
+        vendor.vendor_address,
+        vendor.vendor_phone_number,
         vendor.amount,
         user_id,
         event_id,
+        vendor.vendor_name
       ]
     );
     return updatedBookedVendor;

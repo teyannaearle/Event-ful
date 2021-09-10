@@ -2,19 +2,23 @@ import React from "react";
 import Favorite from "./Favorite";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { apiURL } from "../util/apiURL";
 
-// const API = apiURL() // edit after database setup
+const API = apiURL() 
+
+
 
 export default function FavoriteList() {
   const [favoriteVendors, setFavoriteVendors] = useState([]);
+  const { user_id } = useParams();
 
   useEffect(() => {
-    // axios.get(`${API}/favorites`)
-    axios
-      .get(``)
+    axios.get(`${API}/favorites/${user_id}`)
       .then(
         (res) => {
-          setFavoriteVendors(res.data);
+          console.log(res)
+          //setFavoriteVendors(res.data);
         },
         (e) => {
           console.error(e);
@@ -23,7 +27,7 @@ export default function FavoriteList() {
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [user_id]);
 
   return (
     <div>

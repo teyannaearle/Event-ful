@@ -1,19 +1,25 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import BookedVendor from "./BookedVendor"
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import BookedVendor from "./BookedVendor";
+import { apiURL } from "../util/apiURL";
+import "./BookedVendorsList.css";
 
-// const API = apiURL() // edit after database setup
+const API = apiURL();
 
 export default function FavoriteList() {
   const [bookedVendors, setBookedVendors] = useState([]);
+  const { user_id, event_id } = useParams();
 
   useEffect(() => {
-   // axios.get(`${API}/bookedvendors`)
-   axios.get(``)
+    axios
+      .get(`${API}/booked/${user_id}/${event_id}`)
       .then(
         (res) => {
-          setBookedVendors(res.data);
+          console.log(res.data)
+          setBookedVendors(res.data.message);
         },
         (e) => {
           console.error(e);
@@ -22,28 +28,29 @@ export default function FavoriteList() {
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [user_id, event_id]);
 
   return (
     <div>
-      {bookedVendors.length > 0 && (
-        <section>
-          <table>
-            <thead>
-              <tr>
-                <th>Vendor Name</th>
-                <th>Vendor Address</th>
-                <th>Vendor Phone</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bookedVendors.map((vendor) => {
+      Booked Vendor List
+      <section>
+        <table>
+          <thead>
+            <tr>
+              <th>Vendor Name</th>
+              <th>Vendor Address</th>
+              <th>Vendor Phone</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookedVendors.length > 0 &&
+              bookedVendors.map((vendor) => {
                 return <BookedVendor vendor={vendor} />;
               })}
-            </tbody>
-          </table>
-        </section>
-      )}
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 }
