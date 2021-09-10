@@ -43,7 +43,9 @@ export default function Event() {
         setCategories(vendorCategories);
       });
     } catch {}
+
   }, [event_id, user_id]);
+
 
   const updateCost = (body, category) => {
     try {
@@ -55,6 +57,7 @@ export default function Event() {
     } catch {}
   };
 
+  
   return (
     <div className="event-page">
       <h1>{eventName}</h1>
