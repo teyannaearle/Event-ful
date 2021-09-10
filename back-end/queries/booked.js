@@ -4,7 +4,8 @@ const db = require("../db/dbConfig.js");
 const getAllBookedVendors = async (user_id, event_id) => {
   try {
     const allBookedVendors = await db.any(
-      "SELECT * FROM booked WHERE user_id=$1 AND event_id=$2 ORDER BY vendor_name", [user_id, event_id]
+      "SELECT * FROM booked WHERE user_id=$1 AND event_id=$2 ORDER BY vendor_name",
+      [user_id, event_id]
     );
     return allBookedVendors;
   } catch (err) {
@@ -69,7 +70,7 @@ const updateBookedVendor = async (vendor, user_id, event_id) => {
         vendor.amount,
         user_id,
         event_id,
-        vendor.vendor_name
+        vendor.vendor_name,
       ]
     );
     return updatedBookedVendor;

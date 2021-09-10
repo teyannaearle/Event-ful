@@ -14,8 +14,6 @@ import "./App.css";
 import Test from "./Pages/Test";
 
 function App() {
-
-
   return (
     <div>
       <Switch>
@@ -42,7 +40,7 @@ function App() {
         <Route path="/favorites/:user_id">
           <Favorites />
         </Route>
-        
+
         <Route path="/vendors/:category">
           <VendorIndex />
           {/* <Test /> */}

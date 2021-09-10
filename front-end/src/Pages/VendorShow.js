@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import api from "../util/apiCalls";
 
 export default function VendorShow() {
-  const [business, setbusiness] = useState({
+  const [business, setBusiness] = useState({
     photos: [],
     categories: [{ title: "" }],
     location: { display_address: [] },
@@ -24,8 +24,8 @@ export default function VendorShow() {
       const reviewData = await api.getReviews(provider_id);
       if (data && reviewData) {
         setReviews(reviewData);
-        setbusiness(data);
-        console.log(data)
+        setBusiness(data);
+        console.log(data);
       } else {
         // ---------- ERROR PAGE  ---------------
       }
@@ -71,23 +71,23 @@ export default function VendorShow() {
         {reviews.map((review, i) => {
           return (
             <div key={i} className="review">
-              <div> 
-              <p>{review.user.name}</p>
-              <p>{review.time_created}</p>
-              <img width="50px" src={review.user.image_url} alt="Reviewer" />
+              <div>
+                <p>{review.user.name}</p>
+                <p>{review.time_created}</p>
+                <img width="50px" src={review.user.image_url} alt="Reviewer" />
               </div>
 
-           <div>
-              {/* <p> */}
-              <Ratings rating={review.rating} widgetRatedColors="steelblue">
-                <Ratings.Widget widgetDimension="20px" />
-                <Ratings.Widget widgetDimension="20px" />
-                <Ratings.Widget widgetDimension="30px" />
-                <Ratings.Widget widgetDimension="20px" />
-                <Ratings.Widget widgetDimension="20px" />
-              </Ratings>
-              {/* </p> */}
-              <p>{review.text}</p>
+              <div>
+                {/* <p> */}
+                <Ratings rating={review.rating} widgetRatedColors="steelblue">
+                  <Ratings.Widget widgetDimension="20px" />
+                  <Ratings.Widget widgetDimension="20px" />
+                  <Ratings.Widget widgetDimension="30px" />
+                  <Ratings.Widget widgetDimension="20px" />
+                  <Ratings.Widget widgetDimension="20px" />
+                </Ratings>
+                {/* </p> */}
+                <p>{review.text}</p>
               </div>
             </div>
           );
