@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import api from "../util/apiCalls";
 
-export default function VendorIndex({location}) {
+export default function VendorIndex({ location }) {
   const [vendors, setVendors] = useState([]);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
@@ -80,13 +81,15 @@ export default function VendorIndex({location}) {
     if (location.coordinates) {
       let ven = vendors.map((vendor) => {
         return (
-          <li key={vendor.id}>
-            <img src={vendor.image_url} alt={vendor.name} height="200" />
-            <h1>{vendor.name}</h1>
-            {/* Display distance */}
-            <p>Phone: {vendor.display_phone}</p>
-            <p>Avg Rating: {vendor.rating}</p>
-          </li>
+          <Link to={`/vendor/${category}/${vendor.id}`}>
+            <li key={vendor.id}>
+              <img src={vendor.image_url} alt={vendor.name} height="200" />
+              <h1>{vendor.name}</h1>
+              {/* Display distance */}
+              <p>Phone: {vendor.display_phone}</p>
+              <p>Avg Rating: {vendor.rating}</p>
+            </li>
+          </Link>
         );
       });
       return <div> {ven} </div>;
