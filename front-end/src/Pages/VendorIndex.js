@@ -55,11 +55,11 @@ export default function VendorIndex({ location }) {
       case "party rental":
         item = "Eqipment Rentals";
         break;
-      case "eventphotography":
+      case "photographers":
         item = "Photographers";
         break;
       case "videographers":
-        item = "Videographers";
+        item = "Videographers"; 
         break;
       case "venues":
         item = "Venue";
@@ -67,7 +67,7 @@ export default function VendorIndex({ location }) {
       case "balloons":
         item = "Balloon Services";
         break;
-      case "floraldesigners":
+      case "floral":
         item = "Floral Designers";
         break;
       default:
@@ -93,7 +93,7 @@ export default function VendorIndex({ location }) {
             <p>Phone: {vendor.display_phone}</p>
             <div className="flex-row">
               <p>
-                Avg Rating:{" "}
+                Avg Rating:{" "}              </p>
                 <Ratings
                   rating={vendor.rating}
                   widgetRatedColors="steelblue"
@@ -105,7 +105,7 @@ export default function VendorIndex({ location }) {
                   <Ratings.Widget widgetDimension="15px" />
                   <Ratings.Widget widgetDimension="15px" />
                 </Ratings>
-              </p>
+ 
             </div>
           </li>
         );
@@ -128,7 +128,6 @@ export default function VendorIndex({ location }) {
       <div>
         {category ? <h1 className="flex-row"> {listItem(category)} </h1> : null}
         <form onSubmit={handleSubmit} id="zip-form">
-          {/* <span > */}
           <input
             className="three-d"
             type="number"
@@ -138,10 +137,10 @@ export default function VendorIndex({ location }) {
             id="zip-search"
           />
           <button type="submit">Search</button>
-          {/* </span> */}
         </form>
       </div>
       {vendorsDisplay()}
+
     </div>
   );
 }

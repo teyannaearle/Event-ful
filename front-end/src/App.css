@@ -1,3 +1,4 @@
+/* ACROSS SITE */
 * {
   list-style: none;
   text-decoration: none;
@@ -38,11 +39,31 @@ button:active {
   margin-bottom: 20px;
 }
 
-/* .event-page {
+.page {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
+}
+
+.three-d {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 3px 0px #d8d8d8, 0px 2px 10px rgba(0, 0, 0, 0.4),
+    inset 0px 0px 3px rgba(255, 255, 255, 0.927);
+}
+
+.flex-row {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* EVENT PAGE */
 
 .eventpage-container {
   width: 95%;
@@ -233,33 +254,78 @@ button:active {
   padding-top: 10px;
 }
 
-#vendorimg-container {
-  display: flex;
-  justify-content: center;
-}
-
-.vendor-imgs {
-  width: 33.33%;
-  height: 400px;
-}
-
-.review {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
+.evenpg-containers {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .col-h {
   margin-top: 10px;
 }
 
-.evenpg-containers {
-  padding-top: 15px;
-  padding-bottom: 15px;
+/* VENDOR SHOW PAGE */
+
+.carousel {
+  width: 70%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
+.main-slide {
+  padding-top: 30px;
+}
+
+.car-wrap {
+  width: 50%;
+}
+
+.carousel .slider-wrapper {
+  width: 100%;
+}
+.vendor-imgs {
+  height: 500px;
+  width: 100%;
+}
+
+#ven-info {
+  width: 70%;
+  margin-top: 20px;
+}
+
+#ven-info p,
+#ven-info div {
+  margin: 0;
+}
+
+.reviews {
+  margin-top: 20px;
+  width: 70%;
+}
+
+.review {
+  display: grid;
+
+  grid-template-columns: 20% 80%;
+  align-items: center;
+  justify-items: center;
+}
+
+.reviewers {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.reviewers p,
+.reviewers img {
+  margin: 0;
+}
+
+/* VENDOR INDEX PAGE */
 .indexpg-container {
   width: 95%;
-  margin: auto;
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -279,7 +345,7 @@ button:active {
   margin-bottom: 20px;
 }
 
-.ven-ul{
+.ven-ul {
   width: 100%;
   display: grid;
   grid-template-columns: 30% 30% 30%;
@@ -290,31 +356,6 @@ button:active {
   text-align: center;
 }
 
-
-.ven-li{
+.ven-li {
   padding: 20px;
-}
-
-.page {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.three-d{
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: 0px 3px 0px #d8d8d8, 0px 2px 10px rgba(0, 0, 0, 0.4),
-    inset 0px 0px 3px rgba(255, 255, 255, 0.927);
-}
-
-.flex-row{
-  display: flex;
-  justify-content: center;
-}
-
-.flex-col{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
