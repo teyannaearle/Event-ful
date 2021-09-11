@@ -35,6 +35,11 @@ button:active {
   transition: all 0.2s ease-in-out;
 }
 
+button:hover{
+  filter: brightness(104%);
+  cursor: pointer;
+}
+
 .pg-head {
   margin-bottom: 20px;
 }
@@ -136,14 +141,14 @@ button:active {
   font-size: medium;
 }
 
-.check:hover {
+/* .check:hover {
   background: rgb(118, 153, 186);
   background: linear-gradient(
     90deg,
     rgba(118, 153, 186, 1) 0%,
     rgba(107, 137, 164, 1) 100%
   );
-}
+} */
 .check:active {
   background: rgb(94, 120, 144);
   background: linear-gradient(
