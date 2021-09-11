@@ -1,6 +1,3 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import api from "./util/apiCalls";
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
 import Event from "./Pages/EventPage";
@@ -11,10 +8,10 @@ import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
-import Test from "./Pages/Test";
+import useGeoLocation from "./hooks/useGeoLocation";
 
 function App() {
-
+  const location = useGeoLocation();
 
   return (
     <div>
@@ -44,8 +41,7 @@ function App() {
         </Route>
         
         <Route path="/vendors/:category">
-          <VendorIndex />
-          {/* <Test /> */}
+          <VendorIndex location={location}/>
         </Route>
 
         <Route path="/booked/:user_id/:event_id">
