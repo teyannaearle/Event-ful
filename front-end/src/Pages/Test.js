@@ -91,9 +91,11 @@ function Test() {
           value={zip}
         />
         <input type="submit" value="Search" />
-      </form>
+        </form>
+
+        {vendors ? <p>all the vendors</p> : <p>sorry couldn't find vendors in this area</p>}
     </div>
-  );
+  )
 }
 
 export default Test;

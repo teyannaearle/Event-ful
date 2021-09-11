@@ -14,6 +14,10 @@ export default function Event() {
   const [budget, setBudget] = useState(0);
   const { user_id, event_id } = useParams();
   const [shownCost, setShownCost] = useState({});
+  const formatter = new Intl.NumberFormat("en-US" , {
+    style: "currency",
+    currency: "USD"
+  });
 
   useEffect(() => {
     try {
@@ -56,12 +60,12 @@ export default function Event() {
   };
 
   return (
-    <div className="event-page">
-      <h1>{eventName}</h1>
+    <div className="event-page page">
+      <h1 className="pg-head">{eventName}</h1>
       <div className="eventpage-container">
-        <div id="checklist-container">
-          <h2>Vendor Checklist:</h2>
-          <h2>Booked?</h2>
+        <div id="checklist-container" className="evenpg-containers">
+          <h2 className="col-h">Booked?</h2>
+          <h2 className="col-h">Vendors:</h2>
           <Checklist
             categories={categories}
             user_id={user_id}
@@ -70,17 +74,18 @@ export default function Event() {
           />
         </div>
 
-        <div id="budget-container">
-          <h2>Budget</h2>
+        <div id="budget-container" className="evenpg-containers">
+          <h2 className="col-h">Budget: {formatter.format(budget)}</h2>
           <Budget
             categories={categories}
             budget={budget}
             shownCost={shownCost}
+            formatter={formatter}
           />
         </div>
 
-        <div id="countdown-container">
-          <h2>Countdown to {eventName} !</h2>
+        <div id="countdown-container" className="evenpg-containers">
+          <h2 className="col-h">Countdown to {eventName} !</h2>
           <Timer />
         </div>
       </div>
