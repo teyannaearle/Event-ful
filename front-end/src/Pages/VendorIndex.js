@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import useGeoLocation from "../hooks/useGeoLocation";
 import api from "../util/apiCalls";
 
-export default function VendorIndex() {
-  const [vendors, setVendors] = useState({});
+export default function VendorIndex({location}) {
+  const [vendors, setVendors] = useState([]);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const { category } = useParams();
-  const location = useGeoLocation();
+  const [zip, setZip] = useState("");
 
   useEffect(() => {
-    // IF (location.coordinates.lattitude) //
-    setLat(location.coordinates.latitude);
-    setLng(location.coordinates.longitude);
+    if (location.coordinates) {
+      setLat(location.coordinates.latitude);
+      setLng(location.coordinates.longitude);
+    }
   }, [location]);
 
   useEffect(() => {
@@ -21,21 +21,66 @@ export default function VendorIndex() {
       if (lng && lat) {
         const data = await api.getVendorsLongLag(lng, lat, category);
         setVendors(data.businesses);
-      } else {
-        // EITHER PULL ZIP FROM EVENT OR ASK USER FOR ZIP --- STILL UNSURE
-        // const data = await api.getVendorsZip(category, zip)
-        // setVendors(data)
       }
     })();
   }, [category, lng, lat]);
 
-  console.log(vendors);
+  const handleZipChange = (e) => {
+    setZip(e.target.value);
+  };
 
-  return (
-    <ul>
-      {vendors.map((vendor) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (zip.length !== 5) {
+      window.alert("Zip code is not valid");
+    } else {
+      const data = await api.getVendorsZip(category, zip);
+      setVendors(data);
+    }
+  };
+
+  const listItem = (category) => {
+    let item = "";
+    switch (category) {
+      case "catering":
+        item = "Caterers";
+        break;
+      case "djs":
+        item = "DJ";
+        break;
+      case "musicians":
+        item = "Musicians";
+        break;
+      case "party rental":
+        item = "Eqipment Rentals";
+        break;
+      case "eventphotography":
+        item = "Photographers";
+        break;
+      case "videographers":
+        item = "Videographers";
+        break;
+      case "venues":
+        item = "Venue";
+        break;
+      case "balloons":
+        item = "Balloon Services";
+        break;
+      case "floraldesigners":
+        item = "Floral Designers";
+        break;
+      default:
+        item = "";
+    }
+
+    return item;
+  };
+
+  const vendorsDisplay = () => {
+    if (location.coordinates) {
+      let ven = vendors.map((vendor) => {
         return (
-          <li>
+          <li key={vendor.id}>
             <img src={vendor.image_url} alt={vendor.name} height="200" />
             <h1>{vendor.name}</h1>
             {/* Display distance */}
@@ -43,7 +88,36 @@ export default function VendorIndex() {
             <p>Avg Rating: {vendor.rating}</p>
           </li>
         );
-      })}
-    </ul>
+      });
+      return <div> {ven} </div>;
+    } else {
+      return (
+        <div>
+          <h1>
+            Input zip code above to search for {listItem(category)} in your
+            area.
+          </h1>
+        </div>
+      );
+    }
+  };
+
+  return (
+    <div className="page">
+      <div>
+        {category ? <h1> {listItem(category)} </h1> : null}
+
+        <form onSubmit={handleSubmit}>
+          <input
+            type="number"
+            placeholder="Event zip code"
+            onChange={handleZipChange}
+            value={zip}
+          />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      {vendorsDisplay()}
+    </div>
   );
 }
