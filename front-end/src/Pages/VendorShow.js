@@ -33,7 +33,7 @@ export default function VendorShow() {
   }, [provider_id]);
 
   return (
-    <div id="vendor-showpage">
+    <div id="vendor-showpage" className="page">
       <h1>{business.name} </h1>
 
       <div id="vendorimg-container">

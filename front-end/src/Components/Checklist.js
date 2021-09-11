@@ -99,7 +99,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
 
   const form = (category) => {
     return (
-      <form onSubmit={(e) => handleSubmit(category, e)}>
+      <form onSubmit={(e) => handleSubmit(category, e)} id="cost-form">
         <input
           id={category}
           placeholder="cost"
@@ -114,23 +114,35 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
     );
   };
 
+
+  const editButton = (cost) => {
+    let button = "";
+    if (cost !== "0") {
+      button = "Edit Cost";
+    } else {
+      button = "Add Cost";
+    }
+
+    return button;
+  };
+
   return (
-    <ul className="checklist-list">
+    <ul className="checklist checklist-ul">
       {categories.map((category, i) => {
         return (
-          <li key={i} className="checklist-list-item">
-            <Link to={`/vendors/${category.name}`}>
-              {listItem(category.name)}
-            </Link>
-            <div>
+          <li key={i} className="checklist check-listitem">
+            <div className="book-buttons">
               <button
-                className="book-button"
+                className={bookedStatus[category.name] ? "book-button check" : "book-button x"}
                 onClick={() => updateBookedStatus(category.name)}
               >
                 {" "}
-                {bookedStatus[category.name] ? "✓" : "X"}{" "}
+                {bookedStatus[category.name] ? <>&#10003;</> : <>&#10007;</>}
               </button>
+  
+
               <button
+                // className="checklist-buttons"
                 onClick={() =>
                   setShowForm({
                     ...showForm,
@@ -138,10 +150,22 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
                   })
                 }
               >
-                Edit
+                {editButton(category.cost)}
               </button>
-              {showForm[category.name] ? form(category.name) : null}
             </div>
+
+            <div>
+              <button className="checklist-button">
+                <Link
+                  to={`/vendors/${category.name}`}
+                  className="checklist-span"
+                >
+                  <span> {listItem(category.name)} </span>{" "}
+                  <span>&#187;</span>
+                </Link>
+              </button>
+            </div>
+            {showForm[category.name] ? form(category.name) : null}
           </li>
         );
       })}
