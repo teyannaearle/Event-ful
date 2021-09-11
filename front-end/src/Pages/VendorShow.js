@@ -51,6 +51,7 @@ export default function VendorShow() {
         </div>
 
         <p>{business.display_phone}</p>
+        <div className="flex-row"> 
         <Ratings rating={business.rating} widgetRatedColors="steelblue">
           <Ratings.Widget widgetDimension="30px" />
           <Ratings.Widget widgetDimension="30px" />
@@ -58,7 +59,7 @@ export default function VendorShow() {
           <Ratings.Widget widgetDimension="30px" />
           <Ratings.Widget widgetDimension="30px" />
         </Ratings>
-
+        </div>
         <div>
           {business.categories.map((category, i) => (
             <p key={i}>{category.title}</p>
@@ -79,13 +80,17 @@ export default function VendorShow() {
 
            <div>
               {/* <p> */}
-              <Ratings rating={review.rating} widgetRatedColors="steelblue">
-                <Ratings.Widget widgetDimension="20px" />
-                <Ratings.Widget widgetDimension="20px" />
-                <Ratings.Widget widgetDimension="30px" />
-                <Ratings.Widget widgetDimension="20px" />
-                <Ratings.Widget widgetDimension="20px" />
-              </Ratings>
+              <Ratings
+                  rating={review.rating}
+                  widgetRatedColors="steelblue"
+                  widgetSpacings="2px"
+                >
+                  <Ratings.Widget widgetDimension="15px" />
+                  <Ratings.Widget widgetDimension="15px" />
+                  <Ratings.Widget widgetDimension="20px" />
+                  <Ratings.Widget widgetDimension="15px" />
+                  <Ratings.Widget widgetDimension="15px" />
+                </Ratings>
               {/* </p> */}
               <p>{review.text}</p>
               </div>
