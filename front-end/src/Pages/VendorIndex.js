@@ -60,7 +60,7 @@ export default function VendorIndex({ location }) {
         item = "Photographers";
         break;
       case "videographers":
-        item = "Videographers"; 
+        item = "Videographers";
         break;
       case "venues":
         item = "Venue";
@@ -82,19 +82,19 @@ export default function VendorIndex({ location }) {
     if (location.coordinates) {
       let ven = vendors.map((vendor) => {
         return (
-          <li key={vendor.id} className="flex-col three-d ven-li">
-            <img
-              src={vendor.image_url}
-              alt={vendor.name}
-              height="200"
-              width="200"
-            />
-            <h1>{vendor.name}</h1>
-            {/* Display distance */}
-            <p>Phone: {vendor.display_phone}</p>
-            <div className="flex-row">
-              <p>
-                Avg Rating:{" "}              </p>
+          <Link to={`/vendor/${category}/${vendor.id}`}>
+            <li key={vendor.id} className="flex-col three-d ven-li">
+              <img
+                src={vendor.image_url}
+                alt={vendor.name}
+                height="200"
+                width="200"
+              />
+              <h1>{vendor.name}</h1>
+              {/* Display distance */}
+              <p>Phone: {vendor.display_phone}</p>
+              <div className="flex-row">
+                <p>Avg Rating: </p>
                 <Ratings
                   rating={vendor.rating}
                   widgetRatedColors="steelblue"
@@ -106,10 +106,9 @@ export default function VendorIndex({ location }) {
                   <Ratings.Widget widgetDimension="15px" />
                   <Ratings.Widget widgetDimension="15px" />
                 </Ratings>
- 
-            </div>
-          </li>
->>>>>>> 71e0a768746df7bfe63895701f0c9b1309f5f973
+              </div>
+            </li>
+          </Link>
         );
       });
       return <ul className="ven-ul"> {ven} </ul>;
@@ -142,7 +141,6 @@ export default function VendorIndex({ location }) {
         </form>
       </div>
       {vendorsDisplay()}
-
     </div>
   );
 }
