@@ -109,7 +109,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           min="0"
           step=".01"
         />
-        <input type="submit" value="Update" />
+        <button type="submit">Update</button>
       </form>
     );
   };
