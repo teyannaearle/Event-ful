@@ -86,7 +86,7 @@ export default function VendorIndex({ location }) {
 
   const vendorsList = () => {
     let result = ""
-    if (!location.coordinates){
+    if (!location.coordinates && !searched){
       result = <ZipSearch category={listItem(category)} />
     } else if (searched && !vendors[0]){
       result = <NoVendors />
