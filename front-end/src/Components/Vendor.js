@@ -6,7 +6,7 @@ function Vendor({ vendor, category }) {
   return (
     <>
       <Link to={`/vendor/${category}/${vendor.id}`}>
-        <li key={vendor.id} className="flex-col three-d ven-li">
+        <li className="flex-col three-d ven-li">
           <img
             src={vendor.image_url}
             alt={vendor.name}
