@@ -7,14 +7,17 @@ import SignUp from "./Pages/SignUp.js";
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
-import "./App.css";
 import useGeoLocation from "./hooks/useGeoLocation";
+import ScrollToTop from "./Components/ScrollToTop.js";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./App.css";
 
 function App() {
   const location = useGeoLocation();
 
   return (
-    <div>
+    <div className="site">
+      <ScrollToTop />
       <Switch>
         <Route exact path="/">
           <Landing />
@@ -39,9 +42,9 @@ function App() {
         <Route path="/favorites/:user_id">
           <Favorites />
         </Route>
-        
+
         <Route path="/vendors/:category">
-          <VendorIndex location={location}/>
+          <VendorIndex location={location} />
         </Route>
 
         <Route path="/booked/:user_id/:event_id">

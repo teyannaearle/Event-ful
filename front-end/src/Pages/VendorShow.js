@@ -1,10 +1,13 @@
-import Ratings from "react-ratings-declarative";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import api from "../util/apiCalls";
+import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import VendorReviews from "../Components/VendorReviews";
+import VendorShowInfo from "../Components/VendorShowInfo";
+import Loading from "../Components/Loading";
+
 
 export default function VendorShow() {
-  const [business, setBusiness] = useState({
+  const [business, setbusiness] = useState({
     photos: [],
     categories: [{ title: "" }],
     location: { display_address: [] },
@@ -24,8 +27,7 @@ export default function VendorShow() {
       const reviewData = await api.getReviews(provider_id);
       if (data && reviewData) {
         setReviews(reviewData);
-        setBusiness(data);
-        console.log(data);
+        setbusiness(data);
       } else {
         // ---------- ERROR PAGE  ---------------
       }
@@ -34,65 +36,16 @@ export default function VendorShow() {
 
   return (
     <div id="vendor-showpage" className="page">
-      <h1>{business.name} </h1>
-
-      <div id="vendorimg-container">
-        {business.photos.map((photo, i) => (
-          <img src={photo} key={i} alt="service" className="vendor-imgs" />
-        ))}
-      </div>
-      <div>
-        <p>{business.price}</p>
-
-        <div>
-          {business.location.display_address.map((point, i) => (
-            <p key={i}>{point}</p>
-          ))}
-        </div>
-
-        <p>{business.display_phone}</p>
-        <Ratings rating={business.rating} widgetRatedColors="steelblue">
-          <Ratings.Widget widgetDimension="30px" />
-          <Ratings.Widget widgetDimension="30px" />
-          <Ratings.Widget widgetDimension="40px" />
-          <Ratings.Widget widgetDimension="30px" />
-          <Ratings.Widget widgetDimension="30px" />
-        </Ratings>
-
-        <div>
-          {business.categories.map((category, i) => (
-            <p key={i}>{category.title}</p>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <h2>Reviews</h2>
-        {reviews.map((review, i) => {
-          return (
-            <div key={i} className="review">
-              <div>
-                <p>{review.user.name}</p>
-                <p>{review.time_created}</p>
-                <img width="50px" src={review.user.image_url} alt="Reviewer" />
-              </div>
-
-              <div>
-                {/* <p> */}
-                <Ratings rating={review.rating} widgetRatedColors="steelblue">
-                  <Ratings.Widget widgetDimension="20px" />
-                  <Ratings.Widget widgetDimension="20px" />
-                  <Ratings.Widget widgetDimension="30px" />
-                  <Ratings.Widget widgetDimension="20px" />
-                  <Ratings.Widget widgetDimension="20px" />
-                </Ratings>
-                {/* </p> */}
-                <p>{review.text}</p>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      {business.photos[0] ? (
+        <>
+          {" "}
+          <VendorShowInfo business={business} />
+          <VendorReviews reviews={reviews} />{" "}
+        </>
+      ) : (
+        <Loading />
+      )}
+      
     </div>
   );
 }
