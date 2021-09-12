@@ -13,7 +13,7 @@ function Vendor({ vendor, category }) {
             height="200"
             width="200"
           />
-          <h1>{vendor.name}</h1>
+          <h3>{vendor.name}</h3>
           <p>Phone: {vendor.display_phone}</p>
           <div className="flex-row">
             <p>Avg Rating: </p>

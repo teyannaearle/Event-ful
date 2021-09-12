@@ -3,13 +3,16 @@ import { useParams } from "react-router";
 import api from "../util/apiCalls";
 import VendorList from "../Components/VendorList";
 import ZipSearch from "../Components/ZipSearch"
+import Loading from "../Components/Loading"
+import NoVendors from "../Components/NoVendors";
 
 export default function VendorIndex({ location }) {
   const [vendors, setVendors] = useState([]);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  const { category } = useParams();
   const [zip, setZip] = useState("");
+  const [searched, setSearched] = useState(false)
+  const { category } = useParams();
 
   useEffect(() => {
     if (location.coordinates) {
@@ -23,6 +26,7 @@ export default function VendorIndex({ location }) {
       if (lng && lat) {
         const data = await api.getVendorsLongLag(lng, lat, category);
         setVendors(data.businesses);
+        setSearched(true)
       }
     })();
   }, [category, lng, lat]);
@@ -38,6 +42,7 @@ export default function VendorIndex({ location }) {
     } else {
       const data = await api.getVendorsZip(category, zip);
       setVendors(data);
+      setSearched(true)
     }
   };
 
@@ -48,13 +53,13 @@ export default function VendorIndex({ location }) {
         item = "Caterers";
         break;
       case "djs":
-        item = "DJ";
+        item = "Djs";
         break;
       case "musicians":
         item = "Musicians";
         break;
       case "party rental":
-        item = "Eqipment Rentals";
+        item = "Equipment Rentals";
         break;
       case "photographers":
         item = "Photographers";
@@ -63,7 +68,7 @@ export default function VendorIndex({ location }) {
         item = "Videographers";
         break;
       case "venues":
-        item = "Venue";
+        item = "Venues";
         break;
       case "balloons":
         item = "Balloon Services";
@@ -78,25 +83,38 @@ export default function VendorIndex({ location }) {
     return item;
   };
 
-  return (
+
+  const vendorsList = () => {
+    let result = ""
+    if (!location.coordinates){
+      result = <ZipSearch category={listItem(category)} />
+    } else if (searched && !vendors[0]){
+      result = <NoVendors />
+    } else if (location.coordinates && !vendors[0]){
+      result = <Loading />
+    } else {
+      result = <VendorList vendors={vendors} category={category} />
+    }
+    return result
+  }
+
+  return(
     <div className="page indexpg-container">
-      <div>
-        {category ? <h1 className="flex-row"> {listItem(category)} </h1> : null}
-        <form onSubmit={handleSubmit} id="zip-form">
-          <input
-            className="three-d"
-            type="number"
-            placeholder="Event zip code"
-            onChange={handleZipChange}
-            value={zip}
-            id="zip-search"
-          />
-          <button type="submit">Search</button>
-        </form>
-      </div>
-
-      {location.coordinates ? <VendorList vendors={vendors} category={category} /> :   <ZipSearch category={listItem(category)} />}
-
+    <div>
+      {category ? <h1 className="flex-row pg-head"> {listItem(category)} </h1> : null}
+      <form onSubmit={handleSubmit} id="zip-form">
+        <input
+          className="three-d"
+          type="number"
+          placeholder="Event zip code"
+          onChange={handleZipChange}
+          value={zip}
+          id="zip-search"
+        />
+        <button type="submit">Search</button>
+      </form>
     </div>
-  );
+    {vendorsList()}
+  </div>
+  )
 }

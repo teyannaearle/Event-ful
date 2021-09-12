@@ -3,8 +3,8 @@ import loading from "../assets/loading.gif"
 
 function Loading() {
     return (
-        <div>
-           <img src={loading} alt="loading" />
+        <div className="loading">
+           <img src={loading} alt="loading" width="300px" />
         </div>
     )
 }
