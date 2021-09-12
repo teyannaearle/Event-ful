@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Ratings from "react-ratings-declarative";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import api from "../util/apiCalls";
+import VendorList from "../Components/VendorList";
+import ZipSearch from "../Components/ZipSearch"
 
 export default function VendorIndex({ location }) {
   const [vendors, setVendors] = useState([]);
@@ -78,52 +78,6 @@ export default function VendorIndex({ location }) {
     return item;
   };
 
-  const vendorsDisplay = () => {
-    if (location.coordinates) {
-      let ven = vendors.map((vendor) => {
-        return (
-          <Link to={`/vendor/${category}/${vendor.id}`}>
-            <li key={vendor.id} className="flex-col three-d ven-li">
-              <img
-                src={vendor.image_url}
-                alt={vendor.name}
-                height="200"
-                width="200"
-              />
-              <h1>{vendor.name}</h1>
-              {/* Display distance */}
-              <p>Phone: {vendor.display_phone}</p>
-              <div className="flex-row">
-                <p>Avg Rating: </p>
-                <Ratings
-                  rating={vendor.rating}
-                  widgetRatedColors="steelblue"
-                  widgetSpacings="2px"
-                >
-                  <Ratings.Widget widgetDimension="15px" />
-                  <Ratings.Widget widgetDimension="15px" />
-                  <Ratings.Widget widgetDimension="20px" />
-                  <Ratings.Widget widgetDimension="15px" />
-                  <Ratings.Widget widgetDimension="15px" />
-                </Ratings>
-              </div>
-            </li>
-          </Link>
-        );
-      });
-      return <ul className="ven-ul"> {ven} </ul>;
-    } else {
-      return (
-        <div>
-          <h1>
-            Input zip code above to search for {listItem(category)} in your
-            area.
-          </h1>
-        </div>
-      );
-    }
-  };
-
   return (
     <div className="page indexpg-container">
       <div>
@@ -140,7 +94,9 @@ export default function VendorIndex({ location }) {
           <button type="submit">Search</button>
         </form>
       </div>
-      {vendorsDisplay()}
+
+      {location.coordinates ? <VendorList vendors={vendors} category={category} /> :   <ZipSearch category={listItem(category)} />}
+
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiURL } from "../util/apiURL";
+import React, { useEffect, useState } from "react";
 
 const api = apiURL();
 
@@ -142,7 +142,6 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
   
 
               <button
-                // className="checklist-buttons"
                 onClick={() =>
                   setShowForm({
                     ...showForm,
