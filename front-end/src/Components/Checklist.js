@@ -41,7 +41,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       case "party rental":
         item = "Find Equipment Rentals";
         break;
-      case "eventphotography":
+      case "photographers":
         item = "Find a Photographer";
         break;
       case "videographers":
@@ -53,7 +53,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       case "balloons":
         item = "Find Balloon Services";
         break;
-      case "floraldesigners":
+      case "floral":
         item = "Find a Floral Designer";
         break;
       default:
