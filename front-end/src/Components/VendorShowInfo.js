@@ -5,10 +5,10 @@ import { Carousel } from "react-responsive-carousel";
 function VendorShowInfo({ business }) {
   return (
     <>
-      <h1>{business.name} </h1>
+      <h1 className="pg-head">{business.name} </h1>
 
       <div className="car-wrap">
-        <Carousel className="main-slide" showThumbs={false} autoPlay={true}>
+        <Carousel showThumbs={false} autoPlay={true}>
           {business.photos.map((photo, i) => (
             <img src={photo} alt="service" className="vendor-imgs" key={i} />
           ))}

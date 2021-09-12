@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import VendorReviews from "../Components/VendorReviews";
 import VendorShowInfo from "../Components/VendorShowInfo";
+import Loading from "../Components/Loading";
+
 
 export default function VendorShow() {
   const [business, setbusiness] = useState({
@@ -34,8 +36,16 @@ export default function VendorShow() {
 
   return (
     <div id="vendor-showpage" className="page">
-      <VendorShowInfo business={business}/>
-      <VendorReviews reviews={reviews} />
+      {business.photos[0] ? (
+        <>
+          {" "}
+          <VendorShowInfo business={business} />
+          <VendorReviews reviews={reviews} />{" "}
+        </>
+      ) : (
+        <Loading />
+      )}
+      
     </div>
   );
 }
