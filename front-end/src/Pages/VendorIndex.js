@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Ratings from "react-ratings-declarative";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import api from "../util/apiCalls";
 
 export default function VendorIndex({ location }) {
