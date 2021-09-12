@@ -3,11 +3,6 @@ import React, { useEffect, useState } from "react";
 function Budget({ categories, budget , shownCost, formatter}) {
   const [budgetStatus, setBudgetStatus] = useState(0)
   const [sum, setSum] = useState(0)
-  // const formatter = new Intl.NumberFormat("en-US" , {
-  //   style: "currency",
-  //   currency: "USD"
-  // });
-
 
   useEffect(() => {
     const values = Object.values(shownCost)

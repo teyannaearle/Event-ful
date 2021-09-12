@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Ratings from "react-ratings-declarative";
 import { useParams } from "react-router";
 import api from "../util/apiCalls";
+import VendorList from "../Components/VendorList";
+import ZipSearch from "../Components/ZipSearch"
 
 export default function VendorIndex({ location }) {
   const [vendors, setVendors] = useState([]);
@@ -86,7 +88,7 @@ export default function VendorIndex({ location }) {
               src={vendor.image_url}
               alt={vendor.name}
               height="200"
-              width="200"
+              width="200" 
             />
             <h1>{vendor.name}</h1>
             {/* Display distance */}
@@ -140,6 +142,7 @@ export default function VendorIndex({ location }) {
         </form>
       </div>
       {vendorsDisplay()}
+      {/* {location.coordinates ? <VendorList vendors={vendors} /> :   <ZipSearch category={listItem(category)} />} */}
 
     </div>
   );

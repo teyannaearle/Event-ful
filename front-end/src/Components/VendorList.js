@@ -1,20 +1,14 @@
-import React, { useState, useEffect } from "react";
-import api from "../util/apiCalls";
+import React from "react";
+import Vendor from "./Vendor";
 
-function VendorList() {
-  const [category, setCategory] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const categories = await api.getVendors();
-      setCategory(categories);
-    })();
-  }, []);
-
+function VendorList({ vendors }) {
   return (
-    <div>
-      <h1>{category.name}</h1>
-    </div>
+    <ul className="ven-ul">
+      {vendors.map((vendor) => (
+        <Vendor vendor={vendor} />
+      ))}
+    </ul>
   );
 }
 
