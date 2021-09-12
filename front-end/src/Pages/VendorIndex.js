@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Ratings from "react-ratings-declarative";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import api from "../util/apiCalls";
@@ -55,11 +56,11 @@ export default function VendorIndex({ location }) {
       case "party rental":
         item = "Eqipment Rentals";
         break;
-      case "eventphotography":
+      case "photographers":
         item = "Photographers";
         break;
       case "videographers":
-        item = "Videographers";
+        item = "Videographers"; 
         break;
       case "venues":
         item = "Venue";
@@ -67,7 +68,7 @@ export default function VendorIndex({ location }) {
       case "balloons":
         item = "Balloon Services";
         break;
-      case "floraldesigners":
+      case "floral":
         item = "Floral Designers";
         break;
       default:
@@ -81,18 +82,36 @@ export default function VendorIndex({ location }) {
     if (location.coordinates) {
       let ven = vendors.map((vendor) => {
         return (
-          <Link to={`/vendor/${category}/${vendor.id}`}>
-            <li key={vendor.id}>
-              <img src={vendor.image_url} alt={vendor.name} height="200" />
-              <h1>{vendor.name}</h1>
-              {/* Display distance */}
-              <p>Phone: {vendor.display_phone}</p>
-              <p>Avg Rating: {vendor.rating}</p>
-            </li>
-          </Link>
+          <li key={vendor.id} className="flex-col three-d ven-li">
+            <img
+              src={vendor.image_url}
+              alt={vendor.name}
+              height="200"
+              width="200"
+            />
+            <h1>{vendor.name}</h1>
+            {/* Display distance */}
+            <p>Phone: {vendor.display_phone}</p>
+            <div className="flex-row">
+              <p>
+                Avg Rating:{" "}              </p>
+                <Ratings
+                  rating={vendor.rating}
+                  widgetRatedColors="steelblue"
+                  widgetSpacings="2px"
+                >
+                  <Ratings.Widget widgetDimension="15px" />
+                  <Ratings.Widget widgetDimension="15px" />
+                  <Ratings.Widget widgetDimension="20px" />
+                  <Ratings.Widget widgetDimension="15px" />
+                  <Ratings.Widget widgetDimension="15px" />
+                </Ratings>
+ 
+            </div>
+          </li>
         );
       });
-      return <div> {ven} </div>;
+      return <ul className="ven-ul"> {ven} </ul>;
     } else {
       return (
         <div>
@@ -106,21 +125,23 @@ export default function VendorIndex({ location }) {
   };
 
   return (
-    <div className="page">
+    <div className="page indexpg-container">
       <div>
-        {category ? <h1> {listItem(category)} </h1> : null}
-
-        <form onSubmit={handleSubmit}>
+        {category ? <h1 className="flex-row"> {listItem(category)} </h1> : null}
+        <form onSubmit={handleSubmit} id="zip-form">
           <input
+            className="three-d"
             type="number"
             placeholder="Event zip code"
             onChange={handleZipChange}
             value={zip}
+            id="zip-search"
           />
           <button type="submit">Search</button>
         </form>
       </div>
       {vendorsDisplay()}
+
     </div>
   );
 }

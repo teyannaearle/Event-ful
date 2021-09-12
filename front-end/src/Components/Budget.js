@@ -34,7 +34,7 @@ function Budget({ categories, budget , shownCost, formatter}) {
       case "party rental":
         item = "Equipment Rentals";
         break;
-      case "eventphotography":
+      case "photographers":
         item = "Photographer";
         break;
       case "videographers":
@@ -46,7 +46,7 @@ function Budget({ categories, budget , shownCost, formatter}) {
       case "balloons":
         item = "Balloon Services";
         break;
-      case "floraldesigners":
+      case "floral":
         item = "Floral Designer";
         break;
       default:
