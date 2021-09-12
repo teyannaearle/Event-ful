@@ -1,32 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-<<<<<<< HEAD
-function Budget({ categories, budget, shownCost }) {
-  const [budgetStatus, setBudgetStatus] = useState(0);
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-=======
 function Budget({ categories, budget , shownCost, formatter}) {
   const [budgetStatus, setBudgetStatus] = useState(0)
   const [sum, setSum] = useState(0)
-  // const formatter = new Intl.NumberFormat("en-US" , {
-  //   style: "currency",
-  //   currency: "USD"
-  // });
->>>>>>> 6ce688d955f648d4384c5f9ca4a1ac6f3cf373d0
 
   useEffect(() => {
-<<<<<<< HEAD
-    const values = Object.values(shownCost);
-    const sum = values.reduce((a, b) => {
-      return Number(a) + Number(b);
-    }, 0);
-    const currentSpending = Number(budget) - Number(sum);
-    setBudgetStatus(currentSpending);
-  }, [shownCost, budget]);
-=======
     const values = Object.values(shownCost)
     const sum = values.reduce((a,b) =>{ return Number(a) + Number(b) }, 0)
     const currentSpending = Number(budget) - Number(sum)
@@ -35,7 +13,6 @@ function Budget({ categories, budget , shownCost, formatter}) {
   }, [shownCost, budget])
 
 
->>>>>>> 6ce688d955f648d4384c5f9ca4a1ac6f3cf373d0
 
   const listItem = (category) => {
     let item = "";
@@ -52,7 +29,7 @@ function Budget({ categories, budget , shownCost, formatter}) {
       case "party rental":
         item = "Equipment Rentals";
         break;
-      case "eventphotography":
+      case "photographers":
         item = "Photographer";
         break;
       case "videographers":
@@ -64,7 +41,7 @@ function Budget({ categories, budget , shownCost, formatter}) {
       case "balloons":
         item = "Balloon Services";
         break;
-      case "floraldesigners":
+      case "floral":
         item = "Floral Designer";
         break;
       default:
@@ -75,24 +52,7 @@ function Budget({ categories, budget , shownCost, formatter}) {
   };
 
   const budgetUpdate = () => {
-    let status = "";
 
-<<<<<<< HEAD
-    if (budgetStatus < budget && budgetStatus > 0) {
-      status = (
-        <p>
-          {" "}
-          You have {formatter.format(budgetStatus)} left before you hit your
-          budget
-        </p>
-      );
-    } else if (budgetStatus === 0) {
-      status = <p>You've reached your budget!</p>;
-    } else if (budgetStatus === budget) {
-      status = null;
-    } else {
-      status = <p>You're {formatter.format(budgetStatus * -1)} over budget</p>;
-=======
     let status = ""
 
     if ((budgetStatus < budget && budgetStatus > 0) || (budgetStatus === budget)){
@@ -102,24 +62,13 @@ function Budget({ categories, budget , shownCost, formatter}) {
 
     } else {
       status = (<p >You're {formatter.format(budgetStatus * -1)} over budget</p>)
->>>>>>> 6ce688d955f648d4384c5f9ca4a1ac6f3cf373d0
     }
 
-    return status;
-  };
+    return status
+  }
+
 
   return (
-<<<<<<< HEAD
-    <div>
-      <p> Projected Budget: {formatter.format(budget)}</p>
-      {budgetUpdate()}
-      <ul>
-        {categories.map((category, i) => {
-          return (
-            <li key={i} className="budget-item">
-              <p>{listItem(category.name)} </p>
-              <p> {formatter.format(shownCost[category.name])}</p>
-=======
     <div className="budget-list">
 <div id="budget-update">
   <div className="update">
@@ -134,7 +83,6 @@ function Budget({ categories, budget , shownCost, formatter}) {
             <li key={i} className="budget-li">
               <p className="budget-cat">{listItem(category.name)} </p>
               <p> { formatter.format(shownCost[category.name]) }</p>
->>>>>>> 6ce688d955f648d4384c5f9ca4a1ac6f3cf373d0
             </li>
           );
         })}
