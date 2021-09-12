@@ -6,7 +6,7 @@ function VendorList({ vendors, category }) {
   return (
     <ul className="ven-ul">
       {vendors.map((vendor) => (
-        <Vendor vendor={vendor} category={category}/>
+        <Vendor vendor={vendor} category={category} key={vendor.id}/>
       ))}
     </ul>
   );
