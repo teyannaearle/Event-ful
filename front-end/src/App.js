@@ -11,6 +11,7 @@ import useGeoLocation from "./hooks/useGeoLocation";
 import ScrollToTop from "./Components/ScrollToTop.js";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
+import NewEventForm from "./Pages/NewEventForm.js";
 
 function App() {
   const location = useGeoLocation();
@@ -29,6 +30,10 @@ function App() {
 
         <Route path="/dashboard/:user_id">
           <Dashboard />
+        </Route>
+
+        <Route path="/dashboard/:user_id/new">
+          <NewEventForm />
         </Route>
 
         <Route path="/event/:user_id/:event_id">
