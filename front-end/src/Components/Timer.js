@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { apiURL } from "../util/apiURL";
+import axios from "axios";
+
+const api = apiURL();
 
 const minuteSeconds = 60;
 const hourSeconds = 3600;
@@ -29,27 +34,33 @@ function Timer() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [updated, setUpdated] = useState(false);
+  const { user_id, event_id } = useParams();
 
   useEffect(() => {
-    //  date and time  will eventually come from an api call to /events/:user_id/:event_id
-    setDate("2021-09-30");
-    setTime("00:30:00");
-    setUpdated(true);
-  }, []);
+    try {
+      axios.get(`${api}/events/${user_id}/${event_id}`).then((response) => {
+        const data = response.data.payload;
+        setDate(data.event_date.slice(0, 10));
+        setTime(data.event_time);
+        setUpdated(true);
+      });
+    } catch {}
+  }, [event_id, user_id]);
 
   const countDown = () => {
     const finish = new Date(`${date}T${time}`);
-    const startTime = Date.now() / 1000; 
-    const endTime = finish.getTime() / 1000; 
+    const startTime = Date.now() / 1000;
+    const endTime = finish.getTime() / 1000;
     const remainingTime = Math.ceil(endTime - startTime);
     const days = Math.ceil(remainingTime / daySeconds);
     const daysDuration = days * daySeconds;
 
     return (
-      <div>
+      <div className="countdown ">
         <CountdownCircleTimer
           {...timerProps}
-          colors={[["#191970"]]}
+          size={150}
+          colors={[["#6b89a4"]]}
           duration={daysDuration}
           initialRemainingTime={remainingTime}
         >
@@ -59,7 +70,8 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
-          colors={[["#0047AB"]]}
+          size={150}
+          colors={[["#799bb9"]]}
           duration={daySeconds}
           initialRemainingTime={remainingTime % daySeconds}
           onComplete={(totalElapsedTime) => [
@@ -72,7 +84,8 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
-          colors={[["#007FFF"]]}
+          size={150}
+          colors={[["#8ab0d1"]]}
           duration={hourSeconds}
           initialRemainingTime={remainingTime % hourSeconds}
           onComplete={(totalElapsedTime) => [
@@ -85,7 +98,8 @@ function Timer() {
         </CountdownCircleTimer>
         <CountdownCircleTimer
           {...timerProps}
-          colors={[["#00B7EB"]]}
+          size={150}
+          colors={[["#9ec8ed"]]}
           duration={minuteSeconds}
           initialRemainingTime={remainingTime % minuteSeconds}
           onComplete={(totalElapsedTime) => [
@@ -100,7 +114,7 @@ function Timer() {
     );
   };
 
-  return <div>{updated ? countDown() : null}</div>;
+  return <>{updated ? countDown() : null}</>;
 }
 
 export default Timer;
