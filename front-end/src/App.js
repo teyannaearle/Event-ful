@@ -11,14 +11,18 @@ import useGeoLocation from "./hooks/useGeoLocation";
 import ScrollToTop from "./Components/ScrollToTop.js";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
+import NavBar from "./Components/NavBar/NavBar.js";
 
 function App() {
   const location = useGeoLocation();
 
   return (
     <div className="site">
+  
       <ScrollToTop />
+      <NavBar/>
       <Switch>
+      
         <Route exact path="/">
           <Landing />
         </Route>
