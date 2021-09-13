@@ -1,13 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import Image from '../img/gettyimages-145646848-612x612.jpg'
+import SignInForm from "../Components/SignInForm"
 import './Landing.css'
 
 export default function Landing() {
 
     return (
         <div className="Landing">
-            <div>
-            <h1>Event(ful)</h1>
+                        <h1>Event(ful)</h1>
+
+            <img src={Image} alt="" className="imgstyle"/>
+            <div className="centered">
                 <p>
                 The amateur event planner doesn't have much experience finding vendors, keeping track of their vendor budget, 
                 or monitoring what vendors they like and which ones they have and haven't booked. 
@@ -22,32 +25,7 @@ export default function Landing() {
                 it would take resiliency on their part to stay organized.
                 </p>
             </div>
-            
-            <div>
-            <form>
-                    <label htmlFor="userName"></label>
-                    <input 
-                    type="text" 
-                    value="" 
-                    placeholder="Username"
-                    /> <br/>
-                    
-                    <label htmlFor="Password"></label>
-                    <input 
-                    type="text" 
-                    value="" 
-                    placeholder="Password"
-                    /> <br/>
-                    <button type="button">
-                        Login
-                        </button>
-                    
-                    <h4> Or Sign up Here</h4>
-                    <Link to="/SignUp">
-                    <button>Sign Up</button>
-                    </Link>
-                </form>
-            </div>
+            <SignInForm />
                 
         </div>
     )
