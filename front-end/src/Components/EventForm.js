@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { apiURL } from "../util/apiCalls.js";
+import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
 
