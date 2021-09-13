@@ -36,6 +36,7 @@ const SignUp = ({ history }) => {
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
         history.push("/");
+        
       } catch (error) {
         alert(error);
       }
