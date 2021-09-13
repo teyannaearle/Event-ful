@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
-import EventForm from "../Components/EventForm";
 import EventList from "../Components/EventList";
 import EventForm from "../Components/EventForm";
-
 import app from "../util/firebase"
 import { AuthContext } from "../Components/Auth";
 

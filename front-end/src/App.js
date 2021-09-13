@@ -12,8 +12,6 @@ import useGeoLocation from "./hooks/useGeoLocation";
 import ScrollToTop from "./Components/ScrollToTop.js";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
-
-import { AuthProvider } from "./Components/Auth";
 import PrivateRoute from "./Components/PrivateRoute";
 import { AuthProvider } from "./Components/Auth";
 import axios from "axios";
