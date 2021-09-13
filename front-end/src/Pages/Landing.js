@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Login from "../Components/Login";
 import "./Landing.css";
 
 export default function Landing() {
@@ -27,7 +28,9 @@ export default function Landing() {
         </p>
       </div>
 
-      <div>
+      <Login />
+
+      {/* <div>
         <form>
           <label htmlFor="userName"></label>
           <input type="text" value="" placeholder="Username" /> <br />
@@ -39,7 +42,7 @@ export default function Landing() {
             <button>Sign Up</button>
           </Link>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }

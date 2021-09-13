@@ -2,12 +2,19 @@ import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
 import app from "../util/firebase";
 import { AuthContext } from "./Auth";
-import firebase from "firebase";
+import firebase, { GoogleAuthProvider } from "firebase";
 
 const Login = ({ history }) => {
   const provider = new firebase.auth.GoogleAuthProvider();
   const authWithGoogle = () => {
-    firebase.auth().signInWithPopup(provider);
+    try {
+      app
+        .auth()
+        .signInWithPopup(provider)
+        .then(history.push("/dashboard/:user_id"));
+    } catch (e) {
+      alert(e);
+    }
   };
 
   const handleLogin = useCallback(
@@ -18,7 +25,7 @@ const Login = ({ history }) => {
         await app
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
-        history.push("/");
+        history.push("/dashboard/:user_id");
       } catch (error) {
         alert(error);
       }
