@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import EventList from "../Components/EventList";
+import EventForm from "../Components/EventForm";
+
 import app from "../util/firebase"
 import { AuthContext } from "../Components/Auth";
 
@@ -13,13 +15,17 @@ export default function Dashboard({history}) {
     history.push("/")
   }
 
+
   return (
     <div>
-      Dashboard page
-      {/* <EventList /> */}
+    Dashboard page
+    
 
       <button onClick={signOut}>Sign out</button>
 
+
+
+      <EventList />
 
     </div>
   );
