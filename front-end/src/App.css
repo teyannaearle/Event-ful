@@ -338,6 +338,20 @@ justify-content: space-evenly;}
   margin: 0;
 }
 
+.book-fav{
+display: flex;
+flex-direction: column;
+margin-top: 5px;
+margin-bottom: 5px;
+height: 50px;
+justify-content: space-evenly;
+}
+
+.book-fav button{
+  margin-top: 10px;
+  width: 200px;
+}
+
 /* VENDOR INDEX PAGE */
 .indexpg-container {
   width: 95%;

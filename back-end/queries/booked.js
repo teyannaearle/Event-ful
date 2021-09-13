@@ -46,11 +46,11 @@ const createBookedVendor = async (vendor, user_id, event_id) => {
 };
 
 //delete
-const deleteBookedVendor = async (user_id, event_id, vendorName) => {
+const deleteBookedVendor = async (user_id, event_id, vendor_name) => {
   try {
     const deletedBookedVendor = await db.one(
       "DELETE FROM booked WHERE user_id=$1 AND event_id=$2 AND vendor_name=$3 RETURNING *",
-      [user_id, event_id, vendorName]
+      [user_id, event_id, vendor_name]
     );
     return deletedBookedVendor;
   } catch (err) {
