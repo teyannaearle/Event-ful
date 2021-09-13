@@ -48,7 +48,7 @@ CREATE TABLE booked (
     task_id SERIAL, CONSTRAINT fk_booked_tasklist FOREIGN KEY(task_id) REFERENCES tasklist(task_id) ON DELETE CASCADE,
     vendor_name VARCHAR (255) NOT NULL, 
     vendor_address VARCHAR (255) NOT NULL,
-    vendor_phone_number VARCHAR (10) NOT NULL,
+    vendor_phone_number VARCHAR (11) NOT NULL,
     amount INTEGER
 );
 
@@ -59,5 +59,5 @@ CREATE TABLE favorites (
     user_id  SERIAL, CONSTRAINT fk_favorites_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     vendor_name VARCHAR (255) NOT NULL, 
     vendor_address VARCHAR (255) NOT NULL, 
-    vendor_phone_number VARCHAR (10) NOT NULL
+    vendor_phone_number VARCHAR (11) NOT NULL
 );

@@ -12,10 +12,8 @@ import useGeoLocation from "./hooks/useGeoLocation";
 import ScrollToTop from "./Components/ScrollToTop.js";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
-
-import { AuthProvider } from "./Components/Auth";
 import PrivateRoute from "./Components/PrivateRoute";
-
+import { AuthProvider } from "./Components/Auth";
 import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 import api from "./util/apiCalls";
@@ -26,11 +24,9 @@ import NewEventForm from "./Pages/NewEventForm.js";
 
 function App() {
   const location = useGeoLocation();
-
   return (
     <div className="site">
       <ScrollToTop />
-
       <AuthProvider>
         <Router>
           <Switch>
@@ -70,7 +66,6 @@ function App() {
           </Switch>
         </Router>
       </AuthProvider>
-
     </div>
   );
 }
