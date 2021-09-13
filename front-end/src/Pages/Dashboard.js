@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import EventForm from "../Components/EventForm";
 import EventList from "../Components/EventList";
-import app from "../util/firebase";
+import EventForm from "../Components/EventForm";
+
+import app from "../util/firebase"
 import { AuthContext } from "../Components/Auth";
 
 export default function Dashboard({ history }) {
@@ -9,15 +11,22 @@ export default function Dashboard({ history }) {
   console.log(JSON.stringify(currentUser));
 
   const signOut = () => {
-    app.auth().signOut();
-    history.push("/");
-  };
+    app.auth().signOut()
+    history.push("/")
+  }
+
 
   return (
     <div>
-      Dashboard page
-      <EventList />
+    Dashboard page
+    
+
       <button onClick={signOut}>Sign out</button>
+
+
+
+      <EventList />
+
     </div>
   );
 }
