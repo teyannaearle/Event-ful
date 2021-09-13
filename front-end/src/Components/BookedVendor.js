@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function BookedVendor({ vendor }) {
-    const { user_id, event_id, vendor_name } = useParams();
+  const { user_id, event_id, vendor_name } = useParams();
 
   console.log(vendor.vendor_name);
   return (

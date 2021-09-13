@@ -114,7 +114,6 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
     );
   };
 
-
   const editButton = (cost) => {
     let button = "";
     if (cost !== "0") {
@@ -133,13 +132,16 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           <li key={i} className="checklist check-listitem">
             <div className="book-buttons">
               <button
-                className={bookedStatus[category.name] ? "book-button check" : "book-button x"}
+                className={
+                  bookedStatus[category.name]
+                    ? "book-button check"
+                    : "book-button x"
+                }
                 onClick={() => updateBookedStatus(category.name)}
               >
                 {" "}
                 {bookedStatus[category.name] ? <>&#10003;</> : <>&#10007;</>}
               </button>
-  
 
               <button
                 onClick={() =>
@@ -159,8 +161,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
                   to={`/vendors/${category.name}`}
                   className="checklist-span"
                 >
-                  <span> {listItem(category.name)} </span>{" "}
-                  <span>&#187;</span>
+                  <span> {listItem(category.name)} </span> <span>&#187;</span>
                 </Link>
               </button>
             </div>
