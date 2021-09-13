@@ -5,8 +5,8 @@ import VendorReviews from "../Components/VendorReviews";
 import VendorShowInfo from "../Components/VendorShowInfo";
 import Loading from "../Components/Loading";
 
-
 export default function VendorShow() {
+
   const [business, setbusiness] = useState({
     photos: [],
     categories: [{ title: "" }],
@@ -31,21 +31,19 @@ export default function VendorShow() {
       } else {
         // ---------- ERROR PAGE  ---------------
       }
-    })();
+    })(); 
   }, [provider_id]);
 
   return (
     <div id="vendor-showpage" className="page">
       {business.photos[0] ? (
         <>
-          {" "}
           <VendorShowInfo business={business} />
           <VendorReviews reviews={reviews} />{" "}
         </>
       ) : (
         <Loading />
       )}
-      
     </div>
   );
 }

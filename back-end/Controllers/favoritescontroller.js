@@ -82,10 +82,10 @@ favorites.post("/:user_id", async (req, res) => {
 });
 
 // DELETE
-favorites.delete("/:user_id", async (req, res) => {
-  const { user_id } = req.params;
+favorites.delete("/:user_id/:vendor_name", async (req, res) => {
+  const { user_id, vendor_name } = req.params;
   try {
-    const deletedFavoriteVendor = await deleteFavorite(user_id, req.body.vendor_name);
+    const deletedFavoriteVendor = await deleteFavorite(user_id, vendor_name);
     console.log("deletedFavorite", JSON.stringify(deletedFavoriteVendor))
     // res.status(200).json({ success: true, payload: deletedFavoriteVendor });
     if (deletedFavoriteVendor.vendor_name) {
