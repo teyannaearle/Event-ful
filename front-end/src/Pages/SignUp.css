@@ -1,15 +1,23 @@
-.SignUp_Form {
-  position: relative;
-  text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  justify-content: center;
-}
-
-.SignUp_Form:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
 .Container {
-  padding: 20px 16px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Rampart One',;
+    border: 3px solid black;
+    width: 50%;
+    padding: 10px;
 }
+
+.Container form input {
+    width: 50%;
+    border: 2px solid #000000;
+}
+
+.Container form input:focus {
+    border: 3px solid green;
+
+
+}
+
