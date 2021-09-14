@@ -92,7 +92,7 @@ function EventForm() {
         <label>
           DJ
           <input
-            value="dj"
+            value="djs"
             type="checkbox"
             checked={eventForm.djs}
             onChange={toggleState}
@@ -101,7 +101,7 @@ function EventForm() {
         <label>
           Musician
           <input
-            value="musician"
+            value="musicians"
             type="checkbox"
             checked={eventForm.musicians}
             onChange={toggleState}
@@ -110,7 +110,7 @@ function EventForm() {
         <label>
           Photographer
           <input
-            value="photographer"
+            value="photographers"
             type="checkbox"
             checked={eventForm.photographers}
             onChange={toggleState}
@@ -128,7 +128,7 @@ function EventForm() {
         <label>
           Videographer
           <input
-            value="videographer"
+            value="videographers"
             type="checkbox"
             checked={eventForm.videographers}
             onChange={toggleState}
@@ -137,7 +137,7 @@ function EventForm() {
         <label>
           Venues
           <input
-            value="venue"
+            value="venues"
             type="checkbox"
             checked={eventForm.venues}
             onChange={toggleState}
