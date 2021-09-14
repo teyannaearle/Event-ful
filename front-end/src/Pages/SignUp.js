@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom"
 import './SignUp.css'
 
 export default function SignUp() {
@@ -34,7 +35,9 @@ export default function SignUp() {
                placeholder="Password"/> <br/>
                <br/>
 
+               <Link to="/dashboard">
                <button type="submit" >Sign Up</button>
+               </Link>
            </form>
             
         </div>

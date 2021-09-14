@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from '../img/gettyimages-145646848-612x612.jpg'
 import SignInForm from "../Components/SignInForm"
 import './Landing.css'
 
@@ -9,8 +8,7 @@ export default function Landing() {
         <div className="Landing">
                         <h1>Event(ful)</h1>
 
-            <img src={Image} alt="" className="imgstyle"/>
-            <div className="centered">
+            <div className="Landing-Item">
                 <p>
                 The amateur event planner doesn't have much experience finding vendors, keeping track of their vendor budget, 
                 or monitoring what vendors they like and which ones they have and haven't booked. 
@@ -25,7 +23,7 @@ export default function Landing() {
                 it would take resiliency on their part to stay organized.
                 </p>
             </div>
-            <SignInForm />
+            <SignInForm className="Landing-Form"/>
                 
         </div>
     )

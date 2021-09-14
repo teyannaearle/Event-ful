@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import './SignInForm.css'
 
 export default function SignInForm () {
     return (
@@ -18,13 +19,15 @@ export default function SignInForm () {
                 value="" 
                 placeholder="Password"
                 /> <br/>
-                <button type="button">
+                <button type="button" className="Login">
                     Login
                     </button>
-                
-                <h4> Or Sign up Here</h4>
+                <br/>
+
+                <div className="divider"></div>
+                <br/>
                 <Link to="/SignUp">
-                <button>Sign Up</button>
+                <button type="button">Sign Up</button>
                 </Link>
             </form>
         </div>
