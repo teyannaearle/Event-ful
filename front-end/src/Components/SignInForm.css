@@ -1,0 +1,19 @@
+.newForm {
+    border: 2px solid black;
+    padding: 20px;
+}
+
+.newForm input {
+    width: 100%;
+}
+
+.Login {
+    width: 75%;
+    padding-top: 2%;
+
+}
+
+.divider {
+    border-bottom: 1px black solid;
+    padding: 2%;
+}
