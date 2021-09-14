@@ -1,5 +1,6 @@
 nav{
     box-sizing:border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .NavBarItems {
@@ -18,4 +19,46 @@ nav{
     justify-self: start;
     margin-left:20px;
     cursor:pointer;
+}
+
+.fa-react {
+    margin-left: 0.5rem;
+    font-size: 1.6rem;
+}
+
+.nav-menu {
+    display: grid;
+    grid-template-columns: repeat(5,auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: center;
+    width: 70vw;
+    justify-content: end;
+    margin-right: 2rem;
+}
+
+.nav-links {
+    color: white;
+    padding: 0.5rem 1rem;
+
+
+}
+
+.nav-links:hover {
+    background-color: #6d76f7;
+    border-radius: 4px;
+    transition: all 0.2s ease-out;
+}
+
+.fa-bars {
+    color: #fff;
+}
+
+.nav-links-mobile {
+    display: none;
+
+}
+
+.menu-icon {
+    display:none;
 }

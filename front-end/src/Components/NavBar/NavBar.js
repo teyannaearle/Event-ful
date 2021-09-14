@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import { VendorMenu } from './VendorMenu'
 import {Link, useParams} from 'react-router-dom'
 import './NavBar.css'
@@ -6,6 +6,19 @@ import './NavBar.css'
 export default function NavBar() {
 
     const {user_id} = useParams()
+    const [vendorClicked, setVendorClicked] = useState(false)
+    const [accountClicked, setAccountClicked] = useState(false)
+
+
+    const handleAccountClick = () => {
+        setAccountClicked(!accountClicked)
+
+    }
+
+    const handleVendorClick = () => {
+        setVendorClicked(!vendorClicked)
+
+    }
 
 
     const accountMenu = [
@@ -36,11 +49,12 @@ export default function NavBar() {
 
         return (
             <nav className="NavBarItems">
-                <h1 className="navbar-logo">Event(ful)</h1>
-                <div className="menu-icon">
+                <h1 className="navbar-logo">Event(ful)<i className="fab fa-react"></i></h1>
+                <div className="menu-icon" onClick={handleVendorClick}>
+                    <i className={vendorClicked ? 'fas fa-times' : 'fas fa-bars'}></i>
 
                 </div>
-                <ul>
+                <ul className={vendorClicked ? 'nav-menu active' : 'nav-menu'}>
                     {VendorMenu.map((item, index) => {
                         return (
                         
@@ -53,7 +67,13 @@ export default function NavBar() {
                     })}
 
                 </ul>
-                <div>
+                <div className="menu-icon" onClick={handleAccountClick}>
+                    <i className={accountClicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+
+                </div>
+            
+                <ul className={accountClicked ? 'nav-menu active' : 'nav-menu'}>
+                
                     {accountMenu.map((item,index) => {
                         return (
                             <li key={index}>
@@ -62,7 +82,8 @@ export default function NavBar() {
                                 </li>
                         )
                     })}
-                </div>
+                </ul>
+    
             </nav>
         )
     }
