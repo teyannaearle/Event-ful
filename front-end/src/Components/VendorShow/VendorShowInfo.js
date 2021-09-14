@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Ratings from "react-ratings-declarative";
 import { Carousel } from "react-responsive-carousel";
-import { apiURL } from "../util/apiURL";
+import { apiURL } from "../../util/apiURL";
 
 const api = apiURL();
 const user_id = 1;
