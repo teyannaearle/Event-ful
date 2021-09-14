@@ -6,9 +6,10 @@ export default function Landing() {
 
     return (
         <div className="Landing">
-                        <h1>Event(ful)</h1>
 
             <div className="Landing-Item">
+            <h1>Event(ful)</h1>
+
                 <p>
                 The amateur event planner doesn't have much experience finding vendors, keeping track of their vendor budget, 
                 or monitoring what vendors they like and which ones they have and haven't booked. 
@@ -23,7 +24,7 @@ export default function Landing() {
                 it would take resiliency on their part to stay organized.
                 </p>
             </div>
-            <SignInForm className="Landing-Form"/>
+            <SignInForm />
                 
         </div>
     )
