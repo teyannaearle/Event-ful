@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react'
 import { VendorMenu } from './VendorMenu'
 import {Link, useParams} from 'react-router-dom'
 import './NavBar.css'
+import {Button} from './Button'
 
 export default function NavBar() {
 
@@ -40,8 +41,9 @@ export default function NavBar() {
         {
             title:'Logout',
             url:'/logo',
-            cName:'nav-links'
+            cName:'nav-links-mobile'
         },
+        
         
         ]
 
@@ -67,7 +69,7 @@ export default function NavBar() {
                     })}
 
                 </ul>
-                <div className="menu-icon" onClick={handleAccountClick}>
+                {/* <div className="menu-icon" onClick={handleAccountClick}>
                     <i className={accountClicked ? 'fas fa-times' : 'fas fa-bars'}></i>
 
                 </div>
@@ -82,7 +84,8 @@ export default function NavBar() {
                                 </li>
                         )
                     })}
-                </ul>
+                </ul> */}
+                <Button>Logout</Button>
     
             </nav>
         )
