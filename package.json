@@ -1,5 +1,5 @@
 {
-  "name": "pern-final-project",
+  "name": "capstone_eventful",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/joinpursuit/pern-final-project/issues"
+    "url": "https://github.com/cassidybeni/7-1-team-2/issues"
   },
-  "homepage": "https://github.com/joinpursuit/pern-final-project#readme"
+  "homepage": "https://github.com/cassidybeni/7-1-team-2"
 }

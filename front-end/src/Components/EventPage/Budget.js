@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CategorySwitch from "../CategorySwitch";
 
 function Budget({ categories, budget , shownCost, formatter}) {
   const [budgetStatus, setBudgetStatus] = useState(0)
@@ -12,44 +13,6 @@ function Budget({ categories, budget , shownCost, formatter}) {
     setSum(sum)
   }, [shownCost, budget])
 
-
-
-  const listItem = (category) => {
-    let item = "";
-    switch (category) {
-      case "catering":
-        item = "Caterer";
-        break;
-      case "djs":
-        item = "DJ";
-        break;
-      case "musicians":
-        item = "Musician";
-        break;
-      case "party rental":
-        item = "Equipment Rentals";
-        break;
-      case "photographers":
-        item = "Photographer";
-        break;
-      case "videographers":
-        item = "Videographer";
-        break;
-      case "venues":
-        item = "Venue";
-        break;
-      case "balloons":
-        item = "Balloon Services";
-        break;
-      case "floral":
-        item = "Floral Designer";
-        break;
-      default:
-        item = "";
-    }
-
-    return item;
-  };
 
   const budgetUpdate = () => {
 
@@ -81,7 +44,7 @@ function Budget({ categories, budget , shownCost, formatter}) {
         {categories.map((category, i) => {
           return (
             <li key={i} className="budget-li">
-              <p className="budget-cat">{listItem(category.name)} </p>
+              <p className="budget-cat">{CategorySwitch(category.name)} </p>
               <p> { formatter.format(shownCost[category.name]) }</p>
             </li>
           );
