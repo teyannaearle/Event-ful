@@ -1,11 +1,11 @@
-import React from 'react'
-import BookedVendorsList from "../Components/BookedVendorsList"
+import React from "react";
+import BookedVendorsList from "../Components/BookedVendorsList";
 
 export default function Booked() {
-    return (
-        <div>
-            We Did Booked Page
-            <BookedVendorsList />
-        </div>
-    )
+  return (
+    <div>
+      Booked Page
+      <BookedVendorsList />
+    </div>
+  );
 }
