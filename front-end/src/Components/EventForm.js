@@ -39,6 +39,9 @@ function EventForm() {
     balloons: false,
     floral: false,
   });
+  const eventCheck = (category) => {
+    axios.post(`${API}/checklist/:user_id/:event_id`, category).then();
+  };
 
   const handleTextChange = (e) => {
     setEvent({ ...myEvent, [e.target.id]: e.target.value });
