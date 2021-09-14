@@ -11,7 +11,7 @@ export const VendorMenu = [
     },
     {
         title:'Equipment Rentals',
-        url:'/vendors/party%20rental',
+        url:'/vendors/party_rental',
         cName:'nav-links'
     },
   
@@ -42,17 +42,17 @@ export const VendorMenu = [
     },
     {
         title:'Magicians',
-        url:'/vendors/party%20magician',
+        url:'/vendors/party_magician',
         cName:'nav-links'
     },
     {
         title:'Character Actors',
-        url:'/vendors/party%20characters',
+        url:'/vendors/party_characters',
         cName:'nav-links'
     },
     {
         title:'Clowns',
-        url:'/vendors/party%20clown',
+        url:'/vendors/party_clown',
         cName:'nav-links'
     },
     
