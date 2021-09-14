@@ -32,7 +32,7 @@ function App() {
           <Dashboard />
         </Route>
 
-        <Route path="/dashboard/:user_id/new">
+        <Route path="/event/:user_id/new">
           <NewEventForm />
         </Route>
 

@@ -7,12 +7,11 @@ import { apiURL } from "../util/apiURL.js";
 const API = apiURL();
 
 function EventForm() {
-  //   const eventVendors = {};
   let history = useHistory();
 
   const addEvent = (newEvent) => {
     axios
-      .post(`${API}/dashboard`, newEvent)
+      .post(`/events/:user_id`, newEvent)
       .then(
         () => {
           history.push(`/dashboard`);
@@ -25,19 +24,21 @@ function EventForm() {
   const [myEvent, setEvent] = useState({
     name: "",
     budget: 0,
-    zipcode: "",
     date: "",
     time: "",
+    user_id: "",
   });
 
-  const [state, setState] = useState({});
-  const [djs, setDjs] = useState({});
-  const [musicians, setMusicians] = useState({});
-  const [photographer, setPhotographer] = useState({});
-  const [videographer, setVideographer] = useState({});
-  const [venues, setVenues] = useState({});
-  const [balloons, setBallons] = useState({});
-  const [floral, setFloral] = useState({});
+  const [eventForm, setEventForm] = useState({
+    djs: false,
+    musicians: false,
+    photographers: false,
+    party_rental: false,
+    videographers: false,
+    venues: false,
+    balloons: false,
+    floral: false,
+  });
 
   const handleTextChange = (e) => {
     setEvent({ ...myEvent, [e.target.id]: e.target.value });
@@ -45,7 +46,7 @@ function EventForm() {
 
   const toggleState = (e) => {
     const val = e.target.value;
-    setState((prevState) => ({ ...prevState, [val]: !prevState[val] }));
+    setEventForm((prevState) => ({ ...prevState, [val]: !prevState[val] }));
   };
 
   const handleSubmit = (e) => {
@@ -89,20 +90,20 @@ function EventForm() {
           onChange={handleTextChange}
         />
         <label>
-          DJs
+          DJ
           <input
             value="dj"
             type="checkbox"
-            checked={state["Djs"]}
+            checked={eventForm.djs}
             onChange={toggleState}
           />
         </label>
         <label>
-          Musicians
+          Musician
           <input
             value="musician"
             type="checkbox"
-            checked={state["Musician"]}
+            checked={eventForm.musicians}
             onChange={toggleState}
           />
         </label>
@@ -111,7 +112,16 @@ function EventForm() {
           <input
             value="photographer"
             type="checkbox"
-            checked={state["photographer"]}
+            checked={eventForm.photographers}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Party Rental
+          <input
+            value="party_rental"
+            type="checkbox"
+            checked={eventForm.party_rental}
             onChange={toggleState}
           />
         </label>
@@ -120,34 +130,34 @@ function EventForm() {
           <input
             value="videographer"
             type="checkbox"
-            checked={state["Videographer"]}
+            checked={eventForm.videographers}
             onChange={toggleState}
           />
         </label>
         <label>
-          Venue
+          Venues
           <input
             value="venue"
             type="checkbox"
-            checked={state["Venue"]}
+            checked={eventForm.venues}
             onChange={toggleState}
           />
         </label>
         <label>
-          Balloons
+          Balloon Services
           <input
             value="balloons"
             type="checkbox"
-            checked={state["Balloons"]}
+            checked={eventForm.balloons}
             onChange={toggleState}
           />
         </label>
         <label>
-          Floral
+          Floral Designer
           <input
             value="floral"
             type="checkbox"
-            checked={state["floral"]}
+            checked={eventForm.floral}
             onChange={toggleState}
           />
         </label>
