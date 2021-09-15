@@ -12,6 +12,7 @@ import ScrollToTop from "./Components/ScrollToTop.js";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
 import NavBar from "./Components/NavBar/NavBar.js";
+import NewEventForm from "./Pages/NewEventForm.js";
 
 function App() {
   const location = useGeoLocation();

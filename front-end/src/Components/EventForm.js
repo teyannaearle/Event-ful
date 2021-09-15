@@ -40,9 +40,30 @@ function EventForm() {
     floral: false,
   });
 
-  const eventCheck = category.map(checked => {
-      if ()
-  })
+    const eventCheck = eventForm.map((checked, i) => {
+        for (const checked in eventForm) {
+            if (checked === true) {
+                return eventForm[checked]
+            } else if (checked === false) {
+
+            }
+        }
+    })
+
+    const handleCheckedBox = () => {
+        const checkedCat = {}
+        //loop through object
+        // check if key value === true
+            //if key is true add to empty object
+            //if false do not add
+        for (const checked in eventForm) {
+            if (checked === true) {
+                return checkedCat.push(eventForm[checked])
+        }
+        console.log(checkedCat)
+    }
+
+    handleCheckedBox
 
   const myEventCheck = (category) => {
     axios.post(`${API}/checklist/:user_id/:event_id`, category).then();
