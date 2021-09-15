@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 
 function EditEvent() {
+  const [myEvent, setEvent] = useState({
+    name: "",
+    budget: 0,
+    zipcode: "",
+    date: "",
+    time: "",
+  })
+
+  const 
+
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="event_name">Event</label>
@@ -10,13 +20,13 @@ function EditEvent() {
         id="event_name"
         type="text"
         value={myEvent.name}
-        placeholder="Edit name"
+        placeholder="Name"
         onChange={handleChange}
       />
       <label htmlFor="event_budget">Budget</label>
       <input
         id="event_budget"
-        type="text"
+        type="number"
         value={myEvent.budget}
         placeholder="$0.00"
         onChange={handleChange}
@@ -26,7 +36,7 @@ function EditEvent() {
         id="event_time"
         type="text"
         value={myEvent.time}
-        placeholder="Event Time"
+        placeholder="Time"
         onChange={handleChange}
       />
       <label htmlFor="event_date">Date</label>
@@ -34,7 +44,7 @@ function EditEvent() {
         id="event_date"
         type="text"
         value={myEvent.date}
-        placeholder="Event Date"
+        placeholder="Date"
         onChange={handleChange}
       />
       <label>
