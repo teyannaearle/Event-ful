@@ -1,32 +1,20 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
-
+console.log(API);
 function EventForm() {
-  let history = useHistory();
-
-  const addEvent = (newEvent) => {
-    axios
-      .post(`/events/:user_id`, newEvent)
-      .then(
-        () => {
-          history.push(`/dashboard`);
-        },
-        (error) => console.error(error)
-      )
-      .catch((c) => console.warn("catch", c));
-  };
+  const { user_id } = useParams();
+  const [events, setEvents] = useState([]);
 
   const [myEvent, setEvent] = useState({
-    name: "",
-    budget: 0,
-    date: "",
-    time: "",
-    user_id: "",
+    event_name: "",
+    event_budget: 0,
+    event_date: "",
+    event_time: "",
   });
 
   const [eventForm, setEventForm] = useState({
@@ -40,34 +28,83 @@ function EventForm() {
     floral: false,
   });
 
-    const eventCheck = eventForm.map((checked, i) => {
-        for (const checked in eventForm) {
-            if (checked === true) {
-                return eventForm[checked]
-            } else if (checked === false) {
+  let history = useHistory();
 
-            }
+  useEffect(() => {
+    axios
+      .get(`${API}/events/${user_id}`)
+      .then(
+        (res) => {
+          setEvents(res.data.message);
+        },
+        (e) => {
+          console.error(e);
         }
-    })
+      )
+      .catch((e) => {
+        console.error(e);
+      });
+  }, [user_id]);
 
-    const handleCheckedBox = () => {
-        const checkedCat = {}
-        //loop through object
-        // check if key value === true
-            //if key is true add to empty object
-            //if false do not add
-        for (const checked in eventForm) {
-            if (checked === true) {
-                return checkedCat.push(eventForm[checked])
-        }
-        console.log(checkedCat)
-    }
-
-    handleCheckedBox
-
-  const myEventCheck = (category) => {
-    axios.post(`${API}/checklist/:user_id/:event_id`, category).then();
+  const addEvent = () => {
+    axios
+      .post(`${API}/events/${user_id}`, myEvent)
+      .then(
+        (res) => {
+          console.log(res);
+          //   history.push(`/dashboard`);
+        },
+        (error) => console.error(error)
+      )
+      .catch((c) => console.warn("catch", c));
   };
+
+  const addToCheckedList = () => {
+    const categories = Object.keys(eventForm);
+    console.log(categories);
+    const id = events[0] ? events[events.length - 1].event_id + 1 : 1;
+    for (const checked of categories) {
+      if (eventForm[checked] === true) {
+        const category = {
+          task_name: checked,
+          //   user_id: user_id,
+          //   event_id: 1,
+        };
+        console.log(category);
+        axios
+          .post(`${API}/checklist/${user_id}/${id}`, category)
+          .then((res) => console.log(res));
+      }
+    }
+  };
+
+  // const eventCheck = eventForm.map((checked, i) => {
+  //   for (const checked in eventForm) {
+  //     if (checked === true) {
+  //       return eventForm[checked];
+  //     } else if (checked === false) {
+  //     }
+  //   }
+  // });
+
+  //   const handleCheckedBox = () => {
+  //     const checkedCat = {};
+  //     //loop through object
+  //     // check if key value === true
+  //     //if key is true add to empty object
+  //     //if false do not add
+  //     for (const checked in eventForm) {
+  //       if (checked === true) {
+  //         return checkedCat.push(eventForm[checked]);
+  //       }
+  //       console.log(checkedCat);
+  //     }
+  //   };
+  //   handleCheckedBox;
+
+  //   const myEventCheck = (category) => {
+  //     axios.post(`${API}/checklist/:user_id/:event_id`, category).then();
+  //   };
 
   const handleTextChange = (e) => {
     setEvent({ ...myEvent, [e.target.id]: e.target.value });
@@ -80,7 +117,8 @@ function EventForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addEvent(myEvent);
+    addEvent();
+    addToCheckedList();
   };
 
   return (
@@ -190,6 +228,7 @@ function EventForm() {
             onChange={toggleState}
           />
         </label>
+        <button type="submit">Submit</button>
       </form>
     </section>
   );
