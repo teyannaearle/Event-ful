@@ -2,14 +2,13 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import BookedVendor from "./BookedVendor";
 import { apiURL } from "../util/apiURL";
 import "./BookedVendorsList.css";
 
 const API = apiURL();
 
-export default function FavoriteList() {
+export default function BookedVendorList() {
   const [bookedVendors, setBookedVendors] = useState([]);
   const { user_id, event_id } = useParams();
 
@@ -18,7 +17,6 @@ export default function FavoriteList() {
       .get(`${API}/booked/${user_id}/${event_id}`)
       .then(
         (res) => {
-          console.log(res.data)
           setBookedVendors(res.data.message);
         },
         (e) => {

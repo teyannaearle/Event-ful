@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Checklist from "../Components/Checklist";
-import Budget from "../Components/Budget";
-import Timer from "../Components/Timer";
+import Checklist from "../Components/EventPage/Checklist";
+import Budget from "../Components/EventPage/Budget";
+import Timer from "../Components/EventPage/Timer";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
 
@@ -47,9 +47,7 @@ export default function Event() {
         setCategories(vendorCategories);
       });
     } catch {}
-
   }, [event_id, user_id]);
-
 
   const updateCost = (body, category) => {
     try {
@@ -61,7 +59,6 @@ export default function Event() {
     } catch {}
   };
 
-  
   return (
     <div className="event-page page">
       <h1 className="pg-head">{eventName}</h1>

@@ -68,7 +68,6 @@ booked.post("/:user_id/:event_id", async (req, res) => {
       user_id,
       event_id
     );
-
     if (newBookedVendor.user_id) {
       res.status(200).json({
         success: true,
@@ -98,7 +97,7 @@ booked.delete("/:user_id/:event_id/:vendor_name", async (req, res) => {
     if (deletedBookedVendor.user_id) {
       res.status(200).json({ success: true, payload: deletedBookedVendor });
     } else {
-      throw `No booked vendor was deleted with ${vendorName}`;
+      throw `No booked vendor was deleted with ${vendor_name}`;
     }
   } catch (e) {
     res.status(404).json({
@@ -111,17 +110,21 @@ booked.delete("/:user_id/:event_id/:vendor_name", async (req, res) => {
 // UPDATE
 booked.put("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-  const vendor  = req.body;
-  console.log(req.body)
+  const vendor = req.body;
+  console.log(req.body);
   try {
-    const updatedBookedVendor = await updateBookedVendor(vendor, user_id, event_id);
+    const updatedBookedVendor = await updateBookedVendor(
+      vendor,
+      user_id,
+      event_id
+    );
     if (updatedBookedVendor.user_id) {
       res.status(200).json({
         success: true,
         payload: updatedBookedVendor,
       });
     } else {
-      console.log(updatedBookedVendor)
+      console.log(updatedBookedVendor);
       throw `No vendor was updated with ${vendor.vendor_name}`;
     }
   } catch (e) {

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import api from "../util/apiCalls";
-import VendorList from "../Components/VendorList";
-import ZipSearch from "../Components/ZipSearch"
+import VendorList from "../Components/VendorIndex/VendorList"
+import ZipSearch from "../Components/VendorIndex/ZipSearch"
 import Loading from "../Components/Loading"
-import NoVendors from "../Components/NoVendors";
+import NoVendors from "../Components/VendorIndex/NoVendors";
+import CategorySwitch from "../Components/CategorySwitch"
 
 export default function VendorIndex({ location }) {
   const [vendors, setVendors] = useState([]);
@@ -46,48 +47,11 @@ export default function VendorIndex({ location }) {
     }
   };
 
-  const listItem = (category) => {
-    let item = "";
-    switch (category) {
-      case "catering":
-        item = "Caterers";
-        break;
-      case "djs":
-        item = "Djs";
-        break;
-      case "musicians":
-        item = "Musicians";
-        break;
-      case "party rental":
-        item = "Equipment Rentals";
-        break;
-      case "photographers":
-        item = "Photographers";
-        break;
-      case "videographers":
-        item = "Videographers";
-        break;
-      case "venues":
-        item = "Venues";
-        break;
-      case "balloons":
-        item = "Balloon Services";
-        break;
-      case "floral":
-        item = "Floral Designers";
-        break;
-      default:
-        item = "";
-    }
-
-    return item;
-  };
-
 
   const vendorsList = () => {
     let result = ""
     if (!location.coordinates && !searched){
-      result = <ZipSearch category={listItem(category)} />
+      result = <ZipSearch category={CategorySwitch(category)} />
     } else if (searched && !vendors[0]){
       result = <NoVendors />
     } else if (location.coordinates && !vendors[0]){
@@ -101,7 +65,7 @@ export default function VendorIndex({ location }) {
   return(
     <div className="page indexpg-container">
     <div>
-      {category ? <h1 className="flex-row pg-head"> {listItem(category)} </h1> : null}
+      {category ? <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1> : null}
       <form onSubmit={handleSubmit} id="zip-form">
         <input
           className="three-d"

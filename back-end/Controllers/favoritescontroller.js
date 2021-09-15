@@ -12,15 +12,12 @@ const {
 } = require("../queries/favorites");
 
 const db = require("../db/dbConfig");
-const { deleteBookedVendor } = require("../queries/booked");
 
 // INDEX
 favorites.get("/:user_id", async (req, res) => {
   const { user_id } = req.params;
- 
   try {
     const allFavoriteVendors = await getAllFavorites(user_id);
-
     if (allFavoriteVendors[0].user_id) {
       res.status(200).json({
         success: true,
@@ -61,9 +58,10 @@ favorites.get("/:user_id/:event_id/:vendor_name", async (req, res) => {
 // CREATE
 favorites.post("/:user_id", async (req, res) => {
   const { user_id } = req.params;
-
+  console.log("line 61", JSON.stringify(req.body))
   try {
     const newFavoriteVendor = await createFavorite(req.body, user_id);
+    console.log(newFavoriteVendor)
 
     if (newFavoriteVendor.user_id) {
       res.status(200).json({
@@ -84,9 +82,10 @@ favorites.post("/:user_id", async (req, res) => {
 // DELETE
 favorites.delete("/:user_id/:vendor_name", async (req, res) => {
   const { user_id, vendor_name } = req.params;
+  console.log(`line 83 ${user_id}, ${vendor_name}`)
   try {
     const deletedFavoriteVendor = await deleteFavorite(user_id, vendor_name);
-    console.log("deletedFavorite", JSON.stringify(deletedFavoriteVendor))
+    // console.log("deletedFavorite", JSON.stringify(deletedFavoriteVendor))
     // res.status(200).json({ success: true, payload: deletedFavoriteVendor });
     if (deletedFavoriteVendor.vendor_name) {
       res.status(200).json({ success: true, payload: deletedFavoriteVendor });
@@ -104,8 +103,8 @@ favorites.delete("/:user_id/:vendor_name", async (req, res) => {
 // UPDATE
 favorites.put("/:user_id", async (req, res) => {
   const { user_id } = req.params;
-const vendor = req.body
-console.log(vendor)
+  const vendor = req.body;
+  console.log(vendor);
   try {
     const updatedFavoriteVendor = await updateFavorite(vendor, user_id);
     if (updatedFavoriteVendor.user_id) {

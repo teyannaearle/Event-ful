@@ -1,8 +1,8 @@
 import api from "../util/apiCalls";
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import VendorReviews from "../Components/VendorReviews";
-import VendorShowInfo from "../Components/VendorShowInfo";
+import VendorReviews from "../Components/VendorShow/VendorReviews";
+import VendorShowInfo from "../Components/VendorShow/VendorShowInfo";
 import Loading from "../Components/Loading";
 
 export default function VendorShow() {

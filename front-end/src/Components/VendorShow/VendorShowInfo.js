@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Ratings from "react-ratings-declarative";
 import { Carousel } from "react-responsive-carousel";
-import { apiURL } from "../util/apiURL";
+import { apiURL } from "../../util/apiURL";
 
 const api = apiURL();
 const user_id = 1;
@@ -24,7 +24,9 @@ function VendorShowInfo({ business }) {
           setBooked(true);
         }
       });
-    } catch {}
+    } catch (error) {
+      console.log(error)
+    }
 
     try {
       axios.get(`${api}/favorites/${user_id}`).then((res) => {
@@ -32,7 +34,9 @@ function VendorShowInfo({ business }) {
           setBooked(true);
         }
       });
-    } catch {}
+    } catch (error) {
+      console.log(error)
+    }
   }, [business.name]);
 
   const handleBook = () => {
@@ -49,7 +53,7 @@ function VendorShowInfo({ business }) {
       const body = {
         vendor_name: business.name,
         vendor_address: loc,
-        vendor_phone_number: business.phone,
+        vendor_phone_number: parseNum(business.phone),
         amount: amount,
       };
 
@@ -60,29 +64,35 @@ function VendorShowInfo({ business }) {
       } catch {}
     }
   };
+  const parseNum = str => +str.replace(/[^.\d]/g, '')
 
   const handleFav = () => {
     setFavorite(!favorite);
 
     if (!favorite === false) {
       try {
-        axios
+         axios
           .delete(`${api}/favorites/${user_id}/${business.name}`)
           .then((res) => console.log(res));
-      } catch {}
+      } catch (error) {
+       
+        console.log(error)
+      }
     } else {
       const loc = business.location.display_address.join();
       const body = {
         vendor_name: business.name,
         vendor_address: loc,
-        vendor_phone_number: business.phone,
+        vendor_phone_number: parseNum(business.phone),
       };
 
       try {
         axios
           .post(`${api}/favorites/${user_id}`, body)
           .then((res) => console.log(res));
-      } catch {}
+      } catch (error) {
+        console.log(error)
+      }
     }
   
   };
