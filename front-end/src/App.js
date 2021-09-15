@@ -17,11 +17,9 @@ function App() {
   const location = useGeoLocation();
   return (
     <div className="site">
-  
       <ScrollToTop />
-      <NavBar/>
+      <NavBar />
       <Switch>
-      
         <Route exact path="/">
           <Landing />
         </Route>
@@ -34,13 +32,10 @@ function App() {
           <Dashboard />
         </Route>
 
-<<<<<<< HEAD
         <Route path="/event/:user_id/new">
           <NewEventForm />
         </Route>
 
-=======
->>>>>>> 228025e2693540ff565f75d8fffa1cd5de7faea8
         <Route path="/event/:user_id/:event_id">
           <Event />
         </Route>
