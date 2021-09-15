@@ -39,7 +39,12 @@ function EventForm() {
     balloons: false,
     floral: false,
   });
-  const eventCheck = (category) => {
+
+  const eventCheck = category.map(checked => {
+      if ()
+  })
+
+  const myEventCheck = (category) => {
     axios.post(`${API}/checklist/:user_id/:event_id`, category).then();
   };
 
