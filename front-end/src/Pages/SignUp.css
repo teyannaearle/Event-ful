@@ -6,8 +6,11 @@
     transform: translate(-50%, -50%);
     font-family: 'Rampart One',;
     border: 3px solid black;
+    border-radius: 15%;
     width: 50%;
     padding: 10px;
+    background-color: rgb(228, 202, 210, 0.8);
+
 }
 
 .Container form input {

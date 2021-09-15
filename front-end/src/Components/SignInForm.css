@@ -1,16 +1,22 @@
 .newForm {
     border: 2px solid black;
+    border-radius: 15%;
     padding: 20px;
+    background-color: rgb(228, 202, 210, 0.8);
+    margin: 5%;
 }
 
 .newForm input {
     width: 100%;
 }
 
+.newForm input:focus {
+    border: 3px solid green;
+}
+
 .Login {
     width: 75%;
     padding-top: 2%;
-
 }
 
 .divider {
