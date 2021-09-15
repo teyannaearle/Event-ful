@@ -144,9 +144,9 @@ nav{
 }
 
 
-#logout {
+/* #logout {
     display: none;
-}
+} */
 /* } */
 
 .accountNav {
@@ -165,3 +165,10 @@ margin-right: 5rem;
     color: #fff;
 
 }
+
+.accountLinks:hover{
+    background-color: #7577fa;
+    border-radius: 4px;
+    transform: scale(1.1); 
+}
+
