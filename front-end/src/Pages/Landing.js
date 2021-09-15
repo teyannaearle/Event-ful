@@ -2,10 +2,13 @@ import React from 'react'
 import SignInForm from "../Components/SignInForm"
 import './Landing.css'
 export default function Landing() {
+
     return (
         <div className="Landing">
-            <div className="Landing-Item">
-            <h1>Event(ful)</h1>
+
+            <section className="Landing-Item">
+            <h1>EVENT( FUL )</h1>
+
                 <p>
                 The amateur event planner doesn't have much experience finding vendors, keeping track of their vendor budget,
                 or monitoring what vendors they like and which ones they have and haven't booked.
@@ -19,8 +22,10 @@ export default function Landing() {
                 While these separate entities are okay on their own, for an individual who struggles with multitasking,
                 it would take resiliency on their part to stay organized.
                 </p>
-            </div>
-            <SignInForm className="Landing-Form"/>
+
+            </section>
+            <SignInForm />
+
         </div>
     )
 }
