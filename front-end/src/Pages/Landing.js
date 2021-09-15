@@ -1,7 +1,6 @@
 import React from 'react'
 import SignInForm from "../Components/SignInForm"
 import './Landing.css'
-
 export default function Landing() {
 
     return (

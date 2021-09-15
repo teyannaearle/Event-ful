@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { apiURL } from "../util/apiURL";
+import { apiURL } from "../../util/apiURL";
 import React, { useEffect, useState } from "react";
 
 const api = apiURL();
@@ -38,7 +38,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       case "musicians":
         item = "Find a Musician";
         break;
-      case "party rental":
+      case "party_rental":
         item = "Find Equipment Rentals";
         break;
       case "photographers":
@@ -70,12 +70,13 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       user_id: user_id,
       event_id: event_id,
     };
-    setBookedStatus({ ...bookedStatus, [category]: !bookedStatus[category] });
 
     try {
       axios
         .put(`${api}/checklist/${user_id}/${event_id}`, body)
-        .then((response) => {});
+        .then((response) => {
+          setBookedStatus({ ...bookedStatus, [category]: !bookedStatus[category] });
+        });
     } catch {}
   };
 

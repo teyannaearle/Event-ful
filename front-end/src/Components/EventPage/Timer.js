@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { apiURL } from "../util/apiURL";
+import { apiURL } from "../../util/apiURL";
 import axios from "axios";
 
 const api = apiURL();

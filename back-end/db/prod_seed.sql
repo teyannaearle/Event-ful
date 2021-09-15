@@ -16,7 +16,7 @@ INSERT INTO tasklist (task_name , is_completed , user_id, event_id ) VALUES
 ('catering', false, 1, 1) ,
 ('djs', false, 1, 1),
 ('musicians', false, 1, 1),
-('party rental', false, 1, 1),
+('party_rental', false, 1, 1),
 ('photographers', false, 1, 1),
 ('videographers', false, 1, 1),
 ('venues', false, 1, 1),
@@ -25,25 +25,25 @@ INSERT INTO tasklist (task_name , is_completed , user_id, event_id ) VALUES
 ('catering', false, 1, 2) ,
 ('djs', false, 1, 2),
 ('musicians', false, 1, 2),
-('party rental', false, 1, 2),
+('party_rental', false, 1, 2),
 ('photographers', false, 1, 2),
 ('videographers', false, 1, 2),
 ('catering', false, 1, 3) ,
 ('djs', false, 1, 3),
 ('musicians', false, 1, 3),
-('party rental', false, 1, 3),
+('party_rental', false, 1, 3),
 ('photographers', false, 1, 3),
 ('videographers', false, 1, 3),
 ('catering', false, 2, 4) ,
 ('djs', false, 2, 4),
 ('musicians', false, 2, 4),
-('party rental', false, 2, 4),
+('party_rental', false, 2, 4),
 ('photographers', false, 2, 4),
 ('videographers', false, 2, 4),
 ('catering', false, 2, 5) ,
 ('djs', false, 2, 5),
 ('musicians', false, 2, 5),
-('party rental', false, 2, 6),
+('party_rental', false, 2, 6),
 ('photographers', false, 2, 6),
 ('videographers', false, 2, 6);
 
@@ -61,6 +61,7 @@ INSERT INTO favorites ( user_id , vendor_name , vendor_address ,  vendor_phone_n
 (1, 'Tokyo Sushi', '123 Main Street', '7185551234'),
 (2, 'Lotos Thai', '555 East 27 street', '3475551234'),
 (2, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567');
+
 
 
 
