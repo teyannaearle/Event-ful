@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Event({ event, user_id, event_id }) {
+function Event({ event, user_id }) {
   return (
     <div>
-      <Link to={`/event/${user_id}/${event_id}`}>
+      <Link to={`/event/${user_id}/${event.event_id}`}>
         <h2>{event.event_name}</h2>
       </Link>
     </div>

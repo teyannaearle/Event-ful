@@ -33,7 +33,7 @@ function EventList() {
         {events.map((event) => {
           return (
             <li key={event.user_id}>
-              <Event event={event} />
+              <Event event={event} user_id={user_id} />
             </li>
           );
         })}
