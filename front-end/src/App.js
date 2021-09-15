@@ -1,6 +1,3 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import api from "./util/apiCalls";
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
 import Event from "./Pages/EventPage";
@@ -10,12 +7,21 @@ import SignUp from "./Pages/SignUp.js";
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
+import useGeoLocation from "./hooks/useGeoLocation";
+import ScrollToTop from "./Components/ScrollToTop.js";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
+import NavBar from "./Components/NavBar/NavBar.js";
 
 function App() {
+  const location = useGeoLocation();
   return (
-    <div>
+    <div className="site">
+  
+      <ScrollToTop />
+      <NavBar/>
       <Switch>
+      
         <Route exact path="/">
           <Landing />
         </Route>
@@ -24,27 +30,27 @@ function App() {
           <SignUp />
         </Route>
 
-        <Route path="/dashboard">
+        <Route path="/dashboard/:user_id">
           <Dashboard />
         </Route>
 
-        <Route path="/event/:event_id">
+        <Route path="/event/:user_id/:event_id">
           <Event />
         </Route>
 
-        <Route path="/:category/:provider_id">
+        <Route path="/vendor/:category/:provider_id">
           <VendorShow />
         </Route>
 
-        <Route path="/favorites">
+        <Route path="/favorites/:user_id">
           <Favorites />
         </Route>
-        
-        <Route path="/:category">
-          <VendorIndex />
+
+        <Route path="/vendors/:category">
+          <VendorIndex location={location} />
         </Route>
 
-        <Route path="/booked/:event_id">
+        <Route path="/booked/:user_id/:event_id">
           <Booked />
         </Route>
       </Switch>

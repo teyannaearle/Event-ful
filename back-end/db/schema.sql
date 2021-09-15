@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS events CASCADE;
 CREATE TABLE events (
     event_id SERIAL PRIMARY KEY,
     event_name VARCHAR (255) NOT NULL, 
-    event_zip VARCHAR (5) NOT NULL,
+    -- event_zip VARCHAR (5) NOT NULL,
     event_budget INTEGER DEFAULT 0 ,
     event_date DATE,
     event_time TIME,
@@ -31,6 +31,7 @@ CREATE TABLE tasklist (
     -- task_id SERIAL PRIMARY KEY, (INT AUTO_INCREMENT PRIMARY KEY),
     task_id SERIAL PRIMARY KEY,
     task_name VARCHAR (255) NOT NULL, 
+    task_cost numeric DEFAULT 0,
     is_completed BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id  SERIAL, CONSTRAINT fk_tasklist_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
@@ -47,7 +48,7 @@ CREATE TABLE booked (
     task_id SERIAL, CONSTRAINT fk_booked_tasklist FOREIGN KEY(task_id) REFERENCES tasklist(task_id) ON DELETE CASCADE,
     vendor_name VARCHAR (255) NOT NULL, 
     vendor_address VARCHAR (255) NOT NULL,
-    vendor_phone_number VARCHAR (10) NOT NULL,
+    vendor_phone_number VARCHAR (11) NOT NULL,
     amount INTEGER
 );
 
@@ -58,5 +59,5 @@ CREATE TABLE favorites (
     user_id  SERIAL, CONSTRAINT fk_favorites_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     vendor_name VARCHAR (255) NOT NULL, 
     vendor_address VARCHAR (255) NOT NULL, 
-    vendor_phone_number VARCHAR (10) NOT NULL
+    vendor_phone_number VARCHAR (11) NOT NULL
 );
