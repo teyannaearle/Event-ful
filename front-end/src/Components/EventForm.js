@@ -73,38 +73,11 @@ function EventForm() {
         console.log(category);
         axios
           .post(`${API}/checklist/${user_id}/${id}`, category)
-          .then((res) => console.log(res));
+          .then((res) => console.log(res))
+          .catch((c) => console.warn("catch", c));
       }
     }
   };
-
-  // const eventCheck = eventForm.map((checked, i) => {
-  //   for (const checked in eventForm) {
-  //     if (checked === true) {
-  //       return eventForm[checked];
-  //     } else if (checked === false) {
-  //     }
-  //   }
-  // });
-
-  //   const handleCheckedBox = () => {
-  //     const checkedCat = {};
-  //     //loop through object
-  //     // check if key value === true
-  //     //if key is true add to empty object
-  //     //if false do not add
-  //     for (const checked in eventForm) {
-  //       if (checked === true) {
-  //         return checkedCat.push(eventForm[checked]);
-  //       }
-  //       console.log(checkedCat);
-  //     }
-  //   };
-  //   handleCheckedBox;
-
-  //   const myEventCheck = (category) => {
-  //     axios.post(`${API}/checklist/:user_id/:event_id`, category).then();
-  //   };
 
   const handleTextChange = (e) => {
     setEvent({ ...myEvent, [e.target.id]: e.target.value });
