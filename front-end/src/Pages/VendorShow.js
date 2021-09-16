@@ -5,7 +5,7 @@ import VendorReviews from "../Components/VendorShow/VendorReviews";
 import VendorShowInfo from "../Components/VendorShow/VendorShowInfo";
 import Loading from "../Components/Loading";
 
-export default function VendorShow() {
+export default function VendorShow({user_id}) {
 
   const [business, setbusiness] = useState({
     photos: [],
@@ -38,7 +38,7 @@ export default function VendorShow() {
     <div id="vendor-showpage" className="page">
       {business.photos[0] ? (
         <>
-          <VendorShowInfo business={business} />
+          <VendorShowInfo business={business} user_id={user_id}/>
           <VendorReviews reviews={reviews} />{" "}
         </>
       ) : (

@@ -36,6 +36,7 @@ export default function Event() {
             name: point.task_name,
             booked: point.is_completed,
             cost: point.task_cost,
+            id: point.task_id
           };
         });
         let vendorCategories2 = {};
