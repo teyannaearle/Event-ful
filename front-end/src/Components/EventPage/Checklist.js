@@ -121,14 +121,14 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
   const bookedButton = (category, id) => {
     if (bookedStatus[category.name] === false) {
       return (
-        <Link to={`/task/${user_id}/${event_id}/${id}`}>
+        <Link to={`/task/${category.name}/${event_id}/${id}`}>
           <button
             className="book-button x"
             onClick={() => updateBookedStatus(category.name)}
           >
             {" "}
             &#10007;
-          </button>
+          </button> 
         </Link>
       );
     } else {

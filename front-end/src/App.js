@@ -62,7 +62,7 @@ function App() {
           <Dashboard />
         </Route>
 
-        <Route path="/task/:user_id/:event_id/:task_id">
+        <Route path="/task/:category/:event_id/:task_id">
           <ListEdit user_id={user_id} />
         </Route>
 
