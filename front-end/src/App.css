@@ -137,6 +137,12 @@ button:hover {
   margin: 5px;
 }
 
+.book-buttons a{
+  width: 100%;
+  margin-right: 10px;
+}
+
+
 .check {
   background: rgb(108, 140, 170);
   background: linear-gradient(

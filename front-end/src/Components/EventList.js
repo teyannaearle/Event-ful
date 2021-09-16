@@ -38,7 +38,7 @@ function EventList() {
           );
         })}
       </ul>
-      <Link to={`/event/${user_id}/new`}>
+      <Link to={`/dashboard/new_event/:${user_id}`}>
         <button>New Event Form</button>
       </Link>
     </div>

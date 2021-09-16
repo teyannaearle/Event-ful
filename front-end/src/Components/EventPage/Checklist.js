@@ -75,7 +75,10 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       axios
         .put(`${api}/checklist/${user_id}/${event_id}`, body)
         .then((response) => {
-          setBookedStatus({ ...bookedStatus, [category]: !bookedStatus[category] });
+          setBookedStatus({
+            ...bookedStatus,
+            [category]: !bookedStatus[category],
+          });
         });
     } catch {}
   };
@@ -115,6 +118,31 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
     );
   };
 
+  const bookedButton = (category, id) => {
+    if (bookedStatus[category.name] === false) {
+      return (
+        <Link to={`/task/${user_id}/${event_id}/${id}`}>
+          <button
+            className="book-button x"
+            onClick={() => updateBookedStatus(category.name)}
+          >
+            {" "}
+            &#10007;
+          </button>
+        </Link>
+      );
+    } else {
+      return (
+        <button
+          className="book-button check"
+          onClick={() => updateBookedStatus(category.name)}
+        >
+          {" "}
+          &#10003;
+        </button>
+      );
+    }
+  };
 
   const editButton = (cost) => {
     let button = "";
@@ -130,17 +158,12 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
   return (
     <ul className="checklist checklist-ul">
       {categories.map((category, i) => {
+        let id = categories.filter((point) => point.name === category.name)[0]
+          .id;
         return (
           <li key={i} className="checklist check-listitem">
             <div className="book-buttons">
-              <button
-                className={bookedStatus[category.name] ? "book-button check" : "book-button x"}
-                onClick={() => updateBookedStatus(category.name)}
-              >
-                {" "}
-                {bookedStatus[category.name] ? <>&#10003;</> : <>&#10007;</>}
-              </button>
-  
+              {bookedButton(category, id)}
 
               <button
                 onClick={() =>
@@ -160,8 +183,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
                   to={`/vendors/${category.name}`}
                   className="checklist-span"
                 >
-                  <span> {listItem(category.name)} </span>{" "}
-                  <span>&#187;</span>
+                  <span> {listItem(category.name)} </span> <span>&#187;</span>
                 </Link>
               </button>
             </div>
