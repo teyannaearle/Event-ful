@@ -8,7 +8,7 @@ const API = apiURL();
 console.log(API);
 function EventForm() {
   const { user_id } = useParams();
-  const [events, setEvents] = useState([]);
+  const [lastEvent, setLastEvent] = useState({});
 
   const [myEvent, setEvent] = useState({
     event_name: "",
@@ -32,10 +32,10 @@ function EventForm() {
 
   useEffect(() => {
     axios
-      .get(`${API}/events/${user_id}`)
+      .get(`${API}/events/last`)
       .then(
         (res) => {
-          setEvents(res.data.message);
+          setLastEvent(res.data.payload);
         },
         (e) => {
           console.error(e);
@@ -45,6 +45,8 @@ function EventForm() {
         console.error(e);
       });
   }, [user_id]);
+
+  console.log(lastEvent);
 
   const addEvent = () => {
     axios
@@ -62,7 +64,7 @@ function EventForm() {
   const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
     console.log(categories);
-    const id = events[0] ? events[events.length - 1].event_id + 1 : 1;
+    const id = lastEvent.event_id + 1;
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
