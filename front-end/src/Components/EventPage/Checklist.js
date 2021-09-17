@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 const api = apiURL();
 
-function Checklist({ categories, user_id, event_id, updateCost }) {
+function Checklist({ categories, user_id, event_id, updateCost}) {
   const [bookedStatus, setBookedStatus] = useState({});
   // const [showForm, setShowForm] = useState({});
   // const [costInput, setCostInput] = useState({});
@@ -75,6 +75,29 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
     if (!bookedStatus[category] === false){
       axios.delete(`${api}/booked/${user_id}/${event_id}/${category}`)
       .then(res => console.log(res))
+
+      let checklistBody = {
+        task_cost: 0,
+        task_name: category,
+      };
+      updateCost(checklistBody, category)
+
+      // try {
+      //   axios
+      //     .put(`${api}/checklist/cost/${user_id}/${event_id}`, checklistbody)
+      //     // .then((res) => );
+      // } catch {}
+      let bookedBody = {
+        amount: 0,
+        category: category,
+      };
+  
+      try {
+        axios
+          .put(`${api}/booked/cost/${user_id}/${event_id}`, bookedBody)
+          // .then((res) => console.log("booked" + res));
+      } catch {}
+
     }
 
     try {

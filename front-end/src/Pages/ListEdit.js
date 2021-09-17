@@ -10,7 +10,7 @@ const API = apiURL();
 
 const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 
-function ListEdit({ user_id, lat, lng, formatter }) {
+function ListEdit({ user_id, lat, lng, formatter, updateCost }) {
   const { event_id, category } = useParams();
   // const [search, setSearch] = useState("");
   // const [searchClicked, setSearchClicked] = useState(false);
@@ -33,7 +33,7 @@ function ListEdit({ user_id, lat, lng, formatter }) {
               rating: result.rating
             }
           );
-          // setVendors([]);
+          setCost(result.amount)
         });
     } catch {}
   }, [category, event_id, user_id]);
@@ -96,16 +96,17 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     setCost(e.target.value);
   };
   const handleCostSubmission = () => {
-    let checklistbody = {
+    let checklistBody = {
       task_cost: cost,
       task_name: category,
     };
 
     try {
       axios
-        .put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistbody)
+        .put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody)
         // .then((res) => );
     } catch {}
+
     let bookedBody = {
       amount: cost,
       vendor_name: vendor.name,
