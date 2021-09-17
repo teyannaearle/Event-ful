@@ -24,6 +24,12 @@ const user_id = 1;
 function App() {
   const location = useGeoLocation();
   const [events, setEvents] = useState([]);
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const formatter = new Intl.NumberFormat("en-US" , {
+    style: "currency",
+    currency: "USD"
+  });
 
   useEffect(() => {
     axios
@@ -40,6 +46,13 @@ function App() {
         console.error(e);
       });
   }, []);
+
+  useEffect(() => {
+    if (location.coordinates) {
+      setLat(location.coordinates.latitude);
+      setLng(location.coordinates.longitude);
+    }
+  }, [location]);
 
   return (
     <div className="site">
@@ -63,7 +76,7 @@ function App() {
         </Route>
 
         <Route path="/task/:category/:event_id/:task_id">
-          <ListEdit user_id={user_id} />
+          <ListEdit user_id={user_id} lat={lat} lng={lng} formatter={formatter}/>
         </Route>
 
         <Route path="/event/:user_id/:event_id">

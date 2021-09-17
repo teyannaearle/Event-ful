@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Ratings from "react-ratings-declarative";
 
-function Vendor({ vendor, category }) {
+function Vendor({ vendor }) {
   return (
     <>
       <li className="flex-col three-d ven-li">
