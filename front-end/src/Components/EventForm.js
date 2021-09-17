@@ -54,7 +54,6 @@ function EventForm() {
       .then(
         (res) => {
           console.log(res);
-          //   history.push(`/dashboard`);
         },
         (error) => console.error(error)
       )
@@ -69,8 +68,6 @@ function EventForm() {
       if (eventForm[checked] === true) {
         const category = {
           task_name: checked,
-          //   user_id: user_id,
-          //   event_id: 1,
         };
         console.log(category);
         axios
