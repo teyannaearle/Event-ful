@@ -7,8 +7,8 @@ const api = apiURL();
 
 function Checklist({ categories, user_id, event_id, updateCost }) {
   const [bookedStatus, setBookedStatus] = useState({});
-  const [showForm, setShowForm] = useState({});
-  const [costInput, setCostInput] = useState({});
+  // const [showForm, setShowForm] = useState({});
+  // const [costInput, setCostInput] = useState({});
 
   useEffect(() => {
     const booked = {};
@@ -22,8 +22,8 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
     }
 
     setBookedStatus(booked);
-    setShowForm(show);
-    setCostInput(cost);
+    // setShowForm(show);
+    // setCostInput(cost);
   }, [categories]);
 
   const listItem = (category) => {
@@ -71,6 +71,12 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       event_id: event_id,
     };
 
+
+    if (!bookedStatus[category] === false){
+      axios.delete(`${api}/booked/${user_id}/${event_id}/${category}`)
+      .then(res => console.log(res))
+    }
+
     try {
       axios
         .put(`${api}/checklist/${user_id}/${event_id}`, body)
@@ -81,42 +87,44 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           });
         });
     } catch {}
+
+  
   };
 
-  const handleFormChange = (category, e) => {
-    setCostInput({ ...costInput, [category]: e.target.value });
-  };
+  // const handleFormChange = (category, e) => {
+  //   setCostInput({ ...costInput, [category]: e.target.value });
+  // };
 
-  const handleSubmit = (category, e) => {
-    e.preventDefault();
+  // const handleSubmit = (category, e) => {
+  //   e.preventDefault();
 
-    const body = {
-      task_name: category,
-      task_cost: costInput[category],
-      user_id: user_id,
-      event_id: event_id,
-    };
+  //   const body = {
+  //     task_name: category,
+  //     task_cost: costInput[category],
+  //     user_id: user_id,
+  //     event_id: event_id,
+  //   };
 
-    setShowForm({ ...showForm, [category]: false });
-    updateCost(body, category);
-  };
+  //   // setShowForm({ ...showForm, [category]: false });
+  //   updateCost(body, category);
+  // };
 
-  const form = (category) => {
-    return (
-      <form onSubmit={(e) => handleSubmit(category, e)} id="cost-form">
-        <input
-          id={category}
-          placeholder="cost"
-          value={costInput[category]}
-          onChange={(e) => handleFormChange(category, e)}
-          type="number"
-          min="0"
-          step=".01"
-        />
-        <button type="submit">Update</button>
-      </form>
-    );
-  };
+  // const form = (category) => {
+  //   return (
+  //     <form onSubmit={(e) => handleSubmit(category, e)} id="cost-form">
+  //       <input
+  //         id={category}
+  //         placeholder="cost"
+  //         value={costInput[category]}
+  //         onChange={(e) => handleFormChange(category, e)}
+  //         type="number"
+  //         min="0"
+  //         step=".01"
+  //       />
+  //       <button type="submit">Update</button>
+  //     </form>
+  //   );
+  // };
 
   const bookedButton = (category, id) => {
     if (bookedStatus[category.name] === false) {
@@ -144,12 +152,12 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
     }
   };
 
-  const editButton = (cost) => {
+  const editButton = (category) => {
     let button = "";
-    if (cost !== "0") {
-      button = "Edit Cost";
+    if (bookedStatus[category]) {
+      button = "Edit Vendor";
     } else {
-      button = "Add Cost";
+      button = "Add Vendor";
     }
 
     return button;
@@ -164,17 +172,18 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           <li key={i} className="checklist check-listitem">
             <div className="book-buttons">
               {bookedButton(category, id)}
-
+<Link to={`/task/${category.name}/${event_id}/${id}`}>
               <button
-                onClick={() =>
-                  setShowForm({
-                    ...showForm,
-                    [category.name]: !showForm[category.name],
-                  })
-                }
+                // onClick={() =>
+                //   setShowForm({
+                //     ...showForm,
+                //     [category.name]: !showForm[category.name],
+                //   })
+                // }
               >
-                {editButton(category.cost)}
+                {editButton(category.name)}
               </button>
+              </Link>
             </div>
 
             <div>
@@ -187,7 +196,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
                 </Link>
               </button>
             </div>
-            {showForm[category.name] ? form(category.name) : null}
+            {/* {showForm[category.name] ? form(category.name) : null} */}
           </li>
         );
       })}

@@ -46,10 +46,12 @@ CREATE TABLE booked (
     user_id  SERIAL, CONSTRAINT fk_booked_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     event_id SERIAL, CONSTRAINT fk_booked_events FOREIGN KEY(event_id) REFERENCES events(event_id) ON DELETE CASCADE,
     task_id SERIAL, CONSTRAINT fk_booked_tasklist FOREIGN KEY(task_id) REFERENCES tasklist(task_id) ON DELETE CASCADE,
-    vendor_name VARCHAR (255) NOT NULL, 
+    vendor_name VARCHAR (255) NOT NULL UNIQUE, 
     vendor_address VARCHAR (255) NOT NULL,
     vendor_phone_number VARCHAR (11) NOT NULL,
-    amount INTEGER
+        rating INTEGER DEFAULT 0,
+    category VARCHAR (255) NOT NULL,
+    amount numeric DEFAULT 0
 );
 
     
