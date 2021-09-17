@@ -1,4 +1,5 @@
 import React from "react";
+import "./Event.css";
 import { Link } from "react-router-dom";
 
 function Event({ event, user_id }) {
@@ -6,6 +7,9 @@ function Event({ event, user_id }) {
     <div>
       <Link to={`/event/${user_id}/${event.event_id}`}>
         <h2>{event.event_name}</h2>
+      </Link>
+      <Link to={`/dashboard/${event.event_id}/edit`}>
+        <button>Edit {event.event_name}</button>
       </Link>
     </div>
   );

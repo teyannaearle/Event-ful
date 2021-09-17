@@ -2,16 +2,47 @@ import React, { useState } from "react";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 
-function EditEvent() {
-  const [myEvent, setEvent] = useState({
-    name: "",
-    budget: 0,
-    zipcode: "",
-    date: "",
-    time: "",
-  })
+const API = apiURL();
 
-  const 
+function EditEvent() {
+  const { event_id } = useParams();
+
+  const [event, setEvent] = useState({
+    event_name: "",
+    event_budget: 0,
+    event_date: "",
+    event_time: "",
+  });
+
+  const [checklist, setChecklist] = useState({
+    djs: false,
+    musicians: false,
+    photographers: false,
+    party_rental: false,
+    videographers: false,
+    venues: false,
+    balloons: false,
+    floral: false,
+  });
+
+  const updateEvent = (updatedEvent) => {
+    axios
+      .put(`${API}/events/${event_id}`, updatedEvent)
+      .then(
+        () => history.push(`/events/${event_id}`),
+        (e) => console.warn("catch", c)
+      )
+      .catch((c) => console.warn("catch, c"));
+  };
+
+  const handleChange = (e) => {
+    setEvent({ ...event, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventdefault();
+    updateEvent(event, event_id);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -19,7 +50,7 @@ function EditEvent() {
       <input
         id="event_name"
         type="text"
-        value={myEvent.name}
+        value={event.name}
         placeholder="Name"
         onChange={handleChange}
       />
@@ -27,7 +58,7 @@ function EditEvent() {
       <input
         id="event_budget"
         type="number"
-        value={myEvent.budget}
+        value={event.budget}
         placeholder="$0.00"
         onChange={handleChange}
       />
@@ -35,7 +66,7 @@ function EditEvent() {
       <input
         id="event_time"
         type="text"
-        value={myEvent.time}
+        value={event.time}
         placeholder="Time"
         onChange={handleChange}
       />
@@ -43,7 +74,7 @@ function EditEvent() {
       <input
         id="event_date"
         type="text"
-        value={myEvent.date}
+        value={event.date}
         placeholder="Date"
         onChange={handleChange}
       />
