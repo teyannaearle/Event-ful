@@ -60,6 +60,7 @@ export default function Event() {
     } catch {}
   };
 
+
   return (
     <div className="event-page page">
       <h1 className="pg-head">{eventName}</h1>

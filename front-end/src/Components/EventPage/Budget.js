@@ -11,7 +11,7 @@ function Budget({ categories, budget , shownCost, formatter}) {
     const currentSpending = Number(budget) - Number(sum)
     setBudgetStatus(currentSpending)
     setSum(sum)
-  }, [shownCost, budget])
+  }, [shownCost, budget,categories])
 
 
   const budgetUpdate = () => {
