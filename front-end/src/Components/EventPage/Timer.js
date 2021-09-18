@@ -44,7 +44,15 @@ function Timer() {
         setTime(data.event_time);
         setUpdated(true);
       });
-    } catch {}
+    } catch (e) {
+      console.error(e)
+    }
+
+    return () => {
+      setDate("");
+        setTime("");
+        setUpdated(false);
+    }
   }, [event_id, user_id]);
 
   const countDown = () => {

@@ -5,10 +5,8 @@ import React, { useEffect, useState } from "react";
 
 const api = apiURL();
 
-function Checklist({ categories, user_id, event_id, updateCost}) {
+function Checklist({ categories, user_id, event_id, updateCost }) {
   const [bookedStatus, setBookedStatus] = useState({});
-  // const [showForm, setShowForm] = useState({});
-  // const [costInput, setCostInput] = useState({});
 
   useEffect(() => {
     const booked = {};
@@ -22,8 +20,10 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
     }
 
     setBookedStatus(booked);
-    // setShowForm(show);
-    // setCostInput(cost);
+
+    return () => {
+      setBookedStatus({});
+    };
   }, [categories]);
 
   const listItem = (category) => {
@@ -71,33 +71,16 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
       event_id: event_id,
     };
 
-
-    if (!bookedStatus[category] === false){
-      axios.delete(`${api}/booked/${user_id}/${event_id}/${category}`)
-      .then(res => console.log(res))
+    if (!bookedStatus[category] === false) {
+      axios
+        .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
+        .then((res) => "");
 
       let checklistBody = {
         task_cost: 0,
         task_name: category,
       };
-      updateCost(checklistBody, category)
-
-      // try {
-      //   axios
-      //     .put(`${api}/checklist/cost/${user_id}/${event_id}`, checklistbody)
-      //     // .then((res) => );
-      // } catch {}
-      let bookedBody = {
-        amount: 0,
-        category: category,
-      };
-  
-      try {
-        axios
-          .put(`${api}/booked/cost/${user_id}/${event_id}`, bookedBody)
-          // .then((res) => console.log("booked" + res));
-      } catch {}
-
+      updateCost(checklistBody, category);
     }
 
     try {
@@ -109,45 +92,10 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
             [category]: !bookedStatus[category],
           });
         });
-    } catch {}
-
-  
+    } catch (e) {
+      console.warn(e);
+    }
   };
-
-  // const handleFormChange = (category, e) => {
-  //   setCostInput({ ...costInput, [category]: e.target.value });
-  // };
-
-  // const handleSubmit = (category, e) => {
-  //   e.preventDefault();
-
-  //   const body = {
-  //     task_name: category,
-  //     task_cost: costInput[category],
-  //     user_id: user_id,
-  //     event_id: event_id,
-  //   };
-
-  //   // setShowForm({ ...showForm, [category]: false });
-  //   updateCost(body, category);
-  // };
-
-  // const form = (category) => {
-  //   return (
-  //     <form onSubmit={(e) => handleSubmit(category, e)} id="cost-form">
-  //       <input
-  //         id={category}
-  //         placeholder="cost"
-  //         value={costInput[category]}
-  //         onChange={(e) => handleFormChange(category, e)}
-  //         type="number"
-  //         min="0"
-  //         step=".01"
-  //       />
-  //       <button type="submit">Update</button>
-  //     </form>
-  //   );
-  // };
 
   const bookedButton = (category, id) => {
     if (bookedStatus[category.name] === false) {
@@ -159,7 +107,7 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
           >
             {" "}
             &#10007;
-          </button> 
+          </button>
         </Link>
       );
     } else {
@@ -195,17 +143,8 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
           <li key={i} className="checklist check-listitem">
             <div className="book-buttons">
               {bookedButton(category, id)}
-<Link to={`/task/${category.name}/${event_id}/${id}`}>
-              <button
-                // onClick={() =>
-                //   setShowForm({
-                //     ...showForm,
-                //     [category.name]: !showForm[category.name],
-                //   })
-                // }
-              >
-                {editButton(category.name)}
-              </button>
+              <Link to={`/task/${category.name}/${event_id}/${id}`}>
+                <button>{editButton(category.name)}</button>
               </Link>
             </div>
 
@@ -219,7 +158,6 @@ function Checklist({ categories, user_id, event_id, updateCost}) {
                 </Link>
               </button>
             </div>
-            {/* {showForm[category.name] ? form(category.name) : null} */}
           </li>
         );
       })}

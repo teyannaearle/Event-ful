@@ -26,9 +26,9 @@ function App() {
   const [events, setEvents] = useState([]);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  const formatter = new Intl.NumberFormat("en-US" , {
+  const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD"
+    currency: "USD",
   });
 
   useEffect(() => {
@@ -45,6 +45,10 @@ function App() {
       .catch((e) => {
         console.error(e);
       });
+
+    return () => {
+      setEvents([]);
+    };
   }, []);
 
   useEffect(() => {
@@ -76,11 +80,17 @@ function App() {
         </Route>
 
         <Route path="/task/:category/:event_id/:task_id">
-          <ListEdit user_id={user_id} lat={lat} lng={lng} formatter={formatter}/>
+          <ListEdit
+            user_id={user_id}
+            lat={lat}
+            lng={lng}
+            formatter={formatter}
+            events={events}
+          />
         </Route>
 
         <Route path="/event/:user_id/:event_id">
-          <Event />
+          <Event formatter={formatter} />
         </Route>
 
         <Route path="/vendor/:category/:provider_id">
