@@ -32,6 +32,19 @@ export default function VendorShow({user_id}) {
         // ---------- ERROR PAGE  ---------------
       }
     })(); 
+
+    return () => {
+      setReviews([
+        {
+          user: { image_url: "", name: "" },
+        },
+      ]);
+      setbusiness({
+        photos: [],
+        categories: [{ title: "" }],
+        location: { display_address: [] },
+      });
+    }
   }, [provider_id]);
 
   return (

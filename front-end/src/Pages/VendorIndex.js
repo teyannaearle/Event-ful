@@ -30,6 +30,10 @@ export default function VendorIndex({ location }) {
         setSearched(true)
       }
     })();
+    return () => {
+      setVendors([]);
+      setSearched(false)
+    }
   }, [category, lng, lat]);
 
   const handleZipChange = (e) => {

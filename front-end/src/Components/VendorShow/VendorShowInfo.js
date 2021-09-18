@@ -17,13 +17,16 @@ function VendorShowInfo({ business, user_id }) {
     try {
       axios.get(`${API}/favorites/${user_id}`).then((res) => {
         let index = res.data.message.findIndex((elem) => elem.vendor_name === business.name )
-        console.log(index)
         if (index > -1) {
          setFavorite(true)
         }
       });
-    } catch (error) {
-      console.log(error)
+    } catch (e) {
+      console.warn(e)
+    }
+
+    return () => {
+      setFavorite(false)
     }
   }, [business.name, user_id])
   
@@ -34,10 +37,9 @@ function VendorShowInfo({ business, user_id }) {
         try {
            axios
             .delete(`${API}/favorites/${user_id}/${business.name}`)
-            .then((res) => console.log(res));
-        } catch (error) {
-         
-          console.log(error)
+            .then((res) => "");
+        } catch (e) {
+          console.warn(e)
         }
       } else {
         const loc = business.location.display_address.join();
@@ -50,9 +52,9 @@ function VendorShowInfo({ business, user_id }) {
         try {
           axios
             .post(`${API}/favorites/${user_id}`, body)
-            .then((res) => console.log(res));
-        } catch (error) {
-          console.log(error)
+            .then((res) => "");
+        } catch (e) {
+          console.warn(e)
         }
       }
     }

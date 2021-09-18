@@ -10,42 +10,76 @@ const API = apiURL();
 
 const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 
-function ListEdit({ user_id, lat, lng, formatter, updateCost }) {
+function ListEdit({ user_id, lat, lng, formatter }) {
   const { event_id, category } = useParams();
-  // const [search, setSearch] = useState("");
-  // const [searchClicked, setSearchClicked] = useState(false);
   const [vendors, setVendors] = useState([]);
   const [vendor, setVendor] = useState("");
   const [cost, setCost] = useState(0);
   const [showForm, setShowForm] = useState(false);
+  const [bookedStatus, setBookedStatus] = useState({});
 
   useEffect(() => {
+    let vendorCategories = [];
+    let booked = {};
+
     try {
-      axios
-        .get(`${API}/booked/category/${category}/${user_id}/${event_id}`)
-        .then((res) => {
-          let result = res.data.payload
-          setVendor(
-            {
+      axios.get(`${API}/checklist/${user_id}/${event_id}`).then((response) => {
+        const data = response.data.payload;
+        vendorCategories = data.map((point) => {
+          return {
+            name: point.task_name,
+            booked: point.is_completed,
+            cost: point.task_cost,
+            id: point.task_id,
+          };
+        });
+
+        for (let category of vendorCategories) {
+          booked[category.name] = category.booked;
+        }
+
+        setBookedStatus(booked);
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
+    return () => {
+      setBookedStatus({});
+    };
+  }, [event_id, user_id]);
+
+  useEffect(() => {
+    if (bookedStatus[category] === true) {
+      try {
+        axios
+          .get(`${API}/booked/category/${category}/${user_id}/${event_id}`)
+          .then((res) => {
+            let result = res.data.payload;
+            setVendor({
               name: result.vendor_name,
               image_url: "https://i.stack.imgur.com/y9DpT.jpg",
               display_phone: result.vendor_phone_number,
-              rating: result.rating
-            }
-          );
-          setCost(result.amount)
-        });
-    } catch {}
-  }, [category, event_id, user_id]);
+              rating: result.rating,
+            });
+            setCost(result.amount);
+          });
+      } catch (e) {
+        console.error(e);
+      }
+    }
 
-
+    return () => {
+      setVendor("");
+      setCost(0);
+    };
+  }, [category, event_id, user_id, bookedStatus]);
 
   useEffect(() => {
     (async () => {
       if (!vendor && lat && lng) {
         const data = await api.getVendorsLongLag(lng, lat, category);
         setVendors(data.businesses);
-        // setSearched(true)
       }
     })();
   }, [category, lng, lat, vendor]);
@@ -65,7 +99,7 @@ function ListEdit({ user_id, lat, lng, formatter, updateCost }) {
       vendor_address: loc,
       vendor_phone_number: parseNum(selected.phone),
       category: category,
-      rating: selected.rating
+      rating: selected.rating,
     };
 
     try {
@@ -75,7 +109,9 @@ function ListEdit({ user_id, lat, lng, formatter, updateCost }) {
           setVendor(selected);
           setVendors([]);
         });
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
 
     let checklistBody = {
       is_completed: true,
@@ -87,25 +123,28 @@ function ListEdit({ user_id, lat, lng, formatter, updateCost }) {
     try {
       axios
         .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
-        .then((response) => {
-        });
-    } catch {}
+        .then((response) => {});
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleFormChange = (e) => {
     setCost(e.target.value);
   };
-  const handleCostSubmission = () => {
+  const handleCostSubmission = (e) => {
+    e.preventDefault()
     let checklistBody = {
       task_cost: cost,
       task_name: category,
     };
 
     try {
-      axios
-        .put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody)
-        // .then((res) => );
-    } catch {}
+      axios.put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody);
+      // .then((res) => );
+    } catch (e) {
+      console.error(e);
+    }
 
     let bookedBody = {
       amount: cost,
@@ -113,10 +152,11 @@ function ListEdit({ user_id, lat, lng, formatter, updateCost }) {
     };
 
     try {
-      axios
-        .put(`${API}/booked/cost/${user_id}/${event_id}`, bookedBody)
-        // .then((res) => console.log("booked" + res));
-    } catch {}
+      axios.put(`${API}/booked/cost/${user_id}/${event_id}`, bookedBody);
+      // .then((res) => console.log("booked" + res));
+    } catch (e) {
+      console.error(e);
+    }
 
     setShowForm(false);
   };
@@ -155,7 +195,7 @@ function ListEdit({ user_id, lat, lng, formatter, updateCost }) {
     );
   };
 
-  const form = () => {
+  const form = (e) => {
     return (
       <form onSubmit={handleCostSubmission}>
         <input
