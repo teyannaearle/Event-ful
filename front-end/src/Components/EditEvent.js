@@ -152,7 +152,7 @@ function EditEvent({ user_id }) {
         />
       </label>
       <button>Save Changes</button>
-      <Link to={`/events/${user_id}`}>
+      <Link to={`/dashboard/${user_id}`}>
         <button>Cancel Edit</button>
       </Link>
     </form>
