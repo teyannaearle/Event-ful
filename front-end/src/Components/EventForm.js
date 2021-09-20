@@ -6,8 +6,8 @@ import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
 console.log(API);
-function EventForm() {
-  const { user_id } = useParams();
+function EventForm({user_id}) {
+  // const { user_id } = useParams();
   const [events, setEvents] = useState([]);
 
   const [myEvent, setEvent] = useState({

@@ -30,11 +30,11 @@ const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
 const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
 const getTimeDays = (time) => (time / daySeconds) | 0;
 
-function Timer() {
+function Timer({user_id}) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [updated, setUpdated] = useState(false);
-  const { user_id, event_id } = useParams();
+  const { event_id } = useParams();
 
   useEffect(() => {
     try {

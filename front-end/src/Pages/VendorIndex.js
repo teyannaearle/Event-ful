@@ -72,14 +72,14 @@ export default function VendorIndex({ location }) {
       {category ? <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1> : null}
       <form onSubmit={handleSubmit} id="zip-form">
         <input
-          className="three-d"
+          className="three-d pg-input"
           type="number"
           placeholder="Event zip code"
           onChange={handleZipChange}
           value={zip}
           id="zip-search"
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="pg-buttons">Search</button>
       </form>
     </div>
     {vendorsList()}

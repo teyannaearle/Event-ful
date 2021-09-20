@@ -47,6 +47,7 @@ function VendorShowInfo({ business, user_id }) {
           vendor_name: business.name,
           vendor_address: loc,
           vendor_phone_number: parseNum(business.phone),
+          vendor_id: business.id
         };
   
         try {

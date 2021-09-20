@@ -56,18 +56,8 @@ INSERT INTO booked ( user_id, event_id, task_id, vendor_name , vendor_address , 
 (2, 1, 1, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567', 700);
 
 
-INSERT INTO favorites ( user_id , vendor_name , vendor_address ,  vendor_phone_number) VALUES
-(1, 'Dave & Busters', '234 west 42nd street', '6464952015'),
-(1, 'Tokyo Sushi', '123 Main Street', '7185551234'),
-(2, 'Lotos Thai', '555 East 27 street', '3475551234'),
-(2, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567');
-
-
-
-
-
-
-
-
-
-
+INSERT INTO favorites ( user_id , vendor_name , vendor_address ,  vendor_phone_number,  vendor_id  ) VALUES
+(1, 'Dave & Busters', '234 west 42nd street', '6464952015','jwghjgvw'),
+(1, 'Tokyo Sushi', '123 Main Street', '7185551234', 'jwbhgyux'),
+(2, 'Lotos Thai', '555 East 27 street', '3475551234', 'whjbhdv'),
+(2, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567', 'whvwg');

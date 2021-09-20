@@ -2,10 +2,10 @@ import EditForm from "../Components/EditEvent";
 
 import React from "react";
 
-function EditFormPage() {
+function EditFormPage({user_id}) {
   return (
     <div>
-      <EditForm />
+      <EditForm user_id={user_id}/>
     </div>
   );
 }

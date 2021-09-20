@@ -60,9 +60,9 @@ function App() {
   }, [location]);
 
   return (
-    <div className="site">
+    <div className="site test">
       <ScrollToTop />
-      <NavBar />
+      <NavBar user_id={user_id} />
       <Switch>
         <Route exact path="/">
           <Landing />
@@ -72,12 +72,16 @@ function App() {
           <SignUp />
         </Route>
 
-        <Route path="/dashboard/new_event/:user_id">
-          <NewEventForm />
+        <Route path="/dashboard/new_event">
+          <NewEventForm user_id={user_id} />
         </Route>
 
-        <Route path="/dashboard/:user_id">
-          <Dashboard />
+        <Route path="/dashboard/:event_id/edit">
+          <EditFormPage user_id={user_id} />
+        </Route>
+
+        <Route path="/dashboard">
+          <Dashboard user_id={user_id} />
         </Route>
 
         <Route path="/task/:category/:event_id/:task_id">
@@ -90,28 +94,24 @@ function App() {
           />
         </Route>
 
-        <Route path="/event/:user_id/edit">
-          <EditFormPage user_id={user_id} />
-        </Route>
-
-        <Route path="/event/:user_id/:event_id">
-          <Event formatter={formatter} />
+        <Route path="/event/:event_id">
+          <Event formatter={formatter} user_id={user_id} />
         </Route>
 
         <Route path="/vendor/:category/:provider_id">
           <VendorShow user_id={user_id} events={events} />
         </Route>
 
-        <Route path="/favorites/:user_id">
-          <Favorites />
+        <Route path="/favorites">
+          <Favorites user_id={user_id} />
         </Route>
 
         <Route path="/vendors/:category">
           <VendorIndex location={location} />
         </Route>
 
-        <Route path="/booked/:user_id/:event_id">
-          <Booked />
+        <Route path="/booked/:event_id">
+          <Booked user_id={user_id} />
         </Route>
       </Switch>
     </div>

@@ -49,6 +49,7 @@ CREATE TABLE booked (
     vendor_name VARCHAR (255) NOT NULL UNIQUE, 
     vendor_address VARCHAR (255) NOT NULL,
     vendor_phone_number VARCHAR (11) NOT NULL,
+     vendor_image VARCHAR,
         rating INTEGER DEFAULT 0,
     category VARCHAR (255) NOT NULL,
     amount numeric DEFAULT 0
@@ -61,5 +62,6 @@ CREATE TABLE favorites (
     user_id  SERIAL, CONSTRAINT fk_favorites_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     vendor_name VARCHAR (255) NOT NULL, 
     vendor_address VARCHAR (255) NOT NULL, 
-    vendor_phone_number VARCHAR (11) NOT NULL
+    vendor_phone_number VARCHAR (11) NOT NULL,
+    vendor_id  VARCHAR (255) NOT NULL
 );
