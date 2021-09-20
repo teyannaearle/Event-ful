@@ -17,6 +17,7 @@ import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
 import { useEffect, useState } from "react";
 import { apiURL } from "./util/apiURL";
+import EditFormPage from "./Pages/EditFormPage.js";
 
 const API = apiURL();
 const user_id = 1;
@@ -87,6 +88,10 @@ function App() {
             formatter={formatter}
             events={events}
           />
+        </Route>
+
+        <Route path="/events/:user_id/edit">
+          <EditFormPage user_id={user_id} />
         </Route>
 
         <Route path="/event/:user_id/:event_id">
