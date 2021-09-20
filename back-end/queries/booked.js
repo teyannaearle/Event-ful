@@ -43,7 +43,7 @@ const getOneCategory = async (user_id, event_id, category) => {
 const createBookedVendor = async (vendor, user_id, event_id) => {
   try {
     const newBookedVendor = await db.one(
-      "INSERT INTO booked (user_id, event_id, vendor_name, vendor_address, vendor_phone_number, category, rating) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      "INSERT INTO booked (user_id, event_id, vendor_name, vendor_address, vendor_phone_number, category, rating, vendor_image) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
       [
         user_id,
         event_id,
@@ -51,7 +51,8 @@ const createBookedVendor = async (vendor, user_id, event_id) => {
         vendor.vendor_address,
         vendor.vendor_phone_number,
         vendor.category,
-        vendor.rating
+        vendor.rating,
+        vendor.vendor_image
       ]
     );
     return newBookedVendor;
@@ -77,11 +78,12 @@ const deleteBookedVendor = async (user_id, event_id, category) => {
 const updateBookedVendor = async (vendor, user_id, event_id) => {
   try {
     const updatedBookedVendor = await db.one(
-      "UPDATE booked SET vendor_address=$1, vendor_phone_number=$2, amount=$3 WHERE user_id=$4 AND event_id=$5 AND vendor_name=$6 RETURNING *",
+      "UPDATE booked SET vendor_address=$1, vendor_phone_number=$2, amount=$3, vendor_image=$4 WHERE user_id=$5 AND event_id=$6 AND vendor_name=$7 RETURNING *",
       [
         vendor.vendor_address,
         vendor.vendor_phone_number,
         vendor.amount,
+        vendor.vendor_image,
         user_id,
         event_id,
         vendor.vendor_name,

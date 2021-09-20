@@ -15,7 +15,8 @@ a:active {
 }
 
 html,
-#root {
+#root,
+.site {
   height: 80vw;
 }
 
@@ -52,6 +53,7 @@ button:hover {
 } */
 
 .three-d {
+  background-color: white;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 3px 0px #d8d8d8, 0px 2px 10px rgba(0, 0, 0, 0.4),
     inset 0px 0px 3px rgba(255, 255, 255, 0.927);
@@ -80,11 +82,13 @@ button:hover {
   display: grid;
   grid-template-columns: 50% 50%;
   justify-items: center;
+  border-radius: 8px;
 }
 
 #checklist-container {
   width: 100%;
-  border: black 1px solid;
+  /* border: black 1px solid; */
+  /* border-radius: 8px; */
   display: grid;
   grid-template-columns: 35% 65%;
   grid-template-rows: 10% 90%;
@@ -212,7 +216,7 @@ justify-content: space-evenly;}
 #budget-container {
   width: 100%;
   text-align: center;
-  border: black 1px solid;
+  /* border: black 1px solid; */
 }
 
 .budget-list {
@@ -266,7 +270,7 @@ justify-content: space-evenly;}
   grid-column: span 2;
   width: 100%;
   text-align: center;
-  border: black 1px solid;
+  /* border: black 1px solid; */
   font-weight: 700;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -365,6 +369,7 @@ justify-content: space-evenly;
   flex-direction: column;
   justify-items: center;
   margin: auto;
+  height: 100%;
 }
 
 #zip-search {
@@ -397,6 +402,34 @@ justify-content: space-evenly;
   background-color: white;
 }
 
+
+
+/* ListEdit*/
+
+.ven-info{
+  /* width: 100%;
+  height: 50%;
+  justify-content:space-evenly; */
+  margin-top: 50px;
+  text-align: center;
+}
+
+.ven-cost{
+  height: 100px;
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.ven-cost button {
+  width: 50%
+}
+
+.ven-cost input {
+  font-size: medium;
+}
 /* ACROSS SITE - Stays at bottom*/
 
 .page {

@@ -74,7 +74,7 @@ export default function Event({formatter}) {
   return (
     <div className="event-page page">
       <h1 className="pg-head">{eventName}</h1>
-      <div className="eventpage-container">
+      <div className="eventpage-container three-d">
         <div id="checklist-container" className="evenpg-containers">
           <h2 className="col-h">Booked?</h2>
           <h2 className="col-h">Vendors:</h2>
