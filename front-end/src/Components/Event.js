@@ -8,7 +8,7 @@ function Event({ event, user_id }) {
       <Link to={`/event/${user_id}/${event.event_id}`}>
         <h2>{event.event_name}</h2>
       </Link>
-      <Link to={`/dashboard/${event.event_id}/edit`}>
+      <Link to={`/event/${user_id}/edit`}>
         <button>Edit {event.event_name}</button>
       </Link>
     </div>
