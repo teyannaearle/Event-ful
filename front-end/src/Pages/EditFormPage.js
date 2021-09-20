@@ -1,13 +1,13 @@
-import EditForm from "../Components/EditEvent"
+import EditForm from "../Components/EditEvent";
 
-import React from 'react'
+import React from "react";
 
 function EditFormPage() {
-    return (
-        <div>
-            <EditForm />
-        </div>
-    )
+  return (
+    <div>
+      <EditForm />
+    </div>
+  );
 }
 
-export default EditFormPage
+export default EditFormPage;

@@ -90,7 +90,7 @@ function App() {
           />
         </Route>
 
-        <Route path="/events/:user_id/edit">
+        <Route path="/event/:user_id/edit">
           <EditFormPage user_id={user_id} />
         </Route>
 
