@@ -54,6 +54,7 @@ function EventForm() {
       .then(
         (res) => {
           console.log(res);
+          
         },
         (error) => console.error(error)
       )
