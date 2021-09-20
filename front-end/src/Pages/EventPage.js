@@ -8,8 +8,8 @@ import axios from "axios";
 
 const api = apiURL();
 
-export default function Event({formatter}) {
-  const { user_id, event_id } = useParams();
+export default function Event({formatter, user_id}) {
+  const { event_id } = useParams();
   const [eventName, setEventName] = useState("");
   const [categories, setCategories] = useState([]);
   const [budget, setBudget] = useState(0);
@@ -98,7 +98,9 @@ export default function Event({formatter}) {
 
         <div id="countdown-container" className="evenpg-containers">
           <h2 className="col-h">Countdown to {eventName} !</h2>
-          <Timer />
+          <Timer 
+          user_id={user_id}
+          />
         </div>
       </div>
     </div>

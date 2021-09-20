@@ -3,8 +3,8 @@ import { VendorMenu } from "./VendorMenu";
 import { Link, useParams } from "react-router-dom";
 import "./NavBar.css";
 
-export default function NavBar() {
-  const { user_id } = useParams();
+export default function NavBar({user_id}) {
+  // const { user_id } = useParams();
   const [vendorClicked, setVendorClicked] = useState(false);
 
   const handleVendorClick = () => {
@@ -18,17 +18,17 @@ export default function NavBar() {
   const accountMenu = [
     {
       title: "Dashboard",
-      url: `/dashboard/${user_id}`,
+      url: `/dashboard`,
       cName: "nav-links",
     },
     {
       title: "My Favorites",
-      url: `/favorites/${user_id}`,
+      url: `/favorites`,
       cName: "nav-links",
     },
     {
       title: "Settings",
-      url: `/settings/${user_id}`,
+      url: `/settings`,
       cName: "nav-links",
     },
     {
@@ -40,17 +40,19 @@ export default function NavBar() {
 
   return (
     <nav className="NavBarItems">
+      <Link to="/">
       <h1 className="navbar-logo">
         Event(ful)
         {/* <i className="fab fa-react"></i> */}
       </h1>
+      </Link>
 
       {/* <FontAwesomeIcon icon="fa-solid fa-face-party" /> */}
 
       <ul className="accountNav">
         {accountMenu.map((item, index) => {
           return (
-            <li className="accountLinks" key={index}>
+            <li className="accountLinks" key={index} onClick={closeNav}>
               <Link to={item.url}>{item.title}</Link>
             </li>
           );

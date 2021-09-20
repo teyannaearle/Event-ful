@@ -5,6 +5,7 @@ import Vendor from "../Components/VendorIndex/Vendor";
 import api from "../util/apiCalls";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
+import Loading from "../Components/Loading"
 
 const API = apiURL();
 
@@ -86,7 +87,7 @@ function ListEdit({ user_id, lat, lng, formatter }) {
         setVendors(data.businesses);
       }
     })();
-  }, [category, lng, lat, vendor]);
+  }, [category, lng, lat, searched]);
 
 
   const handleZipChange = (e) => {
@@ -193,7 +194,7 @@ function ListEdit({ user_id, lat, lng, formatter }) {
         </ul>
       );
     } else {
-      return <h1>No vendors</h1>;
+      return <Loading />;
     }
   };
 
@@ -220,7 +221,7 @@ function ListEdit({ user_id, lat, lng, formatter }) {
   const form = (e) => {
     return (
       <form onSubmit={handleCostSubmission} className="ven-cost">
-        <button type="submit">Update</button>
+        <button type="submit" className="pg-buttons">Update</button>
         <input
           id={category}
           placeholder="cost"
@@ -239,14 +240,14 @@ function ListEdit({ user_id, lat, lng, formatter }) {
       <h1>{CategorySwitch(category)}</h1>
       <form onSubmit={handleSubmit} id="zip-form">
         <input
-          className="three-d"
+          className="three-d pg-input"
           type="number"
           placeholder="Event zip code"
           onChange={handleZipChange}
           value={zip}
           id="zip-search"
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="pg-buttons">Search</button>
       </form>
       {vendor && !searched ? vendorShow() : vendorsShow()}
     </div>
