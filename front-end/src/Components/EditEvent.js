@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
-import "./EditEvent.css";
 
 const API = apiURL();
 
@@ -56,107 +55,107 @@ function EditEvent({ user_id }) {
   };
 
   return (
-    <div className="editForm">
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="event_name">Event</label>
+      <input
+        id="event_name"
+        type="text"
+        value={event.name}
+        placeholder="Name"
+        onChange={handleChange}
+      />
+      <label htmlFor="event_budget">Budget</label>
+      <input
+        id="event_budget"
+        type="number"
+        value={event.budget}
+        placeholder="$0.00"
+        onChange={handleChange}
+      />
+      <label htmlFor="event_time">Time</label>
+      <input
+        id="event_time"
+        type="text"
+        value={event.time}
+        placeholder="Time"
+        onChange={handleChange}
+      />
+      <label htmlFor="event_date">Date</label>
+      <input
+        id="event_date"
+        type="text"
+        value={event.date}
+        placeholder="Date"
+        onChange={handleChange}
+      />
+      <label>
+        DJs
         <input
-          id="event_name"
-          type="text"
-          value={event.name}
-          placeholder="Name"
-          onChange={handleChange}
+          value="dj"
+          type="checkbox"
+          checked={checklist["Djs"]}
+          onChange={toggleState}
         />
+      </label>
+      <label>
+        Musicians
         <input
-          id="event_budget"
-          type="number"
-          value={event.budget}
-          placeholder="$0.00"
-          onChange={handleChange}
+          value="musician"
+          type="checkbox"
+          checked={checklist["Musician"]}
+          onChange={toggleState}
         />
+      </label>
+      <label>
+        Photographer
         <input
-          id="event_time"
-          type="text"
-          value={event.time}
-          placeholder="Time"
-          onChange={handleChange}
+          value="photographer"
+          type="checkbox"
+          checked={checklist["photographer"]}
+          onChange={toggleState}
         />
+      </label>
+      <label>
+        Videographer
         <input
-          id="event_date"
-          type="text"
-          value={event.date}
-          placeholder="Date"
-          onChange={handleChange}
+          value="videographer"
+          type="checkbox"
+          checked={checklist["Videographer"]}
+          onChange={toggleState}
         />
-        <label>
-          DJs
-          <input
-            value="dj"
-            type="checkbox"
-            checked={checklist["Djs"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Musicians
-          <input
-            value="musician"
-            type="checkbox"
-            checked={checklist["Musician"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Photographer
-          <input
-            value="photographer"
-            type="checkbox"
-            checked={checklist["photographer"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Videographer
-          <input
-            value="videographer"
-            type="checkbox"
-            checked={checklist["Videographer"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Venue
-          <input
-            value="venue"
-            type="checkbox"
-            checked={checklist["Venue"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Balloons
-          <input
-            value="balloons"
-            type="checkbox"
-            checked={checklist["Balloons"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Floral
-          <input
-            value="floral"
-            type="checkbox"
-            checked={checklist["floral"]}
-            onChange={toggleState}
-          />
-        </label>
-        <div className="btns">
-          <button>Save Changes</button>
-          <Link to={`/dashboard/${user_id}`}>
-            <button>Cancel Edit</button>
-          </Link>
-        </div>
-      </form>
-    </div>
+      </label>
+      <label>
+        Venue
+        <input
+          value="venue"
+          type="checkbox"
+          checked={checklist["Venue"]}
+          onChange={toggleState}
+        />
+      </label>
+      <label>
+        Balloons
+        <input
+          value="balloons"
+          type="checkbox"
+          checked={checklist["Balloons"]}
+          onChange={toggleState}
+        />
+      </label>
+      <label>
+        Floral
+        <input
+          value="floral"
+          type="checkbox"
+          checked={checklist["floral"]}
+          onChange={toggleState}
+        />
+      </label>
+      <button>Save Changes</button>
+      <Link to={`/dashboard/${user_id}`}>
+        <button>Cancel Edit</button>
+      </Link>
+    </form>
   );
 }
 

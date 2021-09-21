@@ -1,4 +1,5 @@
 import React from "react";
+import "./Event.css";
 import { Link } from "react-router-dom";
 
 function Event({ event, user_id }) {
