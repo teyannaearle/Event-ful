@@ -1,40 +1,35 @@
 body {
   background-color: #b2d3e6;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  color: #68a7ca;
+  color: #68a7ca;;
 }
 
-input[type="text"],
-input[type="number"]{
+input,
+label {
   display: grid;
-  width: 100%;
-  height: 25px;
   color: #68a7ca;
+  width: 20%;
 }
 
-::placeholder {
-  color: #68a7ca;
+::placeholder{
+    color: #68a7ca;
 }
 
 .editForm {
-  display: grid;
+  display: block;
   background-color: white;
   padding: 20px;
-  width: 25%;
 }
 
-form {
-  display: grid;
+form{
+    display: grid;
 }
 
 .btns {
   display: flex;
-  justify-content: space-between;
-  padding-top: 20px;
+  justify-content: space-evenly;
 }
 
 button {
-  color: #64b5f6;
-  height: 50px;
-  width: 100px;
+    color: #64b5f6;
 }
