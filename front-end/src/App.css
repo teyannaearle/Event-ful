@@ -45,7 +45,7 @@ body{
 
 }
 
-body::before{
+/* body::before{
   content: '';
   position: absolute;
   top: 0px;
@@ -56,7 +56,7 @@ body::before{
   background-image: url(assets/sparkle.webp);
   z-index: -1;
 
-}
+} */
 
 button {
   border: 0;
