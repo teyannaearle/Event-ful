@@ -1,10 +1,11 @@
 import React from 'react'
-import loading from "../assets/loading.gif"
+// import loading from "../assets/loading.gif"
+import discoBall from "../assets/giphy.gif"
 
 function Loading() {
     return (
         <div className="loading">
-           <img src={loading} alt="loading" width="300px" />
+           <img src={discoBall} alt="loading" width="300px" />
         </div>
     )
 }

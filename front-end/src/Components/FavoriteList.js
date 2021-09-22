@@ -7,9 +7,9 @@ import { apiURL } from "../util/apiURL";
 
 const API = apiURL();
 
-export default function FavoriteList() {
+export default function FavoriteList({user_id}) {
   const [favoriteVendors, setFavoriteVendors] = useState([]);
-  const { user_id } = useParams();
+  // const { user_id } = useParams();
 
   useEffect(() => {
     axios
@@ -42,7 +42,7 @@ export default function FavoriteList() {
           <tbody>
             {favoriteVendors.length > 0 &&
               favoriteVendors.map((vendor) => {
-                return <Favorite vendor={vendor} />;
+                return <Favorite vendor={vendor} key={vendor.vendor_id} />;
               })}
           </tbody>
         </table>

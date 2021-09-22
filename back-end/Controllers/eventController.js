@@ -11,7 +11,7 @@ const {
 } = require("../queries/events");
 
 const db = require("../db/dbConfig");
-///fix catch for first in list/////
+///fix catch for first event in table/////
 events.get("/last", async (req,res) => {
   const event = await getLastEvent();
   try {

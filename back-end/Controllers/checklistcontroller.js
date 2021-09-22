@@ -35,24 +35,25 @@ checklist.get("/:user_id/:event_id", async (req, res) => {
 
 checklist.post("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
+  const listItem = await addToList(req.body.task_name, user_id, event_id);
+res.json(listItem)
+  // try {
+  //   const listItem = await addToList(req.body.task_name, user_id, event_id);
 
-  try {
-    const listItem = await addToList(req.body.task_name, user_id, event_id);
-
-    if (listItem[0].user_id) {
-      res.status(200).json({
-        success: true,
-        payload: listItem,
-      });
-    } else {
-      throw listItem;
-    }
-  } catch (e) {
-    res.status(404).json({
-      success: false,
-      message: e,
-    });
-  }
+  //   if (listItem[0].user_id) {
+  //     res.status(200).json({
+  //       success: true,
+  //       payload: listItem,
+  //     });
+  //   } else {
+  //     throw listItem;
+  //   }
+  // } catch (e) {
+  //   res.status(404).json({
+  //     success: false,
+  //     message: e,
+  //   });
+  // }
 });
 
 checklist.delete("/:user_id/:event_id", async (req, res) => {

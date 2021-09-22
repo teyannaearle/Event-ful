@@ -7,8 +7,6 @@ const api = apiURL();
 
 function Checklist({ categories, user_id, event_id, updateCost }) {
   const [bookedStatus, setBookedStatus] = useState({});
-  const [showForm, setShowForm] = useState({});
-  const [costInput, setCostInput] = useState({});
 
   useEffect(() => {
     const booked = {};
@@ -22,8 +20,10 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
     }
 
     setBookedStatus(booked);
-    setShowForm(show);
-    setCostInput(cost);
+
+    return () => {
+      setBookedStatus({});
+    };
   }, [categories]);
 
   const listItem = (category) => {
@@ -56,6 +56,15 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       case "floral":
         item = "Find a Floral Designer";
         break;
+      case "party_magician":
+        item = "Find a Magician";
+        break;
+      case "party_characters":
+        item = "Find a Character Actor";
+        break;
+      case "party_clown":
+        item = "Find a Clown";
+        break;
       default:
         item = "";
     }
@@ -71,57 +80,64 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       event_id: event_id,
     };
 
+    if (!bookedStatus[category] === false) {
+      axios
+        .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
+        .then((res) => "");
+
+      let checklistBody = {
+        task_cost: 0,
+        task_name: category,
+      };
+      updateCost(checklistBody, category);
+    }
+
     try {
       axios
         .put(`${api}/checklist/${user_id}/${event_id}`, body)
         .then((response) => {
-          setBookedStatus({ ...bookedStatus, [category]: !bookedStatus[category] });
+          setBookedStatus({
+            ...bookedStatus,
+            [category]: !bookedStatus[category],
+          });
         });
-    } catch {}
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
-  const handleFormChange = (category, e) => {
-    setCostInput({ ...costInput, [category]: e.target.value });
-  };
-
-  const handleSubmit = (category, e) => {
-    e.preventDefault();
-
-    const body = {
-      task_name: category,
-      task_cost: costInput[category],
-      user_id: user_id,
-      event_id: event_id,
-    };
-
-    setShowForm({ ...showForm, [category]: false });
-    updateCost(body, category);
-  };
-
-  const form = (category) => {
-    return (
-      <form onSubmit={(e) => handleSubmit(category, e)} id="cost-form">
-        <input
-          id={category}
-          placeholder="cost"
-          value={costInput[category]}
-          onChange={(e) => handleFormChange(category, e)}
-          type="number"
-          min="0"
-          step=".01"
-        />
-        <button type="submit">Update</button>
-      </form>
-    );
-  };
-
-
-  const editButton = (cost) => {
-    let button = "";
-    if (cost !== "0") {
-      button = "Edit Cost";
+  const bookedButton = (category, id) => {
+    if (bookedStatus[category.name] === false) {
+      return (
+        <Link to={`/task/${category.name}/${event_id}/${id}`}>
+          <button
+            className="book-button x"
+            onClick={() => updateBookedStatus(category.name)}
+          >
+            {" "}
+            Not Booked &#10007;
+          </button>
+        </Link>
+      );
     } else {
-      button = "Add Cost";
+      return (
+        <button
+          className="book-button check"
+          onClick={() => updateBookedStatus(category.name)}
+        >
+          {" "}
+          Booked &#10003;
+        </button>
+      );
+    }
+  };
+
+  const editButton = (category) => {
+    let button = "";
+    if (bookedStatus[category]) {
+      button = "Edit Vendor";
+    } else {
+      button = "Add Vendor";
     }
 
     return button;
@@ -130,28 +146,15 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
   return (
     <ul className="checklist checklist-ul">
       {categories.map((category, i) => {
+        let id = categories.filter((point) => point.name === category.name)[0]
+          .id;
         return (
           <li key={i} className="checklist check-listitem">
             <div className="book-buttons">
-              <button
-                className={bookedStatus[category.name] ? "book-button check" : "book-button x"}
-                onClick={() => updateBookedStatus(category.name)}
-              >
-                {" "}
-                {bookedStatus[category.name] ? <>&#10003;</> : <>&#10007;</>}
-              </button>
-  
-
-              <button
-                onClick={() =>
-                  setShowForm({
-                    ...showForm,
-                    [category.name]: !showForm[category.name],
-                  })
-                }
-              >
-                {editButton(category.cost)}
-              </button>
+              {bookedButton(category, id)}
+              <Link to={`/task/${category.name}/${event_id}/${id}`}>
+                <button>{editButton(category.name)}</button>
+              </Link>
             </div>
 
             <div>
@@ -160,12 +163,10 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
                   to={`/vendors/${category.name}`}
                   className="checklist-span"
                 >
-                  <span> {listItem(category.name)} </span>{" "}
-                  <span>&#187;</span>
+                  <span> {listItem(category.name)} </span> <span>&#187;</span>
                 </Link>
               </button>
             </div>
-            {showForm[category.name] ? form(category.name) : null}
           </li>
         );
       })}

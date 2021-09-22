@@ -1,17 +1,58 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { useHistory, useParams } from "react-router";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 
-function EditEvent() {
-  const [myEvent, setEvent] = useState({
-    name: "",
-    budget: 0,
-    zipcode: "",
-    date: "",
-    time: "",
-  })
+const API = apiURL();
 
-  const 
+function EditEvent({ user_id }) {
+  const { event_id } = useParams();
+
+  const [event, setEvent] = useState({
+    event_name: "",
+    event_budget: 0,
+    event_date: "",
+    event_time: "",
+  });
+
+  const [checklist, setChecklist] = useState({
+    djs: false,
+    musicians: false,
+    photographers: false,
+    party_rental: false,
+    videographers: false,
+    venues: false,
+    balloons: false,
+    floral: false,
+  });
+
+  let history = useHistory();
+
+  const updateEvent = (updatedEvent) => {
+    axios
+      .put(`${API}/events/${event_id}`, updatedEvent)
+      .then(
+        () => history.push(`/events/${event_id}`),
+        (c) => console.warn("catch", c)
+      )
+      .catch((c) => console.warn("catch", c));
+  };
+
+  const handleChange = (e) => {
+    setEvent({ ...event, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventdefault();
+    updateEvent(event, event_id);
+  };
+
+  const toggleState = (e) => {
+    const val = e.target.value;
+    setChecklist((prevState) => ({ ...prevState, [val]: !prevState[val] }));
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -19,7 +60,7 @@ function EditEvent() {
       <input
         id="event_name"
         type="text"
-        value={myEvent.name}
+        value={event.name}
         placeholder="Name"
         onChange={handleChange}
       />
@@ -27,7 +68,7 @@ function EditEvent() {
       <input
         id="event_budget"
         type="number"
-        value={myEvent.budget}
+        value={event.budget}
         placeholder="$0.00"
         onChange={handleChange}
       />
@@ -35,7 +76,7 @@ function EditEvent() {
       <input
         id="event_time"
         type="text"
-        value={myEvent.time}
+        value={event.time}
         placeholder="Time"
         onChange={handleChange}
       />
@@ -43,7 +84,7 @@ function EditEvent() {
       <input
         id="event_date"
         type="text"
-        value={myEvent.date}
+        value={event.date}
         placeholder="Date"
         onChange={handleChange}
       />
@@ -52,7 +93,7 @@ function EditEvent() {
         <input
           value="dj"
           type="checkbox"
-          checked={state["Djs"]}
+          checked={checklist["Djs"]}
           onChange={toggleState}
         />
       </label>
@@ -61,7 +102,7 @@ function EditEvent() {
         <input
           value="musician"
           type="checkbox"
-          checked={state["Musician"]}
+          checked={checklist["Musician"]}
           onChange={toggleState}
         />
       </label>
@@ -70,7 +111,7 @@ function EditEvent() {
         <input
           value="photographer"
           type="checkbox"
-          checked={state["photographer"]}
+          checked={checklist["photographer"]}
           onChange={toggleState}
         />
       </label>
@@ -79,7 +120,7 @@ function EditEvent() {
         <input
           value="videographer"
           type="checkbox"
-          checked={state["Videographer"]}
+          checked={checklist["Videographer"]}
           onChange={toggleState}
         />
       </label>
@@ -88,7 +129,7 @@ function EditEvent() {
         <input
           value="venue"
           type="checkbox"
-          checked={state["Venue"]}
+          checked={checklist["Venue"]}
           onChange={toggleState}
         />
       </label>
@@ -97,7 +138,7 @@ function EditEvent() {
         <input
           value="balloons"
           type="checkbox"
-          checked={state["Balloons"]}
+          checked={checklist["Balloons"]}
           onChange={toggleState}
         />
       </label>
@@ -106,12 +147,12 @@ function EditEvent() {
         <input
           value="floral"
           type="checkbox"
-          checked={state["floral"]}
+          checked={checklist["floral"]}
           onChange={toggleState}
         />
       </label>
       <button>Save Changes</button>
-      <Link to={`/events/${user_id}`}>
+      <Link to={`/dashboard/${user_id}`}>
         <button>Cancel Edit</button>
       </Link>
     </form>

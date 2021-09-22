@@ -9,6 +9,8 @@ const {
   createBookedVendor,
   deleteBookedVendor,
   updateBookedVendor,
+  getOneCategory,
+  updateCost
 } = require("../queries/booked");
 
 const db = require("../db/dbConfig");
@@ -33,6 +35,8 @@ booked.get("/:user_id/:event_id", async (req, res) => {
     });
   }
 });
+
+
 
 // SHOW
 booked.get("/:user_id/:event_id/:vendor_name", async (req, res) => {
@@ -59,14 +63,40 @@ booked.get("/:user_id/:event_id/:vendor_name", async (req, res) => {
   }
 });
 
+
+booked.get("/category/:category/:user_id/:event_id", async (req, res) => {
+  const { user_id, event_id, category } = req.params;
+  try {
+    const bookedVendor = await getOneCategory(
+      user_id,
+      event_id,
+      category
+    );
+    if (bookedVendor.user_id) {
+      res.status(200).json({
+        success: true,
+        payload: bookedVendor,
+      });
+    } else {
+      throw `No booked vendor found with name ${vendor_name}`;
+    }
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      message: e,
+    });
+  }
+});
+
 // CREATE
 booked.post("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
+
   try {
     const newBookedVendor = await createBookedVendor(
       req.body,
       user_id,
-      event_id
+      event_id,
     );
     if (newBookedVendor.user_id) {
       res.status(200).json({
@@ -85,19 +115,19 @@ booked.post("/:user_id/:event_id", async (req, res) => {
 });
 
 // DELETE
-booked.delete("/:user_id/:event_id/:vendor_name", async (req, res) => {
-  const { user_id, event_id, vendor_name } = req.params;
+booked.delete("/:user_id/:event_id/:category", async (req, res) => {
+  const { user_id, event_id, category} = req.params;
   // const vendorName = req.body.vendor_name;
   try {
     const deletedBookedVendor = await deleteBookedVendor(
       user_id,
       event_id,
-      vendor_name
+      category
     );
     if (deletedBookedVendor.user_id) {
       res.status(200).json({ success: true, payload: deletedBookedVendor });
     } else {
-      throw `No booked vendor was deleted with ${vendor_name}`;
+      throw `No booked vendor was deleted with category name ${category}`;
     }
   } catch (e) {
     res.status(404).json({
@@ -134,5 +164,35 @@ booked.put("/:user_id/:event_id", async (req, res) => {
     });
   }
 });
+
+
+booked.put("/cost/:user_id/:event_id", async (req, res) => {
+  const { user_id, event_id } = req.params;
+  const vendor = req.body;
+
+  try {
+    const updatedBookedVendor = await updateCost(
+      vendor,
+      user_id,
+      event_id
+    );
+    if (updatedBookedVendor.user_id) {
+      res.status(200).json({
+        success: true,
+        payload: updatedBookedVendor,
+      });
+    } else {
+      console.log(updatedBookedVendor);
+      throw `No vendor was updated with ${vendor.vendor_name}`;
+    }
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      message: e,
+    });
+  }
+});
+
+
 
 module.exports = booked;

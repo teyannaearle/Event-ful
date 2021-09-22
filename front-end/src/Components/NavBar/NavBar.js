@@ -3,8 +3,8 @@ import { VendorMenu } from "./VendorMenu";
 import { Link, useParams } from "react-router-dom";
 import "./NavBar.css";
 
-export default function NavBar() {
-  const { user_id } = useParams();
+export default function NavBar({ user_id }) {
+  // const { user_id } = useParams();
   const [vendorClicked, setVendorClicked] = useState(false);
 
   const handleVendorClick = () => {
@@ -18,17 +18,17 @@ export default function NavBar() {
   const accountMenu = [
     {
       title: "Dashboard",
-      url: `/dashboard/${user_id}`,
+      url: `/dashboard`,
       cName: "nav-links",
     },
     {
       title: "My Favorites",
-      url: `/favorites/${user_id}`,
+      url: `/favorites`,
       cName: "nav-links",
     },
     {
       title: "Settings",
-      url: `/settings/${user_id}`,
+      url: `/settings`,
       cName: "nav-links",
     },
     {
@@ -40,26 +40,33 @@ export default function NavBar() {
 
   return (
     <nav className="NavBarItems">
-      <h1 className="navbar-logo">
-        Event(ful)
-        {/* <i className="fab fa-react"></i> */}
-      </h1>
+
+        <h1 className="navbar-logo">
+          Event(ful)
+          {/* <i className="fab fa-react"></i> */}
+        </h1>
+
 
       {/* <FontAwesomeIcon icon="fa-solid fa-face-party" /> */}
 
       <ul className="accountNav">
+        <li className="accountLinks" onClick={handleVendorClick}>
+          <span className="pg-buttons nav-but">
+            Vendors {vendorClicked ? <> &#x2191; </> : <>&#x2193;</>}
+          </span>
+        </li>
         {accountMenu.map((item, index) => {
           return (
-            <li className="accountLinks" key={index}>
-              <Link to={item.url}>{item.title}</Link>
+            <li className="accountLinks" key={index} onClick={closeNav}>
+              <Link to={item.url} className="pg-buttons nav-but">
+                {item.title}
+              </Link>
             </li>
           );
         })}
       </ul>
 
-      <div className="menu-icon" onClick={handleVendorClick}>
-        <i className={vendorClicked ? "fas fa-times" : "fas fa-bars"}></i>
-      </div>
+      {/* <i className={vendorClicked ? "fas fa-times" : "fas fa-bars"}></i> */}
 
       <ul className={vendorClicked ? "nav-menu active" : "nav-menu"}>
         {VendorMenu.map((item, index) => {
