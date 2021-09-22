@@ -21,6 +21,7 @@ import EditFormPage from "./Pages/EditFormPage.js";
 
 const API = apiURL();
 const user_id = 1;
+const name = "Jasleen"
 
 function App() {
   const location = useGeoLocation();
@@ -81,7 +82,7 @@ function App() {
         </Route>
 
         <Route path="/dashboard">
-          <Dashboard user_id={user_id} />
+          <Dashboard user_id={user_id} name={name}/>
         </Route>
 
         <Route path="/task/:category/:event_id/:task_id">

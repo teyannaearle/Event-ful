@@ -53,7 +53,7 @@ export default function NavBar({user_id}) {
         {accountMenu.map((item, index) => {
           return (
             <li className="accountLinks" key={index} onClick={closeNav}>
-              <Link to={item.url}>{item.title}</Link>
+              <Link to={item.url} className="pg-buttons nav-but">{item.title}</Link>
             </li>
           );
         })}

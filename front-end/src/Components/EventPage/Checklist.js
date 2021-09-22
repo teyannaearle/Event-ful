@@ -106,7 +106,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
             onClick={() => updateBookedStatus(category.name)}
           >
             {" "}
-            &#10007;
+           Not Booked &#10007;
           </button>
         </Link>
       );
@@ -117,7 +117,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           onClick={() => updateBookedStatus(category.name)}
         >
           {" "}
-          &#10003;
+         Booked &#10003;
         </button>
       );
     }
