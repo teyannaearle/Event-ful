@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
@@ -182,7 +182,7 @@ function EventForm() {
             onChange={toggleState}
           />
         </label>
-        <button type="submit">Submit</button>
+        <Link to= "/checklist"><button>Create Event</button>
       </form>
     </section>
   );

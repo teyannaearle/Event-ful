@@ -2,6 +2,7 @@ import React from 'react'
 
 export default function EventCheckbox() {
 
+//pass props from eventForm to represent the name,date, budget, etc.
 const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
     console.log(categories);
@@ -27,7 +28,6 @@ const addToCheckedList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addEvent();
     addToCheckedList();
   };
     
