@@ -181,10 +181,6 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     setShowForm(false);
   };
 
-  const goBack = () => {
-    history.goBack()
-  }
-
   const vendorsShow = () => {
     if (vendors[0]) {
       return (
@@ -242,7 +238,7 @@ function ListEdit({ user_id, lat, lng, formatter }) {
 
   return (
     <>
-    <button className="pg-buttons back-button" onClick={goBack}> &#x21e6; Back to Event</button>
+    <button className="pg-buttons back-button" onClick={() =>  history.goBack()}> &#x21e6; Back to Event</button>
     <div className="page indexpg-container">
      
       <h1>{CategorySwitch(category)}</h1>

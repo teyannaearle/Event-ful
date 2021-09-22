@@ -102,7 +102,7 @@ nav {
     #6daccf,
     #68a7ca
   );
-  color: black;
+  /* color: black; */
   border-radius: 0;
   border: 1px solid white;
 }
@@ -130,9 +130,9 @@ nav {
   font-size: 2rem;
 }
 
-.fa-times:hover{
+/* .fa-times:hover{
   color: black;
-}
+} */
 
 .nav-links-mobile {
   display: block;
@@ -181,7 +181,7 @@ nav {
     #9ec2d7,
     #a5c5d8
   ); */
-  color: black;
+  /* color: black; */
   border-radius: 4px;
   transform: scale(1.1);
 }
