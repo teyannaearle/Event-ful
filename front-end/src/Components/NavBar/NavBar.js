@@ -50,6 +50,9 @@ export default function NavBar({user_id}) {
       {/* <FontAwesomeIcon icon="fa-solid fa-face-party" /> */}
 
       <ul className="accountNav">
+        <li className="accountLinks"  onClick={handleVendorClick}>  
+        <span className="pg-buttons nav-but"> Vendors &#x2193;</span>
+          </li>
         {accountMenu.map((item, index) => {
           return (
             <li className="accountLinks" key={index} onClick={closeNav}>
@@ -59,9 +62,11 @@ export default function NavBar({user_id}) {
         })}
       </ul>
 
-      <div className="menu-icon" onClick={handleVendorClick}>
-        <i className={vendorClicked ? "fas fa-times" : "fas fa-bars"}></i>
-      </div>
+    
+        {/* <i className={vendorClicked ? "fas fa-times" : "fas fa-bars"}></i> */}
+       
+
+
 
       <ul className={vendorClicked ? "nav-menu active" : "nav-menu"}>
         {VendorMenu.map((item, index) => {
