@@ -1,6 +1,36 @@
 import React from 'react'
 
 export default function EventCheckbox() {
+
+const addToCheckedList = () => {
+    const categories = Object.keys(eventForm);
+    console.log(categories);
+    const id = lastEvent.event_id + 1;
+    for (const checked of categories) {
+      if (eventForm[checked] === true) {
+        const category = {
+          task_name: checked,
+        };
+        console.log(category);
+        axios
+          .post(`${API}/checklist/${user_id}/${id}`, category)
+          .then((res) => console.log(res))
+          .catch((c) => console.warn("catch", c));
+      }
+    }
+  };
+
+  const toggleState = (e) => {
+    const val = e.target.value;
+    setEventForm((prevState) => ({ ...prevState, [val]: !prevState[val] }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addEvent();
+    addToCheckedList();
+  };
+    
     return (
         <section className="NewEvent">
       <form onSubmit={handleSubmit}>
