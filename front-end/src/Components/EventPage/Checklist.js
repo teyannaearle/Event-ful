@@ -56,6 +56,15 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
       case "floral":
         item = "Find a Floral Designer";
         break;
+      case "party_magician":
+        item = "Find a Magician";
+        break;
+      case "party_characters":
+        item = "Find a Character Actor";
+        break;
+      case "party_clown":
+        item = "Find a Clown";
+        break;
       default:
         item = "";
     }
@@ -106,7 +115,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
             onClick={() => updateBookedStatus(category.name)}
           >
             {" "}
-           Not Booked &#10007;
+            Not Booked &#10007;
           </button>
         </Link>
       );
@@ -117,7 +126,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           onClick={() => updateBookedStatus(category.name)}
         >
           {" "}
-         Booked &#10003;
+          Booked &#10003;
         </button>
       );
     }

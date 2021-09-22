@@ -72,7 +72,6 @@ const updateEvent = async (body, user_id, event_id) => {
       "UPDATE events SET event_name=$1 , event_zip=$2 , event_budget=$3 , event_date=$4 , event_time=$5 WHERE user_id=$6 AND event_id=$7 RETURNING *",
       [
         body.event_name,
-        body.event_zip,
         body.event_budget,
         body.event_date,
         body.event_time,
