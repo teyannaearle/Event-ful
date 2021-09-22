@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Event from "./Event";
 import { useParams, Link } from "react-router-dom";
-import { apiURL } from "../util/apiURL";
+import { apiURL } from "../../util/apiURL";
 
 const API = apiURL();
 
