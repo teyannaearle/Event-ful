@@ -26,25 +26,24 @@ nav {
   color: #fff;
   justify-self: start;
   margin-left: 20px;
-  cursor: pointer;
 }
 
-.fa-react {
+/* .fa-react {
   margin-left: 0.5rem;
   font-size: 1.6rem;
-}
+} */
 
 .nav-links {
   color: white;
   padding: 0.5rem 1rem;
 }
 
-.fa-bars {
+/* .fa-bars {
   color: #fff;
-}
-.fa-bars:hover{
+} */
+/* .fa-bars:hover{
   color: black;
-}
+} */
 .NavBarItems {
   position: relative;
 }
@@ -115,9 +114,6 @@ nav {
   transform: transalte(25%, 50%);
 }
 
-.navbar-logo:hover{
-  color: black;
-}
 
 .menu-icon {
   display: block;

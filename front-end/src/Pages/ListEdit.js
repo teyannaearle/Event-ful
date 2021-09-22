@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import CategorySwitch from "../Components/CategorySwitch";
 import Vendor from "../Components/VendorIndex/Vendor";
 import api from "../util/apiCalls";
@@ -20,6 +20,7 @@ function ListEdit({ user_id, lat, lng, formatter }) {
   const [bookedStatus, setBookedStatus] = useState({});
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false)
+  const history = useHistory()
   
 
   useEffect(() => {
@@ -180,6 +181,10 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     setShowForm(false);
   };
 
+  const goBack = () => {
+    history.goBack()
+  }
+
   const vendorsShow = () => {
     if (vendors[0]) {
       return (
@@ -236,7 +241,10 @@ function ListEdit({ user_id, lat, lng, formatter }) {
   };
 
   return (
+    <>
+    <button className="pg-buttons back-button" onClick={goBack}> &#x21e6; Back to Event</button>
     <div className="page indexpg-container">
+     
       <h1>{CategorySwitch(category)}</h1>
       <form onSubmit={handleSubmit} id="zip-form">
         <input
@@ -249,8 +257,10 @@ function ListEdit({ user_id, lat, lng, formatter }) {
         />
         <button type="submit" className="pg-buttons">Search</button>
       </form>
+
       {vendor && !searched ? vendorShow() : vendorsShow()}
     </div>
+    </>
   );
 }
 

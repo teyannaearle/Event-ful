@@ -28,6 +28,15 @@ const CategorySwitch = (category) => {
     case "floral":
       item = "Floral Designers";
       break;
+    case "party_magician":
+      item = "Magicians";
+      break;
+    case "party_characters":
+      item = "Character Actors";
+      break;
+    case "party_clown":
+      item = "Clowns";
+      break;
     default:
       item = "";
   }
@@ -35,4 +44,4 @@ const CategorySwitch = (category) => {
   return item;
 };
 
-export default CategorySwitch
+export default CategorySwitch;

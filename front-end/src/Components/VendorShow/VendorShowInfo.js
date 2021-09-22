@@ -5,12 +5,16 @@ import Ratings from "react-ratings-declarative";
 import { Carousel } from "react-responsive-carousel";
 import { apiURL } from "../../util/apiURL";
 
+
+
 const parseNum = str => +str.replace(/[^.\d]/g, '')
 
 const API = apiURL()
 
 function VendorShowInfo({ business, user_id }) {
   const [favorite, setFavorite] = useState(false);
+
+
 
 
   useEffect(()=>{
@@ -30,6 +34,7 @@ function VendorShowInfo({ business, user_id }) {
     }
   }, [business.name, user_id])
   
+
   
     const handleFav = () => {
       setFavorite(!favorite)
