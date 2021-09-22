@@ -54,13 +54,11 @@ export default function VendorShow({user_id}) {
     }
   }, [provider_id]);
 
-  const goBack = () => {
-    history.goBack()
-  }
+
 
   return (
     <>
-            <button className="pg-buttons back-button" onClick={goBack}> &#x21e6; Back to {CategorySwitch(category)}</button>
+            <button className="pg-buttons back-button" onClick={()=>     history.goBack()}> &#x21e6; Back to {CategorySwitch(category)}</button>
 
     <div id="vendor-showpage" className="page">
       {business.photos[0] ? (
