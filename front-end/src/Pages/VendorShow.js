@@ -6,13 +6,9 @@ import VendorShowInfo from "../Components/VendorShow/VendorShowInfo";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
 
-
-
-
-export default function VendorShow({user_id}) {
-  const history = useHistory()
-   const { provider_id, category } = useParams();
-  
+export default function VendorShow({ user_id }) {
+  const history = useHistory();
+  const { provider_id, category } = useParams();
 
   const [business, setbusiness] = useState({
     photos: [],
@@ -26,8 +22,6 @@ export default function VendorShow({user_id}) {
     },
   ]);
 
- 
-
   useEffect(() => {
     (async () => {
       const data = await api.getVendor(provider_id);
@@ -38,7 +32,7 @@ export default function VendorShow({user_id}) {
       } else {
         // ---------- ERROR PAGE  ---------------
       }
-    })(); 
+    })();
 
     return () => {
       setReviews([
@@ -51,25 +45,29 @@ export default function VendorShow({user_id}) {
         categories: [{ title: "" }],
         location: { display_address: [] },
       });
-    }
+    };
   }, [provider_id]);
-
-
 
   return (
     <>
-            <button className="pg-buttons back-button" onClick={()=>     history.goBack()}> &#x21e6; Back to {CategorySwitch(category)}</button>
+      <button
+        className="pg-buttons back-button"
+        onClick={() => history.goBack()}
+      >
+        {" "}
+        &#x21e6; Back to {CategorySwitch(category)}
+      </button>
 
-    <div id="vendor-showpage" className="page">
-      {business.photos[0] ? (
-        <>
-          <VendorShowInfo business={business} user_id={user_id}/>
-          <VendorReviews reviews={reviews} />{" "}
-        </>
-      ) : (
-        <Loading />
-      )}
-    </div>
+      <div id="vendor-showpage" className="page">
+        {business.photos[0] ? (
+          <>
+            <VendorShowInfo business={business} user_id={user_id} />
+            <VendorReviews reviews={reviews} />{" "}
+          </>
+        ) : (
+          <Loading />
+        )}
+      </div>
     </>
   );
 }

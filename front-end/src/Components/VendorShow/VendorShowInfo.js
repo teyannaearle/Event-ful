@@ -45,17 +45,17 @@ function VendorShowInfo({ business, user_id }) {
             .then((res) => "");
         } catch (e) {
           console.warn(e)
-        }
+        } 
       } else {
         const loc = business.location.display_address.join();
         const body = {
           vendor_name: business.name,
           vendor_address: loc,
           vendor_phone_number: parseNum(business.phone),
-          vendor_id: business.id
+          vendor_id: business.id,
+          vendor_image: business.image_url
         };
-  
-        try {
+        try { 
           axios
             .post(`${API}/favorites/${user_id}`, body)
             .then((res) => "");
@@ -67,7 +67,8 @@ function VendorShowInfo({ business, user_id }) {
 
   return (
     <>
-      <h1 className="pg-head">{business.name} </h1>
+      <h1>{business.name} </h1>
+      <div className="ven-info page three-d">
 
       <div className="car-wrap">
         <Carousel showThumbs={false} autoPlay={true}>
@@ -76,6 +77,8 @@ function VendorShowInfo({ business, user_id }) {
           ))}
         </Carousel>
       </div>
+
+
 
       <div id="ven-info">
         <div className="flex-row">
@@ -99,23 +102,24 @@ function VendorShowInfo({ business, user_id }) {
           </Ratings>
         </div>
 
+<h2> Contact Information </h2>
         <p>{business.price}</p>
+        <p>{business.display_phone}</p>
 
-        {business.location.display_address.map((point, i) => (
+       {business.location.display_address.map((point, i) => (
           <p key={i}>{point}</p>
         ))}
 
-        <p>{business.display_phone}</p>
+   
 
         <div className="book-fav">
-          {/* <button onClick={handleBook}>
-            {!booked ? <> Booked &#63;</> : <> Booked &#10003;</>}{" "}
-          </button> */}
-          <button onClick={handleFav}>
+
+          <button onClick={handleFav} className="pg-buttons">
             {!favorite ? <> Favorite &#63;</> : <> Favorite &#10003;</>}{" "}
           </button>
         </div>
       </div>
+</div>
     </>
   );
 }

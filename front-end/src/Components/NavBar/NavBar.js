@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { VendorMenu } from "./VendorMenu";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./NavBar.css";
 
-export default function NavBar({ user_id }) {
-  // const { user_id } = useParams();
+export default function NavBar() {
   const [vendorClicked, setVendorClicked] = useState(false);
 
   const handleVendorClick = () => {
@@ -43,11 +42,7 @@ export default function NavBar({ user_id }) {
 
         <h1 className="navbar-logo">
           Event(ful)
-          {/* <i className="fab fa-react"></i> */}
         </h1>
-
-
-      {/* <FontAwesomeIcon icon="fa-solid fa-face-party" /> */}
 
       <ul className="accountNav">
         <li className="accountLinks" onClick={handleVendorClick}>
@@ -65,8 +60,6 @@ export default function NavBar({ user_id }) {
           );
         })}
       </ul>
-
-      {/* <i className={vendorClicked ? "fas fa-times" : "fas fa-bars"}></i> */}
 
       <ul className={vendorClicked ? "nav-menu active" : "nav-menu"}>
         {VendorMenu.map((item, index) => {
