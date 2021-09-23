@@ -116,8 +116,9 @@ button:hover {
 
 .pg-input {
   border-radius: 8px;
-
  padding: 5px;
+ padding-left: 20px;
+ padding-right: 20px;
   border:0;
 }
 
@@ -466,20 +467,24 @@ justify-content: space-evenly;}
 
 .review {
   display: grid;
-
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 15% 85%;
   align-items: center;
   justify-items: center;
+  height: 180px;
+  font-size: medium;
+
 }
 
 .reviewers {
   margin-top: 5px;
   margin-bottom: 5px;
+  font-weight: 700;
 }
 
 .reviewers p,
 .reviewers img {
   margin: 0;
+  text-align: center;
 }
 
 /* .book-fav{
@@ -497,10 +502,7 @@ justify-content: space-evenly;
   width: 200px;
 }
 
-.ven-info{
-  width: 70%;
-  padding-top: 20px;
-}
+
 
 /* VENDOR INDEX PAGE */
 .indexpg-container {
@@ -540,15 +542,34 @@ justify-content: space-evenly;
 .ven-li {
   padding: 20px;
   background-color: white;
+  height: 90%;
 
+/* white-space: nowrap; */
 }
-/* ListEdit*/
+
+.ven-li h2{
+  /* white-space:nowrap; */
+  /* overflow:hidden;
+  text-overflow:ellipsis; */
+  /* white-space: normal; */
+}
+
+
+.ven-img{
+  padding-bottom: 10px;
+}
+/* EditBooked*/
+
+.ven-info{
+  width: 50%;
+  padding-top: 20px;
+}
 
 .ven-info{
   /* width: 100%;
   height: 50%;
   justify-content:space-evenly; */
-  margin-top: 50px;
+  /* margin-top: 50px; */
   text-align: center;
 }
 

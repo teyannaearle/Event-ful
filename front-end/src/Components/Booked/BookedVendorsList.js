@@ -32,7 +32,7 @@ export default function BookedVendorList({user_id}) {
     <div>
       Booked Vendor List
       <section>
-        <table>
+        <table className="three-d">
           <thead>
             <tr>
               <th>Vendor Name</th>

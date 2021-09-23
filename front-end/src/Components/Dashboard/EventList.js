@@ -38,7 +38,7 @@ function EventList({ user_id }) {
         })}
         <Link to={`/dashboard/new_event`} className="dash-event new-event" >
 
-        <h2 id="new-event">Create a new Event and start planning! </h2>
+        <h2 id="new-event">Create a new event and start planning! </h2>
          <p className="plus-sign"> 	&#x002B;</p>
 
         </Link>
