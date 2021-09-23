@@ -21,7 +21,7 @@ import EditFormPage from "./Pages/EditFormPage.js";
 
 const API = apiURL();
 const user_id = 1;
-const name = "Jasleen"
+const name = "jasleen"
 
 function App() {
   const location = useGeoLocation();
@@ -61,7 +61,7 @@ function App() {
   }, [location]);
 
   return (
-    <div className="site test">
+    <div className="site">
       <ScrollToTop />
       <NavBar user_id={user_id} />
       <Switch>
@@ -82,7 +82,7 @@ function App() {
         </Route>
 
         <Route path="/dashboard">
-          <Dashboard user_id={user_id} name={name}/>
+          <Dashboard user_id={user_id} name={name[0].toUpperCase() + name.slice(1)}/>
         </Route>
 
         <Route path="/task/:category/:event_id/:task_id">

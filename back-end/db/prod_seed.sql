@@ -49,11 +49,11 @@ INSERT INTO tasklist (task_name , is_completed , user_id, event_id ) VALUES
 
 
 
-INSERT INTO booked ( user_id, event_id, task_id, vendor_name , vendor_address , vendor_phone_number, amount ) VALUES
-(1, 1, 1, 'Dave & Busters' , '234 west 42nd street', '6464952015', 400),
-(1, 1, 1, 'Tokyo Sushi', '123 Main Street', '7185551234', 500),
-(2, 1, 1, 'Lotos Thai', '555 East 27 street', '3475551234', 600),
-(2, 1, 1, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567', 700);
+INSERT INTO booked ( user_id, event_id, task_id, vendor_name , vendor_address , vendor_phone_number, amount, category ) VALUES
+(1, 1, 1, 'Dave & Busters' , '234 west 42nd street', '6464952015', 400, 'catering'),
+(1, 1, 1, 'Tokyo Sushi', '123 Main Street', '7185551234', 500, 'djs'),
+(2, 1, 1, 'Lotos Thai', '555 East 27 street', '3475551234', 600, 'venues'),
+(2, 1, 1, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567', 700, 'floral');
 
 
 INSERT INTO favorites ( user_id , vendor_name , vendor_address ,  vendor_phone_number,  vendor_id  ) VALUES

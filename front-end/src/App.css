@@ -436,7 +436,7 @@ justify-content: space-evenly;}
 
 
 .car-wrap {
-  width: 50%;
+  width: 80%;
 }
 
 .carousel .slider-wrapper {
@@ -450,6 +450,8 @@ justify-content: space-evenly;}
 #ven-info {
   width: 70%;
   margin-top: 20px;
+  /* font-weight: 700; */
+  font-size: larger;
 }
 
 #ven-info p,
@@ -480,18 +482,24 @@ justify-content: space-evenly;}
   margin: 0;
 }
 
-.book-fav{
+/* .book-fav{
 display: flex;
 flex-direction: column;
 margin-top: 5px;
 margin-bottom: 5px;
 height: 50px;
 justify-content: space-evenly;
-}
+} */
 
 .book-fav button{
   margin-top: 10px;
+  margin-bottom: 20px;
   width: 200px;
+}
+
+.ven-info{
+  width: 70%;
+  padding-top: 20px;
 }
 
 /* VENDOR INDEX PAGE */
@@ -534,7 +542,6 @@ justify-content: space-evenly;
   background-color: white;
 
 }
-
 /* ListEdit*/
 
 .ven-info{
@@ -547,6 +554,7 @@ justify-content: space-evenly;
 
 .ven-cost{
   height: 100px;
+  width: 100%;
   font-size: larger;
   display: flex;
   flex-direction: column;
@@ -555,12 +563,17 @@ justify-content: space-evenly;
 }
 
 .ven-cost button {
-  width: 50%
+  /* width: 30%; */
+  width: max-content;
+  height: 25px
 }
 
 .ven-cost input {
   font-size: medium;
+  height: 20px;
 }
+
+
 
 /* DASHBOARD */
 

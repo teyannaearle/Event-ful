@@ -30,12 +30,14 @@ const getOneFavorite = async (user_id, vendor_name) => {
 const createFavorite = async (vendor, user_id) => {
   try {
     const newFavorite = await db.one(
-      "INSERT INTO favorites (user_id, vendor_name, vendor_address, vendor_phone_number) VALUES ($1, $2, $3, $4) RETURNING *",
+      "INSERT INTO favorites (user_id, vendor_name, vendor_address, vendor_phone_number, vendor_id, vendor_image) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       [
         user_id,
         vendor.vendor_name,
         vendor.vendor_address,
         vendor.vendor_phone_number,
+        vendor.vendor_id,
+        vendor.vendor_image
       ]
     );
     return newFavorite;

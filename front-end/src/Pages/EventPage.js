@@ -4,6 +4,7 @@ import Checklist from "../Components/EventPage/Checklist";
 import Budget from "../Components/EventPage/Budget";
 import Timer from "../Components/EventPage/Timer";
 import { apiURL } from "../util/apiURL";
+import CapitalizeEvent from "../Components/CapitalizeEvent";
 import axios from "axios";
 
 const api = apiURL();
@@ -15,6 +16,7 @@ export default function Event({formatter, user_id}) {
   const [budget, setBudget] = useState(0);
   const [shownCost, setShownCost] = useState({});
 const history = useHistory()
+
 
   useEffect(() => {
     try {
@@ -79,7 +81,7 @@ const history = useHistory()
         <button className="pg-buttons back-button" onClick={ ()=>history.push("/dashboard")}> &#x21e6; Back to Dashboard</button>
 
     <div className="event-page page">
-      <h1 className="pg-head">{eventName}</h1>
+      <h1 className="pg-head">{eventName ? CapitalizeEvent(eventName) : null}</h1>
       <div className="eventpage-container three-d">
         <div id="checklist-container" className="evenpg-containers">
           <h2 className="col-h">Booked?</h2>
