@@ -9,8 +9,8 @@ function Vendor({ vendor, category }) {
         <img
           src={vendor.image_url}
           alt={vendor.name}
-          height="200"
-          width="200"
+          height="250"
+          width="300"
         />
        
         <h3>{vendor.name}</h3>

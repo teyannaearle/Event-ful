@@ -2,14 +2,13 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Event from "./Event";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
 
 const API = apiURL();
 
-function EventList({user_id}) {
+function EventList({ user_id }) {
   const [events, setEvents] = useState([]);
-  // const { user_id } = useParams();
 
   useEffect(() => {
     axios
@@ -26,7 +25,7 @@ function EventList({user_id}) {
         console.error(e);
       });
   }, [user_id]);
- 
+
   return (
     <>
       <ul className="dash-events">
@@ -37,12 +36,13 @@ function EventList({user_id}) {
             </li>
           );
         })}
-             <Link to={`/dashboard/new_event`} className="plus-sign">
-        {/* <button>New Event Form</button> */}
-       &#x2B;
-   </Link>
+        <Link to={`/dashboard/new_event`} className="dash-event new-event" >
+
+        <h2 id="new-event">Create a new Event and start planning! </h2>
+         <p className="plus-sign"> 	&#x002B;</p>
+
+        </Link>
       </ul>
- 
     </>
   );
 }

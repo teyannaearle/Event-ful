@@ -5,11 +5,11 @@ import Vendor from "../Components/VendorIndex/Vendor";
 import api from "../util/apiCalls";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
-import Loading from "../Components/Loading"
+import Loading from "../Components/Loading";
 
 const API = apiURL();
 
-const parseNum = (str) => +str.replace(/[^.\d]/g, "");    
+const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 
 function ListEdit({ user_id, lat, lng, formatter }) {
   const { event_id, category } = useParams();
@@ -19,9 +19,8 @@ function ListEdit({ user_id, lat, lng, formatter }) {
   const [showForm, setShowForm] = useState(false);
   const [bookedStatus, setBookedStatus] = useState({});
   const [zip, setZip] = useState("");
-  const [searched, setSearched] = useState(false)
-  const history = useHistory()
-  
+  const [searched, setSearched] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     let vendorCategories = [];
@@ -80,7 +79,6 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     };
   }, [category, event_id, user_id, bookedStatus]);
 
-
   useEffect(() => {
     (async () => {
       if (!searched && lat && lng) {
@@ -89,7 +87,6 @@ function ListEdit({ user_id, lat, lng, formatter }) {
       }
     })();
   }, [category, lng, lat, searched]);
-
 
   const handleZipChange = (e) => {
     setZip(e.target.value);
@@ -102,10 +99,9 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     } else {
       const data = await api.getVendorsZip(category, zip);
       setVendors(data);
-      setSearched(true)
+      setSearched(true);
     }
   };
-
 
   const handleSelection = (selected) => {
     const loc = selected.location.display_address.join();
@@ -115,38 +111,51 @@ function ListEdit({ user_id, lat, lng, formatter }) {
       vendor_phone_number: parseNum(selected.phone),
       category: category,
       rating: selected.rating,
-      vendor_image: selected.image_url
+      vendor_image: selected.image_url,
     };
-
-    if (!vendor){
-
-    try {
-      axios
-        .post(`${API}/booked/${user_id}/${event_id}`, bookedbody)
-        .then((res) => {
-          setVendor(selected);
-          setVendors([]);
-          setSearched(false)
-        });
-    } catch (e) {
-      console.error(e);
-    }
 
     let checklistBody = {
       is_completed: true,
       task_name: category,
-      user_id: user_id,
-      event_id: event_id,
+      // user_id: user_id,
+      // event_id: event_id,
     };
 
-    try {
-      axios
-        .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
-        .then((response) => {});
-    } catch (e) {
-      console.error(e);
+    if (!vendor) {
+      try {
+        axios
+          .post(`${API}/booked/${user_id}/${event_id}`, bookedbody)
+          .then((res) => {
+            setVendor(selected);
+            setVendors([]);
+            setSearched(false);
+          });
+      } catch (e) {
+        console.error(e);
+      }
+
+      try {
+        axios
+          .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
+          .then((response) => {});
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      try {
+        axios
+          .put(`${API}/booked/${user_id}/${event_id}`, bookedbody)
+          .then((res) => {
+            setVendor(selected);
+            setVendors([]);
+            setSearched(false);
+          });
+      } catch {}
+
+      try {
+        axios.put(`${API}/checklist/${user_id}/${event_id}`, checklistBody);
+      } catch {}
     }
-  } 
   };
 
   const handleFormChange = (e) => {
@@ -209,7 +218,7 @@ function ListEdit({ user_id, lat, lng, formatter }) {
           {showForm ? (
             form()
           ) : (
-            <button onClick={() => setShowForm(true)}>
+            <button className="pg-buttons" onClick={() => setShowForm(true)}>
               {cost ? <>Edit Cost</> : <>Add Cost</>}
             </button>
           )}
@@ -218,11 +227,9 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     );
   };
 
-
   const form = (e) => {
     return (
       <form onSubmit={handleCostSubmission} className="ven-cost">
-        <button type="submit" className="pg-buttons">Update</button>
         <input
           id={category}
           placeholder="cost"
@@ -232,30 +239,40 @@ function ListEdit({ user_id, lat, lng, formatter }) {
           min="0"
           step=".01"
         />
+        <button type="submit" className="pg-buttons">
+          Update
+        </button>
       </form>
     );
   };
 
   return (
     <>
-    <button className="pg-buttons back-button" onClick={() =>  history.goBack()}> &#x21e6; Back to Event</button>
-    <div className="page indexpg-container">
-     
-      <h1>{CategorySwitch(category)}</h1>
-      <form onSubmit={handleSubmit} id="zip-form">
-        <input
-          className="three-d pg-input"
-          type="number"
-          placeholder="Event zip code"
-          onChange={handleZipChange}
-          value={zip}
-          id="zip-search"
-        />
-        <button type="submit" className="pg-buttons">Search</button>
-      </form>
+      <button
+        className="pg-buttons back-button"
+        onClick={() => history.goBack()}
+      >
+        {" "}
+        &#x21e6; Back to Event
+      </button>
+      <div className="page indexpg-container">
+        <h1>{CategorySwitch(category)}</h1>
+        <form onSubmit={handleSubmit} id="zip-form">
+          <input
+            className="three-d pg-input"
+            type="number"
+            placeholder="Event zip code"
+            onChange={handleZipChange}
+            value={zip}
+            id="zip-search"
+          />
+          <button type="submit" className="pg-buttons">
+            Search
+          </button>
+        </form>
 
-      {vendor && !searched ? vendorShow() : vendorsShow()}
-    </div>
+        {vendor && !searched ? vendorShow() : vendorsShow()}
+      </div>
     </>
   );
 }

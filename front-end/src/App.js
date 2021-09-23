@@ -18,10 +18,11 @@ import ScrollToTop from "./Components/ScrollToTop.js";
 import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
+import EventCheckboxPg from "./Pages/EventCheckboxPg"
 
 const API = apiURL();
 const user_id = 1;
-const name = "Jasleen"
+const name = "jasleen"
 
 function App() {
   const location = useGeoLocation();
@@ -61,7 +62,7 @@ function App() {
   }, [location]);
 
   return (
-    <div className="site test">
+    <div className="site">
       <ScrollToTop />
       <NavBar user_id={user_id} />
       <Switch>
@@ -73,6 +74,10 @@ function App() {
           <SignUp />
         </Route>
 
+        <Route path="/dashboard/new_event/checklist/:id">
+          <EventCheckboxPg user_id={user_id} />
+        </Route>
+
         <Route path="/dashboard/new_event">
           <NewEventForm user_id={user_id} />
         </Route>
@@ -82,7 +87,7 @@ function App() {
         </Route>
 
         <Route path="/dashboard">
-          <Dashboard user_id={user_id} name={name}/>
+          <Dashboard user_id={user_id} name={name[0].toUpperCase() + name.slice(1)}/>
         </Route>
 
         <Route path="/task/:category/:event_id/:task_id">

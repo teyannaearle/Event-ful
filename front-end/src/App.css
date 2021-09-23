@@ -436,7 +436,7 @@ justify-content: space-evenly;}
 
 
 .car-wrap {
-  width: 50%;
+  width: 80%;
 }
 
 .carousel .slider-wrapper {
@@ -450,6 +450,8 @@ justify-content: space-evenly;}
 #ven-info {
   width: 70%;
   margin-top: 20px;
+  /* font-weight: 700; */
+  font-size: larger;
 }
 
 #ven-info p,
@@ -480,18 +482,24 @@ justify-content: space-evenly;}
   margin: 0;
 }
 
-.book-fav{
+/* .book-fav{
 display: flex;
 flex-direction: column;
 margin-top: 5px;
 margin-bottom: 5px;
 height: 50px;
 justify-content: space-evenly;
-}
+} */
 
 .book-fav button{
   margin-top: 10px;
+  margin-bottom: 20px;
   width: 200px;
+}
+
+.ven-info{
+  width: 70%;
+  padding-top: 20px;
 }
 
 /* VENDOR INDEX PAGE */
@@ -534,7 +542,6 @@ justify-content: space-evenly;
   background-color: white;
 
 }
-
 /* ListEdit*/
 
 .ven-info{
@@ -547,6 +554,7 @@ justify-content: space-evenly;
 
 .ven-cost{
   height: 100px;
+  width: 100%;
   font-size: larger;
   display: flex;
   flex-direction: column;
@@ -555,12 +563,17 @@ justify-content: space-evenly;
 }
 
 .ven-cost button {
-  width: 50%
+  /* width: 30%; */
+  width: max-content;
+  height: 25px
 }
 
 .ven-cost input {
   font-size: medium;
+  height: 20px;
 }
+
+
 
 /* DASHBOARD */
 
@@ -582,23 +595,46 @@ justify-content: space-evenly;
   height: 255px;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   /* box-shadow: 0px 3px 0px #7d97a5, 0px 2px 4px rgba(0, 0, 0, 0.4); */
   box-shadow: 0px 3px 0px rgba(125, 151, 165, 0.4), 0px 2px 4px rgba(125, 151, 165, 0.4);
   color: #68a7ca;
+  text-align: center;
 }
 
 .plus-sign{
-  font-size: 250px;
-  width: 100%;
-  display: flex;
+  font-size: 200px;
+  font-family: 'Times New Roman';
+  line-height: 150px;
+  height: 140px;
+  /* font-size: 220px;
+  display: inline; */
+  /* width: 100%; */
+  /* display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0px 3px 0px #7d97a5, 0px 2px 4px rgba(0, 0, 0, 0.4);
+  justify-content: center; */
+  /* box-shadow: 0px 3px 0px #7d97a5, 0px 2px 4px rgba(0, 0, 0, 0.4); */
   color: #68a7ca;
+  /* justify-content: space-around; */
 
 }
+
+.plus-sign:hover{
+  color: black;
+}
+
+.new-event{
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; */
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 .event-sq{
 /* display: flex;
@@ -622,6 +658,10 @@ width: 80%;
   padding-top: 5px;
   padding-bottom: 5px;
 }
+/* 
+#new-event{
+  font-size: 16px;
+} */
 /* ACROSS SITE - Stays at bottom*/
 
 .page {

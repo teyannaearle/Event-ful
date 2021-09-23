@@ -7,13 +7,14 @@ import { apiURL } from "../../util/apiURL";
 
 
 
-const parseNum = str => +str.replace(/[^.\d]/g, '')
+//const parseNum = str => +str.replace(/[^.\d]/g, '')
 
 const API = apiURL()
 
 function VendorShowInfo({ business, user_id, category }) {
   const [favorite, setFavorite] = useState(false);
-
+console.log(business)
+console.log(business.rating)
 
 
   useEffect(()=>{
@@ -44,20 +45,19 @@ function VendorShowInfo({ business, user_id, category }) {
             .then((res) => "");
         } catch (e) {
           console.warn(e)
-        }
+        } 
       } else {
         const loc = business.location.display_address.join();
         const body = {
           vendor_name: business.name,
           vendor_address: loc,
-          vendor_phone_number: parseNum(business.phone),
+          vendor_phone_number: business.display_phone,
           vendor_id: business.id, 
           vendor_image: business.photos[0], 
           vendor_category: category, 
           vendor_rating: business.rating
         };
-  
-        try {
+        try { 
           axios
             .post(`${API}/favorites/${user_id}`, body)
             .then((res) => "");
@@ -69,7 +69,8 @@ function VendorShowInfo({ business, user_id, category }) {
 
   return (
     <>
-      <h1 className="pg-head">{business.name} </h1>
+      <h1>{business.name} </h1>
+      <div className="ven-info page three-d">
 
       <div className="car-wrap">
         <Carousel showThumbs={false} autoPlay={true}>
@@ -78,6 +79,8 @@ function VendorShowInfo({ business, user_id, category }) {
           ))}
         </Carousel>
       </div>
+
+
 
       <div id="ven-info">
         <div className="flex-row">
@@ -101,23 +104,24 @@ function VendorShowInfo({ business, user_id, category }) {
           </Ratings>
         </div>
 
+<h2> Contact Information </h2>
         <p>{business.price}</p>
+        <p>{business.display_phone}</p>
 
-        {business.location.display_address.map((point, i) => (
+       {business.location.display_address.map((point, i) => (
           <p key={i}>{point}</p>
         ))}
 
-        <p>{business.display_phone}</p>
+   
 
         <div className="book-fav">
-          {/* <button onClick={handleBook}>
-            {!booked ? <> Booked &#63;</> : <> Booked &#10003;</>}{" "}
-          </button> */}
-          <button onClick={handleFav}>
+
+          <button onClick={handleFav} className="pg-buttons">
             {!favorite ? <> Favorite &#63;</> : <> Favorite &#10003;</>}{" "}
           </button>
         </div>
       </div>
+</div>
     </>
   );
 }
