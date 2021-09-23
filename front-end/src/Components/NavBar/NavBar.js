@@ -43,7 +43,7 @@ export default function NavBar({user_id}) {
       <Link to="/">
       <h1 className="navbar-logo">
         Event(ful)
-        {/* <i className="fab fa-react"></i> */}
+        &#127881;
       </h1>
       </Link>
 
