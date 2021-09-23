@@ -85,7 +85,7 @@ const history = useHistory()
       <div className="eventpage-container three-d">
         <div id="checklist-container" className="evenpg-containers">
           <h2 className="col-h">Booked?</h2>
-          <h2 className="col-h">Vendors:</h2>
+          <h2 className="col-h">Find Vendors:</h2>
           <Checklist
             categories={categories}
             user_id={user_id}
