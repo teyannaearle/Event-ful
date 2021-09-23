@@ -130,7 +130,7 @@ const addToCheckedList = () => {
           />
         </label>
         <label>
-          Party Magician
+          Magician
           <input
             value="party_magician"
             type="checkbox"
@@ -139,7 +139,7 @@ const addToCheckedList = () => {
           />
         </label>
         <label>
-          Party Characters
+          Character Actors
           <input
             value="party_characters"
             type="checkbox"
@@ -148,7 +148,7 @@ const addToCheckedList = () => {
           />
         </label>
         <label>
-          Party Clown
+          Clowns
           <input
             value="party_clown"
             type="checkbox"
