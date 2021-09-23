@@ -13,7 +13,9 @@ import Landing from "./Pages/Landing.js";
 import SignUp from "./Pages/SignUp.js";
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
-import ListEdit from "./Pages/ListEdit.js";
+import EditBooked from "./Pages/EditBooked.js";
+import { Route, Switch } from "react-router-dom";
+import useGeoLocation from "./hooks/useGeoLocation";
 import ScrollToTop from "./Components/ScrollToTop.js";
 import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
@@ -61,6 +63,10 @@ function App() {
     }
   }, [location]);
 
+  const capitalizeName = (name) => {
+    return name[0].toUpperCase() + name.slice(1)
+  }
+
   return (
     <div className="site">
       <ScrollToTop />
@@ -87,11 +93,11 @@ function App() {
         </Route>
 
         <Route path="/dashboard">
-          <Dashboard user_id={user_id} name={name[0].toUpperCase() + name.slice(1)}/>
+          <Dashboard user_id={user_id} name={capitalizeName(name)}/>
         </Route>
 
         <Route path="/task/:category/:event_id/:task_id">
-          <ListEdit
+          <EditBooked
             user_id={user_id}
             lat={lat}
             lng={lng}
@@ -109,14 +115,14 @@ function App() {
         </Route>
 
         <Route path="/favorites">
-          <Favorites user_id={user_id} />
+          <Favorites user_id={user_id} name={capitalizeName(name)} />
         </Route>
 
         <Route path="/vendors/:category">
           <VendorIndex location={location} />
         </Route>
 
-        <Route path="/booked/:event_id">
+        <Route path="/booked/:event_id/:event_name">
           <Booked user_id={user_id} />
         </Route>
       </Switch>

@@ -1,8 +1,12 @@
 import React from "react";
 import Ratings from "react-ratings-declarative";
+import { useLocation } from "react-router-dom"
 
-function Vendor({ vendor, category }) {
-  console.log(`Line 5 ${category}`)
+function Vendor({ vendor }) {
+  // const location = useLocation().pathname.split("/")
+//  const split = location.pathname.split("/")
+
+
   return (
     <>
       <li className="flex-col three-d ven-li">
@@ -11,9 +15,9 @@ function Vendor({ vendor, category }) {
           alt={vendor.name}
           height="250"
           width="300"
+          className="ven-img"
         />
-       
-        <h3>{vendor.name}</h3>
+        <h2>{vendor.name}</h2>
         <p>Phone: {vendor.display_phone}</p>
         <div className="flex-row">
           <p>Avg Rating: </p>
@@ -29,6 +33,7 @@ function Vendor({ vendor, category }) {
             <Ratings.Widget widgetDimension="15px" />
           </Ratings>
         </div>
+        {/* {location[1] === "task"   ?  <h3>Input discussed cost below</h3> : null} */}
       </li>
     </>
   );

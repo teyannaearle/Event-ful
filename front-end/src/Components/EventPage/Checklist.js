@@ -171,7 +171,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           </li>
         );
       })}
-              <button className="book-buttons check" id="all-booked" onClick={ ()=>history.push(`/booked/${event_id}`)}> View All Booked Vendors for {eventName}</button>
+              <button className="book-buttons check" id="all-booked" onClick={ ()=>history.push(`/booked/${event_id}/${eventName}`)}> View All Booked Vendors for {eventName}</button>
 
     </ul>
   );

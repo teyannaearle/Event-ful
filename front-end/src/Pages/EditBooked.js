@@ -11,7 +11,7 @@ const API = apiURL();
 
 const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 
-function ListEdit({ user_id, lat, lng, formatter }) {
+function EditBooked({ user_id, lat, lng, formatter }) {
   const { event_id, category } = useParams();
   const [vendors, setVendors] = useState([]);
   const [vendor, setVendor] = useState("");
@@ -92,15 +92,18 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     setZip(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleZipSubmit = async (e) => {
     e.preventDefault();
-    if (zip.length !== 5) {
-      window.alert("Zip code is not valid");
-    } else {
-      const data = await api.getVendorsZip(category, zip);
-      setVendors(data);
-      setSearched(true);
-    }
+    // if (zip.length !== 5) {
+    //   window.alert("Zip code is not valid");
+    // } else {
+    //   const data = await api.getVendorsZip(category, zip);
+    //   setVendors(data);
+    //   setSearched(true);
+    // }
+    const data = await api.getVendorsZip(category, zip);
+    setVendors(data);
+    setSearched(true);
   };
 
   const handleSelection = (selected) => {
@@ -246,6 +249,41 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     );
   };
 
+  const directions = () => {
+    let direction = "";
+    if ((!vendor && !searched && lat && lng) || searched) {
+      direction = (
+        <h2>
+          Browse below or search by zip code to select the vendor that you've
+          booked
+        </h2>
+      );
+    } else if (vendor && !searched) {
+      direction = (
+        <>
+        <h2> Input discussed cost below  </h2>
+          
+        <h2>If you have changed to a new vendor, search by zip code above  </h2>
+        </>
+      );
+    } else if (searched && !vendors) {
+      direction = (
+        <h2>
+          Unfortunately, we could not find any vendors in this area. Please try
+          another zip code.{" "}
+        </h2>
+      );
+    } else if (!lng && !lat) {
+      direction = (
+        <h2>
+          Search by zip code above to select the vendor that you've booked
+        </h2>
+      );
+    }
+
+    return direction;
+  };
+
   return (
     <>
       <button
@@ -257,24 +295,30 @@ function ListEdit({ user_id, lat, lng, formatter }) {
       </button>
       <div className="page indexpg-container">
         <h1>{CategorySwitch(category)}</h1>
-        <form onSubmit={handleSubmit} id="zip-form">
+
+        <form onSubmit={handleZipSubmit} id="zip-form">
           <input
             className="three-d pg-input"
-            type="number"
-            placeholder="Event zip code"
+            type="text"
+            placeholder="Zip Code - Must be 5 digits -"
             onChange={handleZipChange}
             value={zip}
             id="zip-search"
+            required
+            pattern="[0-9]{5}"
           />
           <button type="submit" className="pg-buttons">
             Search
           </button>
         </form>
-
+        {directions()}
+        {/* {!vendor && !searched && lat ? <h2>Browse below or search by zip code to select the vendor that you've booked</h2> : null}
+        {vendor && !searched ?<h2> Search by zip code above if you have changed to a new vendor </h2>: null} */}
+        {/* {!lat && !lng? "search by zip above" : null} */}
         {vendor && !searched ? vendorShow() : vendorsShow()}
       </div>
     </>
   );
 }
 
-export default ListEdit;
+export default EditBooked;

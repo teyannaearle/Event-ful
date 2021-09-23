@@ -31,7 +31,7 @@ export default function FavoriteList({user_id}) {
     <div>
       Favorite Vendors List
       <section>
-        <table>
+        <table className="three-d">
           <thead>
             <tr>
               <th>Vendor Name</th>
