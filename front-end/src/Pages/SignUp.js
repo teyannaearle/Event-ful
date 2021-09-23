@@ -6,7 +6,6 @@ export default function SignUp() {
     return (
         <div className="Container">
            <form >
-               {/* <h1>Sign up for Event(ful) Here!</h1> */}
                <label htmlFor="FullName">Please Enter Your Full Name</label> <br/>
                <input 
                type="text" 

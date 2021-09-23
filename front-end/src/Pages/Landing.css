@@ -6,10 +6,18 @@
     justify-content: space-evenly;
     padding-top: 10%;
 }
+h1 {
+margin-bottom: 2%;
+}
+
+h3 {
+  padding: 2%;
+}
 
   .Landing-Item {
     flex-wrap: wrap;
     width: 50%;
+    font-size: larger;
 
   }
   
