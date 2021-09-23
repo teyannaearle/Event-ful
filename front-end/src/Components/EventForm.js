@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
+import "./EventForm.css"
 
 const API = apiURL();
 console.log(API);
@@ -70,7 +71,7 @@ function EventForm({user_id}) {
     e.preventDefault();
     addEvent();
   };
-//   console.log(id)
+
 
   return (
     <section className="NewEvent">
