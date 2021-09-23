@@ -14,8 +14,8 @@ export default function Booked({ user_id }) {
         &#x21e6; Back to Event
       </button>
 
-      <div>
-        Booked Page
+      <div className="page">
+      <h1 className="pg-head">  Booked Page </h1>
         <BookedVendorsList user_id={user_id} />
       </div>
     </>
