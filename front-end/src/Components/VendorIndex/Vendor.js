@@ -1,12 +1,7 @@
 import React from "react";
 import Ratings from "react-ratings-declarative";
-import { useLocation } from "react-router-dom"
 
 function Vendor({ vendor }) {
-  // const location = useLocation().pathname.split("/")
-//  const split = location.pathname.split("/")
-
-
   return (
     <>
       <li className="flex-col three-d ven-li">
@@ -33,7 +28,6 @@ function Vendor({ vendor }) {
             <Ratings.Widget widgetDimension="15px" />
           </Ratings>
         </div>
-        {/* {location[1] === "task"   ?  <h3>Input discussed cost below</h3> : null} */}
       </li>
     </>
   );

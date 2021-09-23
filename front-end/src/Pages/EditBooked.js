@@ -83,7 +83,9 @@ function EditBooked({ user_id, lat, lng, formatter }) {
     (async () => {
       if (!searched && lat && lng) {
         const data = await api.getVendorsLongLag(lng, lat, category);
-        setVendors(data.businesses);
+        if (data.businesses[0].id) {
+          setVendors(data.businesses);
+        }
       }
     })();
   }, [category, lng, lat, searched]);
@@ -94,16 +96,42 @@ function EditBooked({ user_id, lat, lng, formatter }) {
 
   const handleZipSubmit = async (e) => {
     e.preventDefault();
-    // if (zip.length !== 5) {
-    //   window.alert("Zip code is not valid");
-    // } else {
-    //   const data = await api.getVendorsZip(category, zip);
-    //   setVendors(data);
-    //   setSearched(true);
-    // }
     const data = await api.getVendorsZip(category, zip);
-    setVendors(data);
+    if (data[0].id) {
+      setVendors(data);
+    }
     setSearched(true);
+  };
+
+  const handleFormChange = (e) => {
+    setCost(e.target.value);
+  };
+
+  const handleCostSubmission = (e) => {
+    e.preventDefault();
+    let checklistBody = {
+      task_cost: cost,
+      task_name: category,
+    };
+
+    try {
+      axios.put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody);
+    } catch (e) {
+      console.error(e);
+    }
+
+    let bookedBody = {
+      amount: cost,
+      vendor_name: vendor.name,
+    };
+
+    try {
+      axios.put(`${API}/booked/cost/${user_id}/${event_id}`, bookedBody);
+    } catch (e) {
+      console.error(e);
+    }
+
+    setShowForm(false);
   };
 
   const handleSelection = (selected) => {
@@ -120,8 +148,6 @@ function EditBooked({ user_id, lat, lng, formatter }) {
     let checklistBody = {
       is_completed: true,
       task_name: category,
-      // user_id: user_id,
-      // event_id: event_id,
     };
 
     if (!vendor) {
@@ -138,9 +164,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
       }
 
       try {
-        axios
-          .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
-          .then((response) => {});
+        axios.put(`${API}/checklist/${user_id}/${event_id}`, checklistBody);
       } catch (e) {
         console.error(e);
       }
@@ -153,44 +177,16 @@ function EditBooked({ user_id, lat, lng, formatter }) {
             setVendors([]);
             setSearched(false);
           });
-      } catch {}
+      } catch (e) {
+        console.error(e);
+      }
 
       try {
         axios.put(`${API}/checklist/${user_id}/${event_id}`, checklistBody);
-      } catch {}
+      } catch (e) {
+        console.error(e);
+      }
     }
-  };
-
-  const handleFormChange = (e) => {
-    setCost(e.target.value);
-  };
-  const handleCostSubmission = (e) => {
-    e.preventDefault();
-    let checklistBody = {
-      task_cost: cost,
-      task_name: category,
-    };
-
-    try {
-      axios.put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody);
-      // .then((res) => );
-    } catch (e) {
-      console.error(e);
-    }
-
-    let bookedBody = {
-      amount: cost,
-      vendor_name: vendor.name,
-    };
-
-    try {
-      axios.put(`${API}/booked/cost/${user_id}/${event_id}`, bookedBody);
-      // .then((res) => console.log("booked" + res));
-    } catch (e) {
-      console.error(e);
-    }
-
-    setShowForm(false);
   };
 
   const vendorsShow = () => {
@@ -261,9 +257,12 @@ function EditBooked({ user_id, lat, lng, formatter }) {
     } else if (vendor && !searched) {
       direction = (
         <>
-        <h2> Input discussed cost below  </h2>
-          
-        <h2>If you have changed to a new vendor, search by zip code above  </h2>
+          <h2> Edit discussed cost below </h2>
+
+          <h2>
+            If you have changed vendors, search by zip code above to select the
+            vendor that you've booked{" "}
+          </h2>
         </>
       );
     } else if (searched && !vendors) {
@@ -312,9 +311,6 @@ function EditBooked({ user_id, lat, lng, formatter }) {
           </button>
         </form>
         {directions()}
-        {/* {!vendor && !searched && lat ? <h2>Browse below or search by zip code to select the vendor that you've booked</h2> : null}
-        {vendor && !searched ?<h2> Search by zip code above if you have changed to a new vendor </h2>: null} */}
-        {/* {!lat && !lng? "search by zip above" : null} */}
         {vendor && !searched ? vendorShow() : vendorsShow()}
       </div>
     </>
