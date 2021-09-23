@@ -263,7 +263,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
         <>
         <h2> Input discussed cost below  </h2>
           
-        <h2>If you have changed to a new vendor, search by zip code above  </h2>
+        <h2>If you have changed vendors, search by zip code above to select the vendor that you've booked  </h2>
         </>
       );
     } else if (searched && !vendors) {
