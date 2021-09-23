@@ -261,7 +261,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
     } else if (vendor && !searched) {
       direction = (
         <>
-        <h2> Input discussed cost below  </h2>
+        <h2> Edit discussed cost below  </h2>
           
         <h2>If you have changed vendors, search by zip code above to select the vendor that you've booked  </h2>
         </>
