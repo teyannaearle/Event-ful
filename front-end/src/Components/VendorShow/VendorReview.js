@@ -2,8 +2,6 @@ import React from 'react'
 import Ratings from "react-ratings-declarative";
 
 function VendorReview({review}) {
-  // var date = 
-  // console.log(date)
     return (
         <div className="review three-d">
         <div className="flex-col reviewers">

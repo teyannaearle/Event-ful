@@ -15,11 +15,9 @@ import "./App.css";
 import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
 import { useEffect, useState } from "react";
-import { apiURL } from "./util/apiURL";
 import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
 
-const API = apiURL();
 const user_id = 1;
 const name = "jasleen";
 
