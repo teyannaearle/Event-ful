@@ -3,7 +3,7 @@ import Favorite from "./Favorite";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { apiURL } from "../util/apiURL";
+import { apiURL } from "../../util/apiURL";
 
 const API = apiURL();
 
@@ -37,6 +37,9 @@ export default function FavoriteList({user_id}) {
               <th>Vendor Name</th>
               <th>Vendor Address</th>
               <th>Vendor Phone</th>
+              <th>Vendor Image</th>
+              <th>Vendor Category</th>
+              <th>Vendor Rating</th>
             </tr>
           </thead>
           <tbody>

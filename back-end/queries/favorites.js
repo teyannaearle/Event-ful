@@ -4,7 +4,7 @@ const db = require("../db/dbConfig.js");
 const getAllFavorites = async (user_id) => {
   try {
     const allFavorites = await db.any(
-      "SELECT * FROM favorites WHERE user_id=$1 ORDER BY vendor_name",
+      "SELECT * FROM favorites WHERE user_id=$1 ORDER BY vendor_category, vendor_name",
       user_id
     );
     return allFavorites;

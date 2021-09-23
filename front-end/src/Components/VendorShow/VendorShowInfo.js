@@ -11,11 +11,8 @@ const parseNum = str => +str.replace(/[^.\d]/g, '')
 
 const API = apiURL()
 
-function VendorShowInfo({ business, user_id }) {
+function VendorShowInfo({ business, user_id, category }) {
   const [favorite, setFavorite] = useState(false);
-
-
-
 
   useEffect(()=>{
     try {
@@ -52,7 +49,10 @@ function VendorShowInfo({ business, user_id }) {
           vendor_name: business.name,
           vendor_address: loc,
           vendor_phone_number: parseNum(business.phone),
-          vendor_id: business.id
+          vendor_id: business.id, 
+          vendor_image: business.photos[0], 
+          vendor_category: category, 
+          vendor_rating: business.rating
         };
   
         try {

@@ -14,6 +14,9 @@ export default function Favorite({ vendor }) {
       </td>
       <td>{vendor.vendor_address}</td>
       <td>{vendor.vendor_phone_number}</td>
+      <td>{vendor.vendor_image}</td>
+      <td>{vendor.vendor_category}</td>
+      <td>{vendor.vendor_rating}</td>
     </tr>
   );
 }
