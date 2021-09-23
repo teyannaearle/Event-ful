@@ -18,6 +18,7 @@ import NewEventForm from "./Pages/NewEventForm.js";
 import { useEffect, useState } from "react";
 import { apiURL } from "./util/apiURL";
 import EditFormPage from "./Pages/EditFormPage.js";
+import EventCheckboxPg from "./Pages/EventCheckboxPg"
 
 const API = apiURL();
 const user_id = 1;
@@ -71,6 +72,10 @@ function App() {
 
         <Route path="/signup">
           <SignUp />
+        </Route>
+
+        <Route path="/dashboard/new_event/checklist/:id">
+          <EventCheckboxPg user_id={user_id} />
         </Route>
 
         <Route path="/dashboard/new_event">

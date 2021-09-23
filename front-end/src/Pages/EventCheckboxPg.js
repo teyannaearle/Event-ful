@@ -1,13 +1,13 @@
 import React from 'react'
-import EventCheckbox from '../Component/EventCheckbox.js'
+import EventCheckbox from "../Components/EventCheckbox.js"
 
-export default function EventCheckboxPg() {
+export default function EventCheckboxPg({user_id}) {
+
     return (
-        <div>
-           <div>
+        <div> 
       Create Your Event
-      <EventCheckbox />
-    </div> 
+      <EventCheckbox user_id={user_id} />
+    
         </div>
     )
 }

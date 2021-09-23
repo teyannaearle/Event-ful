@@ -1,21 +1,44 @@
-import React from 'react'
+import React from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useHistory, useParams, Link } from "react-router-dom";
+import { apiURL } from "../util/apiURL.js";
 
-export default function EventCheckbox() {
+const API = apiURL();
+
+export default function EventCheckbox({user_id}) {
+    const { id } = useParams()
+    const history = useHistory()
+
+    const [eventForm, setEventForm] = useState({
+    djs: false,
+    musicians: false,
+    photographers: false,
+    party_rental: false,
+    videographers: false,
+    venues: false,
+    balloons: false,
+    floral: false,
+    party_magician: false,
+    party_characters: false,
+    party_clown: false,
+  });
 
 //pass props from eventForm to represent the name,date, budget, etc.
 const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
-    console.log(categories);
-    const id = lastEvent.event_id + 1;
+    // console.log(categories);
+    // const id = lastEvent.event_id + 1;
+    
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
           task_name: checked,
         };
-        console.log(category);
+        // console.log(category);
         axios
           .post(`${API}/checklist/${user_id}/${id}`, category)
-          .then((res) => console.log(res))
+          .then((res) => history.push("/dashboard"))
           .catch((c) => console.warn("catch", c));
       }
     }
@@ -33,7 +56,7 @@ const addToCheckedList = () => {
     
     return (
         <section className="NewEvent">
-      <form onSubmit={handleSubmit}>
+      <form className="three-d" onSubmit={handleSubmit}>
         <label>
           DJ
           <input
@@ -106,7 +129,34 @@ const addToCheckedList = () => {
             onChange={toggleState}
           />
         </label>
-        <button type="submit">Submit</button>
+        <label>
+          Party Magician
+          <input
+            value="party_magician"
+            type="checkbox"
+            checked={eventForm.party_magician}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Party Characters
+          <input
+            value="party_characters"
+            type="checkbox"
+            checked={eventForm.party_characters}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Party Clown
+          <input
+            value="party_clown"
+            type="checkbox"
+            checked={eventForm.party_clown}
+            onChange={toggleState}
+          />
+        </label>
+        <button className=" pg-buttons" type="submit">Submit</button>
       </form>
     </section>
     )
