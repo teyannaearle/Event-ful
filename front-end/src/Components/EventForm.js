@@ -1,14 +1,17 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
 console.log(API);
+
 function EventForm({user_id}) {
   // const { user_id } = useParams();
   const [events, setEvents] = useState([]);
+   const [id, setId] = useState({});
+
 
   const [myEvent, setEvent] = useState({
     event_name: "",
@@ -17,25 +20,15 @@ function EventForm({user_id}) {
     event_time: "",
   });
 
-  const [eventForm, setEventForm] = useState({
-    djs: false,
-    musicians: false,
-    photographers: false,
-    party_rental: false,
-    videographers: false,
-    venues: false,
-    balloons: false,
-    floral: false,
-  });
 
   let history = useHistory();
 
   useEffect(() => {
     axios
-      .get(`${API}/events/${user_id}`)
+      .get(`${API}/events/last`)
       .then(
         (res) => {
-          setEvents(res.data.message);
+          setId(res.data.payload.event_id + 1);
         },
         (e) => {
           console.error(e);
@@ -44,86 +37,44 @@ function EventForm({user_id}) {
       .catch((e) => {
         console.error(e);
       });
-  }, [user_id]);
+  }, []);
+
+
 
   const addEvent = () => {
-    axios
+      console.log("Hello")
+      try {
+          axios
       .post(`${API}/events/${user_id}`, myEvent)
       .then(
         (res) => {
-          console.log(res);
-          //   history.push(`/dashboard`);
-        },
-        (error) => console.error(error)
-      )
-      .catch((c) => console.warn("catch", c));
-  };
-
-  const addToCheckedList = () => {
-    const categories = Object.keys(eventForm);
-    console.log(categories);
-    const id = events[0] ? events[events.length - 1].event_id + 1 : 1;
-    for (const checked of categories) {
-      if (eventForm[checked] === true) {
-        const category = {
-          task_name: checked,
-          //   user_id: user_id,
-          //   event_id: 1,
-        };
-        console.log(category);
-        axios
-          .post(`${API}/checklist/${user_id}/${id}`, category)
-          .then((res) => console.log(res));
+          history.push(`/dashboard/new_event/checklist/${id}`);
+          
+        })
+      } catch(error) {
+          console.log("Not working")
       }
-    }
+    
+      
   };
 
-  // const eventCheck = eventForm.map((checked, i) => {
-  //   for (const checked in eventForm) {
-  //     if (checked === true) {
-  //       return eventForm[checked];
-  //     } else if (checked === false) {
-  //     }
-  //   }
-  // });
-
-  //   const handleCheckedBox = () => {
-  //     const checkedCat = {};
-  //     //loop through object
-  //     // check if key value === true
-  //     //if key is true add to empty object
-  //     //if false do not add
-  //     for (const checked in eventForm) {
-  //       if (checked === true) {
-  //         return checkedCat.push(eventForm[checked]);
-  //       }
-  //       console.log(checkedCat);
-  //     }
-  //   };
-  //   handleCheckedBox;
-
-  //   const myEventCheck = (category) => {
-  //     axios.post(`${API}/checklist/:user_id/:event_id`, category).then();
-  //   };
+  
 
   const handleTextChange = (e) => {
     setEvent({ ...myEvent, [e.target.id]: e.target.value });
   };
 
-  const toggleState = (e) => {
-    const val = e.target.value;
-    setEventForm((prevState) => ({ ...prevState, [val]: !prevState[val] }));
-  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addEvent();
-    addToCheckedList();
   };
+//   console.log(id)
 
   return (
     <section className="NewEvent">
-      <form onSubmit={handleSubmit}>
+      <form className="three-d" onSubmit={handleSubmit}>
         <label htmlFor="event_name">New Event</label>
         <input
           id="event_name"
@@ -143,7 +94,7 @@ function EventForm({user_id}) {
         <label htmlFor="event_time">Time of your Event</label>
         <input
           id="event_time"
-          type="text"
+          type="time"
           value={myEvent.time}
           placeholder="Enter Event Time"
           onChange={handleTextChange}
@@ -151,84 +102,12 @@ function EventForm({user_id}) {
         <label htmlFor="event_date">Event Date</label>
         <input
           id="event_date"
-          type="text"
+          type="date"
           value={myEvent.date}
           placeholder="Enter Event Date"
           onChange={handleTextChange}
         />
-        <label>
-          DJ
-          <input
-            value="djs"
-            type="checkbox"
-            checked={eventForm.djs}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Musician
-          <input
-            value="musicians"
-            type="checkbox"
-            checked={eventForm.musicians}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Photographer
-          <input
-            value="photographers"
-            type="checkbox"
-            checked={eventForm.photographers}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Party Rental
-          <input
-            value="party_rental"
-            type="checkbox"
-            checked={eventForm.party_rental}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Videographer
-          <input
-            value="videographers"
-            type="checkbox"
-            checked={eventForm.videographers}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Venues
-          <input
-            value="venues"
-            type="checkbox"
-            checked={eventForm.venues}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Balloon Services
-          <input
-            value="balloons"
-            type="checkbox"
-            checked={eventForm.balloons}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Floral Designer
-          <input
-            value="floral"
-            type="checkbox"
-            checked={eventForm.floral}
-            onChange={toggleState}
-          />
-        </label>
-        <button type="submit">Submit</button>
+         <button className="pg-buttons" type="submit">Create Event</button>
       </form>
     </section>
   );
