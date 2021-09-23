@@ -14,6 +14,7 @@ export default function VendorIndex({ location }) {
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false)
   const { category } = useParams();
+  
 
   useEffect(() => {
     if (location.coordinates) {

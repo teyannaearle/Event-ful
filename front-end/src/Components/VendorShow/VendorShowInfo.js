@@ -14,6 +14,8 @@ const API = apiURL()
 function VendorShowInfo({ business, user_id, category }) {
   const [favorite, setFavorite] = useState(false);
 
+
+
   useEffect(()=>{
     try {
       axios.get(`${API}/favorites/${user_id}`).then((res) => {

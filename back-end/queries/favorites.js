@@ -30,12 +30,13 @@ const getOneFavorite = async (user_id, vendor_name) => {
 const createFavorite = async (vendor, user_id) => {
   try {
     const newFavorite = await db.one(
-      "INSERT INTO favorites (user_id, vendor_name, vendor_address, vendor_phone_number) VALUES ($1, $2, $3, $4) RETURNING *",
+      "INSERT INTO favorites (user_id, vendor_name, vendor_address, vendor_phone_number, vendor_category) VALUES ($1, $2, $3, $4, $5) RETURNING *",
       [
         user_id,
         vendor.vendor_name,
         vendor.vendor_address,
         vendor.vendor_phone_number,
+        vendor.vendor_category
       ]
     );
     return newFavorite;
@@ -61,12 +62,13 @@ const deleteFavorite = async (user_id, vendorName) => {
 const updateFavorite = async (vendor, user_id) => {
   try {
     const updatedFavorite = await db.one(
-      "UPDATE favorites SET vendor_address=$1, vendor_phone_number=$2 WHERE user_id=$3 AND vendor_name=$4 RETURNING *",
+      "UPDATE favorites SET vendor_address=$1, vendor_phone_number=$2, vendor_category=$3 WHERE user_id=$4 AND vendor_name=$5 RETURNING *",
       [
         vendor.vendor_address,
         vendor.vendor_phone_number,
+        vendor.vendor_category,
         user_id,
-        vendor.vendor_name,
+        vendor.vendor_name
       ]
     );
     return updatedFavorite;

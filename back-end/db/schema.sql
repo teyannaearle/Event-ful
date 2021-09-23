@@ -63,5 +63,8 @@ CREATE TABLE favorites (
     vendor_name VARCHAR (255) NOT NULL, 
     vendor_address VARCHAR (255) NOT NULL, 
     vendor_phone_number VARCHAR (11) NOT NULL,
-    vendor_id  VARCHAR (255) NOT NULL
+    vendor_id  VARCHAR (255) NOT NULL,
+    vendor_category VARCHAR (255) NOT NULL, 
+    vendor_image VARCHAR,
+    vendor_rating INTEGER DEFAULT 0
 );

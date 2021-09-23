@@ -1,3 +1,10 @@
+import { Route, Switch } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { apiURL } from "./util/apiURL";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./App.css";
+import useGeoLocation from "./hooks/useGeoLocation";
+import axios from "axios";
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
 import Event from "./Pages/EventPage";
@@ -7,16 +14,9 @@ import SignUp from "./Pages/SignUp.js";
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import ListEdit from "./Pages/ListEdit.js";
-import { Route, Switch } from "react-router-dom";
-import useGeoLocation from "./hooks/useGeoLocation";
 import ScrollToTop from "./Components/ScrollToTop.js";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "./App.css";
-import axios from "axios";
 import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
-import { useEffect, useState } from "react";
-import { apiURL } from "./util/apiURL";
 import EditFormPage from "./Pages/EditFormPage.js";
 
 const API = apiURL();

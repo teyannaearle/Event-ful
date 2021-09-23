@@ -58,10 +58,10 @@ favorites.get("/:user_id/:event_id/:vendor_name", async (req, res) => {
 // CREATE
 favorites.post("/:user_id", async (req, res) => {
   const { user_id } = req.params;
-  console.log("line 61", JSON.stringify(req.body));
+  // console.log("line 61", JSON.stringify(req.body))
   try {
     const newFavoriteVendor = await createFavorite(req.body, user_id);
-    console.log(newFavoriteVendor);
+    // console.log(newFavoriteVendor)
 
     if (newFavoriteVendor.user_id) {
       res.status(200).json({
@@ -103,10 +103,10 @@ favorites.delete("/:user_id/:vendor_name", async (req, res) => {
 // UPDATE
 favorites.put("/:user_id", async (req, res) => {
   const { user_id } = req.params;
-  const vendor = req.body;
-  console.log(vendor);
+  // const vendor = req.body;
+  // console.log(vendor);
   try {
-    const updatedFavoriteVendor = await updateFavorite(vendor, user_id);
+    const updatedFavoriteVendor = await updateFavorite(req.body, user_id);
     if (updatedFavoriteVendor.user_id) {
       res.status(200).json({
         success: true,

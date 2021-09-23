@@ -1,7 +1,8 @@
 import React from "react";
 import Ratings from "react-ratings-declarative";
 
-function Vendor({ vendor }) {
+function Vendor({ vendor, category }) {
+  console.log(`Line 5 ${category}`)
   return (
     <>
       <li className="flex-col three-d ven-li">
@@ -11,6 +12,7 @@ function Vendor({ vendor }) {
           height="200"
           width="200"
         />
+       
         <h3>{vendor.name}</h3>
         <p>Phone: {vendor.display_phone}</p>
         <div className="flex-row">
