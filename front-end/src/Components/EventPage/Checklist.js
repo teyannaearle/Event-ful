@@ -1,12 +1,13 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
 import React, { useEffect, useState } from "react";
 
 const api = apiURL();
 
-function Checklist({ categories, user_id, event_id, updateCost }) {
+function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
   const [bookedStatus, setBookedStatus] = useState({});
+  const history = useHistory()
 
   useEffect(() => {
     const booked = {};
@@ -170,6 +171,8 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           </li>
         );
       })}
+              <button className="book-buttons check" id="all-booked" onClick={ ()=>history.push(`/booked/${event_id}`)}> View All Booked Vendors for {eventName}</button>
+
     </ul>
   );
 }

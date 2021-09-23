@@ -79,7 +79,7 @@ button:active {
   transition: all 0.2s ease-in-out;
 }
 button:hover {
-  filter: brightness(104%);
+  filter: brightness(110%);
   cursor: pointer;
 }
 
@@ -94,18 +94,20 @@ button:hover {
  border: 1px solid white;
  letter-spacing: 1px;
  font-size: medium;
+ cursor: pointer;
  
 }
 
 .pg-buttons:hover{
   filter: brightness(108%);
-  color: black;
-  border: 1px solid black;
+  /* color: black;
+  border: 1px solid black; */
 }
 
 .back-button{
   /* margin-left: 10px; */
   height: 50px;
+  width: max-content;
 }
 
 .pg-head {
@@ -153,6 +155,13 @@ button:hover {
 }
 
 /* EVENT PAGE */
+
+#all-booked{
+  grid-column: span 2;
+  width: max-content;
+  margin: auto;
+  padding: 10px;
+}
 
 .eventpage-container {
   width: 95%;
@@ -205,6 +214,7 @@ button:hover {
   align-items: center;
 }
 
+
 .book-buttons {
   display: flex;
   align-items: center;
@@ -225,59 +235,98 @@ button:hover {
 
 
 .check {
-  background: rgb(108, 140, 170);
+  /* background: rgb(108, 140, 170);
   background: linear-gradient(
     90deg,
     rgba(108, 140, 170, 1) 0%,
     rgba(94, 120, 144, 1) 100%
+  ); */
+  /* background: #68a7ca; */
+  background: rgb(104, 167, 202,1);
+  background: linear-gradient(
+    90deg,
+    rgba(104, 167, 202,1) 0%,
+    rgb(96, 153, 184) 100%
   );
   color: ivory;
   font-size: medium;
 }
 
-/* .check:hover {
-  background: rgb(118, 153, 186);
+.check:hover {
+  /* filter: brightness(108%); */
+  /* color: black; */
+  border: 1px solid white;
+  background: rgb(96, 153, 184,1);
   background: linear-gradient(
     90deg,
-    rgba(118, 153, 186, 1) 0%,
-    rgba(107, 137, 164, 1) 100%
+    rgba(96, 153, 184,1) 0%,
+    rgb(104, 167, 202,1) 100%
   );
-} */
+}
 .check:active {
-  background: rgb(94, 120, 144);
+  /* background: rgb(94, 120, 144);
   background: linear-gradient(
     90deg,
     rgba(94, 120, 144, 1) 0%,
     rgba(108, 140, 170, 1) 100%
+  ); */
+  background: rgb(96, 153, 184,1);
+  background: linear-gradient(
+    90deg,
+    rgba(96, 153, 184,1) 0%,
+    rgb(104, 167, 202,1) 100%
   );
+  border: 1px solid white
 }
 
 .x {
+
   font-size: medium;
-  background: rgb(158, 190, 219);
+  /* background: rgb(158, 190, 219);
   background: linear-gradient(
     90deg,
     rgb(158, 190, 219, 1) 0%,
     rgba(149, 177, 203, 1) 100%
+  ); */
+  background: rgba(178, 211, 230);
+  background: linear-gradient(
+    90deg,
+    rgba(178, 211, 230, 1) 0%,
+    rgb(165, 197, 215,1)100%
   );
 }
 
 .x:hover {
-  background: rgb(176, 203, 227);
+  /* background: rgb(176, 203, 227);
   background: linear-gradient(
     90deg,
     rgba(176, 203, 227, 1) 0%,
     rgba(160, 185, 208, 1) 100%
+  ); */
+  background: rgba(165, 197, 215,1);
+  background: linear-gradient(
+    90deg,
+    rgba(165, 197, 215,1) 0%,
+    rgba(178, 211, 230, 1) 100%
   );
+
+  border: 1px solid white
 }
 
 .x:active {
-  background: rgba(149, 177, 203);
+  /* background: rgba(149, 177, 203);
   background: linear-gradient(
     90deg,
     rgba(149, 177, 203, 1) 0%,
     rgba(158, 190, 219, 1) 100%
+  ); */
+  background: rgba(165, 197, 215,1);
+  background: linear-gradient(
+    90deg,
+    rgba(165, 197, 215,1) 0%,
+    rgba(178, 211, 230, 1) 100%
   );
+  border: 1px solid white
 }
 
 #cost-form {
@@ -346,22 +395,28 @@ justify-content: space-evenly;}
 #countdown-container {
   grid-column: span 2;
   width: 100%;
+  height: 250px;
   text-align: center;
   /* border: black 1px solid; */
   font-weight: 700;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
 }
 .countdown {
   width: 70%;
   margin: auto;
   display: flex;
   justify-content: space-around;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .evenpg-containers {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 30px;
+  /* padding-top: 15px;
+  padding-bottom: 15px; */
 }
 
 .col-h {
@@ -381,7 +436,7 @@ justify-content: space-evenly;}
 
 
 .car-wrap {
-  width: 50%;
+  width: 80%;
 }
 
 .carousel .slider-wrapper {
@@ -395,6 +450,8 @@ justify-content: space-evenly;}
 #ven-info {
   width: 70%;
   margin-top: 20px;
+  /* font-weight: 700; */
+  font-size: larger;
 }
 
 #ven-info p,
@@ -425,18 +482,24 @@ justify-content: space-evenly;}
   margin: 0;
 }
 
-.book-fav{
+/* .book-fav{
 display: flex;
 flex-direction: column;
 margin-top: 5px;
 margin-bottom: 5px;
 height: 50px;
 justify-content: space-evenly;
-}
+} */
 
 .book-fav button{
   margin-top: 10px;
+  margin-bottom: 20px;
   width: 200px;
+}
+
+.ven-info{
+  width: 70%;
+  padding-top: 20px;
 }
 
 /* VENDOR INDEX PAGE */
@@ -479,7 +542,6 @@ justify-content: space-evenly;
   background-color: white;
 
 }
-
 /* ListEdit*/
 
 .ven-info{
@@ -492,6 +554,7 @@ justify-content: space-evenly;
 
 .ven-cost{
   height: 100px;
+  width: 100%;
   font-size: larger;
   display: flex;
   flex-direction: column;
@@ -500,12 +563,17 @@ justify-content: space-evenly;
 }
 
 .ven-cost button {
-  width: 50%
+  /* width: 30%; */
+  width: max-content;
+  height: 25px
 }
 
 .ven-cost input {
   font-size: medium;
+  height: 20px;
 }
+
+
 
 /* DASHBOARD */
 

@@ -1,5 +1,5 @@
 import React from "react";
-import FavoriteList from "../Components/FavoriteList";
+import FavoriteList from "../Components/Favorites/FavoriteList";
 
 export default function Favorites({user_id}) {
   return (
