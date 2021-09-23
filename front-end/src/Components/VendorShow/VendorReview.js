@@ -2,12 +2,14 @@ import React from 'react'
 import Ratings from "react-ratings-declarative";
 
 function VendorReview({review}) {
+  // var date = 
+  // console.log(date)
     return (
         <div className="review three-d">
         <div className="flex-col reviewers">
           <p>{review.user.name}</p>
 
-          <p>{review.time_created}</p>
+          <p>{new Date(review.time_created).toDateString()}</p>
           <img
             width="80px"
             height="100px"

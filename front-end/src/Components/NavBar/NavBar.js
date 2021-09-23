@@ -25,11 +25,11 @@ export default function NavBar() {
       url: `/favorites`,
       cName: "nav-links",
     },
-    {
-      title: "Settings",
-      url: `/settings`,
-      cName: "nav-links",
-    },
+    // {
+    //   title: "Settings",
+    //   url: `/settings`,
+    //   cName: "nav-links",
+    // },
     {
       title: "Logout",
       url: "/logo",
