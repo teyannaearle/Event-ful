@@ -78,15 +78,16 @@ const deleteBookedVendor = async (user_id, event_id, category) => {
 const updateBookedVendor = async (vendor, user_id, event_id) => {
   try {
     const updatedBookedVendor = await db.one(
-      "UPDATE booked SET vendor_address=$1, vendor_phone_number=$2, amount=$3, vendor_image=$4 WHERE user_id=$5 AND event_id=$6 AND vendor_name=$7 RETURNING *",
+      "UPDATE booked SET vendor_address=$1, vendor_phone_number=$2, vendor_name=$3, vendor_image=$4, rating=$5 WHERE user_id=$6 AND event_id=$7 AND category=$8 RETURNING *",
       [
         vendor.vendor_address,
         vendor.vendor_phone_number,
-        vendor.amount,
+        vendor.vendor_name,
         vendor.vendor_image,
+        vendor.rating,
         user_id,
         event_id,
-        vendor.vendor_name,
+        vendor.category
       ]
     );
     return updatedBookedVendor;

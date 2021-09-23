@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Checklist from "../Components/EventPage/Checklist";
 import Budget from "../Components/EventPage/Budget";
 import Timer from "../Components/EventPage/Timer";
 import { apiURL } from "../util/apiURL";
+import CapitalizeEvent from "../Components/CapitalizeEvent";
 import axios from "axios";
 
 const api = apiURL();
@@ -14,6 +15,8 @@ export default function Event({formatter, user_id}) {
   const [categories, setCategories] = useState([]);
   const [budget, setBudget] = useState(0);
   const [shownCost, setShownCost] = useState({});
+const history = useHistory()
+
 
   useEffect(() => {
     try {
@@ -25,7 +28,7 @@ export default function Event({formatter, user_id}) {
     } catch (e) {
       console.error(e)
     }
-
+ 
     try {
       axios.get(`${api}/checklist/${user_id}/${event_id}`).then((response) => {
         const data = response.data.payload;
@@ -70,19 +73,25 @@ export default function Event({formatter, user_id}) {
     }
   };
 
+  
+
 
   return (
+    <>
+        <button className="pg-buttons back-button" onClick={ ()=>history.push("/dashboard")}> &#x21e6; Back to Dashboard</button>
+
     <div className="event-page page">
-      <h1 className="pg-head">{eventName}</h1>
+      <h1 className="pg-head">{eventName ? CapitalizeEvent(eventName) : null}</h1>
       <div className="eventpage-container three-d">
         <div id="checklist-container" className="evenpg-containers">
           <h2 className="col-h">Booked?</h2>
-          <h2 className="col-h">Vendors:</h2>
+          <h2 className="col-h">Find Vendors:</h2>
           <Checklist
             categories={categories}
             user_id={user_id}
             event_id={event_id}
             updateCost={updateCost}
+            eventName = {eventName}
           />
         </div>
 
@@ -97,12 +106,13 @@ export default function Event({formatter, user_id}) {
         </div>
 
         <div id="countdown-container" className="evenpg-containers">
-          <h2 className="col-h">Countdown to {eventName} !</h2>
+          <h2 >Countdown to {eventName} !</h2>
           <Timer 
           user_id={user_id}
           />
         </div>
       </div>
     </div>
+    </>
   );
 }

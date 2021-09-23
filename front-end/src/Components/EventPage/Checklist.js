@@ -1,12 +1,13 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
 import React, { useEffect, useState } from "react";
 
 const api = apiURL();
 
-function Checklist({ categories, user_id, event_id, updateCost }) {
+function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
   const [bookedStatus, setBookedStatus] = useState({});
+  const history = useHistory()
 
   useEffect(() => {
     const booked = {};
@@ -55,6 +56,15 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
         break;
       case "floral":
         item = "Find a Floral Designer";
+        break;
+      case "party_magician":
+        item = "Find a Magician";
+        break;
+      case "party_characters":
+        item = "Find a Character Actor";
+        break;
+      case "party_clown":
+        item = "Find a Clown";
         break;
       default:
         item = "";
@@ -106,7 +116,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
             onClick={() => updateBookedStatus(category.name)}
           >
             {" "}
-           Not Booked &#10007;
+            Not Booked &#10007;
           </button>
         </Link>
       );
@@ -117,7 +127,7 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           onClick={() => updateBookedStatus(category.name)}
         >
           {" "}
-         Booked &#10003;
+          Booked &#10003;
         </button>
       );
     }
@@ -161,6 +171,8 @@ function Checklist({ categories, user_id, event_id, updateCost }) {
           </li>
         );
       })}
+              <button className="book-buttons check" id="all-booked" onClick={ ()=>history.push(`/booked/${event_id}/${eventName}`)}> View All Booked Vendors for {eventName}</button>
+
     </ul>
   );
 }

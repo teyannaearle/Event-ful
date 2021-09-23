@@ -26,25 +26,24 @@ nav {
   color: #fff;
   justify-self: start;
   margin-left: 20px;
-  cursor: pointer;
 }
 
-.fa-react {
+/* .fa-react {
   margin-left: 0.5rem;
   font-size: 1.6rem;
-}
+} */
 
 .nav-links {
   color: white;
   padding: 0.5rem 1rem;
 }
 
-.fa-bars {
+/* .fa-bars {
   color: #fff;
-}
-.fa-bars:hover{
+} */
+/* .fa-bars:hover{
   color: black;
-}
+} */
 .NavBarItems {
   position: relative;
 }
@@ -103,7 +102,7 @@ nav {
     #6daccf,
     #68a7ca
   );
-  color: black;
+  /* color: black; */
   border-radius: 0;
   border: 1px solid white;
 }
@@ -115,9 +114,6 @@ nav {
   transform: transalte(25%, 50%);
 }
 
-.navbar-logo:hover{
-  color: black;
-}
 
 .menu-icon {
   display: block;
@@ -134,9 +130,9 @@ nav {
   font-size: 2rem;
 }
 
-.fa-times:hover{
+/* .fa-times:hover{
   color: black;
-}
+} */
 
 .nav-links-mobile {
   display: block;
@@ -185,7 +181,7 @@ nav {
     #9ec2d7,
     #a5c5d8
   ); */
-  color: black;
+  /* color: black; */
   border-radius: 4px;
   transform: scale(1.1);
 }
