@@ -67,6 +67,7 @@ export default function VendorIndex({ location }) {
   }
 
   return(
+  
     <div className="page indexpg-container">
     <div>
       {category ? <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1> : null}
@@ -84,5 +85,6 @@ export default function VendorIndex({ location }) {
     </div>
     {vendorsList()}
   </div>
+
   )
 }
