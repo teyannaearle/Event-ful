@@ -42,8 +42,7 @@ export default function NavBar() {
 
 
       <h1 className="navbar-logo">
-        Event(ful)
-        &#127881;
+        Event(ful) &#127881;
       </h1>
 
       <ul className="accountNav">
