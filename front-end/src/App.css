@@ -548,6 +548,8 @@ justify-content: space-evenly;
 
 .ven-img{
   padding-bottom: 10px;
+  width: 90%;
+  height: 250px
 }
 /* EditBooked*/
 
@@ -684,3 +686,34 @@ width: 80%;
   
 }
 
+
+@media only screen and (max-width: 1200px) {
+  /* VENDOR INDEX */
+  .ven-ul{
+    grid-template-columns: 45% 45%;
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 700px){
+  .ven-ul{
+    grid-template-columns: 90%;
+  }
+
+}
+
+@media only screen and (max-width: 320px){
+  #zip-form{
+   flex-direction: column;
+   align-items: center;
+  }
+
+  #zip-search{
+    margin-bottom: 10px;
+  }
+
+  #zip-form button{
+    width: 80%;
+  }
+
+}
