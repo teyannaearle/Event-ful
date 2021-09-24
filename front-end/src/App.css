@@ -427,7 +427,7 @@ justify-content: space-evenly;}
 /* VENDOR SHOW PAGE */
 
 .carousel {
-  width: 70%;
+  /* width: 70%; */
 
   display: flex;
   align-items: center;
@@ -445,15 +445,15 @@ justify-content: space-evenly;}
 }
 .vendor-imgs {
   height: 500px;
-  width: 100%;
+  /* width: 100%; */
 }
 
-#ven-info {
-  width: 70%;
-  margin-top: 20px;
+/* #ven-info { */
+  /* width: 70%;
+  margin-top: 20px; */
   /* font-weight: 700; */
-  font-size: larger;
-}
+  /* font-size: larger; */
+/* } */
 
 #ven-info p,
 #ven-info div {
@@ -462,7 +462,7 @@ justify-content: space-evenly;}
 
 .reviews {
   margin-top: 20px;
-  width: 70%;
+  width: 80%;
 }
 
 .review {
@@ -554,7 +554,7 @@ justify-content: space-evenly;
 /* EditBooked*/
 
 .ven-info{
-  width: 50%;
+  width: 80%;
   padding-top: 20px;
 }
 
@@ -696,13 +696,41 @@ width: 80%;
 }
 
 @media only screen and (max-width: 700px){
+    /* VENDOR INDEX */
   .ven-ul{
     grid-template-columns: 90%;
   }
 
+  /* VENDOR SHOW */
+  .rev-text{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .review{
+    grid-template-columns: 30% 70%;
+  }
+
+  .reviewers img{
+    box-shadow: none;
+    width: 90%;
+  }
+
+  .vendor-imgs{
+    height: 350px
+  }
+
+  .car-wrap{
+    width: 90%;
+  }
 }
 
 @media only screen and (max-width: 320px){
+    /* VENDOR INDEX */
   #zip-form{
    flex-direction: column;
    align-items: center;
@@ -715,5 +743,8 @@ width: 80%;
   #zip-form button{
     width: 80%;
   }
-
+  /* VENDOR SHOW */
+  #vendor-showpage h1{
+    text-align: center;
+  }
 }

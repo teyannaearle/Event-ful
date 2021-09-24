@@ -17,7 +17,7 @@ function VendorReview({review}) {
           />
         </div>
 
-        <div>
+        <div className="rev-text">
           <Ratings
             rating={review.rating}
             widgetRatedColors="steelblue"
