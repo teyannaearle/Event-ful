@@ -135,7 +135,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
   };
 
   const handleSelection = (selected) => {
-    const loc = selected.location.display_address.join();
+    const loc = selected.location.display_address.join(", ");
     let bookedbody = {
       vendor_name: selected.name,
       vendor_address: loc,

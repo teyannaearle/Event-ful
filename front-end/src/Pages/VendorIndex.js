@@ -24,6 +24,7 @@ export default function VendorIndex({ location }) {
     (async () => {
       if (lng && lat) {
         const data = await api.getVendorsLongLag(lng, lat, category);
+
         if (data.businesses[0].id) {
           setVendors(data.businesses);
         }
@@ -47,7 +48,6 @@ export default function VendorIndex({ location }) {
     if (data[0].id) {
       setVendors(data);
     }
-
     setSearched(true);
   };
 
