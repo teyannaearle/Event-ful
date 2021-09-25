@@ -50,18 +50,18 @@ INSERT INTO tasklist (task_name , is_completed , user_id, event_id ) VALUES
 
 
 INSERT INTO booked (user_id, event_id, task_id, vendor_name, vendor_address, vendor_phone_number, vendor_image, rating, category, amount) VALUES
-(1, 1, 1, 'Dave & Busters', '234 west 42nd street', '6464952015', 'image url', 5, 'venues', 400),
-(1, 1, 1, 'Tokyo Sushi', '123 Main Street', '7185551234', 'image url', 5, 'venues', 500),
-(2, 1, 1, 'Lotos Thai', '555 East 27 street', '3475551234', 'image url', 5, 'venues', 600),
-(2, 1, 1, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567', 'image url', 5, 'venues', 700);
+(1, 1, 1, 'Dave & Busters', '234 west 42nd street', '6464952015', '', 5, 'venues', 400),
+(1, 1, 1, 'Tokyo Sushi', '123 Main Street', '7185551234', '', 5, 'venues', 500),
+(2, 1, 1, 'Lotos Thai', '555 East 27 street', '3475551234', '', 5, 'venues', 600),
+(2, 1, 1, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567', '', 5, 'venues', 700);
 
 
 INSERT INTO favorites (user_id, vendor_name, vendor_address, vendor_phone_number, vendor_id, vendor_image, vendor_category, vendor_rating) VALUES
-(1, 'Dave & Busters', '234 west 42nd street', '6464952015','jwghjgvw', 'image url', 'venues', 5),
-(1, 'Restaurant 1', '234 west 42nd street', '6464952015','jwdffgvw', 'image url', 'acategory', 5),
-(1, 'Tokyo Sushi', '123 Main Street', '7185551234', 'jwbhgyux', 'image url', 'venues', 5),
-(2, 'Lotos Thai', '555 East 27 street', '3475551234', 'whjbhdv', 'image url', 'venues', 5),
-(2, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567', 'whvwg', 'image url', 'venues', 5);
+(1, 'Dave & Busters', '234 west 42nd street', '6464952015','jwghjgvw', '', 'venues', 5),
+(1, 'Restaurant 1', '234 west 42nd street', '6464952015','jwdffgvw', '', 'venues', 5),
+(1, 'Tokyo Sushi', '123 Main Street', '7185551234', 'jwbhgyux', '', 'venues', 5),
+(2, 'Lotos Thai', '555 East 27 street', '3475551234', 'whjbhdv', '', 'venues', 5),
+(2, 'Bengal Tiger Indian', '777 west 77nd street', '6461234567', 'whvwg', '', 'venues', 5);
  
 
 

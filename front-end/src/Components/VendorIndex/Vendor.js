@@ -1,11 +1,10 @@
 import React from "react";
 import Ratings from "react-ratings-declarative";
-import { useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom";
 
 function Vendor({ vendor }) {
   // const location = useLocation().pathname.split("/")
-//  const split = location.pathname.split("/")
-
+  //  const split = location.pathname.split("/")
 
   return (
     <>

@@ -14,8 +14,6 @@ import SignUp from "./Pages/SignUp.js";
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import EditBooked from "./Pages/EditBooked.js";
-import { Route, Switch } from "react-router-dom";
-import useGeoLocation from "./hooks/useGeoLocation";
 import ScrollToTop from "./Components/ScrollToTop.js";
 import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
