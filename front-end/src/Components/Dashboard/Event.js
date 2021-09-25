@@ -5,12 +5,17 @@ import CapitalizeEvent from "../CapitalizeEvent";
 function Event({ event, user_id }) {
   return (
     <div className="event-sq">
+
       <Link to={`/event/${event.event_id}`}>
-        <h2>Plan {CapitalizeEvent(event.event_name)}</h2>
+        <p className="plan-ev">
+          &#x261E;Plan {CapitalizeEvent(event.event_name)}
+        </p>
       </Link>
+      <span className="ed-but">
       <Link to={`/dashboard/${user_id}/edit`}>
-        <button className="pg-buttons edit-ev">Edit {CapitalizeEvent(event.event_name)} Details</button>
+        <button className="pg-buttons edit-ev">Edit Event Details</button>
       </Link>
+      </span>
     </div>
   );
 }
