@@ -10,6 +10,7 @@ const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 const API = apiURL();
 
 function VendorShowInfo({ business, user_id, category }) {
+
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
@@ -38,11 +39,14 @@ function VendorShowInfo({ business, user_id, category }) {
         axios
           .delete(`${API}/favorites/${user_id}/${business.name}`)
           .then((res) => "");
+
       } catch (e) {
         console.warn(e);
       }
     } else {
+
       const loc = business.location.display_address.join(", ");
+
       const body = {
         vendor_name: business.name,
         vendor_address: loc,

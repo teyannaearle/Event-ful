@@ -24,7 +24,10 @@ export default function VendorIndex({ location }) {
     (async () => {
       if (lng && lat) {
         const data = await api.getVendorsLongLag(lng, lat, category);
-        setVendors(data.businesses);
+
+        if (data.businesses[0].id) {
+          setVendors(data.businesses);
+        }
         setSearched(true);
       }
     })();
@@ -40,16 +43,12 @@ export default function VendorIndex({ location }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = await api.getVendorsZip(category, zip);
-    setVendors(data);
+    if (data[0].id) {
+      setVendors(data);
+    }
     setSearched(true);
-    // if (zip.length !== 5) {
-    //   window.alert("Zip code is not valid");
-    // } else {
-    //   const data = await api.getVendorsZip(category, zip);
-    //   setVendors(data);
-    //   setSearched(true)
-    // }
   };
 
   const vendorsList = () => {

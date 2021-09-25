@@ -18,41 +18,19 @@ import ScrollToTop from "./Components/ScrollToTop.js";
 import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
-import EventCheckboxPg from "./Pages/EventCheckboxPg"
+import EventCheckboxPg from "./Pages/EventCheckboxPg";
 
-const API = apiURL();
 const user_id = 1;
-const name = "jasleen"
+const name = "jasleen";
 
 function App() {
   const location = useGeoLocation();
-  const [events, setEvents] = useState([]);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
-
-  useEffect(() => {
-    axios
-      .get(`${API}/events/${user_id}`)
-      .then(
-        (res) => {
-          setEvents(res.data.message);
-        },
-        (e) => {
-          console.error(e);
-        }
-      )
-      .catch((e) => {
-        console.error(e);
-      });
-
-    return () => {
-      setEvents([]);
-    };
-  }, []);
 
   useEffect(() => {
     if (location.coordinates) {
@@ -62,8 +40,8 @@ function App() {
   }, [location]);
 
   const capitalizeName = (name) => {
-    return name[0].toUpperCase() + name.slice(1)
-  }
+    return name[0].toUpperCase() + name.slice(1);
+  };
 
   return (
     <div className="site">
@@ -91,7 +69,7 @@ function App() {
         </Route>
 
         <Route path="/dashboard">
-          <Dashboard user_id={user_id} name={capitalizeName(name)}/>
+          <Dashboard user_id={user_id} name={capitalizeName(name)} />
         </Route>
 
         <Route path="/task/:category/:event_id/:task_id">
@@ -100,7 +78,6 @@ function App() {
             lat={lat}
             lng={lng}
             formatter={formatter}
-            events={events}
           />
         </Route>
 
@@ -109,7 +86,7 @@ function App() {
         </Route>
 
         <Route path="/vendor/:category/:provider_id">
-          <VendorShow user_id={user_id} events={events} />
+          <VendorShow user_id={user_id} />
         </Route>
 
         <Route path="/favorites">

@@ -7,17 +7,15 @@ const api = apiURL();
 
 function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
   const [bookedStatus, setBookedStatus] = useState({});
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     const booked = {};
-    const show = {};
-    const cost = {};
 
     for (let category of categories) {
       booked[category.name] = category.booked;
-      show[category.name] = false;
-      cost[category.name] = category.cost;
+      // show[category.name] = false;
+      // cost[category.name] = category.cost;
     }
 
     setBookedStatus(booked);
@@ -26,52 +24,6 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
       setBookedStatus({});
     };
   }, [categories]);
-
-  const listItem = (category) => {
-    let item = "";
-    switch (category) {
-      case "catering":
-        item = "Find a Caterer";
-        break;
-      case "djs":
-        item = "Find a DJ";
-        break;
-      case "musicians":
-        item = "Find a Musician";
-        break;
-      case "party_rental":
-        item = "Find Equipment Rentals";
-        break;
-      case "photographers":
-        item = "Find a Photographer";
-        break;
-      case "videographers":
-        item = "Find a Videographer";
-        break;
-      case "venues":
-        item = "Find a Venue";
-        break;
-      case "balloons":
-        item = "Find Balloon Services";
-        break;
-      case "floral":
-        item = "Find a Floral Designer";
-        break;
-      case "party_magician":
-        item = "Find a Magician";
-        break;
-      case "party_characters":
-        item = "Find a Character Actor";
-        break;
-      case "party_clown":
-        item = "Find a Clown";
-        break;
-      default:
-        item = "";
-    }
-
-    return item;
-  };
 
   const updateBookedStatus = (category) => {
     let body = {
@@ -84,13 +36,13 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     if (!bookedStatus[category] === false) {
       axios
         .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
-        .then((res) => "");
-
-      let checklistBody = {
-        task_cost: 0,
-        task_name: category,
-      };
-      updateCost(checklistBody, category);
+        .then((res) => {
+          let checklistBody = {
+            task_cost: 0,
+            task_name: category,
+          };
+          updateCost(checklistBody, category);
+        });
     }
 
     try {
@@ -144,6 +96,52 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     return button;
   };
 
+  const listItem = (category) => {
+    let item = "";
+    switch (category) {
+      case "catering":
+        item = "Find a Caterer";
+        break;
+      case "djs":
+        item = "Find a DJ";
+        break;
+      case "musicians":
+        item = "Find a Musician";
+        break;
+      case "party_rental":
+        item = "Find Equipment Rentals";
+        break;
+      case "photographers":
+        item = "Find a Photographer";
+        break;
+      case "videographers":
+        item = "Find a Videographer";
+        break;
+      case "venues":
+        item = "Find a Venue";
+        break;
+      case "balloons":
+        item = "Find Balloon Services";
+        break;
+      case "floral":
+        item = "Find a Floral Designer";
+        break;
+      case "party_magician":
+        item = "Find a Magician";
+        break;
+      case "party_characters":
+        item = "Find a Character Actor";
+        break;
+      case "party_clown":
+        item = "Find a Clown";
+        break;
+      default:
+        item = "";
+    }
+
+    return item;
+  };
+
   return (
     <ul className="checklist checklist-ul">
       {categories.map((category, i) => {
@@ -171,8 +169,14 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           </li>
         );
       })}
-              <button className="book-buttons check" id="all-booked" onClick={ ()=>history.push(`/booked/${event_id}/${eventName}`)}> View All Booked Vendors for {eventName}</button>
-
+      <button
+        className="book-buttons check"
+        id="all-booked"
+        onClick={() => history.push(`/booked/${event_id}/${eventName}`)}
+      >
+        {" "}
+        View All Booked Vendors for {eventName}
+      </button>
     </ul>
   );
 }

@@ -7,35 +7,12 @@ const {
   createEvent,
   deleteEvent,
   updateEvent,
-  getLastEvent
 } = require("../queries/events");
 
 const db = require("../db/dbConfig");
-///fix catch for first event in table/////
-events.get("/last", async (req,res) => {
-  const event = await getLastEvent();
-  try {
-    const event = await getLastEvent();
-
-    if (event.event_id) {
-      res.status(200).json({
-        success: true,
-        payload: event,
-      });
-    } else {
-      throw event;
-    }
-  } catch (e) {
-    res.status(404).json({
-      success: true,
-      payload: {event_id: 1}
-    });
-  }
-})
 
 events.get("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-
   try {
     const event = await getEvent(user_id, event_id);
 
