@@ -597,6 +597,17 @@ button:hover {
   }
 }
 
+@media only screen and (max-width: 1000px){
+  /* EVENT PAGE */
+  .eventpage-container{
+    grid-template-columns: 100%;
+  }
+  
+#countdown-container{
+  grid-column: span 1;
+}
+}
+
 @media only screen and (max-width: 800px) {
   /*DASHBOARD*/
   .dash-events {
@@ -669,3 +680,5 @@ button:hover {
     text-align: center;
   }
 }
+
+
