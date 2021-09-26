@@ -11,8 +11,8 @@ function Vendor({ vendor }) {
         <img
           src={vendor.image_url}
           alt={vendor.name}
-          height="250"
-          width="300"
+          // height="250"
+          // width="300"
           className="ven-img"
         />
         <h2>{vendor.name}</h2>

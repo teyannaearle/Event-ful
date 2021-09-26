@@ -29,6 +29,14 @@ function EventList({ user_id }) {
   return (
     <>
       <ul className="dash-events">
+        <span className="dash-event new-sq">
+      <Link to={`/dashboard/new_event`} className="new-event" >
+
+<p id="new">Create a new event and start planning! </p>
+ <p className="plus-sign"> 	&#x002B;</p>
+
+</Link>
+</span>
         {events.map((event) => {
           return (
             <li key={event.event_id} className="dash-event">
@@ -36,12 +44,7 @@ function EventList({ user_id }) {
             </li>
           );
         })}
-        <Link to={`/dashboard/new_event`} className="dash-event new-event" >
 
-        <h2 id="new-event">Create a new event and start planning! </h2>
-         <p className="plus-sign"> 	&#x002B;</p>
-
-        </Link>
       </ul>
     </>
   );

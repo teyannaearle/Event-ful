@@ -209,7 +209,8 @@ function EditBooked({ user_id, lat, lng, formatter }) {
 
   const vendorShow = () => {
     return (
-      <div className="ven-info">
+      // <div className="ven-info">
+      <div className="single-ven">
         <Vendor vendor={vendor} category={category} />
         <div className="three-d ven-cost">
           <p>Cost: {formatter.format(cost)}</p>
