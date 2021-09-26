@@ -9,7 +9,8 @@ const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 
 const API = apiURL();
 
-function VendorShowInfo({ business, user_id }) {
+function VendorShowInfo({ business, user_id, category }) {
+
   const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
@@ -37,20 +38,27 @@ function VendorShowInfo({ business, user_id }) {
       try {
         axios
           .delete(`${API}/favorites/${user_id}/${business.name}`)
+          .then((res) => "");
+
       } catch (e) {
         console.warn(e);
       }
     } else {
-      const loc = business.location.display_address.join();
+
+      const loc = business.location.display_address.join(", ");
+
       const body = {
         vendor_name: business.name,
         vendor_address: loc,
         vendor_phone_number: parseNum(business.phone),
+        // vendor_phone_number: business.display_phone,
         vendor_id: business.id,
-        vendor_image: business.image_url,
+        vendor_image: business.photos[0],
+        vendor_category: category,
+        vendor_rating: business.rating,
       };
       try {
-        axios.post(`${API}/favorites/${user_id}`, body);
+        axios.post(`${API}/favorites/${user_id}`, body).then((res) => "");
       } catch (e) {
         console.warn(e);
       }

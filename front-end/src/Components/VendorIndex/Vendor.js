@@ -1,7 +1,10 @@
 import React from "react";
 import Ratings from "react-ratings-declarative";
 
+
+
 function Vendor({ vendor }) {
+
   return (
     <>
       <li className="flex-col three-d ven-li">

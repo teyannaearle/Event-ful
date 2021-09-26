@@ -43,8 +43,8 @@ const deleteAll = async (user_id, event_id) => {
       [user_id, event_id]
     )
     return deleted
-  }catch (err){
-    return errr
+  } catch (err){
+    return err
   }
 }
 

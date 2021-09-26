@@ -60,7 +60,11 @@ export default function VendorShow({ user_id }) {
       <div id="vendor-showpage" className="page">
         {business.photos[0] ? (
           <>
-            <VendorShowInfo business={business} user_id={user_id} />
+            <VendorShowInfo
+              business={business}
+              user_id={user_id}
+              category={category}
+            />
             <VendorReviews reviews={reviews} />{" "}
           </>
         ) : (
