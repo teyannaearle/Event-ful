@@ -23,11 +23,11 @@ function VendorReview({review}) {
             widgetRatedColors="steelblue"
             widgetSpacings="2px"
           >
-            <Ratings.Widget widgetDimension="15px" />
-            <Ratings.Widget widgetDimension="15px" />
             <Ratings.Widget widgetDimension="20px" />
-            <Ratings.Widget widgetDimension="15px" />
-            <Ratings.Widget widgetDimension="15px" />
+            <Ratings.Widget widgetDimension="20px" />
+            <Ratings.Widget widgetDimension="25px" />
+            <Ratings.Widget widgetDimension="20px" />
+            <Ratings.Widget widgetDimension="20px" />
           </Ratings>
 
           <p>{review.text}</p>
