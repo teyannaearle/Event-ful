@@ -250,34 +250,34 @@ function EditBooked({ user_id, lat, lng, formatter }) {
     let direction = "";
     if ((!vendor && !searched && lat && lng) || searched) {
       direction = (
-        <h2>
+        <p className="directions">
           Browse below or search by zip code to select the vendor that you've
           booked
-        </h2>
+        </p>
       );
     } else if (vendor && !searched) {
       direction = (
         <>
-          <h2> Edit discussed cost below </h2>
+          <p className="directions"> Edit discussed cost below </p>
 
-          <h2>
+          <p className="directions">
             If you have changed vendors, search by zip code above to select the
             vendor that you've booked{" "}
-          </h2>
+          </p>
         </>
       );
     } else if (searched && !vendors) {
       direction = (
-        <h2>
+        <p className="directions">
           Unfortunately, we could not find any vendors in this area. Please try
           another zip code.{" "}
-        </h2>
+        </p>
       );
     } else if (!lng && !lat) {
       direction = (
-        <h2>
+        <p className="directions">
           Search by zip code above to select the vendor that you've booked
-        </h2>
+        </p>
       );
     }
 
