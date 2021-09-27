@@ -1,5 +1,6 @@
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { UserProvider } from "./Providers/UserProvider";
 import { apiURL } from "./util/apiURL";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
@@ -19,6 +20,7 @@ import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
+import SignIn from "./Pages/SignIn.js"
 
 const user_id = 1;
 const name = "jasleen";
@@ -45,6 +47,7 @@ function App() {
 
   return (
     <div className="site">
+      <UserProvider>
       <ScrollToTop />
       <NavBar user_id={user_id} />
       <Switch>
@@ -54,6 +57,10 @@ function App() {
 
         <Route path="/signup">
           <SignUp />
+        </Route>
+
+        <Route path="/signin">
+          <SignIn />
         </Route>
 
         <Route path="/dashboard/new_event/checklist/:id">
@@ -101,6 +108,7 @@ function App() {
           <Booked user_id={user_id} />
         </Route>
       </Switch>
+      </UserProvider>
     </div>
   );
 }
