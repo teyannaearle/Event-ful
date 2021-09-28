@@ -4,6 +4,7 @@ import Event from "./Pages/EventPage";
 import Favorites from "./Pages/Favorites.js";
 import Landing from "./Pages/Landing.js";
 import SignUp from "./Pages/SignUp.js";
+import SignIn from "./Pages/SignIn"
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import { Route, Switch } from "react-router-dom";
@@ -28,6 +29,10 @@ function App() {
 
         <Route path="/signup">
           <SignUp />
+        </Route>
+
+        <Route path="/signin">
+          <SignIn />
         </Route>
 
         <Route path="/dashboard/:user_id">
