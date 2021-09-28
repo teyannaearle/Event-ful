@@ -497,8 +497,6 @@ button:hover {
 .like-span {
   position: absolute;
   top: 0;
-
-
   visibility: hidden;
   opacity: 0;
   transition: 0.6s;
@@ -732,6 +730,26 @@ span.press {
   }
 }
 
+@media only screen and (max-width: 850px){
+  /* VENDOR SHOW */
+  #vendor-showpage{
+    margin-top: 20px;
+  }
+
+  .like-span {
+    top: 0;
+    left: -60px;
+    font-size: medium;
+    padding: 15px;
+  }
+  
+  span.press {
+    left: -60px;
+    top: -70px;
+  }
+
+}
+
 @media only screen and (max-width: 800px) {
   /*DASHBOARD*/
   .dash-events {
@@ -787,8 +805,38 @@ span.press {
   /*VENDOR SHOW */
   .like-div {
     text-align: center;
-    margin-left: 0;
   }
+
+  .show-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .show-header h1 , .show-header div{
+    width: 100%;
+    text-align: center;
+    margin-left: 0px;
+  }
+
+
+  .like-span {
+    top: 0;
+    left: 80px;
+    font-size: smaller;
+    padding: 10px;
+  }
+  
+  span.press {
+    left: 80px;
+    top: 58px;
+  }
+
+  .ven-info{
+    margin-top: 0px;
+  }
+
 }
 
 @media only screen and (max-width: 320px) {
