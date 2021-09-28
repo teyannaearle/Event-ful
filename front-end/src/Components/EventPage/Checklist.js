@@ -32,7 +32,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
       user_id: user_id,
       event_id: event_id,
     };
-
+/// ONLY DELETE IF THE BOOKED VENDOR EXISTS ////
     if (!bookedStatus[category] === false) {
       axios
         .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
@@ -68,7 +68,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
             onClick={() => updateBookedStatus(category.name)}
           >
             {" "}
-            Not Booked &#10007;
+            &#10007; No
           </button>
         </Link>
       );
@@ -79,11 +79,43 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           onClick={() => updateBookedStatus(category.name)}
         >
           {" "}
-          Booked &#10003;
+          &#10003; Yes
         </button>
       );
     }
   };
+
+  // const bookedButton = (category, id) => {
+  //   if (bookedStatus[category.name] === false) {
+  //     return (
+  //       // <Link to={`/task/${category.name}/${event_id}/${id}`}>
+  //         <input
+  //           className="book-button x"
+  //           onChange={() => updateBookedStatus(category.name)}
+  //           type="checkbox"
+  //           // value={bookedStatus[category.name]}
+  //           checked={bookedStatus[category.name]}
+  //         >
+  //           {/* {" "}
+  //           &#10007; No */}
+  //         </input>
+  //       // </Link>
+  //     );
+  //   } else {
+  //     return (
+  //       <input
+  //         className="book-button check"
+  //         onChange={() => updateBookedStatus(category.name)}
+  //         type="checkbox"
+  //         // value={bookedStatus[category.name]}
+  //         checked={bookedStatus[category.name]}
+  //       >
+  //         {/* {" "}
+  //         &#10003; Yes */}
+  //       </input>
+  //     );
+  //   }
+  // };
 
   const editButton = (category) => {
     let button = "";
