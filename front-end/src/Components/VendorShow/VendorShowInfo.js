@@ -69,7 +69,6 @@ function VendorShowInfo({ business, user_id, category }) {
 
   const heartColor = () => {
     let color = "";
-    // favorite ? "#68a7ca" : "#aaa"
 
     if (hover && !favorite) {
       color = "#666";

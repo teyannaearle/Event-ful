@@ -155,16 +155,18 @@ function EditBooked({ user_id, lat, lng, formatter }) {
         axios
           .post(`${API}/booked/${user_id}/${event_id}`, bookedbody)
           .then((res) => {
-            setVendor(selected);
-            setVendors([]);
-            setSearched(false);
+            try {
+              axios
+                .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
+                .then((res) => {
+                  setVendor(selected);
+                  setVendors([]);
+                  setSearched(false);
+                });
+            } catch (e) {
+              console.error(e);
+            }
           });
-      } catch (e) {
-        console.error(e);
-      }
-
-      try {
-        axios.put(`${API}/checklist/${user_id}/${event_id}`, checklistBody);
       } catch (e) {
         console.error(e);
       }
@@ -173,16 +175,18 @@ function EditBooked({ user_id, lat, lng, formatter }) {
         axios
           .put(`${API}/booked/${user_id}/${event_id}`, bookedbody)
           .then((res) => {
-            setVendor(selected);
-            setVendors([]);
-            setSearched(false);
+            try {
+              axios
+                .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
+                .then((res) => {
+                  setVendor(selected);
+                  setVendors([]);
+                  setSearched(false);
+                });
+            } catch (e) {
+              console.error(e);
+            }
           });
-      } catch (e) {
-        console.error(e);
-      }
-
-      try {
-        axios.put(`${API}/checklist/${user_id}/${event_id}`, checklistBody);
       } catch (e) {
         console.error(e);
       }
@@ -209,7 +213,6 @@ function EditBooked({ user_id, lat, lng, formatter }) {
 
   const vendorShow = () => {
     return (
-      // <div className="ven-info">
       <div className="single-ven">
         <Vendor vendor={vendor} category={category} />
         <div className="three-d ven-cost">
