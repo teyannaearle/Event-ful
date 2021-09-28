@@ -32,13 +32,10 @@ h4 {
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
 }
 
-<<<<<<< HEAD
-=======
 .page h1 {
   text-align: center;
 }
 
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
 h1 {
   margin-top: 10px;
 }
@@ -48,10 +45,6 @@ h2:hover {
 }
 
 body {
-<<<<<<< HEAD
-  /* background-color: #b2d3e6; */
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   background: radial-gradient(
     circle,
     rgba(186, 222, 242, 1) 0%,
@@ -64,23 +57,11 @@ button {
   border: 0;
   border-radius: 4px;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
-<<<<<<< HEAD
-  /* box-shadow: 0px 3px 0px #d8d8d8, 0px 2px 10px rgba(0, 0, 0, 0.4),
-    inset 0px 0px 3px rgba(255, 255, 255, 0.927); */
-=======
-
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   box-shadow: 0px 3px 0px #7d97a5, 0px 2px 10px rgba(0, 0, 0, 0.4),
     inset 0px 0px 3px rgba(255, 255, 255, 0.927);
 }
 
 button:active {
-<<<<<<< HEAD
-  /* box-shadow: 0px 2px 0px #b3b3b3, 0px 1px 6px rgba(0, 0, 0, 0.4),
-    inset 0px 1px 0px rgba(255, 255, 255, 0.797),
-    inset 0px 0px 3px rgba(255, 255, 255, 0.927); */
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   box-shadow: 0px 2px 0px #7d97a5, 0px 1px 6px rgba(0, 0, 0, 0.4),
     inset 0px 1px 0px rgba(255, 255, 255, 0.797),
     inset 0px 0px 3px rgba(255, 255, 255, 0.927);
@@ -93,10 +74,6 @@ button:hover {
 }
 
 .pg-buttons {
-<<<<<<< HEAD
-  /* padding: 5px; */
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 4px;
@@ -115,10 +92,6 @@ button:hover {
 }
 
 .back-button {
-<<<<<<< HEAD
-  /* margin-left: 10px; */
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   height: 50px;
   width: max-content;
 }
@@ -129,14 +102,9 @@ button:hover {
 
 .pg-input {
   border-radius: 8px;
-<<<<<<< HEAD
-
-  padding: 5px;
-=======
   padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   border: 0;
 }
 
@@ -145,11 +113,6 @@ button:hover {
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 3px 0px #7d97a5, 0px 2px 10px rgba(0, 0, 0, 0.4),
     inset 0px 0px 3px rgba(255, 255, 255, 0.927);
-<<<<<<< HEAD
-  /* box-shadow: 0px 3px 0px #d8d8d8, 0px 2px 10px rgba(0, 0, 0, 0.4),
-    inset 0px 0px 3px rgba(255, 255, 255, 0.927); */
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
 }
 
 .flex-row {
@@ -177,13 +140,10 @@ button:hover {
 
 /* EVENT PAGE */
 
-<<<<<<< HEAD
-=======
 .event-page {
   margin-top: 0;
 }
 
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
 #all-booked {
   grid-column: span 2;
   width: max-content;
@@ -250,13 +210,12 @@ button:hover {
   grid-template-columns: 25% 75%;
 }
 
-
 .book-buttons button {
   width: 100%;
   height: 25px;
   margin: 5px;
   width: 100%;
-  width: 60%
+  width: 60%;
 }
 
 .book-buttons a {
@@ -264,27 +223,14 @@ button:hover {
   margin-right: 10px;
 }
 
-<<<<<<< HEAD
-=======
-.book-buttons input{
-  width: 100%
+.book-buttons input {
+  width: 100%;
 }
 
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
 .check {
   background: rgb(104, 167, 202, 1);
   background: linear-gradient(
     90deg,
-<<<<<<< HEAD
-    rgba(108, 140, 170, 1) 0%,
-    rgba(94, 120, 144, 1) 100%
-  ); */
-  /* background: #68a7ca; */
-  background: rgb(104, 167, 202, 1);
-  background: linear-gradient(
-    90deg,
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
     rgba(104, 167, 202, 1) 0%,
     rgb(96, 153, 184) 100%
   );
@@ -302,15 +248,6 @@ button:hover {
   );
 }
 .check:active {
-<<<<<<< HEAD
-  /* background: rgb(94, 120, 144);
-  background: linear-gradient(
-    90deg,
-    rgba(94, 120, 144, 1) 0%,
-    rgba(108, 140, 170, 1) 100%
-  ); */
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   background: rgb(96, 153, 184, 1);
   background: linear-gradient(
     90deg,
@@ -331,15 +268,6 @@ button:hover {
 }
 
 .x:hover {
-<<<<<<< HEAD
-  /* background: rgb(176, 203, 227);
-  background: linear-gradient(
-    90deg,
-    rgba(176, 203, 227, 1) 0%,
-    rgba(160, 185, 208, 1) 100%
-  ); */
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   background: rgba(165, 197, 215, 1);
   background: linear-gradient(
     90deg,
@@ -351,15 +279,6 @@ button:hover {
 }
 
 .x:active {
-<<<<<<< HEAD
-  /* background: rgba(149, 177, 203);
-  background: linear-gradient(
-    90deg,
-    rgba(149, 177, 203, 1) 0%,
-    rgba(158, 190, 219, 1) 100%
-  ); */
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   background: rgba(165, 197, 215, 1);
   background: linear-gradient(
     90deg,
@@ -551,29 +470,12 @@ button:hover {
   text-align: center;
 }
 
-<<<<<<< HEAD
-/* .book-fav{
-display: flex;
-flex-direction: column;
-margin-top: 5px;
-margin-bottom: 5px;
-height: 50px;
-justify-content: space-evenly;
-} */
-
-=======
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
 .book-fav button {
   margin-top: 10px;
   margin-bottom: 20px;
   width: 200px;
 }
 
-<<<<<<< HEAD
-.ven-info {
-  width: 70%;
-  padding-top: 20px;
-=======
 .like-div {
   margin: 0 auto;
   position: relative;
@@ -649,7 +551,6 @@ span.press {
   100% {
     padding: 10px 12px 8px;
   }
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
 }
 
 /* VENDOR INDEX PAGE */
@@ -690,8 +591,6 @@ span.press {
 .ven-li {
   padding: 20px;
   background-color: white;
-<<<<<<< HEAD
-=======
   height: 90%;
 }
 
@@ -702,21 +601,11 @@ span.press {
 }
 /* EditBooked*/
 
-.directions{
+.directions {
   font-size: larger;
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
 }
 
 .ven-info {
-<<<<<<< HEAD
-  /* width: 100%;
-  height: 50%;
-  justify-content:space-evenly; */
-  margin-top: 50px;
-  text-align: center;
-}
-
-=======
   width: 80%;
   padding-top: 20px;
   text-align: center;
@@ -726,7 +615,6 @@ span.press {
   margin-top: 20px;
 }
 
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
 .ven-cost {
   height: 100px;
   width: 100%;
@@ -767,13 +655,7 @@ span.press {
   height: 255px;
   width: 100%;
   display: flex;
-<<<<<<< HEAD
-  align-items: center;
-  justify-content: center;
-  /* box-shadow: 0px 3px 0px #7d97a5, 0px 2px 4px rgba(0, 0, 0, 0.4); */
-=======
   flex-direction: column;
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   box-shadow: 0px 3px 0px rgba(125, 151, 165, 0.4),
     0px 2px 4px rgba(125, 151, 165, 0.4);
   color: #68a7ca;
@@ -781,35 +663,6 @@ span.press {
 }
 
 .plus-sign {
-<<<<<<< HEAD
-  font-size: 250px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 3px 0px #7d97a5, 0px 2px 4px rgba(0, 0, 0, 0.4);
-  color: #68a7ca;
-}
-
-.event-sq {
-  /* display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-justify-content: space-around; */
-  display: grid;
-  grid-column: 50% 50%;
-  align-items: center;
-  /* justify-content: center; */
-  height: 60%;
-  width: 80%;
-}
-
-.edit-ev {
-  /* position: absolute; */
-  /* bottom: 0; */
-  width: 100%;
-=======
   font-size: 200px;
   font-family: "Times New Roman";
   line-height: 150px;
@@ -859,23 +712,9 @@ justify-content: space-around; */
 }
 .edit-ev {
   width: max-content;
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
   padding-top: 5px;
   padding-bottom: 5px;
 }
-
-<<<<<<< HEAD
-.page {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* #new_event_form {
-  margin: 8px;
-} */
-=======
 
 @media only screen and (max-width: 1200px) {
   /* VENDOR INDEX */
@@ -896,9 +735,9 @@ justify-content: space-around; */
   }
 }
 
-@media only screen and (max-width: 850px){
+@media only screen and (max-width: 850px) {
   /* VENDOR SHOW */
-  #vendor-showpage{
+  #vendor-showpage {
     margin-top: 20px;
   }
 
@@ -908,12 +747,11 @@ justify-content: space-around; */
     font-size: medium;
     padding: 15px;
   }
-  
+
   span.press {
     left: -60px;
     top: -70px;
   }
-
 }
 
 @media only screen and (max-width: 800px) {
@@ -973,19 +811,19 @@ justify-content: space-around; */
     text-align: center;
   }
 
-  .show-header{
+  .show-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .show-header h1 , .show-header div{
+  .show-header h1,
+  .show-header div {
     width: 100%;
     text-align: center;
     margin-left: 0px;
   }
-
 
   .like-span {
     top: 0;
@@ -993,16 +831,15 @@ justify-content: space-around; */
     font-size: smaller;
     padding: 10px;
   }
-  
+
   span.press {
     left: 80px;
     top: 58px;
   }
 
-  .ven-info{
+  .ven-info {
     margin-top: 0px;
   }
-
 }
 
 @media only screen and (max-width: 320px) {
@@ -1024,4 +861,3 @@ justify-content: space-around; */
     text-align: center;
   }
 }
->>>>>>> dbb6f5a3058ec8ec684718747dc6d560624dca4b
