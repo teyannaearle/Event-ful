@@ -378,21 +378,23 @@ button:hover {
   margin-top: 0;
 }
 .show-header {
-  width: 100%;
+  width: 80%;
+  margin: auto;
+  text-align: center;
   /* height: 100% */
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
 }
 
 .show-header h1,
 .show-header div {
-  /* display: inline; */
-  width: 100%;
+  display: inline;
+  width: 50%;
 }
 
 .show-header h1 {
   text-align: right;
-  width: 140%;
+  width: 85%;
 }
 
 .show-header div {
@@ -494,7 +496,9 @@ button:hover {
 
 .like-span {
   position: absolute;
-  top: 20px;
+  top: 0;
+
+
   visibility: hidden;
   opacity: 0;
   transition: 0.6s;
@@ -516,7 +520,7 @@ i.press {
 
 span.press {
   left: 50px;
-  top: -5px;
+  top: -40px;
   animation: fade 2s;
 }
 
