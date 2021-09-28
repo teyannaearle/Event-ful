@@ -6,11 +6,11 @@ import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
 
-export default function EventCheckbox({user_id}) {
-    const { id } = useParams()
-    const history = useHistory()
+export default function EventCheckbox({ user_id }) {
+  const { id } = useParams();
+  const history = useHistory();
 
-    const [eventForm, setEventForm] = useState({
+  const [eventForm, setEventForm] = useState({
     djs: false,
     musicians: false,
     photographers: false,
@@ -24,12 +24,12 @@ export default function EventCheckbox({user_id}) {
     party_clown: false,
   });
 
-//pass props from eventForm to represent the name,date, budget, etc.
-const addToCheckedList = () => {
+  //pass props from eventForm to represent the name,date, budget, etc.
+  const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
     // console.log(categories);
     // const id = lastEvent.event_id + 1;
-    
+
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
@@ -53,9 +53,9 @@ const addToCheckedList = () => {
     e.preventDefault();
     addToCheckedList();
   };
-    
-    return (
-        <section className="NewEvent">
+
+  return (
+    <section className="NewEvent">
       <form className="three-d" onSubmit={handleSubmit}>
         <label>
           DJ
@@ -156,8 +156,10 @@ const addToCheckedList = () => {
             onChange={toggleState}
           />
         </label>
-        <button className=" pg-buttons" type="submit">Submit</button>
+        <button className=" three-d pg-buttons" type="submit">
+          Submit
+        </button>
       </form>
     </section>
-    )
+  );
 }
