@@ -27,10 +27,9 @@ const getEvent = async (user_id, event_id) => {
 const createEvent = async (body, user_id) => {
   try {
     const newEvent = await db.one(
-      "INSERT INTO events (event_name , event_zip, event_budget, event_date, event_time, user_id) VALUES($1, $2, $3, $4, $5, $6)  RETURNING *",
+      "INSERT INTO events (event_name , event_budget, event_date, event_time, user_id) VALUES($1, $2, $3, $4, $5)  RETURNING *",
       [
         body.event_name,
-        body.event_zip,
         body.event_budget,
         body.event_date,
         body.event_time,
@@ -61,7 +60,6 @@ const updateEvent = async (body, user_id, event_id) => {
       "UPDATE events SET event_name=$1 , event_zip=$2 , event_budget=$3 , event_date=$4 , event_time=$5 WHERE user_id=$6 AND event_id=$7 RETURNING *",
       [
         body.event_name,
-        body.event_zip,
         body.event_budget,
         body.event_date,
         body.event_time,
@@ -80,5 +78,5 @@ module.exports = {
   getEvent,
   createEvent,
   deleteEvent,
-  updateEvent,
+  updateEvent
 };

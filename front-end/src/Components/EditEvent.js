@@ -1,120 +1,166 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { useHistory, useParams } from "react-router";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
+import "./EditEvent.css"
 
-function EditEvent() {
-  const [myEvent, setEvent] = useState({
-    name: "",
-    budget: 0,
-    zipcode: "",
-    date: "",
-    time: "",
-  })
+const API = apiURL();
 
-  const 
+function EditEvent({ user_id }) {
+  const { event_id } = useParams();
+
+  const [event, setEvent] = useState({
+    event_name: "",
+    event_budget: 0,
+    event_date: "",
+    event_time: "",
+  });
+
+  const [checklist, setChecklist] = useState({
+    djs: false,
+    musicians: false,
+    photographers: false,
+    party_rental: false,
+    videographers: false,
+    venues: false,
+    balloons: false,
+    floral: false,
+  });
+
+  let history = useHistory();
+
+  const updateEvent = (updatedEvent) => {
+    axios
+      .put(`${API}/events/${event_id}`, updatedEvent)
+      .then(
+        () => history.push(`/events/${event_id}`),
+        (c) => console.warn("catch", c)
+      )
+      .catch((c) => console.warn("catch", c));
+  };
+
+  const handleChange = (e) => {
+    setEvent({ ...event, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventdefault();
+    updateEvent(event, event_id);
+  };
+
+  const toggleState = (e) => {
+    const val = e.target.value;
+    setChecklist((prevState) => ({ ...prevState, [val]: !prevState[val] }));
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="event_name">Event</label>
-      <input
-        id="event_name"
-        type="text"
-        value={myEvent.name}
-        placeholder="Name"
-        onChange={handleChange}
-      />
-      <label htmlFor="event_budget">Budget</label>
-      <input
-        id="event_budget"
-        type="number"
-        value={myEvent.budget}
-        placeholder="$0.00"
-        onChange={handleChange}
-      />
-      <label htmlFor="event_time">Time</label>
-      <input
-        id="event_time"
-        type="text"
-        value={myEvent.time}
-        placeholder="Time"
-        onChange={handleChange}
-      />
-      <label htmlFor="event_date">Date</label>
-      <input
-        id="event_date"
-        type="text"
-        value={myEvent.date}
-        placeholder="Date"
-        onChange={handleChange}
-      />
-      <label>
-        DJs
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
         <input
-          value="dj"
-          type="checkbox"
-          checked={state["Djs"]}
-          onChange={toggleState}
+          id="event_name"
+          type="text"
+          required
+          value={event.name}
+          placeholder="Name"
+          onChange={handleChange}
         />
-      </label>
-      <label>
-        Musicians
         <input
-          value="musician"
-          type="checkbox"
-          checked={state["Musician"]}
-          onChange={toggleState}
+          id="event_budget"
+          type="number"
+          required
+          value={event.budget}
+          placeholder="$0.00"
+          onChange={handleChange}
         />
-      </label>
-      <label>
-        Photographer
         <input
-          value="photographer"
-          type="checkbox"
-          checked={state["photographer"]}
-          onChange={toggleState}
+          id="appt-time"
+          type="time"
+          min="1:00"
+          max="12:00"
+          required
+          value={event.time}
+          placeholder="Time"
+          onChange={handleChange}
         />
-      </label>
-      <label>
-        Videographer
         <input
-          value="videographer"
-          type="checkbox"
-          checked={state["Videographer"]}
-          onChange={toggleState}
+          id="event_date"
+          type="date"
+          required
+          value={event.date}
+          placeholder="Date"
+          onChange={handleChange}
         />
-      </label>
-      <label>
-        Venue
-        <input
-          value="venue"
-          type="checkbox"
-          checked={state["Venue"]}
-          onChange={toggleState}
-        />
-      </label>
-      <label>
-        Balloons
-        <input
-          value="balloons"
-          type="checkbox"
-          checked={state["Balloons"]}
-          onChange={toggleState}
-        />
-      </label>
-      <label>
-        Floral
-        <input
-          value="floral"
-          type="checkbox"
-          checked={state["floral"]}
-          onChange={toggleState}
-        />
-      </label>
-      <button>Save Changes</button>
-      <Link to={`/events/${user_id}`}>
-        <button>Cancel Edit</button>
-      </Link>
-    </form>
+        <label>
+          DJs
+          <input
+            value="dj"
+            type="checkbox"
+            checked={checklist["Djs"]}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Musicians
+          <input
+            value="musician"
+            type="checkbox"
+            checked={checklist["Musician"]}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Photographer
+          <input
+            value="photographer"
+            type="checkbox"
+            checked={checklist["photographer"]}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Videographer
+          <input
+            value="videographer"
+            type="checkbox"
+            checked={checklist["Videographer"]}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Venue
+          <input
+            value="venue"
+            type="checkbox"
+            checked={checklist["Venue"]}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Balloons
+          <input
+            value="balloons"
+            type="checkbox"
+            checked={checklist["Balloons"]}
+            onChange={toggleState}
+          />
+        </label>
+        <label>
+          Floral
+          <input
+            value="floral"
+            type="checkbox"
+            checked={checklist["floral"]}
+            onChange={toggleState}
+          />
+        </label>
+        <button className="pg-buttons">Save Changes</button>
+        <Link to={`/dashboard/${user_id}`}>
+          <button className="pg-buttons">Cancel Edit</button>
+        </Link>
+      </form>
+    </div>
   );
 }
 

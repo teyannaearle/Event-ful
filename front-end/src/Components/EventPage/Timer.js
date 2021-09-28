@@ -6,35 +6,11 @@ import axios from "axios";
 
 const api = apiURL();
 
-const minuteSeconds = 60;
-const hourSeconds = 3600;
-const daySeconds = 86400;
-
-const timerProps = {
-  isPlaying: true,
-  size: 120,
-  strokeWidth: 6,
-};
-
-const renderTime = (dimension, time) => {
-  return (
-    <div className="time-wrapper">
-      <div className="time">{time}</div>
-      <div>{dimension}</div>
-    </div>
-  );
-};
-
-const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
-const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
-const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
-const getTimeDays = (time) => (time / daySeconds) | 0;
-
-function Timer() {
+function Timer({ user_id }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [updated, setUpdated] = useState(false);
-  const { user_id, event_id } = useParams();
+  const { event_id } = useParams();
 
   useEffect(() => {
     try {
@@ -44,8 +20,40 @@ function Timer() {
         setTime(data.event_time);
         setUpdated(true);
       });
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
+
+    return () => {
+      setDate("");
+      setTime("");
+      setUpdated(false);
+    };
   }, [event_id, user_id]);
+
+  const minuteSeconds = 60;
+  const hourSeconds = 3600;
+  const daySeconds = 86400;
+
+  const timerProps = {
+    isPlaying: true,
+    size: 120,
+    strokeWidth: 6,
+  };
+
+  const renderTime = (dimension, time) => {
+    return (
+      <div className="time-wrapper">
+        <div className="time">{time}</div>
+        <div>{dimension}</div>
+      </div>
+    );
+  };
+
+  const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
+  const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
+  const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
+  const getTimeDays = (time) => (time / daySeconds) | 0;
 
   const countDown = () => {
     const finish = new Date(`${date}T${time}`);
@@ -60,7 +68,7 @@ function Timer() {
         <CountdownCircleTimer
           {...timerProps}
           size={150}
-          colors={[["#6b89a4"]]}
+          colors={[["#0F5298"]]}
           duration={daysDuration}
           initialRemainingTime={remainingTime}
         >
@@ -71,7 +79,7 @@ function Timer() {
         <CountdownCircleTimer
           {...timerProps}
           size={150}
-          colors={[["#799bb9"]]}
+          colors={[["#3C99DC"]]}
           duration={daySeconds}
           initialRemainingTime={remainingTime % daySeconds}
           onComplete={(totalElapsedTime) => [
@@ -85,7 +93,7 @@ function Timer() {
         <CountdownCircleTimer
           {...timerProps}
           size={150}
-          colors={[["#8ab0d1"]]}
+          colors={[["#4390BC"]]}
           duration={hourSeconds}
           initialRemainingTime={remainingTime % hourSeconds}
           onComplete={(totalElapsedTime) => [
@@ -99,7 +107,7 @@ function Timer() {
         <CountdownCircleTimer
           {...timerProps}
           size={150}
-          colors={[["#9ec8ed"]]}
+          colors={[["#68a7ca"]]}
           duration={minuteSeconds}
           initialRemainingTime={remainingTime % minuteSeconds}
           onComplete={(totalElapsedTime) => [

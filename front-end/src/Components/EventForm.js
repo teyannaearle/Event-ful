@@ -1,61 +1,81 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useHistory, useParams, Link } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
+import "./EventForm.css"
 
 const API = apiURL();
+console.log(API);
 
-function EventForm() {
-  //   const eventVendors = {};
-  let history = useHistory();
+function EventForm({user_id}) {
+  // const { user_id } = useParams();
+  const [events, setEvents] = useState([]);
+   const [id, setId] = useState({});
 
-  const addEvent = (newEvent) => {
-    axios
-      .post(`${API}/dashboard`, newEvent)
-      .then(
-        () => {
-          history.push(`/dashboard`);
-        },
-        (error) => console.error(error)
-      )
-      .catch((c) => console.warn("catch", c));
-  };
 
   const [myEvent, setEvent] = useState({
-    name: "",
-    budget: 0,
-    zipcode: "",
-    date: "",
-    time: "",
+    event_name: "",
+    event_budget: 0,
+    event_date: "",
+    event_time: "",
   });
 
-  const [state, setState] = useState({});
-  const [djs, setDjs] = useState({});
-  const [musicians, setMusicians] = useState({});
-  const [photographer, setPhotographer] = useState({});
-  const [videographer, setVideographer] = useState({});
-  const [venues, setVenues] = useState({});
-  const [balloons, setBallons] = useState({});
-  const [floral, setFloral] = useState({});
+
+  let history = useHistory();
+
+  useEffect(() => {
+    axios
+      .get(`${API}/events/last`)
+      .then(
+        (res) => {
+          setId(res.data.payload.event_id + 1);
+        },
+        (e) => {
+          console.error(e);
+        }
+      )
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
+
+
+
+  const addEvent = () => {
+      console.log("Hello")
+      try {
+          axios
+      .post(`${API}/events/${user_id}`, myEvent)
+      .then(
+        (res) => {
+          history.push(`/dashboard/new_event/checklist/${id}`);
+          
+        })
+      } catch(error) {
+          console.log("Not working")
+      }
+    
+      
+  };
+
+  
 
   const handleTextChange = (e) => {
     setEvent({ ...myEvent, [e.target.id]: e.target.value });
   };
 
-  const toggleState = (e) => {
-    const val = e.target.value;
-    setState((prevState) => ({ ...prevState, [val]: !prevState[val] }));
-  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addEvent(myEvent);
+    addEvent();
   };
+
 
   return (
     <section className="NewEvent">
-      <form onSubmit={handleSubmit}>
+      <form className="three-d" onSubmit={handleSubmit}>
         <label htmlFor="event_name">New Event</label>
         <input
           id="event_name"
@@ -75,7 +95,7 @@ function EventForm() {
         <label htmlFor="event_time">Time of your Event</label>
         <input
           id="event_time"
-          type="text"
+          type="time"
           value={myEvent.time}
           placeholder="Enter Event Time"
           onChange={handleTextChange}
@@ -83,74 +103,12 @@ function EventForm() {
         <label htmlFor="event_date">Event Date</label>
         <input
           id="event_date"
-          type="text"
+          type="date"
           value={myEvent.date}
           placeholder="Enter Event Date"
           onChange={handleTextChange}
         />
-        <label>
-          DJs
-          <input
-            value="dj"
-            type="checkbox"
-            checked={state["Djs"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Musicians
-          <input
-            value="musician"
-            type="checkbox"
-            checked={state["Musician"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Photographer
-          <input
-            value="photographer"
-            type="checkbox"
-            checked={state["photographer"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Videographer
-          <input
-            value="videographer"
-            type="checkbox"
-            checked={state["Videographer"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Venue
-          <input
-            value="venue"
-            type="checkbox"
-            checked={state["Venue"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Balloons
-          <input
-            value="balloons"
-            type="checkbox"
-            checked={state["Balloons"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Floral
-          <input
-            value="floral"
-            type="checkbox"
-            checked={state["floral"]}
-            onChange={toggleState}
-          />
-        </label>
+         <button className="pg-buttons" type="submit">Create Event</button>
       </form>
     </section>
   );

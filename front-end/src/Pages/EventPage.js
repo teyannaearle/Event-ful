@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Checklist from "../Components/EventPage/Checklist";
 import Budget from "../Components/EventPage/Budget";
 import Timer from "../Components/EventPage/Timer";
 import { apiURL } from "../util/apiURL";
+import CapitalizeEvent from "../Components/CapitalizeEvent";
 import axios from "axios";
 
 const api = apiURL();
 
-export default function Event() {
-  const [eventName, setEventName] = useState();
+export default function Event({ formatter, user_id }) {
+  const { event_id } = useParams();
+  const [eventName, setEventName] = useState("");
   const [categories, setCategories] = useState([]);
   const [budget, setBudget] = useState(0);
-  const { user_id, event_id } = useParams();
   const [shownCost, setShownCost] = useState({});
-  const formatter = new Intl.NumberFormat("en-US" , {
-    style: "currency",
-    currency: "USD"
-  });
+  const history = useHistory();
 
   useEffect(() => {
     try {
@@ -26,7 +24,9 @@ export default function Event() {
         setEventName(data.event_name);
         setBudget(data.event_budget);
       });
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
 
     try {
       axios.get(`${api}/checklist/${user_id}/${event_id}`).then((response) => {
@@ -36,6 +36,7 @@ export default function Event() {
             name: point.task_name,
             booked: point.is_completed,
             cost: point.task_cost,
+            id: point.task_id,
           };
         });
         let vendorCategories2 = {};
@@ -46,7 +47,16 @@ export default function Event() {
         setShownCost(vendorCategories2);
         setCategories(vendorCategories);
       });
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
+
+    return () => {
+      setEventName("");
+      setBudget(0);
+      setShownCost({});
+      setCategories([]);
+    };
   }, [event_id, user_id]);
 
   const updateCost = (body, category) => {
@@ -56,39 +66,54 @@ export default function Event() {
         .then((response) => {
           setShownCost({ ...shownCost, [category]: body.task_cost });
         });
-    } catch {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
-    <div className="event-page page">
-      <h1 className="pg-head">{eventName}</h1>
-      <div className="eventpage-container">
-        <div id="checklist-container" className="evenpg-containers">
-          <h2 className="col-h">Booked?</h2>
-          <h2 className="col-h">Vendors:</h2>
-          <Checklist
-            categories={categories}
-            user_id={user_id}
-            event_id={event_id}
-            updateCost={updateCost}
-          />
-        </div>
+    <>
+      <button
+        className="pg-buttons back-button"
+        onClick={() => history.push("/dashboard")}
+      >
+        {" "}
+        &#x21e6; Back to Dashboard
+      </button>
 
-        <div id="budget-container" className="evenpg-containers">
-          <h2 className="col-h">Budget: {formatter.format(budget)}</h2>
-          <Budget
-            categories={categories}
-            budget={budget}
-            shownCost={shownCost}
-            formatter={formatter}
-          />
-        </div>
+      <div className="event-page page">
+        <h1 className="pg-head">
+          {eventName ? CapitalizeEvent(eventName) : null}
+        </h1>
+        <div className="eventpage-container three-d">
+          <div id="checklist-container" className="evenpg-containers">
+            <h2 className="col-h">Booked?</h2>
+            <h2 className="col-h">Find Vendors:</h2>
+            <Checklist
+              categories={categories}
+              user_id={user_id}
+              event_id={event_id}
+              updateCost={updateCost}
+              eventName={eventName}
+            />
+          </div>
 
-        <div id="countdown-container" className="evenpg-containers">
-          <h2 className="col-h">Countdown to {eventName} !</h2>
-          <Timer />
+          <div id="budget-container" className="evenpg-containers">
+            <h2 className="col-h">Budget: {formatter.format(budget)}</h2>
+            <Budget
+              categories={categories}
+              budget={budget}
+              shownCost={shownCost}
+              formatter={formatter}
+            />
+          </div>
+
+          <div id="countdown-container" className="evenpg-containers">
+            <h2>Countdown to {eventName} !</h2>
+            <Timer user_id={user_id} />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

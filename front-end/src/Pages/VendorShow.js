@@ -1,12 +1,12 @@
 import api from "../util/apiCalls";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import VendorReviews from "../Components/VendorShow/VendorReviews";
 import VendorShowInfo from "../Components/VendorShow/VendorShowInfo";
 import Loading from "../Components/Loading";
+import CategorySwitch from "../Components/CategorySwitch";
 
-export default function VendorShow() {
-
+export default function VendorShow({ user_id }) {
   const [business, setbusiness] = useState({
     photos: [],
     categories: [{ title: "" }],
@@ -19,7 +19,9 @@ export default function VendorShow() {
     },
   ]);
 
-  const { provider_id } = useParams();
+  const { provider_id, category } = useParams();
+  const history = useHistory();
+
 
   useEffect(() => {
     (async () => {
@@ -28,22 +30,47 @@ export default function VendorShow() {
       if (data && reviewData) {
         setReviews(reviewData);
         setbusiness(data);
-      } else {
-        // ---------- ERROR PAGE  ---------------
-      }
-    })(); 
+      } 
+    })();
+
+    return () => {
+      setReviews([
+        {
+          user: { image_url: "", name: "" },
+        },
+      ]);
+      setbusiness({
+        photos: [],
+        categories: [{ title: "" }],
+        location: { display_address: [] },
+      });
+    };
   }, [provider_id]);
 
   return (
-    <div id="vendor-showpage" className="page">
-      {business.photos[0] ? (
-        <>
-          <VendorShowInfo business={business} />
-          <VendorReviews reviews={reviews} />{" "}
-        </>
-      ) : (
-        <Loading />
-      )}
-    </div>
+    <>
+      <button
+        className="pg-buttons back-button"
+        onClick={() => history.goBack()}
+      >
+        {" "}
+        &#x21e6; Back to {CategorySwitch(category)}
+      </button>
+
+      <div id="vendor-showpage" className="page">
+        {business.photos[0] ? (
+          <>
+            <VendorShowInfo
+              business={business}
+              user_id={user_id}
+              category={category}
+            />
+            <VendorReviews reviews={reviews} />{" "}
+          </>
+        ) : (
+          <Loading />
+        )}
+      </div>
+    </>
   );
 }

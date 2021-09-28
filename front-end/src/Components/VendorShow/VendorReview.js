@@ -7,7 +7,7 @@ function VendorReview({review}) {
         <div className="flex-col reviewers">
           <p>{review.user.name}</p>
 
-          <p>{review.time_created}</p>
+          <p>{new Date(review.time_created).toDateString()}</p>
           <img
             width="80px"
             height="100px"
@@ -17,17 +17,17 @@ function VendorReview({review}) {
           />
         </div>
 
-        <div>
+        <div className="rev-text">
           <Ratings
             rating={review.rating}
             widgetRatedColors="steelblue"
             widgetSpacings="2px"
           >
-            <Ratings.Widget widgetDimension="15px" />
-            <Ratings.Widget widgetDimension="15px" />
             <Ratings.Widget widgetDimension="20px" />
-            <Ratings.Widget widgetDimension="15px" />
-            <Ratings.Widget widgetDimension="15px" />
+            <Ratings.Widget widgetDimension="20px" />
+            <Ratings.Widget widgetDimension="25px" />
+            <Ratings.Widget widgetDimension="20px" />
+            <Ratings.Widget widgetDimension="20px" />
           </Ratings>
 
           <p>{review.text}</p>

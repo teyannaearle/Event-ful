@@ -13,7 +13,6 @@ const db = require("../db/dbConfig");
 
 events.get("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-
   try {
     const event = await getEvent(user_id, event_id);
 
