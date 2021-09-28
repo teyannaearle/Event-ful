@@ -132,7 +132,18 @@ button:hover {
   margin-top: 50px;
 }
 
+.page {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* EVENT PAGE */
+
+.event-page {
+  margin-top: 0;
+}
 
 #all-booked {
   grid-column: span 2;
@@ -363,6 +374,30 @@ button:hover {
 }
 
 /* VENDOR SHOW PAGE */
+#vendor-showpage {
+  margin-top: 0;
+}
+.show-header {
+  width: 100%;
+  /* height: 100% */
+  display: flex;
+  align-items: center;
+}
+
+.show-header h1,
+.show-header div {
+  /* display: inline; */
+  width: 100%;
+}
+
+.show-header h1 {
+  text-align: right;
+  width: 140%;
+}
+
+.show-header div {
+  margin-left: 20px;
+}
 
 .carousel {
   /* width: 70%; */
@@ -374,7 +409,8 @@ button:hover {
 }
 
 .car-wrap {
-  width: 80%;
+  width: 65%;
+  margin-bottom: 20px;
 }
 
 .carousel .slider-wrapper {
@@ -387,6 +423,17 @@ button:hover {
 #ven-info p,
 #ven-info div {
   margin: 0;
+}
+#ven-info p {
+  font-size: larger;
+}
+#ven-info {
+  text-align: left;
+  width: 100%;
+  margin-left: 20px;
+}
+.ven-info {
+  padding-bottom: 20px;
 }
 
 .reviews {
@@ -419,6 +466,83 @@ button:hover {
   margin-top: 10px;
   margin-bottom: 20px;
   width: 200px;
+}
+
+.like-div {
+  margin: 0 auto;
+  position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+.heart {
+  cursor: pointer;
+  padding: 10px 12px 8px;
+  background: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 0 15px;
+  transition: 0.2s;
+  box-shadow: 0px 3px 0px #7d97a5, 0px 2px 10px rgba(0, 0, 0, 0.4),
+    inset 0px 0px 3px rgba(255, 255, 255, 0.927);
+  margin-top: 20px;
+}
+
+.heart:hover {
+  cursor: pointer;
+}
+
+.like-span {
+  position: absolute;
+  top: 20px;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.6s;
+  font-size: 2px;
+  font-weight: 700;
+  color: #68a7ca;
+  background-color: white;
+  font-size: larger;
+  display: inline;
+  width: max-content;
+  padding: 20px;
+  border-radius: 50%;
+}
+
+i.press {
+  animation: size 0.4s;
+  color: #68a7ca;
+}
+
+span.press {
+  left: 50px;
+  top: -5px;
+  animation: fade 2s;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes size {
+  0% {
+    padding: 10px 12px 8px;
+  }
+  50% {
+    padding: 10px 14px 8px;
+  }
+  100% {
+    padding: 10px 12px 8px;
+  }
 }
 
 /* VENDOR INDEX PAGE */
@@ -468,6 +592,10 @@ button:hover {
   height: 250px;
 }
 /* EditBooked*/
+
+.directions{
+  font-size: larger;
+}
 
 .ven-info {
   width: 80%;
@@ -580,14 +708,6 @@ button:hover {
   padding-bottom: 5px;
 }
 
-/* ACROSS SITE - Stays at bottom*/
-
-.page {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 @media only screen and (max-width: 1200px) {
   /* VENDOR INDEX */
@@ -597,15 +717,15 @@ button:hover {
   }
 }
 
-@media only screen and (max-width: 1000px){
+@media only screen and (max-width: 1000px) {
   /* EVENT PAGE */
-  .eventpage-container{
+  .eventpage-container {
     grid-template-columns: 100%;
   }
-  
-#countdown-container{
-  grid-column: span 1;
-}
+
+  #countdown-container {
+    grid-column: span 1;
+  }
 }
 
 @media only screen and (max-width: 800px) {
@@ -659,6 +779,12 @@ button:hover {
     padding-right: 2px;
     font-size: 12px;
   }
+
+  /*VENDOR SHOW */
+  .like-div {
+    text-align: center;
+    margin-left: 0;
+  }
 }
 
 @media only screen and (max-width: 320px) {
@@ -680,5 +806,3 @@ button:hover {
     text-align: center;
   }
 }
-
-
