@@ -11,7 +11,7 @@ const API = apiURL();
 
 const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 
-function ListEdit({ user_id, lat, lng, formatter }) {
+function EditBooked({ user_id, lat, lng, formatter }) {
   const { event_id, category } = useParams();
   const [vendors, setVendors] = useState([]);
   const [vendor, setVendor] = useState("");
@@ -83,7 +83,9 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     (async () => {
       if (!searched && lat && lng) {
         const data = await api.getVendorsLongLag(lng, lat, category);
-        setVendors(data.businesses);
+        if (data.businesses[0].id) {
+          setVendors(data.businesses);
+        }
       }
     })();
   }, [category, lng, lat, searched]);
@@ -92,19 +94,48 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     setZip(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleZipSubmit = async (e) => {
     e.preventDefault();
-    if (zip.length !== 5) {
-      window.alert("Zip code is not valid");
-    } else {
-      const data = await api.getVendorsZip(category, zip);
+    const data = await api.getVendorsZip(category, zip);
+    if (data[0].id) {
       setVendors(data);
-      setSearched(true);
     }
+    setSearched(true);
+  };
+
+  const handleFormChange = (e) => {
+    setCost(e.target.value);
+  };
+
+  const handleCostSubmission = (e) => {
+    e.preventDefault();
+    let checklistBody = {
+      task_cost: cost,
+      task_name: category,
+    };
+
+    try {
+      axios.put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody);
+    } catch (e) {
+      console.error(e);
+    }
+
+    let bookedBody = {
+      amount: cost,
+      vendor_name: vendor.name,
+    };
+
+    try {
+      axios.put(`${API}/booked/cost/${user_id}/${event_id}`, bookedBody);
+    } catch (e) {
+      console.error(e);
+    }
+
+    setShowForm(false);
   };
 
   const handleSelection = (selected) => {
-    const loc = selected.location.display_address.join();
+    const loc = selected.location.display_address.join(", ");
     let bookedbody = {
       vendor_name: selected.name,
       vendor_address: loc,
@@ -117,8 +148,6 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     let checklistBody = {
       is_completed: true,
       task_name: category,
-      // user_id: user_id,
-      // event_id: event_id,
     };
 
     if (!vendor) {
@@ -126,18 +155,18 @@ function ListEdit({ user_id, lat, lng, formatter }) {
         axios
           .post(`${API}/booked/${user_id}/${event_id}`, bookedbody)
           .then((res) => {
-            setVendor(selected);
-            setVendors([]);
-            setSearched(false);
+            try {
+              axios
+                .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
+                .then((res) => {
+                  setVendor(selected);
+                  setVendors([]);
+                  setSearched(false);
+                });
+            } catch (e) {
+              console.error(e);
+            }
           });
-      } catch (e) {
-        console.error(e);
-      }
-
-      try {
-        axios
-          .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
-          .then((response) => {});
       } catch (e) {
         console.error(e);
       }
@@ -146,48 +175,22 @@ function ListEdit({ user_id, lat, lng, formatter }) {
         axios
           .put(`${API}/booked/${user_id}/${event_id}`, bookedbody)
           .then((res) => {
-            setVendor(selected);
-            setVendors([]);
-            setSearched(false);
+            try {
+              axios
+                .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
+                .then((res) => {
+                  setVendor(selected);
+                  setVendors([]);
+                  setSearched(false);
+                });
+            } catch (e) {
+              console.error(e);
+            }
           });
-      } catch {}
-
-      try {
-        axios.put(`${API}/checklist/${user_id}/${event_id}`, checklistBody);
-      } catch {}
+      } catch (e) {
+        console.error(e);
+      }
     }
-  };
-
-  const handleFormChange = (e) => {
-    setCost(e.target.value);
-  };
-  const handleCostSubmission = (e) => {
-    e.preventDefault();
-    let checklistBody = {
-      task_cost: cost,
-      task_name: category,
-    };
-
-    try {
-      axios.put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody);
-      // .then((res) => );
-    } catch (e) {
-      console.error(e);
-    }
-
-    let bookedBody = {
-      amount: cost,
-      vendor_name: vendor.name,
-    };
-
-    try {
-      axios.put(`${API}/booked/cost/${user_id}/${event_id}`, bookedBody);
-      // .then((res) => console.log("booked" + res));
-    } catch (e) {
-      console.error(e);
-    }
-
-    setShowForm(false);
   };
 
   const vendorsShow = () => {
@@ -210,7 +213,7 @@ function ListEdit({ user_id, lat, lng, formatter }) {
 
   const vendorShow = () => {
     return (
-      <div className="ven-info">
+      <div className="single-ven">
         <Vendor vendor={vendor} category={category} />
         <div className="three-d ven-cost">
           <p>Cost: {formatter.format(cost)}</p>
@@ -246,6 +249,44 @@ function ListEdit({ user_id, lat, lng, formatter }) {
     );
   };
 
+  const directions = () => {
+    let direction = "";
+    if ((!vendor && !searched && lat && lng) || searched) {
+      direction = (
+        <p className="directions">
+          Browse below or search by zip code to select the vendor that you've
+          booked
+        </p>
+      );
+    } else if (vendor && !searched) {
+      direction = (
+        <>
+          <p className="directions"> Edit discussed cost below </p>
+
+          <p className="directions">
+            If you have changed vendors, search by zip code above to select the
+            vendor that you've booked{" "}
+          </p>
+        </>
+      );
+    } else if (searched && !vendors) {
+      direction = (
+        <p className="directions">
+          Unfortunately, we could not find any vendors in this area. Please try
+          another zip code.{" "}
+        </p>
+      );
+    } else if (!lng && !lat) {
+      direction = (
+        <p className="directions">
+          Search by zip code above to select the vendor that you've booked
+        </p>
+      );
+    }
+
+    return direction;
+  };
+
   return (
     <>
       <button
@@ -257,24 +298,27 @@ function ListEdit({ user_id, lat, lng, formatter }) {
       </button>
       <div className="page indexpg-container">
         <h1>{CategorySwitch(category)}</h1>
-        <form onSubmit={handleSubmit} id="zip-form">
+
+        <form onSubmit={handleZipSubmit} id="zip-form">
           <input
             className="three-d pg-input"
-            type="number"
-            placeholder="Event zip code"
+            type="text"
+            placeholder="Zip Code - Must be 5 digits -"
             onChange={handleZipChange}
             value={zip}
             id="zip-search"
+            required
+            pattern="[0-9]{5}"
           />
           <button type="submit" className="pg-buttons">
             Search
           </button>
         </form>
-
+        {directions()}
         {vendor && !searched ? vendorShow() : vendorsShow()}
       </div>
     </>
   );
 }
 
-export default ListEdit;
+export default EditBooked;

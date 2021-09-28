@@ -12,18 +12,6 @@ const getAllEvents = async (user_id) => {
   }
 };
 
-const  getLastEvent = async () => {
-  try{
-    const event = await db.one(
-      "SELECT * FROM events ORDER BY event_id DESC LIMIT 1"
-    );
-    return {event_id: event.event_id}
-
-  }catch (err){
-    return err
-  }
-}
-
 const getEvent = async (user_id, event_id) => {
   try {
     const event = await db.one(
@@ -90,6 +78,5 @@ module.exports = {
   getEvent,
   createEvent,
   deleteEvent,
-  updateEvent,
-  getLastEvent
+  updateEvent
 };

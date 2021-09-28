@@ -7,9 +7,6 @@ import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
 
 export default function VendorShow({ user_id }) {
-  const history = useHistory();
-  const { provider_id, category } = useParams();
-
   const [business, setbusiness] = useState({
     photos: [],
     categories: [{ title: "" }],
@@ -22,6 +19,10 @@ export default function VendorShow({ user_id }) {
     },
   ]);
 
+  const { provider_id, category } = useParams();
+  const history = useHistory();
+
+
   useEffect(() => {
     (async () => {
       const data = await api.getVendor(provider_id);
@@ -29,9 +30,7 @@ export default function VendorShow({ user_id }) {
       if (data && reviewData) {
         setReviews(reviewData);
         setbusiness(data);
-      } else {
-        // ---------- ERROR PAGE  ---------------
-      }
+      } 
     })();
 
     return () => {
@@ -61,7 +60,11 @@ export default function VendorShow({ user_id }) {
       <div id="vendor-showpage" className="page">
         {business.photos[0] ? (
           <>
-            <VendorShowInfo business={business} user_id={user_id} />
+            <VendorShowInfo
+              business={business}
+              user_id={user_id}
+              category={category}
+            />
             <VendorReviews reviews={reviews} />{" "}
           </>
         ) : (

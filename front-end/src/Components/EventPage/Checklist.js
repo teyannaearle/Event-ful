@@ -7,17 +7,15 @@ const api = apiURL();
 
 function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
   const [bookedStatus, setBookedStatus] = useState({});
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     const booked = {};
-    const show = {};
-    const cost = {};
 
     for (let category of categories) {
       booked[category.name] = category.booked;
-      show[category.name] = false;
-      cost[category.name] = category.cost;
+      // show[category.name] = false;
+      // cost[category.name] = category.cost;
     }
 
     setBookedStatus(booked);
@@ -26,6 +24,113 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
       setBookedStatus({});
     };
   }, [categories]);
+
+  const updateBookedStatus = (category) => {
+    let body = {
+      is_completed: !bookedStatus[category],
+      task_name: category,
+      user_id: user_id,
+      event_id: event_id,
+    };
+/// ONLY DELETE IF THE BOOKED VENDOR EXISTS ////
+    if (!bookedStatus[category] === false) {
+      axios
+        .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
+        .then((res) => {
+          let checklistBody = {
+            task_cost: 0,
+            task_name: category,
+          };
+          updateCost(checklistBody, category);
+        });
+    }
+
+    try {
+      axios
+        .put(`${api}/checklist/${user_id}/${event_id}`, body)
+        .then((response) => {
+          setBookedStatus({
+            ...bookedStatus,
+            [category]: !bookedStatus[category],
+          });
+        });
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  // const bookedButton = (category, id) => {
+  //   if (bookedStatus[category.name] === false) {
+  //     return (
+  //       <Link to={`/task/${category.name}/${event_id}/${id}`}>
+  //         <button
+  //           className="book-button x"
+  //           onClick={() => updateBookedStatus(category.name)}
+  //         >
+  //           {" "}
+  //           &#10007; No
+  //         </button>
+  //       </Link>
+  //     );
+  //   } else {
+  //     return (
+  //       <button
+  //         className="book-button check"
+  //         onClick={() => updateBookedStatus(category.name)}
+  //       >
+  //         {" "}
+  //         &#10003; Yes
+  //       </button>
+  //     );
+  //   }
+  // };
+
+  const bookedButton = (category, id) => {
+    if (bookedStatus[category.name] === false) {
+      return (
+        // <Link to={`/task/${category.name}/${event_id}/${id}`}>
+        <label className="check-container"> 
+          <input
+            className="book-button x"
+            onChange={() => updateBookedStatus(category.name)}
+            type="checkbox"
+            // value={bookedStatus[category.name]}
+            checked={bookedStatus[category.name] ? bookedStatus[category.name] : false}
+            defaultChecked={false}
+          >
+            {/* {" "}
+            &#10007; No */}
+          </input>
+          </label>
+        // </Link>
+      );
+    } else {
+      return (
+        <label className="check-container"> 
+        <input
+          className="book-button check"
+          onChange={() => updateBookedStatus(category.name)}
+          type="checkbox"
+          // value={bookedStatus[category.name]}
+          checked={bookedStatus[category.name] ? bookedStatus[category.name] : false}        >
+          {/* {" "}
+          &#10003; Yes */}
+        </input>
+        </label>
+      );
+    }
+  };
+
+  const editButton = (category) => {
+    let button = "";
+    if (bookedStatus[category]) {
+      button = "Edit Vendor";
+    } else {
+      button = "Add Vendor";
+    }
+
+    return button;
+  };
 
   const listItem = (category) => {
     let item = "";
@@ -73,77 +178,6 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     return item;
   };
 
-  const updateBookedStatus = (category) => {
-    let body = {
-      is_completed: !bookedStatus[category],
-      task_name: category,
-      user_id: user_id,
-      event_id: event_id,
-    };
-
-    if (!bookedStatus[category] === false) {
-      axios
-        .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
-        .then((res) => "");
-
-      let checklistBody = {
-        task_cost: 0,
-        task_name: category,
-      };
-      updateCost(checklistBody, category);
-    }
-
-    try {
-      axios
-        .put(`${api}/checklist/${user_id}/${event_id}`, body)
-        .then((response) => {
-          setBookedStatus({
-            ...bookedStatus,
-            [category]: !bookedStatus[category],
-          });
-        });
-    } catch (e) {
-      console.warn(e);
-    }
-  };
-
-  const bookedButton = (category, id) => {
-    if (bookedStatus[category.name] === false) {
-      return (
-        <Link to={`/task/${category.name}/${event_id}/${id}`}>
-          <button
-            className="book-button x"
-            onClick={() => updateBookedStatus(category.name)}
-          >
-            {" "}
-            Not Booked &#10007;
-          </button>
-        </Link>
-      );
-    } else {
-      return (
-        <button
-          className="book-button check"
-          onClick={() => updateBookedStatus(category.name)}
-        >
-          {" "}
-          Booked &#10003;
-        </button>
-      );
-    }
-  };
-
-  const editButton = (category) => {
-    let button = "";
-    if (bookedStatus[category]) {
-      button = "Edit Vendor";
-    } else {
-      button = "Add Vendor";
-    }
-
-    return button;
-  };
-
   return (
     <ul className="checklist checklist-ul">
       {categories.map((category, i) => {
@@ -171,8 +205,14 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           </li>
         );
       })}
-              <button className="book-buttons check" id="all-booked" onClick={ ()=>history.push(`/booked/${event_id}`)}> View All Booked Vendors for {eventName}</button>
-
+      <button
+        className="book-buttons check"
+        id="all-booked"
+        onClick={() => history.push(`/booked/${event_id}/${eventName}`)}
+      >
+        {" "}
+        View All Booked Vendors for {eventName}
+      </button>
     </ul>
   );
 }

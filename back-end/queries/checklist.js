@@ -1,7 +1,5 @@
 const db = require("../db/dbConfig");
 
-///correct addtolist function////
-
 const getChecklist = async (user_id, event_id) => {
   try {
     const checklist = await db.any(
@@ -38,6 +36,18 @@ const deleteFromList = async (task_name, user_id, event_id) => {
   }
 };
 
+const deleteAll = async (user_id, event_id) => {
+  try{
+    const deleted = await db.any(
+      "DELETE FROM tasklist WHERE user_id=$1 AND event_id=$2 RETURNING *",
+      [user_id, event_id]
+    )
+    return deleted
+  } catch (err){
+    return err
+  }
+}
+
 const updateTask = async (is_completed, task_name, user_id, event_id) => {
   try {
     const updatedTask = await db.one(
@@ -68,4 +78,5 @@ module.exports = {
   deleteFromList,
   updateTask,
   updateCost,
+  deleteAll
 };

@@ -25,11 +25,11 @@ export default function NavBar() {
       url: `/favorites`,
       cName: "nav-links",
     },
-    {
-      title: "Settings",
-      url: `/settings`,
-      cName: "nav-links",
-    },
+    // {
+    //   title: "Settings",
+    //   url: `/settings`,
+    //   cName: "nav-links",
+    // },
     {
       title: "Logout",
       url: "/logo",
@@ -40,9 +40,10 @@ export default function NavBar() {
   return (
     <nav className="NavBarItems">
 
-        <h1 className="navbar-logo">
-          Event(ful)
-        </h1>
+
+      <h1 className="navbar-logo">
+        Event(ful) &#127881;
+      </h1>
 
       <ul className="accountNav">
         <li className="accountLinks" onClick={handleVendorClick}>

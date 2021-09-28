@@ -7,9 +7,12 @@ const {
   deleteFromList,
   updateTask,
   updateCost,
+  deleteAll
 } = require("../queries/checklist");
 
 const db = require("../db/dbConfig");
+
+//GET ENTIRE CHECKLIST RELATED TO AN EVENT 
 
 checklist.get("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
@@ -33,28 +36,33 @@ checklist.get("/:user_id/:event_id", async (req, res) => {
   }
 });
 
+//POST A SINGLE CATEGORY TO THE CHECKLIST 
+
 checklist.post("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
   const listItem = await addToList(req.body.task_name, user_id, event_id);
-res.json(listItem)
-  // try {
-  //   const listItem = await addToList(req.body.task_name, user_id, event_id);
 
-  //   if (listItem[0].user_id) {
-  //     res.status(200).json({
-  //       success: true,
-  //       payload: listItem,
-  //     });
-  //   } else {
-  //     throw listItem;
-  //   }
-  // } catch (e) {
-  //   res.status(404).json({
-  //     success: false,
-  //     message: e,
-  //   });
-  // }
+  try {
+    const listItem = await addToList(req.body.task_name, user_id, event_id);
+
+    if (listItem[0].user_id) {
+      res.status(200).json({
+        success: true,
+        payload: listItem,
+      });
+    } else {
+      throw listItem;
+    }
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      message: e,
+    });
+  }
 });
+
+
+// DELETE A SINGLE CATEGORY FROM THE CHECKLIST
 
 checklist.delete("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
@@ -76,6 +84,30 @@ checklist.delete("/:user_id/:event_id", async (req, res) => {
     });
   }
 });
+
+// DELETE ENTIRE CHECKLIST RELATED TO AN EVENT
+
+checklist.delete("/all/:user_id/:event_id", async (req, res) => {
+  const { user_id, event_id } = req.params;
+  try {
+    const deleted = await deleteAll(user_id, event_id);
+    if (deleted[0].user_id) {
+      res.status(200).json({
+        success: true,
+        payload: deleted,
+      });
+    } else {
+      throw deleted;
+    }
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      message: e,
+    });
+  }
+});
+
+//UPDATE IF A CATEGORY IS COMPLETED
 
 checklist.put("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
@@ -104,6 +136,8 @@ checklist.put("/:user_id/:event_id", async (req, res) => {
     });
   }
 });
+
+//UPDATE A CATEGORY'S COST
 
 checklist.put("/cost/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;

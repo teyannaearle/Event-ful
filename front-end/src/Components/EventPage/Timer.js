@@ -6,31 +6,7 @@ import axios from "axios";
 
 const api = apiURL();
 
-const minuteSeconds = 60;
-const hourSeconds = 3600;
-const daySeconds = 86400;
-
-const timerProps = {
-  isPlaying: true,
-  size: 120,
-  strokeWidth: 6,
-};
-
-const renderTime = (dimension, time) => {
-  return (
-    <div className="time-wrapper">
-      <div className="time">{time}</div>
-      <div>{dimension}</div>
-    </div>
-  );
-};
-
-const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
-const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
-const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
-const getTimeDays = (time) => (time / daySeconds) | 0;
-
-function Timer({user_id}) {
+function Timer({ user_id }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [updated, setUpdated] = useState(false);
@@ -45,15 +21,39 @@ function Timer({user_id}) {
         setUpdated(true);
       });
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
 
     return () => {
       setDate("");
-        setTime("");
-        setUpdated(false);
-    }
+      setTime("");
+      setUpdated(false);
+    };
   }, [event_id, user_id]);
+
+  const minuteSeconds = 60;
+  const hourSeconds = 3600;
+  const daySeconds = 86400;
+
+  const timerProps = {
+    isPlaying: true,
+    size: 120,
+    strokeWidth: 6,
+  };
+
+  const renderTime = (dimension, time) => {
+    return (
+      <div className="time-wrapper">
+        <div className="time">{time}</div>
+        <div>{dimension}</div>
+      </div>
+    );
+  };
+
+  const getTimeSeconds = (time) => (minuteSeconds - time) | 0;
+  const getTimeMinutes = (time) => ((time % hourSeconds) / minuteSeconds) | 0;
+  const getTimeHours = (time) => ((time % daySeconds) / hourSeconds) | 0;
+  const getTimeDays = (time) => (time / daySeconds) | 0;
 
   const countDown = () => {
     const finish = new Date(`${date}T${time}`);

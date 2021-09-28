@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import BookedVendor from "./BookedVendor";
 import { apiURL } from "../../util/apiURL";
-import "./BookedVendorsList.css";
 
 const API = apiURL();
 
-export default function BookedVendorList({user_id}) {
+export default function BookedVendorList({ user_id }) {
   const [bookedVendors, setBookedVendors] = useState([]);
   const { event_id } = useParams();
 
@@ -30,9 +29,8 @@ export default function BookedVendorList({user_id}) {
 
   return (
     <div>
-      Booked Vendor List
-      <section>
-        <table>
+      {/* <section>
+        <table className="three-d">
           <thead>
             <tr>
               <th>Vendor Name</th>
@@ -48,7 +46,16 @@ export default function BookedVendorList({user_id}) {
               })}
           </tbody>
         </table>
-      </section>
+      </section> */}
+      {bookedVendors.length > 0 ? (
+        <ul className="ven-ul">
+          {bookedVendors.map((vendor) => {
+            return <BookedVendor vendor={vendor} />;
+          })}{" "}
+        </ul>
+      ) : (
+        <h1>No booked vendors</h1>
+      )}
     </div>
   );
 }
