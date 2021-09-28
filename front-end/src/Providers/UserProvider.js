@@ -4,30 +4,32 @@ import { auth } from "../Services/Firebase";
 
 export const UserContext = createContext();
 
-export const UserProvider = (props) => {
+export const UserProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
+      console.log("onAuthStateChanged")
+      console.log(user)
       if (user) {
         console.log(user);
-        history.pushState("/");
-        //     const {email, displayName, photoURL, phoneNumber, uid} = user
-        //     setUser({
-        //       email,
-        //       displayName,
-        //       photoURL,
-        //       phoneNumber,
-        //       uid
-        //  })
+        history.push("/dashboard");
+            const {email, displayName, photoURL, phoneNumber, uid} = user
+            setUser({
+              email,
+              displayName,
+              photoURL,
+              phoneNumber,
+              uid
+         })
       } else {
         setUser(null);
       }
     });
-  }, []);
+  }, [history]);
 
   return (
-    <UserContext.Provider value={user}>{props.children}</UserContext.Provider>
+    <UserContext.Provider value={user}>{children}</UserContext.Provider>
   );
 };

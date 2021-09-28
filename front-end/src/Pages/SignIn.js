@@ -1,9 +1,12 @@
 import React from 'react'
+import {userSignIn, userGoogleSignIn} from "../Services/Firebase.js"
+import SignInForm from '../Components/SignInForm'
 
 export default function SignIn() {
     return (
         <div>
-            sign in page
+          Please sign in to continue
+            <SignInForm />
         </div>
     )
 }

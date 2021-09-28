@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { VendorMenu } from "./VendorMenu";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
+import { userSignOut } from "../../Services/Firebase";
 
 export default function NavBar() {
   const [vendorClicked, setVendorClicked] = useState(false);
-
+  const history = useHistory();
   const handleVendorClick = () => {
     setVendorClicked(!vendorClicked);
   };
@@ -30,20 +31,19 @@ export default function NavBar() {
     //   url: `/settings`,
     //   cName: "nav-links",
     // },
-    {
-      title: "Logout",
-      url: "/logo",
-      cName: "nav-links-mobile",
-    },
+    // {
+    //   title: "Logout",
+    //   url: "/logo",
+    //   cName: "nav-links-mobile",
+    // },
   ];
-
+  const signOut = () => {
+    userSignOut();
+    history.push("/");
+  };
   return (
     <nav className="NavBarItems">
-
-
-      <h1 className="navbar-logo">
-        Event(ful) &#127881;
-      </h1>
+      <h1 className="navbar-logo">Event(ful) &#127881;</h1>
 
       <ul className="accountNav">
         <li className="accountLinks" onClick={handleVendorClick}>
@@ -60,6 +60,10 @@ export default function NavBar() {
             </li>
           );
         })}
+        <li className="accountLinks" onClick={signOut}>
+          {" "}
+          <span className="pg-buttons nav-but">Logout</span>
+        </li>
       </ul>
 
       <ul className={vendorClicked ? "nav-menu active" : "nav-menu"}>

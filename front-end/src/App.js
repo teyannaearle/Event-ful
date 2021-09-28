@@ -48,6 +48,8 @@ function App() {
   return (
     <div className="site">
       <UserProvider>
+        {/* <Router> */}
+
       <ScrollToTop />
       <NavBar user_id={user_id} />
       <Switch>
@@ -108,6 +110,7 @@ function App() {
           <Booked user_id={user_id} />
         </Route>
       </Switch>
+            {/* </Router> */}
       </UserProvider>
     </div>
   );

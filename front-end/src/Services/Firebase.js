@@ -1,7 +1,10 @@
 import dotenv from "dotenv";
 import { initializeApp } from "firebase/app";
 // import firebase from "firebase/app";
-// import "firebase/auth";
+// import "firebase/auth";\import firebase from "firebase/compat/app";
+import "firebase/auth";
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut  } from "firebase/auth";
 dotenv.config();
 
@@ -29,10 +32,14 @@ export const userSignUp = (name, email, password) => {
     });
 };
 
-export const userSignIn = (name, email, password) => {
+export const userSignIn = (email, password) => {
   signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
     // Signed in
+    // console.log(`userCredential: ${userCredential}`)
+    // console.log(Object.keys(userCredential))
+    // console.log(Object.values(userCredential))
     const user = userCredential.user
+    console.log(user)
     //
   }).catch((error) => {
     const errorCode = error.code;
@@ -65,8 +72,10 @@ export const userGoogleSignIn = () => {
 export const userSignOut = () => {
   signOut(auth).then(() => {
     // Sign-out successful.
+    console.log("user signed out")
   }).catch((error) => {
     // An error happened.
+    console.warn(error)
   });
 }
 // export default app;
