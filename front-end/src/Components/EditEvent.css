@@ -5,8 +5,38 @@
   height: 100%;
   width: 50%;
   margin: 0 auto;
+} 
+
+/* .edit-checkbox {
+  width: 100%;
+} */
+
+
+.checkbox-span label {
+  /* display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse; */
+  display: block;
 }
 
-label {
+.edit-checkbox .checkmark{
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 23px;
+  width: 23px;
+}
+
+.category {
+  /* width: 80%; */
+  text-align: left;
+  margin-left: 40px;
+}
+
+/* label {
   display: block;
+} */
+
+.checkbox-span{
+  display: block;
+text-align: left;
 }

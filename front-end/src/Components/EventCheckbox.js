@@ -6,11 +6,11 @@ import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
 
-export default function EventCheckbox({user_id}) {
-    const { id } = useParams()
-    const history = useHistory()
+export default function EventCheckbox({ user_id }) {
+  const { id } = useParams();
+  const history = useHistory();
 
-    const [eventForm, setEventForm] = useState({
+  const [eventForm, setEventForm] = useState({
     djs: false,
     musicians: false,
     photographers: false,
@@ -24,12 +24,12 @@ export default function EventCheckbox({user_id}) {
     party_clown: false,
   });
 
-//pass props from eventForm to represent the name,date, budget, etc.
-const addToCheckedList = () => {
+  //pass props from eventForm to represent the name,date, budget, etc.
+  const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
     // console.log(categories);
     // const id = lastEvent.event_id + 1;
-    
+
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
@@ -53,111 +53,131 @@ const addToCheckedList = () => {
     e.preventDefault();
     addToCheckedList();
   };
-    
-    return (
-        <section className="NewEvent">
-      <form className="three-d" onSubmit={handleSubmit}>
-        <label>
-          DJ
+
+  return (
+    <section className="NewEvent">
+      <form className=" col-h three-d" onSubmit={handleSubmit}>
+      <span className="checkbox-span">
+        <label className="check-container edit-checkbox">
           <input
             value="djs"
             type="checkbox"
             checked={eventForm.djs}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category">DJ</span>
         </label>
-        <label>
-          Musician
+        <label className="check-container edit-checkbox">
           <input
             value="musicians"
             type="checkbox"
             checked={eventForm.musicians}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Musician</span>
         </label>
-        <label>
-          Photographer
+        <label className="check-container edit-checkbox">
           <input
             value="photographers"
             type="checkbox"
             checked={eventForm.photographers}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Photographer</span>
         </label>
-        <label>
-          Party Rental
+        <label className="check-container edit-checkbox">
           <input
             value="party_rental"
             type="checkbox"
             checked={eventForm.party_rental}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Party Rental</span>
         </label>
-        <label>
-          Videographer
+        <label className="check-container edit-checkbox">
           <input
             value="videographers"
             type="checkbox"
             checked={eventForm.videographers}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Videographer</span>
         </label>
-        <label>
-          Venues
+        <label className="check-container edit-checkbox">
+ 
           <input
             value="venues"
             type="checkbox"
             checked={eventForm.venues}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Venues</span>
         </label>
-        <label>
-          Balloon Services
+        <label className="check-container edit-checkbox">
+
           <input
             value="balloons"
             type="checkbox"
             checked={eventForm.balloons}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Balloon Services</span>
         </label>
-        <label>
-          Floral Designer
+        <label className="check-container edit-checkbox">
           <input
             value="floral"
             type="checkbox"
             checked={eventForm.floral}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Floral Designer</span>
         </label>
-        <label>
-          Magician
+        <label className="check-container edit-checkbox">
+ 
           <input
             value="party_magician"
             type="checkbox"
             checked={eventForm.party_magician}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Magician</span>
         </label>
-        <label>
-          Character Actors
+        <label className="check-container edit-checkbox">
+
           <input
             value="party_characters"
             type="checkbox"
             checked={eventForm.party_characters}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Character Actors</span>
         </label>
-        <label>
-          Clowns
+        <label className="check-container edit-checkbox">
+
           <input
             value="party_clown"
             type="checkbox"
             checked={eventForm.party_clown}
             onChange={toggleState}
           />
+          <span className="checkmark"></span>
+          <span className="category"> Clowns</span>
         </label>
-        <button className=" pg-buttons" type="submit">Submit</button>
+        </span>
+        <button className=" three-d pg-buttons" type="submit">
+          Submit
+        </button>
       </form>
     </section>
-    )
+  );
 }
