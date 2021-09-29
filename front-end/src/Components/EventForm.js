@@ -38,7 +38,6 @@ function EventForm({ user_id }) {
   //   }, []);
 
   const addEvent = () => {
-    console.log("Hello");
     try {
       axios.post(`${API}/events/${user_id}`, myEvent).then((res) => {
         const id = res.data.payload.event_id;
