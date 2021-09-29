@@ -165,6 +165,7 @@ button:hover {
   grid-template-columns: 50% 50%;
   text-align: center;
   justify-content: center;
+  border-radius: 10px;
 }
 
 #checklist-container {

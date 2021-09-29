@@ -57,7 +57,7 @@ export default function EventCheckbox({ user_id }) {
   return (
     <section className="NewEvent">
       <form className=" col-h three-d" onSubmit={handleSubmit}>
-        <label>
+        <label class="check-container">
           DJ
           <input
             value="djs"
@@ -65,8 +65,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.djs}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Musician
           <input
             value="musicians"
@@ -74,8 +75,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.musicians}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Photographer
           <input
             value="photographers"
@@ -83,8 +85,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.photographers}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Party Rental
           <input
             value="party_rental"
@@ -92,8 +95,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.party_rental}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Videographer
           <input
             value="videographers"
@@ -101,8 +105,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.videographers}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Venues
           <input
             value="venues"
@@ -110,8 +115,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.venues}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Balloon Services
           <input
             value="balloons"
@@ -119,8 +125,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.balloons}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Floral Designer
           <input
             value="floral"
@@ -128,8 +135,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.floral}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Magician
           <input
             value="party_magician"
@@ -137,8 +145,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.party_magician}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Character Actors
           <input
             value="party_characters"
@@ -146,8 +155,9 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.party_characters}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Clowns
           <input
             value="party_clown"
@@ -155,6 +165,7 @@ export default function EventCheckbox({ user_id }) {
             checked={eventForm.party_clown}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
         <button className=" three-d pg-buttons" type="submit">
           Submit

@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
-import "./EditEvent.css"
+import "./EditEvent.css";
 
 const API = apiURL();
 
@@ -92,7 +92,7 @@ function EditEvent({ user_id }) {
           placeholder="Date"
           onChange={handleChange}
         />
-        <label>
+        <label class="check-container">
           DJs
           <input
             value="dj"
@@ -100,6 +100,7 @@ function EditEvent({ user_id }) {
             checked={checklist["Djs"]}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
         <label>
           Musicians
@@ -109,6 +110,7 @@ function EditEvent({ user_id }) {
             checked={checklist["Musician"]}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
         <label>
           Photographer
@@ -118,6 +120,7 @@ function EditEvent({ user_id }) {
             checked={checklist["photographer"]}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
         <label>
           Videographer
@@ -127,6 +130,7 @@ function EditEvent({ user_id }) {
             checked={checklist["Videographer"]}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
         <label>
           Venue
@@ -136,6 +140,7 @@ function EditEvent({ user_id }) {
             checked={checklist["Venue"]}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
         <label>
           Balloons
@@ -145,6 +150,7 @@ function EditEvent({ user_id }) {
             checked={checklist["Balloons"]}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
         <label>
           Floral
@@ -154,6 +160,7 @@ function EditEvent({ user_id }) {
             checked={checklist["floral"]}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
         <button className="pg-buttons">Save Changes</button>
         <Link to={`/dashboard/${user_id}`}>
