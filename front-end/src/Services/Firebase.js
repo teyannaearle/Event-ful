@@ -12,6 +12,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
+  updateProfile
 } from "firebase/auth";
 dotenv.config();
 
@@ -26,20 +27,23 @@ const app = initializeApp({
 
 export const auth = getAuth();
 
-export const userSignUp = (email, password) => {
-  console.log(`firebase line 30 ${email} ${password}`)
+export const userSignUp = (userName, email, password) => {
+  let errorMessage = null
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log(`Firebase, line 35, ${user}`);
+      updateProfile(userCredential.user, {displayName: userName})
+      console.log(`Created new user`)
+      console.log(user)
     })
-    .catch(
-      (error) => {
-      // const errorCode = error.errorCode;
-      // const errorMessage = error.message;
-      console.log(error)
-      });
+    .catch(e => {
+    
+    errorMessage = e.code
+    console.log(`errorMessage is ${errorMessage}`)
+    return errorMessage
+  });
+    
 };
 
 export const userSignIn = (email, password) => {
@@ -50,9 +54,9 @@ export const userSignIn = (email, password) => {
       // console.log(Object.keys(userCredential))
       // console.log(Object.values(userCredential))
       const user = userCredential.user;
-      console.log(`Firebase, line 46, ${user}`);
-      console.log(Object.keys(user))
-      console.log(user)
+      console.log(`Firebase, line 57, ${user}`);
+      console.log(Object.keys(user));
+      console.log(user);
       //
     })
     .catch((error) => {
@@ -85,7 +89,7 @@ export const userGoogleSignIn = () => {
 };
 
 export const userSignOut = () => {
- return signOut(auth)
+  return signOut(auth)
     .then(() => {
       // Sign-out successful.
       console.log("user signed out");

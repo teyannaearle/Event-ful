@@ -6,14 +6,16 @@ import { UserContext } from "../Providers/UserProvider";
 
 export default function SignInForm() {
   const history = useHistory();
+  const currentUser = useContext(UserContext);
+
 
   const signIn = useCallback(
     async (e) => {
       e.preventDefault();
       console.log(e);
       const { email, password } = e.target.elements;
-      console.log(email.value);
-      console.log(password.value);
+      // console.log(email.value);
+      // console.log(password.value);
       try {
         await userSignIn(email.value, password.value);
       } catch (error) {
@@ -23,14 +25,26 @@ export default function SignInForm() {
     [history]
   );
 
-  const currentUser = useContext(UserContext);
-  console.log(`line 27, sign in form, currentUser ${currentUser}`);
-  if (currentUser) {
-    console.log(Object.keys(currentUser))
-  }
+ const signInGoogle = useCallback(
+    async (e) => {
+      try {
+        await userGoogleSignIn();
+console.log(`Google sign in, line 32`)
+console.log(currentUser)
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
+
+  // if (currentUser) {
+  //   console.log(Object.keys(currentUser));
+  // }
+
   // if (currentUser.uid) {
   //   history.push("/dashboard");
-  // } 
+  // }
 
   return (
     <div className="newForm">
@@ -46,7 +60,7 @@ export default function SignInForm() {
         <div className="divider"></div>
         <br />
       </form>
-      <button type="button" className="Login" onClick={userGoogleSignIn}>
+      <button type="button" className="Login" onClick={signInGoogle}>
         Sign In with Google
       </button>
       <Link to="/SignUp">

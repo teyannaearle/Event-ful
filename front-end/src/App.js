@@ -12,6 +12,7 @@ import Event from "./Pages/EventPage";
 import Favorites from "./Pages/Favorites.js";
 import Landing from "./Pages/Landing.js";
 import SignUp from "./Pages/SignUp.js";
+import SignIn from "./Pages/SignIn"
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import EditBooked from "./Pages/EditBooked.js";
@@ -20,7 +21,7 @@ import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
-import SignIn from "./Pages/SignIn.js"
+
 
 const user_id = 1;
 const name = "jasleen";
