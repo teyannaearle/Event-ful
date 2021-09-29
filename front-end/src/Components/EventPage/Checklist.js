@@ -32,7 +32,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
       user_id: user_id,
       event_id: event_id,
     };
-
+/// ONLY DELETE IF THE BOOKED VENDOR EXISTS ////
     if (!bookedStatus[category] === false) {
       axios
         .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
@@ -59,28 +59,67 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     }
   };
 
+  // const bookedButton = (category, id) => {
+  //   if (bookedStatus[category.name] === false) {
+  //     return (
+  //       <Link to={`/task/${category.name}/${event_id}/${id}`}>
+  //         <button
+  //           className="book-button x"
+  //           onClick={() => updateBookedStatus(category.name)}
+  //         >
+  //           {" "}
+  //           &#10007; No
+  //         </button>
+  //       </Link>
+  //     );
+  //   } else {
+  //     return (
+  //       <button
+  //         className="book-button check"
+  //         onClick={() => updateBookedStatus(category.name)}
+  //       >
+  //         {" "}
+  //         &#10003; Yes
+  //       </button>
+  //     );
+  //   }
+  // };
+
   const bookedButton = (category, id) => {
     if (bookedStatus[category.name] === false) {
       return (
-        <Link to={`/task/${category.name}/${event_id}/${id}`}>
-          <button
+        // <Link to={`/task/${category.name}/${event_id}/${id}`}>
+        <label className="check-container"> 
+          <input
             className="book-button x"
-            onClick={() => updateBookedStatus(category.name)}
+            onChange={() => updateBookedStatus(category.name)}
+            type="checkbox"
+            // value={bookedStatus[category.name]}
+            checked={bookedStatus[category.name] ? bookedStatus[category.name] : false}
+            defaultChecked={false}
           >
-            {" "}
-            Not Booked &#10007;
-          </button>
-        </Link>
+            {/* {" "}
+            &#10007; No */}
+          </input>
+          <span className="checkmark"></span>
+
+          </label>
+        // </Link>
       );
     } else {
       return (
-        <button
+        <label className="check-container"> 
+        <input
           className="book-button check"
-          onClick={() => updateBookedStatus(category.name)}
-        >
-          {" "}
-          Booked &#10003;
-        </button>
+          onChange={() => updateBookedStatus(category.name)}
+          type="checkbox"
+          // value={bookedStatus[category.name]}
+          checked={bookedStatus[category.name] ? bookedStatus[category.name] : false}        >
+          {/* {" "}
+          &#10003; Yes */}
+        </input>
+        <span className="checkmark"></span>
+        </label>
       );
     }
   };
@@ -149,7 +188,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           .id;
         return (
           <li key={i} className="checklist check-listitem">
-            <div className="book-buttons">
+            <div className="book-buttons book-grid">
               {bookedButton(category, id)}
               <Link to={`/task/${category.name}/${event_id}/${id}`}>
                 <button>{editButton(category.name)}</button>

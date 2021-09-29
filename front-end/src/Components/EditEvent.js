@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
-import "./EditEvent.css"
+import "./EditEvent.css";
 
 const API = apiURL();
 
@@ -19,6 +19,7 @@ function EditEvent({ user_id }) {
   });
 
   const [checklist, setChecklist] = useState({
+    catering: false,
     djs: false,
     musicians: false,
     photographers: false,
@@ -27,6 +28,9 @@ function EditEvent({ user_id }) {
     venues: false,
     balloons: false,
     floral: false,
+    party_magician: false,
+    party_characters: false,
+    party_clown: false,
   });
 
   let history = useHistory();
@@ -57,7 +61,7 @@ function EditEvent({ user_id }) {
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form className="edit-eventform" onSubmit={handleSubmit}>
         <input
           id="event_name"
           type="text"
@@ -92,69 +96,135 @@ function EditEvent({ user_id }) {
           placeholder="Date"
           onChange={handleChange}
         />
-        <label>
-          DJs
-          <input
-            value="dj"
-            type="checkbox"
-            checked={checklist["Djs"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Musicians
-          <input
-            value="musician"
-            type="checkbox"
-            checked={checklist["Musician"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Photographer
-          <input
-            value="photographer"
-            type="checkbox"
-            checked={checklist["photographer"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Videographer
-          <input
-            value="videographer"
-            type="checkbox"
-            checked={checklist["Videographer"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Venue
-          <input
-            value="venue"
-            type="checkbox"
-            checked={checklist["Venue"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Balloons
-          <input
-            value="balloons"
-            type="checkbox"
-            checked={checklist["Balloons"]}
-            onChange={toggleState}
-          />
-        </label>
-        <label>
-          Floral
-          <input
-            value="floral"
-            type="checkbox"
-            checked={checklist["floral"]}
-            onChange={toggleState}
-          />
-        </label>
+
+        <span className="checkbox-span">
+          <label className="check-container edit-checkbox">
+            <input
+              value="catering"
+              type="checkbox"
+              checked={checklist["catering"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category">Caterer</span>
+          </label>
+
+          <label className="check-container edit-checkbox">
+            <input
+              value="dj"
+              type="checkbox"
+              checked={checklist["Djs"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category">DJ</span>
+          </label>
+          <label className="check-container edit-checkbox">
+            <input
+              value="musician"
+              type="checkbox"
+              checked={checklist["Musician"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Musician</span>
+          </label>
+          <label className="check-container edit-checkbox">
+            <input
+              value="photographer"
+              type="checkbox"
+              checked={checklist["photographer"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Photographer</span>
+          </label>
+
+          <label className="check-container edit-checkbox">
+            <input
+              value="party_rental"
+              type="checkbox"
+              checked={checklist["party_rental"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Party Rental</span>
+          </label>
+
+          <label className="check-container edit-checkbox">
+            <input
+              value="videographer"
+              type="checkbox"
+              checked={checklist["Videographer"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Videographer</span>
+          </label>
+          <label className="check-container edit-checkbox">
+            <input
+              value="venue"
+              type="checkbox"
+              checked={checklist["Venue"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Venues</span>
+          </label>
+          <label className="check-container edit-checkbox">
+            <input
+              value="balloons"
+              type="checkbox"
+              checked={checklist["Balloons"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Balloon Services</span>
+          </label>
+          <label className="check-container edit-checkbox">
+            <input
+              value="floral"
+              type="checkbox"
+              checked={checklist["floral"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Floral Designer</span>
+          </label>
+
+          <label className="check-container edit-checkbox">
+            <input
+              value="party_magician"
+              type="checkbox"
+              checked={checklist["party_magician"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Magician</span>
+          </label>
+
+          <label className="check-container edit-checkbox">
+            <input
+              value="party_characters"
+              type="checkbox"
+              checked={checklist["party_characters"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Character Actors</span>
+          </label>
+
+          <label className="check-container edit-checkbox">
+            <input
+              value="party_clown"
+              type="checkbox"
+              checked={checklist["party_clown"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category"> Clowns</span>
+          </label>
+        </span>
         <button className="pg-buttons">Save Changes</button>
         <Link to={`/dashboard/${user_id}`}>
           <button className="pg-buttons">Cancel Edit</button>
