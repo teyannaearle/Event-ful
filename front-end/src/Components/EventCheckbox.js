@@ -56,7 +56,7 @@ export default function EventCheckbox({ user_id }) {
 
   return (
     <section className="NewEvent">
-      <form className="three-d" onSubmit={handleSubmit}>
+      <form className=" col-h three-d" onSubmit={handleSubmit}>
         <label>
           DJ
           <input

@@ -60,7 +60,7 @@ function EventForm({ user_id }) {
 
   return (
     <section>
-      <form className="three-d" onSubmit={handleSubmit}>
+      <form className="eventform-container three-d" onSubmit={handleSubmit}>
         <label htmlFor="event_name">New Event</label>
         <input
           className="three-d pg-input"
