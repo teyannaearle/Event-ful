@@ -1,13 +1,19 @@
 import React from "react";
 import Ratings from "react-ratings-declarative";
+import { useLocation } from "react-router-dom";
 
-
-
-function Vendor({ vendor }) {
+function Vendor({ vendor, selected }) {
+  const location = useLocation().pathname.split("/");
 
   return (
     <>
-      <li className="flex-col three-d ven-li">
+      <li
+        className={`flex-col three-d ${
+          (location[1] === "task" && !selected) || location[1] === "vendors"
+            ? "ven-li-blue "
+            : "ven-li"
+        }`}
+      >
         <img
           src={vendor.image_url}
           alt={vendor.name}
