@@ -101,6 +101,8 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
             {/* {" "}
             &#10007; No */}
           </input>
+          <span className="checkmark"></span>
+
           </label>
         // </Link>
       );
@@ -116,6 +118,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           {/* {" "}
           &#10003; Yes */}
         </input>
+        <span className="checkmark"></span>
         </label>
       );
     }
@@ -185,7 +188,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           .id;
         return (
           <li key={i} className="checklist check-listitem">
-            <div className="book-buttons">
+            <div className="book-buttons book-grid">
               {bookedButton(category, id)}
               <Link to={`/task/${category.name}/${event_id}/${id}`}>
                 <button>{editButton(category.name)}</button>
