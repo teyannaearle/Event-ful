@@ -10,8 +10,8 @@ export const UserProvider = ({children}) => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
-      console.log("onAuthStateChanged")
-      console.log(`userprovider line 14, user is ${user}`)
+      // console.log("onAuthStateChanged")
+      // console.log(`userprovider line 14, user is ${user}`)
       // console.log(Object.keys(user))
       if (user) {
         

@@ -24,10 +24,13 @@ export default function SignInForm() {
   );
 
   const currentUser = useContext(UserContext);
-  console.log(`line 24, sign in form, currentUser ${currentUser}`);
+  console.log(`line 27, sign in form, currentUser ${currentUser}`);
   if (currentUser) {
-    history.push("/dashboard");
-  } 
+    console.log(Object.keys(currentUser))
+  }
+  // if (currentUser.uid) {
+  //   history.push("/dashboard");
+  // } 
 
   return (
     <div className="newForm">

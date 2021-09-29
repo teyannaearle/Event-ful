@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import SignInForm from "../Components/SignInForm"
 import './Landing.css'
-export default function Landing() {
+import { UserContext } from "../Providers/UserProvider";
 
+export default function Landing() {
+const user = useContext(UserContext)
+console.log(user)
     return (
         <div className="Landing">
 
@@ -24,7 +27,7 @@ export default function Landing() {
                 </p>
 
             </section>
-            <SignInForm />
+            {/* <SignInForm /> */}
 
         </div>
     )
