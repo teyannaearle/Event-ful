@@ -57,7 +57,7 @@ function EditEvent({ user_id }) {
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form className="edit-eventform" onSubmit={handleSubmit}>
         <input
           id="event_name"
           type="text"
@@ -92,17 +92,17 @@ function EditEvent({ user_id }) {
           placeholder="Date"
           onChange={handleChange}
         />
-        <label class="check-container">
-          DJs
+        <label className="check-container edit-checkbox">
           <input
             value="dj"
             type="checkbox"
             checked={checklist["Djs"]}
             onChange={toggleState}
           />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
+          <span id="test">DJs</span>
         </label>
-        <label>
+        <label className="check-container edit-checkbox">
           Musicians
           <input
             value="musician"
@@ -110,9 +110,9 @@ function EditEvent({ user_id }) {
             checked={checklist["Musician"]}
             onChange={toggleState}
           />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
-        <label>
+        <label className="check-container edit-checkbox">
           Photographer
           <input
             value="photographer"
@@ -120,9 +120,9 @@ function EditEvent({ user_id }) {
             checked={checklist["photographer"]}
             onChange={toggleState}
           />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
-        <label>
+        <label className="check-container edit-checkbox">
           Videographer
           <input
             value="videographer"
@@ -130,9 +130,9 @@ function EditEvent({ user_id }) {
             checked={checklist["Videographer"]}
             onChange={toggleState}
           />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
-        <label>
+        <label className="check-container edit-checkbox">
           Venue
           <input
             value="venue"
@@ -140,9 +140,9 @@ function EditEvent({ user_id }) {
             checked={checklist["Venue"]}
             onChange={toggleState}
           />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
-        <label>
+        <label className="check-container edit-checkbox">
           Balloons
           <input
             value="balloons"
@@ -150,9 +150,9 @@ function EditEvent({ user_id }) {
             checked={checklist["Balloons"]}
             onChange={toggleState}
           />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
-        <label>
+        <label className="check-container edit-checkbox">
           Floral
           <input
             value="floral"
@@ -160,7 +160,7 @@ function EditEvent({ user_id }) {
             checked={checklist["floral"]}
             onChange={toggleState}
           />
-          <span class="checkmark"></span>
+          <span className="checkmark"></span>
         </label>
         <button className="pg-buttons">Save Changes</button>
         <Link to={`/dashboard/${user_id}`}>

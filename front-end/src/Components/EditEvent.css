@@ -7,6 +7,24 @@
   margin: 0 auto;
 }
 
+.edit-checkbox {
+  width: 100%;
+}
+
+.edit-eventform label {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+}
+
+.edit-checkbox span {
+}
+
+#test {
+  width: 80%;
+  text-align: left;
+}
+
 label {
   display: block;
 }
