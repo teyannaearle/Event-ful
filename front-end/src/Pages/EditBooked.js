@@ -20,7 +20,10 @@ function EditBooked({ user_id, lat, lng, formatter }) {
   const [bookedStatus, setBookedStatus] = useState({});
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false);
+
+  const [selected, setSelected] = useState(false)
   const history = useHistory();
+
 
   useEffect(() => {
     let vendorCategories = [];
@@ -60,6 +63,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
           .get(`${API}/booked/category/${category}/${user_id}/${event_id}`)
           .then((res) => {
             let result = res.data.payload;
+            setSelected(true)
             setVendor({
               name: result.vendor_name,
               image_url: result.vendor_image,
@@ -101,6 +105,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
       setVendors(data);
     }
     setSearched(true);
+    setSelected(false)
   };
 
   const handleFormChange = (e) => {
@@ -162,6 +167,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
                   setVendor(selected);
                   setVendors([]);
                   setSearched(false);
+                  setSelected(true)
                 });
             } catch (e) {
               console.error(e);
@@ -182,6 +188,8 @@ function EditBooked({ user_id, lat, lng, formatter }) {
                   setVendor(selected);
                   setVendors([]);
                   setSearched(false);
+                  setSelected(true)
+
                 });
             } catch (e) {
               console.error(e);
@@ -200,7 +208,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
           {vendors.map((vendor) => {
             return (
               <button onClick={() => handleSelection(vendor)} key={vendor.id}>
-                <Vendor vendor={vendor} category={category} />
+                <Vendor vendor={vendor} category={category} selected={selected}/>
               </button>
             );
           })}
@@ -214,7 +222,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
   const vendorShow = () => {
     return (
       <div className="single-ven">
-        <Vendor vendor={vendor} category={category} />
+        <Vendor vendor={vendor} category={category} selected={selected}/>
         <div className="three-d ven-cost">
           <p>Cost: {formatter.format(cost)}</p>
 
