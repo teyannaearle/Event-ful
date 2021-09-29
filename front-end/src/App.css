@@ -19,6 +19,8 @@ html,
 .site {
   min-height: 100vh;
   flex: 1;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .site {
@@ -77,13 +79,31 @@ button:hover {
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 4px;
-  background-color: #68a7ca;
+  /* background-color: #68a7ca; */
+  /* border: 1px solid white; */
+  /* background-color: #3886b1; */
+  background-image: linear-gradient(
+    to right top,
+    #3b90bf,
+    #3a8fbe,
+    #3a8ebc,
+    #398dbb,
+    #388cba,
+    #388bb9,
+    #378bb8,
+    #378ab7,
+    #3789b5,
+    #3888b4,
+    #3887b2,
+    #3886b1
+  );
   color: white;
   font-weight: 700;
-  border: 1px solid white;
   letter-spacing: 1px;
-  font-size: medium;
+  /* font-size: medium; */
   cursor: pointer;
+  box-shadow: 0px 3px 0px #2c6d8f, 0px 2px 10px rgba(0, 0, 0, 0.4),
+    inset 1px 1px 3px rgba(255, 255, 255, 0.927);
 }
 
 .pg-buttons:hover {
@@ -94,6 +114,10 @@ button:hover {
 .back-button {
   height: 50px;
   width: max-content;
+  /* border: 1px solid white; */
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  padding-left: 15px;
 }
 
 .pg-head {
@@ -215,25 +239,105 @@ button:hover {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  display: grid;
-  grid-template-columns: 25% 75%;
 }
 
 .book-buttons button {
-  width: 100%;
+  width: 100px;
   height: 25px;
   margin: 5px;
-  width: 100%;
-  width: 60%;
+  /* width: 100%;
+  width: 60% */
 }
 
+.check-container {
+  display: block;
+  position: relative;
+  /* padding-left: 35px;
+  margin-bottom: 12px; */
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+  height: 25px;
+  width: 25px;
+  background-color: #aaa;
+  /* background-color: rgb(205, 202, 202); */
+  border-radius: 100%;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4),
+    inset 0px 0px 3px rgba(255, 255, 255, 0.927);
+}
+
+.check-container:hover input ~ .checkmark {
+  background-color: #ccc;
+  /* background-color: #b2d3e6 */
+  background-color: #68a7ca;
+}
+
+.check-container:active input ~ .checkmark {
+  background-color: #3886b1;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4),
+    inset 0px 0px 1px rgba(255, 255, 255, 0.927);
+}
+
+.check-container input:checked ~ .checkmark {
+  /* background-color: #2196F3; */
+  /* background-color: #5c96b5; */
+  background-color: #3886b1;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.check-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.check-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  /* -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg); */
+  transform: rotate(40deg);
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: 25% 50%;
+  align-items: center;
+  justify-content: center;
+}
 .book-buttons a {
   width: 100%;
   margin-right: 10px;
-}
-
-.book-buttons input {
-  width: 100%;
 }
 
 .check {
@@ -395,26 +499,26 @@ button:hover {
 .show-header {
   width: 80%;
   margin: auto;
-  text-align: center;
-  /* height: 100% */
+  /* text-align: center; */
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .show-header h1,
 .show-header div {
   display: inline;
-  width: 50%;
+  width: 100%;
 }
 
 .show-header h1 {
   text-align: right;
-  width: 85%;
+  /* width: 85%; */
 }
 
-.show-header div {
+/* .show-header div {
   margin-left: 20px;
-}
+} */
 
 .carousel {
   /* width: 70%; */
@@ -451,6 +555,7 @@ button:hover {
 }
 .ven-info {
   padding-bottom: 20px;
+  margin-top: 0;
 }
 
 .reviews {
@@ -495,14 +600,20 @@ button:hover {
 .heart {
   cursor: pointer;
   padding: 10px 12px 8px;
+  /* padding: 12px 14px 10px; */
   background: #fff;
+  /* background-color: #3886B1; */
+  /* background-color: black; */
   border-radius: 50%;
+  border: 1px solid white;
   display: inline-block;
   margin: 0 0 15px;
   transition: 0.2s;
   box-shadow: 0px 3px 0px #7d97a5, 0px 2px 10px rgba(0, 0, 0, 0.4),
     inset 0px 0px 3px rgba(255, 255, 255, 0.927);
   margin-top: 20px;
+  font-size: 25px;
+  margin-right: 10px;
 }
 
 .heart:hover {
@@ -511,18 +622,25 @@ button:hover {
 
 .like-span {
   position: absolute;
-  top: 0;
+  top: -15px;
+  left: -70px;
   visibility: hidden;
   opacity: 0;
   transition: 0.6s;
-  font-size: 2px;
+  /* font-size: 2px; */
   font-weight: 700;
-  color: #68a7ca;
+  /* color: #68a7ca;
+  background-color: white; */
+  /* color: #D8BFD8; */
+  /* color: white;
+ */
   background-color: white;
-  font-size: larger;
+  color: #3886b1;
+  /* color: red; */
+  /* font-size: larger; */
   display: inline;
   width: max-content;
-  padding: 20px;
+  padding: 15px 20px;
   border-radius: 50%;
 }
 
@@ -532,9 +650,11 @@ i.press {
 }
 
 span.press {
-  left: 50px;
-  top: -40px;
-  animation: fade 2s;
+  /* top: -15px; */
+  /* left: -50px;
+  left: 50px; */
+  top: -70px;
+  animation: fade 1.5s;
 }
 
 @keyframes fade {
@@ -560,6 +680,15 @@ span.press {
   100% {
     padding: 10px 12px 8px;
   }
+  /* 0% {
+    padding: 12px 14px 10px;
+  }
+  50% {
+    padding: 12px 16px 10px;
+  }
+  100% {
+    padding: 12px 14px 10px;
+  } */
 }
 
 /* VENDOR INDEX PAGE */
@@ -569,6 +698,7 @@ span.press {
   flex-direction: column;
   justify-items: center;
   margin: auto;
+  margin-top: 30px;
   height: 100%;
 }
 
@@ -601,6 +731,20 @@ span.press {
   padding: 20px;
   background-color: white;
   height: 90%;
+}
+
+.ven-li-blue {
+  padding: 20px;
+  height: 90%;
+  background-color: #3886b1;
+  color: white;
+}
+
+.ven-ul button:hover {
+  filter: brightness(100%);
+}
+.ven-li-blue:hover {
+  filter: brightness(110%);
 }
 
 .ven-img {
@@ -742,26 +886,54 @@ span.press {
   #countdown-container {
     grid-column: span 1;
   }
-}
-
-@media only screen and (max-width: 850px) {
   /* VENDOR SHOW */
-  #vendor-showpage {
-    margin-top: 20px;
+  .like-span {
+    /* top: 0;
+  left: -60px;
+  font-size: medium;
+  padding: 15px;
+  width: 100% */
+
+    top: -15px;
+    left: -70px;
+    font-size: smaller;
+    padding: 10px;
   }
 
+  span.press {
+    /* left: -100px; */
+    /* top: 0px; */
+    /* top: -70px; */
+    left: -140px;
+    top: -10px;
+  }
+}
+
+/* @media only screen and (max-width: 850px){
+  VENDOR SHOW
+  #vendor-showpage{
+    margin-top: 20px;
+  }
+.show-header span{
+  width: 100%;
+  display: block;
+}
   .like-span {
     top: 0;
     left: -60px;
     font-size: medium;
     padding: 15px;
+    width: 100%
   }
 
   span.press {
-    left: -60px;
+    left: -100px;
+    top: 0px;
     top: -70px;
+
   }
-}
+
+} */
 
 @media only screen and (max-width: 800px) {
   /*DASHBOARD*/
@@ -804,7 +976,25 @@ span.press {
   }
 }
 
+@media only screen and (max-width: 680px) {
+  /* VENDOR SHOW PAGE */
+  .like-span {
+    top: 0;
+    left: 80px;
+    font-size: smaller;
+    padding: 10px;
+  }
+
+  span.press {
+    left: -30px;
+    top: 20px;
+    z-index: 100;
+  }
+}
 @media only screen and (max-width: 500px) {
+  .pg-buttons:hover {
+    transform: none;
+  }
   /*DASHBOARD*/
   .plan-ev {
     font-size: medium;
@@ -821,8 +1011,15 @@ span.press {
   }
 
   .show-header {
+    width: 100%;
+  }
+
+  .heart {
+    margin-top: 2px;
+  }
+  .show-header span {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
   }
@@ -843,7 +1040,8 @@ span.press {
 
   span.press {
     left: 80px;
-    top: 58px;
+    top: 40px;
+    z-index: 100;
   }
 
   .ven-info {
@@ -869,4 +1067,8 @@ span.press {
   #vendor-showpage h1 {
     text-align: center;
   }
+}
+
+svg .widget {
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.7));
 }
