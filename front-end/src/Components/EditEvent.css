@@ -5,26 +5,38 @@
   height: 100%;
   width: 50%;
   margin: 0 auto;
-}
+} 
 
-.edit-checkbox {
+/* .edit-checkbox {
   width: 100%;
-}
+} */
 
-.edit-eventform label {
-  display: flex;
+
+.checkbox-span label {
+  /* display: flex;
   justify-content: space-around;
-  flex-direction: row-reverse;
-}
-
-.edit-checkbox span {
-}
-
-#test {
-  width: 80%;
-  text-align: left;
-}
-
-label {
+  flex-direction: row-reverse; */
   display: block;
+}
+
+.edit-checkbox .checkmark{
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 23px;
+  width: 23px;
+}
+
+.category {
+  /* width: 80%; */
+  text-align: left;
+  margin-left: 40px;
+}
+
+/* label {
+  display: block;
+} */
+
+.checkbox-span{
+  display: block;
+text-align: left;
 }
