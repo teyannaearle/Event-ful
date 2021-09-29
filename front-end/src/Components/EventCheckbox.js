@@ -6,11 +6,11 @@ import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
 
-export default function EventCheckbox({user_id}) {
-    const { id } = useParams()
-    const history = useHistory()
+export default function EventCheckbox({ user_id }) {
+  const { id } = useParams();
+  const history = useHistory();
 
-    const [eventForm, setEventForm] = useState({
+  const [eventForm, setEventForm] = useState({
     djs: false,
     musicians: false,
     photographers: false,
@@ -24,12 +24,12 @@ export default function EventCheckbox({user_id}) {
     party_clown: false,
   });
 
-//pass props from eventForm to represent the name,date, budget, etc.
-const addToCheckedList = () => {
+  //pass props from eventForm to represent the name,date, budget, etc.
+  const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
     // console.log(categories);
     // const id = lastEvent.event_id + 1;
-    
+
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
@@ -53,11 +53,11 @@ const addToCheckedList = () => {
     e.preventDefault();
     addToCheckedList();
   };
-    
-    return (
-        <section className="NewEvent">
-      <form className="three-d" onSubmit={handleSubmit}>
-        <label>
+
+  return (
+    <section className="NewEvent">
+      <form className=" col-h three-d" onSubmit={handleSubmit}>
+        <label class="check-container">
           DJ
           <input
             value="djs"
@@ -65,8 +65,9 @@ const addToCheckedList = () => {
             checked={eventForm.djs}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Musician
           <input
             value="musicians"
@@ -74,8 +75,9 @@ const addToCheckedList = () => {
             checked={eventForm.musicians}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Photographer
           <input
             value="photographers"
@@ -83,8 +85,9 @@ const addToCheckedList = () => {
             checked={eventForm.photographers}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Party Rental
           <input
             value="party_rental"
@@ -92,8 +95,9 @@ const addToCheckedList = () => {
             checked={eventForm.party_rental}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Videographer
           <input
             value="videographers"
@@ -101,8 +105,9 @@ const addToCheckedList = () => {
             checked={eventForm.videographers}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Venues
           <input
             value="venues"
@@ -110,8 +115,9 @@ const addToCheckedList = () => {
             checked={eventForm.venues}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Balloon Services
           <input
             value="balloons"
@@ -119,8 +125,9 @@ const addToCheckedList = () => {
             checked={eventForm.balloons}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Floral Designer
           <input
             value="floral"
@@ -128,8 +135,9 @@ const addToCheckedList = () => {
             checked={eventForm.floral}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Magician
           <input
             value="party_magician"
@@ -137,8 +145,9 @@ const addToCheckedList = () => {
             checked={eventForm.party_magician}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Character Actors
           <input
             value="party_characters"
@@ -146,8 +155,9 @@ const addToCheckedList = () => {
             checked={eventForm.party_characters}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <label>
+        <label class="check-container">
           Clowns
           <input
             value="party_clown"
@@ -155,9 +165,12 @@ const addToCheckedList = () => {
             checked={eventForm.party_clown}
             onChange={toggleState}
           />
+          <span class="checkmark"></span>
         </label>
-        <button className=" pg-buttons" type="submit">Submit</button>
+        <button className=" three-d pg-buttons" type="submit">
+          Submit
+        </button>
       </form>
     </section>
-    )
+  );
 }

@@ -82,16 +82,28 @@ button:hover {
   /* background-color: #68a7ca; */
   /* border: 1px solid white; */
   /* background-color: #3886b1; */
-  background-image: linear-gradient(to right top, #3b90bf, #3a8fbe, #3a8ebc, #398dbb, #388cba, #388bb9, #378bb8, #378ab7, #3789b5, #3888b4, #3887b2, #3886b1);
+  background-image: linear-gradient(
+    to right top,
+    #3b90bf,
+    #3a8fbe,
+    #3a8ebc,
+    #398dbb,
+    #388cba,
+    #388bb9,
+    #378bb8,
+    #378ab7,
+    #3789b5,
+    #3888b4,
+    #3887b2,
+    #3886b1
+  );
   color: white;
   font-weight: 700;
   letter-spacing: 1px;
   /* font-size: medium; */
   cursor: pointer;
   box-shadow: 0px 3px 0px #2c6d8f, 0px 2px 10px rgba(0, 0, 0, 0.4),
-  inset 1px 1px 3px rgba(255, 255, 255,  0.927); 
-
-
+    inset 1px 1px 3px rgba(255, 255, 255, 0.927);
 }
 
 .pg-buttons:hover {
@@ -102,11 +114,10 @@ button:hover {
 .back-button {
   height: 50px;
   width: max-content;
-/* border: 1px solid white; */
-border-right: 1px solid white;
-border-bottom: 1px solid white;
-padding-left: 15px;
-
+  /* border: 1px solid white; */
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  padding-left: 15px;
 }
 
 .pg-head {
@@ -172,6 +183,15 @@ padding-left: 15px;
   border-radius: 8px;
 }
 
+.eventform-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  text-align: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
 #checklist-container {
   width: 100%;
 
@@ -219,7 +239,6 @@ padding-left: 15px;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-
 }
 
 .book-buttons button {
@@ -230,7 +249,7 @@ padding-left: 15px;
   width: 60% */
 }
 
-.check-container{
+.check-container {
   display: block;
   position: relative;
   /* padding-left: 35px;
@@ -246,7 +265,6 @@ padding-left: 15px;
   justify-content: center;
 }
 
-
 .check-container input {
   position: absolute;
   opacity: 0;
@@ -254,7 +272,6 @@ padding-left: 15px;
   height: 0;
   width: 0;
 }
-
 
 .checkmark {
   position: absolute;
@@ -266,25 +283,25 @@ padding-left: 15px;
   /* background-color: rgb(205, 202, 202); */
   border-radius: 100%;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4),
-  inset 0px 0px 3px rgba(255, 255, 255,  0.927); 
+    inset 0px 0px 3px rgba(255, 255, 255, 0.927);
 }
 
 .check-container:hover input ~ .checkmark {
   background-color: #ccc;
   /* background-color: #b2d3e6 */
-background-color: #68a7ca;
+  background-color: #68a7ca;
 }
 
-.check-container:active input ~ .checkmark{
-  background-color: #3886B1;
+.check-container:active input ~ .checkmark {
+  background-color: #3886b1;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4),
-  inset 0px 0px 1px rgba(255, 255, 255,  0.927); 
+    inset 0px 0px 1px rgba(255, 255, 255, 0.927);
 }
 
 .check-container input:checked ~ .checkmark {
   /* background-color: #2196F3; */
   /* background-color: #5c96b5; */
-  background-color: #3886B1;
+  background-color: #3886b1;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -312,7 +329,7 @@ background-color: #68a7ca;
   transform: rotate(40deg);
 }
 
-.book-grid{
+.book-grid {
   display: grid;
   grid-template-columns: 25% 50%;
   align-items: center;
@@ -588,7 +605,7 @@ background-color: #68a7ca;
   /* background-color: #3886B1; */
   /* background-color: black; */
   border-radius: 50%;
-border: 1px solid white;
+  border: 1px solid white;
   display: inline-block;
   margin: 0 0 15px;
   transition: 0.2s;
@@ -596,7 +613,7 @@ border: 1px solid white;
     inset 0px 0px 3px rgba(255, 255, 255, 0.927);
   margin-top: 20px;
   font-size: 25px;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
 .heart:hover {
@@ -618,7 +635,7 @@ border: 1px solid white;
   /* color: white;
  */
   background-color: white;
- color:#3886B1 ;
+  color: #3886b1;
   /* color: red; */
   /* font-size: larger; */
   display: inline;
@@ -683,7 +700,6 @@ span.press {
   margin: auto;
   margin-top: 30px;
   height: 100%;
-
 }
 
 #zip-search {
@@ -717,17 +733,17 @@ span.press {
   height: 90%;
 }
 
-.ven-li-blue{
+.ven-li-blue {
   padding: 20px;
   height: 90%;
-  background-color: #3886B1;
+  background-color: #3886b1;
   color: white;
 }
 
-.ven-ul button:hover{
+.ven-ul button:hover {
   filter: brightness(100%);
 }
-.ven-li-blue:hover{
+.ven-li-blue:hover {
   filter: brightness(110%);
 }
 
@@ -738,7 +754,7 @@ span.press {
 }
 /* EditBooked*/
 
-.directions{
+.directions {
   font-size: larger;
 }
 
@@ -853,7 +869,6 @@ span.press {
   padding-bottom: 5px;
 }
 
-
 @media only screen and (max-width: 1200px) {
   /* VENDOR INDEX */
   .ven-ul {
@@ -871,29 +886,27 @@ span.press {
   #countdown-container {
     grid-column: span 1;
   }
-/* VENDOR SHOW */
-.like-span {
-  /* top: 0;
+  /* VENDOR SHOW */
+  .like-span {
+    /* top: 0;
   left: -60px;
   font-size: medium;
   padding: 15px;
   width: 100% */
 
-  top: -15px;
-left: -70px;
-font-size: smaller;
-padding: 10px;
+    top: -15px;
+    left: -70px;
+    font-size: smaller;
+    padding: 10px;
+  }
 
-}
-
-span.press {
-  /* left: -100px; */
-  /* top: 0px; */
-  /* top: -70px; */
-  left: -140px;
-  top: -10px;
-}
-
+  span.press {
+    /* left: -100px; */
+    /* top: 0px; */
+    /* top: -70px; */
+    left: -140px;
+    top: -10px;
+  }
 }
 
 /* @media only screen and (max-width: 850px){
@@ -912,7 +925,7 @@ span.press {
     padding: 15px;
     width: 100%
   }
-  
+
   span.press {
     left: -100px;
     top: 0px;
@@ -971,17 +984,15 @@ span.press {
     font-size: smaller;
     padding: 10px;
   }
-  
+
   span.press {
     left: -30px;
     top: 20px;
     z-index: 100;
   }
-
 }
 @media only screen and (max-width: 500px) {
-
-  .pg-buttons:hover{
+  .pg-buttons:hover {
     transform: none;
   }
   /*DASHBOARD*/
@@ -999,26 +1010,26 @@ span.press {
     text-align: center;
   }
 
-  .show-header{
-    width: 100%
+  .show-header {
+    width: 100%;
   }
 
-  .heart{
+  .heart {
     margin-top: 2px;
   }
-  .show-header span{
+  .show-header span {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
   }
 
-  .show-header h1 , .show-header div{
+  .show-header h1,
+  .show-header div {
     width: 100%;
     text-align: center;
     margin-left: 0px;
   }
-
 
   .like-span {
     top: 0;
@@ -1026,17 +1037,16 @@ span.press {
     font-size: smaller;
     padding: 10px;
   }
-  
+
   span.press {
     left: 80px;
     top: 40px;
     z-index: 100;
   }
 
-  .ven-info{
+  .ven-info {
     margin-top: 0px;
   }
-
 }
 
 @media only screen and (max-width: 320px) {
@@ -1059,8 +1069,6 @@ span.press {
   }
 }
 
-svg .widget{
-  filter: drop-shadow( 2px 2px 1px rgba(0, 0, 0, .7)); 
-
+svg .widget {
+  filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.7));
 }
-
