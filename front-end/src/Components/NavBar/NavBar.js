@@ -38,8 +38,7 @@ export default function NavBar() {
     // },
   ];
   const signOut = () => {
-    userSignOut();
-    history.push("/");
+    userSignOut().then(history.push("/"));
   };
   return (
     <nav className="NavBarItems">

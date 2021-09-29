@@ -11,9 +11,10 @@ export const UserProvider = ({children}) => {
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       console.log("onAuthStateChanged")
-      console.log(user)
+      console.log(`userprovider line 14, user is ${user}`)
+      // console.log(Object.keys(user))
       if (user) {
-        console.log(user);
+        
         history.push("/dashboard");
             const {email, displayName, photoURL, phoneNumber, uid} = user
             setUser({

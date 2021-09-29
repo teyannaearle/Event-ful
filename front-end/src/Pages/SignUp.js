@@ -1,14 +1,32 @@
-import React from 'react'
-import { Link } from "react-router-dom"
+import React, { useCallback, useContext }  from 'react'
+import { Link, useHistory } from "react-router-dom"
 import './SignUp.css'
 import { userSignUp } from '../Services/Firebase'
 
 export default function SignUp() {
+const history = useHistory()
+
+    const handleSignUp = useCallback(
+        async (event) => {
+          event.preventDefault();
+          const { email, password } = event.target.elements;
+          try {
+            await userSignUp(email.value, password.value);
+            console.log()
+            history.push("/dashboard");
+          } catch (error) {
+            alert(error);
+          }
+        },
+        [history]
+      );
+
+
     return (
         <div className="Container">
-           <form >
+           <form onSubmit={handleSignUp}>
                {/* <h1>Sign up for Event(ful) Here!</h1> */}
-               <label htmlFor="FullName">Please Enter Your Full Name</label> <br/>
+               {/* <label htmlFor="FullName">Please Enter Your Full Name</label> <br/>
                <input 
                type="text" 
                value="" 
@@ -20,19 +38,20 @@ export default function SignUp() {
                type="text" 
                value="" 
                placeholder="Username"/> <br/>
-               <br/>
+               <br/> */}
 
                <label htmlFor="Email">Please Enter your Email</label> <br/>
                <input 
-               type="text" 
-               value="" 
-               placeholder="Email"/> <br/>
+               type="email" 
+              name="email"
+               placeholder="Email"/> 
+               <br/>
                <br/>
 
                <label htmlFor="PassWord">Select a Password</label> <br/>
                <input 
-               type="text" 
-               value="" 
+               type="password" 
+             name="password"
                placeholder="Password"/> <br/>
                <br/>
 

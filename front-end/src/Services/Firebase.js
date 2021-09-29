@@ -19,17 +19,21 @@ const app = initializeApp({
 
 export const auth = getAuth();
 
-export const userSignUp = (name, email, password) => {
+export const userSignUp = (email, password) => {
+  let error = null
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      console.log(user)
       //
     })
-    .catch((error) => {
-      const errorCode = error.errorCode;
-      const errorMessage = error.message;
-    });
+    .catch((error) => error = error.code
+      // const errorCode = error.errorCode;
+      // const errorMessage = error.message;
+      );
+      console.log(error)
+    return error
 };
 
 export const userSignIn = (email, password) => {
@@ -70,6 +74,7 @@ export const userGoogleSignIn = () => {
 }
 
 export const userSignOut = () => {
+  let error = null
   signOut(auth).then(() => {
     // Sign-out successful.
     console.log("user signed out")
@@ -77,5 +82,6 @@ export const userSignOut = () => {
     // An error happened.
     console.warn(error)
   });
+  return error
 }
 // export default app;
