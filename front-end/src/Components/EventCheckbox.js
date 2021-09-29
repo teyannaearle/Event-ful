@@ -30,17 +30,16 @@ export default function EventCheckbox({ user_id }) {
     const categories = Object.keys(eventForm);
     // console.log(categories);
     // const id = lastEvent.event_id + 1;
-    console.log(categories);
 
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
           task_name: checked,
         };
-        // console.log(category);
         axios
           .post(`${API}/checklist/${user_id}/${id}`, category)
-          .then((res) => history.push("/dashboard"))
+          // .then((res) => history.push("/dashboard"))
+          // .then((res) => console.log(res))
           .catch((c) => console.warn("catch", c));
       }
     }
@@ -54,6 +53,7 @@ export default function EventCheckbox({ user_id }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addToCheckedList();
+    history.push("/dashboard")
   };
 
   return (
