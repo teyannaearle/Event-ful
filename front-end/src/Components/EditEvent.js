@@ -19,6 +19,7 @@ function EditEvent({ user_id }) {
   });
 
   const [checklist, setChecklist] = useState({
+    catering: false,
     djs: false,
     musicians: false,
     photographers: false,
@@ -97,6 +98,17 @@ function EditEvent({ user_id }) {
         />
 
         <span className="checkbox-span">
+          <label className="check-container edit-checkbox">
+            <input
+              value="catering"
+              type="checkbox"
+              checked={checklist["catering"]}
+              onChange={toggleState}
+            />
+            <span className="checkmark"></span>
+            <span className="category">Caterer</span>
+          </label>
+
           <label className="check-container edit-checkbox">
             <input
               value="dj"
