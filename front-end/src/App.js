@@ -57,6 +57,10 @@ function App() {
           <SignUp />
         </Route>
 
+        <Route path="/signin">
+          <SignIn />
+        </Route>
+
         <Route path="/dashboard/new_event/checklist/:id">
           <EventCheckboxPg user_id={user_id} />
         </Route>

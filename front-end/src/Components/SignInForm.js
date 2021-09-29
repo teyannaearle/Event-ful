@@ -1,11 +1,11 @@
 import React from "react"
-import { Link, Route } from "react-router-dom"
+import { Link } from "react-router-dom"
 import SignUp from "../Pages/SignUp.js";
 import './SignInForm.css'
 
 export default function SignInForm () {
     return (
-        <div className="newForm">
+        <div className="newForm three-d">
             <h3>Sign In Here To Get Started</h3>
         <form>
                 <label htmlFor="Email"></label>
@@ -21,7 +21,7 @@ export default function SignInForm () {
                 value="" 
                 placeholder="Password"
                 /> <br/>
-                <button type="button" className="Login">
+                <button type="button" className="pg-buttons">
                     Login
                     </button>
                 <br/>

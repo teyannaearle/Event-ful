@@ -4,7 +4,7 @@ import './SignUp.css'
 
 export default function SignUp() {
     return (
-        <div className="Container">
+        <div className="three-d">
            <form >
                <label htmlFor="FullName">Please Enter Your Full Name</label> <br/>
                <input 
@@ -35,7 +35,7 @@ export default function SignUp() {
                <br/>
 
                <Link to="/dashboard">
-               <button type="submit" >Sign Up</button>
+               <button type="submit" className="pg-buttons">Sign Up</button>
                </Link>
            </form>
             
