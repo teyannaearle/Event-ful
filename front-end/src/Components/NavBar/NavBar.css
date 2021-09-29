@@ -126,6 +126,14 @@ nav {
     inset 1px 1px 3px rgba(255, 255, 255, 0.927);
   font-size: large;
 }
+/* 
+.logout{
+background-image: none;
+background-color: #68a7ca;
+box-shadow: 0px 3px 0px #2c6d8f, 0px 2px 10px rgba(0, 0, 0, 0.4),
+inset 0px 0px 3px rgba(19, 19, 19, 0.927);
+color: black;
+} */
 
 @media only screen and (max-width: 742px) {
   .accountLinks {
@@ -143,7 +151,7 @@ nav {
   }
 }
 
-@media only screen and (max-width: 686px) {
+@media only screen and (max-width: 730px) {
   .navbar-logo {
     width: max-content;
   }
@@ -157,6 +165,8 @@ nav {
   }
   .accountNav {
     width: 100%;
+    justify-content: center;
+    /* justify-content: space-evenly; */
   }
 
   .accountLinks {
@@ -164,7 +174,7 @@ nav {
   }
 }
 
-@media only screen and (max-width: 686px) {
+@media only screen and (max-width: 600px) {
   .accountNav {
     width: 80%;
     display: grid;
@@ -184,6 +194,7 @@ nav {
     display: block;
     width: 150px;
     text-align: center;
+    font-size: smaller;
   }
 
   .NavBarItems {
@@ -193,7 +204,7 @@ nav {
     z-index: 100;
   }
 
-  .nav-menu {
+  .nav-menu.active {
     top: 150px;
   }
 }
@@ -207,4 +218,10 @@ nav {
   .nav-but {
     font-size: small;
   }
+}
+
+.svg{
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 3px 0px #2c6d8f, 0px 2px 10px rgba(0, 0, 0, 0.4),
+    inset 1px 1px 3px rgba(255, 255, 255, 0.927);
 }

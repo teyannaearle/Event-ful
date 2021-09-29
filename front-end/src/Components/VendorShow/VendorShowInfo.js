@@ -73,7 +73,10 @@ function VendorShowInfo({ business, user_id, category }) {
     if (hover && !favorite) {
       color = "#666";
     } else if (favorite) {
-      color = "#68a7ca";
+      // color = "#68a7ca";
+      // color = "#D8BFD8";
+      color = "white";
+      color = "red";
     } else {
       color = "#aaa";
     }
@@ -84,7 +87,7 @@ function VendorShowInfo({ business, user_id, category }) {
   return (
     <>
       <span className="show-header">
-        <h1>{business.name} </h1>
+   <span> 
         <div className="like-div">
           <i
             className={`fas fa-heart fa-lg heart ${pressed ? "press" : null}`}
@@ -94,9 +97,11 @@ function VendorShowInfo({ business, user_id, category }) {
             onMouseLeave={() => setHover(!hover)}
           ></i>
           <span className={`like-span ${pressed ? "press" : null}`}>
-            Added to Favorites!
+            Added to Favorites !
           </span>
         </div>
+        <h1>{business.name} </h1>
+        </span>
       </span>
       <div className="ven-info page three-d">
         <div className="car-wrap">
@@ -113,7 +118,7 @@ function VendorShowInfo({ business, user_id, category }) {
           </div>
 
           <div className="flex-row">
-            <Ratings rating={business.rating} widgetRatedColors="steelblue">
+            <Ratings rating={business.rating} widgetRatedColors="#efcc00" widgetSpacings="5px" widgetEmptyColors="#aaa">
               <Ratings.Widget widgetDimension="30px" />
               <Ratings.Widget widgetDimension="30px" />
               <Ratings.Widget widgetDimension="35px" />

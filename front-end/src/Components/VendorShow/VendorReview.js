@@ -20,8 +20,9 @@ function VendorReview({review}) {
         <div className="rev-text">
           <Ratings
             rating={review.rating}
-            widgetRatedColors="steelblue"
+            widgetRatedColors="#efcc00"
             widgetSpacings="2px"
+            widgetEmptyColors="#aaa"
           >
             <Ratings.Widget widgetDimension="20px" />
             <Ratings.Widget widgetDimension="20px" />

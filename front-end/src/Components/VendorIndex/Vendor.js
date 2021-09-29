@@ -18,10 +18,10 @@ function Vendor({ vendor }) {
         <h2>{vendor.name}</h2>
         <p>Phone: {vendor.display_phone}</p>
         <div className="flex-row">
-          <p>Avg Rating: </p>
+          {/* <p>Avg Rating: </p> */}
           <Ratings
             rating={vendor.rating}
-            widgetRatedColors="steelblue"
+            widgetRatedColors="#efcc00"
             widgetSpacings="2px"
           >
             <Ratings.Widget widgetDimension="15px" />

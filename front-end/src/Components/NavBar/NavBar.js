@@ -18,12 +18,12 @@ export default function NavBar() {
     {
       title: "Dashboard",
       url: `/dashboard`,
-      cName: "nav-links",
+      cName: "pg-buttons nav-but",
     },
     {
       title: "My Favorites",
       url: `/favorites`,
-      cName: "nav-links",
+      cName:"pg-buttons nav-but",
     },
     // {
     //   title: "Settings",
@@ -33,7 +33,7 @@ export default function NavBar() {
     {
       title: "Logout",
       url: "/logo",
-      cName: "nav-links-mobile",
+      cName: "pg-buttons nav-but logout",
     },
   ];
 
@@ -54,7 +54,7 @@ export default function NavBar() {
         {accountMenu.map((item, index) => {
           return (
             <li className="accountLinks" key={index} onClick={closeNav}>
-              <Link to={item.url} className="pg-buttons nav-but">
+              <Link to={item.url} className={item.cName}>
                 {item.title}
               </Link>
             </li>

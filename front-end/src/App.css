@@ -19,6 +19,8 @@ html,
 .site {
   min-height: 100vh;
   flex: 1;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .site {
@@ -85,7 +87,7 @@ button:hover {
   color: white;
   font-weight: 700;
   letter-spacing: 1px;
-  font-size: medium;
+  /* font-size: medium; */
   cursor: pointer;
   box-shadow: 0px 3px 0px #2c6d8f, 0px 2px 10px rgba(0, 0, 0, 0.4),
   inset 1px 1px 3px rgba(255, 255, 255,  0.927); 
@@ -261,19 +263,29 @@ padding-left: 15px;
   left: 0; */
   height: 25px;
   width: 25px;
-  /* background-color: #eee; */
-  background-color: rgb(205, 202, 202);
-  border-radius: 100%
+  background-color: #aaa;
+  /* background-color: rgb(205, 202, 202); */
+  border-radius: 100%;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4),
+  inset 0px 0px 3px rgba(255, 255, 255,  0.927); 
 }
 
 .check-container:hover input ~ .checkmark {
   background-color: #ccc;
-  background-color: #b2d3e6
+  /* background-color: #b2d3e6 */
+background-color: #68a7ca;
+}
+
+.check-container:active input ~ .checkmark{
+  background-color: #3886B1;
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.4),
+  inset 0px 0px 1px rgba(255, 255, 255,  0.927); 
 }
 
 .check-container input:checked ~ .checkmark {
   /* background-color: #2196F3; */
-  background-color: #5c96b5;
+  /* background-color: #5c96b5; */
+  background-color: #3886B1;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -471,25 +483,26 @@ padding-left: 15px;
 .show-header {
   width: 80%;
   margin: auto;
-  text-align: center;
+  /* text-align: center; */
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .show-header h1,
 .show-header div {
   display: inline;
-  width: 50%;
+  width: 100%;
 }
 
 .show-header h1 {
   text-align: right;
-  width: 85%;
+  /* width: 85%; */
 }
 
-.show-header div {
+/* .show-header div {
   margin-left: 20px;
-}
+} */
 
 .carousel {
   /* width: 70%; */
@@ -526,6 +539,7 @@ padding-left: 15px;
 }
 .ven-info {
   padding-bottom: 20px;
+  margin-top: 0;
 }
 
 .reviews {
@@ -570,14 +584,20 @@ padding-left: 15px;
 .heart {
   cursor: pointer;
   padding: 10px 12px 8px;
+  /* padding: 12px 14px 10px; */
   background: #fff;
+  /* background-color: #3886B1; */
+  /* background-color: black; */
   border-radius: 50%;
+border: 1px solid white;
   display: inline-block;
   margin: 0 0 15px;
   transition: 0.2s;
   box-shadow: 0px 3px 0px #7d97a5, 0px 2px 10px rgba(0, 0, 0, 0.4),
     inset 0px 0px 3px rgba(255, 255, 255, 0.927);
   margin-top: 20px;
+  font-size: 25px;
+  margin-right: 10px
 }
 
 .heart:hover {
@@ -586,18 +606,25 @@ padding-left: 15px;
 
 .like-span {
   position: absolute;
-  top: 0;
+  top: -15px;
+  left: -70px;
   visibility: hidden;
   opacity: 0;
   transition: 0.6s;
-  font-size: 2px;
+  /* font-size: 2px; */
   font-weight: 700;
-  color: #68a7ca;
+  /* color: #68a7ca;
+  background-color: white; */
+  /* color: #D8BFD8; */
+  /* color: white;
+ */
   background-color: white;
-  font-size: larger;
+ color:#3886B1 ;
+  /* color: red; */
+  /* font-size: larger; */
   display: inline;
   width: max-content;
-  padding: 20px;
+  padding: 15px 20px;
   border-radius: 50%;
 }
 
@@ -607,9 +634,11 @@ i.press {
 }
 
 span.press {
-  left: 50px;
-  top: -40px;
-  animation: fade 2s;
+  /* top: -15px; */
+  /* left: -50px;
+  left: 50px; */
+  top: -70px;
+  animation: fade 1.5s;
 }
 
 @keyframes fade {
@@ -635,6 +664,15 @@ span.press {
   100% {
     padding: 10px 12px 8px;
   }
+  /* 0% {
+    padding: 12px 14px 10px;
+  }
+  50% {
+    padding: 12px 16px 10px;
+  }
+  100% {
+    padding: 12px 14px 10px;
+  } */
 }
 
 /* VENDOR INDEX PAGE */
@@ -644,7 +682,9 @@ span.press {
   flex-direction: column;
   justify-items: center;
   margin: auto;
+  margin-top: 30px;
   height: 100%;
+
 }
 
 #zip-search {
@@ -674,7 +714,9 @@ span.press {
 
 .ven-li {
   padding: 20px;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #3886B1;
+  color: white;
   height: 90%;
 }
 
@@ -818,27 +860,56 @@ span.press {
   #countdown-container {
     grid-column: span 1;
   }
+/* VENDOR SHOW */
+.like-span {
+  /* top: 0;
+  left: -60px;
+  font-size: medium;
+  padding: 15px;
+  width: 100% */
+
+  top: -15px;
+left: -70px;
+font-size: smaller;
+padding: 10px;
+
 }
 
-@media only screen and (max-width: 850px){
-  /* VENDOR SHOW */
+span.press {
+  /* left: -100px; */
+  /* top: 0px; */
+  /* top: -70px; */
+  left: -140px;
+  top: -10px;
+}
+
+}
+
+/* @media only screen and (max-width: 850px){
+  VENDOR SHOW
   #vendor-showpage{
     margin-top: 20px;
   }
-
+.show-header span{
+  width: 100%;
+  display: block;
+}
   .like-span {
     top: 0;
     left: -60px;
     font-size: medium;
     padding: 15px;
+    width: 100%
   }
   
   span.press {
-    left: -60px;
+    left: -100px;
+    top: 0px;
     top: -70px;
+
   }
 
-}
+} */
 
 @media only screen and (max-width: 800px) {
   /*DASHBOARD*/
@@ -881,7 +952,27 @@ span.press {
   }
 }
 
+@media only screen and (max-width: 680px) {
+  /* VENDOR SHOW PAGE */
+  .like-span {
+    top: 0;
+    left: 80px;
+    font-size: smaller;
+    padding: 10px;
+  }
+  
+  span.press {
+    left: -30px;
+    top: 20px;
+    z-index: 100;
+  }
+
+}
 @media only screen and (max-width: 500px) {
+
+  .pg-buttons:hover{
+    transform: none;
+  }
   /*DASHBOARD*/
   .plan-ev {
     font-size: medium;
@@ -898,8 +989,15 @@ span.press {
   }
 
   .show-header{
+    width: 100%
+  }
+
+  .heart{
+    margin-top: 2px;
+  }
+  .show-header span{
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
   }
@@ -920,7 +1018,8 @@ span.press {
   
   span.press {
     left: 80px;
-    top: 58px;
+    top: 40px;
+    z-index: 100;
   }
 
   .ven-info{
@@ -948,3 +1047,9 @@ span.press {
     text-align: center;
   }
 }
+
+svg .widget{
+  filter: drop-shadow( 2px 2px 1px rgba(0, 0, 0, .7)); 
+
+}
+
