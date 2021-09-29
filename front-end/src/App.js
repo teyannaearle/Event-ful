@@ -11,7 +11,7 @@ import Event from "./Pages/EventPage";
 import Favorites from "./Pages/Favorites.js";
 import Landing from "./Pages/Landing.js";
 import SignUp from "./Pages/SignUp.js";
-import SignIn from "./Pages/SignIn"
+import SignIn from "./Pages/SignIn.js"
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import EditBooked from "./Pages/EditBooked.js";
