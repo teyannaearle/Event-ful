@@ -88,7 +88,7 @@ function EditEvent({ user_id }) {
 
   return (
     <>
-    {/* <h1>Edit {CapitalizeEvent(event.event_name)}</h1> */}
+    <h1>Edit {event.event_name ? CapitalizeEvent(event.event_name) : event.event_name}</h1>
     <div className="form-container">
       <form className="edit-eventform three-d" onSubmit={handleSubmit}>
         <input
