@@ -1,6 +1,5 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import SignUp from "../Pages/SignUp.js";
 import './SignInForm.css'
 
 export default function SignInForm () {

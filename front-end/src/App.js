@@ -1,10 +1,8 @@
 import { Route, Switch } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { apiURL } from "./util/apiURL";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
-import useGeoLocation from "./hooks/useGeoLocation";
-import axios from "axios";
+import useGeoLocation from "./hooks/useGeoLocation"; 
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
 import Event from "./Pages/EventPage";
@@ -22,7 +20,7 @@ import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
 
 const user_id = 1;
-const name = "jasleen";
+const name = "john";
 
 function App() {
   const location = useGeoLocation();

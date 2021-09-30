@@ -118,6 +118,10 @@ nav {
   transform: scale(1.1);
 }
 
+.accountLinks:active{
+  transform: scale(1);
+}
+
 .nav-but {
   padding-top: 5px;
   padding-bottom: 5px;
