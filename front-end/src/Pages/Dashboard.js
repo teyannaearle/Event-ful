@@ -4,7 +4,12 @@ import { UserContext } from "../Providers/UserProvider";
 
 export default function Dashboard({ user_id, name }) {
   const user = useContext(UserContext)
-  console.log(user)
+  
+  if (user) {
+    console.log(`Dashboard user is ${user.displayName}`)
+  }
+
+
   return (
     <div className="page">
       <h1 className="pg-head">{name}'s Dashboard </h1>

@@ -12,7 +12,7 @@ export default function SignUp() {
       event.preventDefault();
       setErrorMessage(null);
       const { userName, email, password } = event.target.elements;
-      //   await userSignUp(userName.value, email.value, password.value);
+      
       try {
         let res = await userSignUp(userName.value, email.value, password.value);
         if (res === null) {

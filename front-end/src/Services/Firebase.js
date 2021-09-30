@@ -38,7 +38,6 @@ export const userSignUp = (userName, email, password) => {
       console.log(user)
     })
     .catch(e => {
-    
     errorMessage = e.code
     console.log(`errorMessage is ${errorMessage}`)
     return errorMessage
@@ -47,21 +46,23 @@ export const userSignUp = (userName, email, password) => {
 };
 
 export const userSignIn = (email, password) => {
+  let errorMessage = null
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       // console.log(`userCredential: ${userCredential}`)
       // console.log(Object.keys(userCredential))
       // console.log(Object.values(userCredential))
-      const user = userCredential.user;
-      console.log(`Firebase, line 57, ${user}`);
-      console.log(Object.keys(user));
-      console.log(user);
+      // const user = userCredential.user;
+      // console.log(`Firebase, line 57, ${user}`);
+      // console.log(Object.keys(user));
+      // console.log(user);
       //
     })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+    .catch(e => {
+      errorMessage = e.code
+      console.log(`errorMessage is ${errorMessage}`)
+      return errorMessage
     });
 };
 
@@ -99,4 +100,4 @@ export const userSignOut = () => {
       console.warn(error.message);
     });
 };
-// export default app;
+

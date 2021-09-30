@@ -5,6 +5,11 @@ import { UserContext } from "../Providers/UserProvider";
 
 export default function Landing() {
   const user = useContext(UserContext);
+  if (user) {
+    console.log(`Landing user is ${user.displayName}`)
+  } else {console.log('no user')}
+  
+  
   return (
     <div className="Landing">
       <section className="Landing-Item">

@@ -8,16 +8,19 @@ export default function SignInForm() {
   const history = useHistory();
   const currentUser = useContext(UserContext);
 
-
   const signIn = useCallback(
     async (e) => {
       e.preventDefault();
-      console.log(e);
+      // console.log(e);
       const { email, password } = e.target.elements;
       // console.log(email.value);
       // console.log(password.value);
       try {
-        await userSignIn(email.value, password.value);
+       let res = await userSignIn(email.value, password.value);
+       if (res === null) {
+
+         history.push("/dashboard")
+       }
       } catch (error) {
         alert(error);
       }
@@ -25,12 +28,15 @@ export default function SignInForm() {
     [history]
   );
 
- const signInGoogle = useCallback(
+  const signInGoogle = useCallback(
     async (e) => {
       try {
-        await userGoogleSignIn();
-console.log(`Google sign in, line 32`)
-console.log(currentUser)
+        let res = await userGoogleSignIn();
+        if (res === null) {
+          console.log(`Google sign in, line 32`);
+          console.log(currentUser);
+          history.push("/dashboard")
+        }
       } catch (error) {
         alert(error);
       }
