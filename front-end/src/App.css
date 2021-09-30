@@ -109,7 +109,7 @@ button:hover {
 
 .pg-buttons:hover {
   filter: brightness(108%);
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .pg-buttons:active {
@@ -957,7 +957,7 @@ span.press {
 }
 
 .ed-but:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 .edit-ev {
   width: max-content;

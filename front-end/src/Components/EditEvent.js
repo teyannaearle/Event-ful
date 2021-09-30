@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import "./EditEvent.css";
+import CapitalizeEvent from "../Components/CapitalizeEvent";
 
 const API = apiURL();
 
@@ -86,8 +87,10 @@ function EditEvent({ user_id }) {
   };
 
   return (
+    <>
+    <h1>Edit {CapitalizeEvent(event.event_name)}</h1>
     <div className="form-container">
-      <form className="edit-eventform" onSubmit={handleSubmit}>
+      <form className="edit-eventform three-d" onSubmit={handleSubmit}>
         <input
           id="event_name"
           type="text"
@@ -265,6 +268,7 @@ function EditEvent({ user_id }) {
         </Link>
       </form>
     </div>
+    </>
   );
 }
 
