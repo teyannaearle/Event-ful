@@ -4,8 +4,8 @@ import { Link, Route } from "react-router-dom";
 export default function Landing() {
   return (
     <div className="Landing">
+        
       <section className="Landing-Item">
-        {/* <h1>EVENT( FUL )</h1> */}
         <h1>OUR MISS( ION )</h1>
 
         <p>
@@ -16,7 +16,7 @@ export default function Landing() {
         </p>
       </section>
       <Link to="/signin"className="call2action three-d">
-          <h1>Lets get booking</h1>
+          <h1>Start Planning Your Next Event</h1>
     </Link>
     </div>
   );
