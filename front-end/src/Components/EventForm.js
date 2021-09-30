@@ -1,15 +1,14 @@
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
 
 const API = apiURL();
-console.log(API);
 
 function EventForm({ user_id }) {
   // const { user_id } = useParams();
-  const [events, setEvents] = useState([]);
+  // const [events, setEvents] = useState([]);
   //    const [id, setId] = useState({});
 
   const [myEvent, setEvent] = useState({

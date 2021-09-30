@@ -3,14 +3,14 @@ const db = require("../db/dbConfig");
 const getAllEvents = async (user_id) => {
   try {
     const events = await db.any(
-      "SELECT * FROM events WHERE user_id=$1 ORDER BY event_name ASC",
+      "SELECT * FROM events WHERE user_id=$1 ORDER BY created_at DESC",
       user_id
     );
     return events;
   } catch (err) {
     return err;
   }
-};
+}; 
 
 const getEvent = async (user_id, event_id) => {
   try {
