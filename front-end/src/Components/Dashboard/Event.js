@@ -42,7 +42,7 @@ return item
         {/* </p> */}
       </Link>
       <span className="ed-but">
-        <Link to={`/dashboard/${user_id}/edit`}>
+        <Link to={`/dashboard/${event.event_id}/edit`}>
         Edit Event Details
           {/* <button className="pg-buttons edit-ev">Edit Event Details</button> */}
         </Link>
