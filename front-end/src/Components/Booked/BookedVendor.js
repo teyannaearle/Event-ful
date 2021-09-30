@@ -1,11 +1,12 @@
 import React from "react";
 // import { useParams } from "react-router-dom";
-import celebrate from "../../assets/celebrate.jpeg";
+// import celebrate from "../../assets/celebrate.jpeg";
 
 export default function BookedVendor({ vendor }) {
   // const { user_id, event_id, vendor_name } = useParams();
-  const image = vendor.vendor_image ? vendor.vendor_image : celebrate;
-  console.log(vendor);
+  // const image = vendor.vendor_image ? vendor.vendor_image : celebrate;
+  // console.log(vendor);
+  const image = vendor.vendor_image
   return (
     // <tr>
     //   <td>

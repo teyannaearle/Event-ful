@@ -50,7 +50,7 @@ CREATE TABLE booked (
     vendor_name VARCHAR (255) NOT NULL, 
     vendor_address VARCHAR (255) NOT NULL,
     vendor_phone_number VARCHAR (11) NOT NULL,
-    vendor_image VARCHAR,
+    vendor_image VARCHAR NOT NULL,
     rating INTEGER DEFAULT 0,
     category VARCHAR (255) NOT NULL,
     amount numeric DEFAULT 0
@@ -66,6 +66,6 @@ CREATE TABLE favorites (
     vendor_phone_number VARCHAR (15) NOT NULL,
     vendor_id  VARCHAR (255) NOT NULL,
     vendor_category VARCHAR (255) NOT NULL, 
-    vendor_image VARCHAR,
+    vendor_image VARCHAR NOT NULL,
     vendor_rating INTEGER DEFAULT 0
 );
