@@ -16,7 +16,10 @@ export const UserProvider = ({ children }) => {
       if (user) {
         // history.push("/dashboard");
         setCurrentUser(user)
-      } 
+      } else {
+        // history.push("/signin")
+        setCurrentUser(null)
+      }
     });
   }, [history]);
 

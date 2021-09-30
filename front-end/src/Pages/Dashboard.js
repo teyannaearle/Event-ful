@@ -7,6 +7,8 @@ export default function Dashboard({ user_id, name }) {
   
   if (user) {
     console.log(`Dashboard user is ${user.displayName}`)
+  } else {
+    console.log("Dashboard user is null")
   }
 
 

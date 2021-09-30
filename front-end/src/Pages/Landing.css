@@ -1,11 +1,40 @@
+.Landing-Container{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+
+.Landing-Container::before{
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.10;
+  background-image: url(../assets/sparkle.webp);
+  z-index: -1;
+}
+
 .Landing {
-  position: relative;
+  /* position: relative; */
   text-align: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding-top: 10%;
+  /* padding-top: 10%; */
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: max-content;
+  background-color: #b2d3e6 ;
+  margin-right: 100px;
+  border-radius: 30px;
 }
+
 h1 {
   margin-bottom: 2%;
 }
@@ -14,6 +43,9 @@ h1 {
   flex-wrap: wrap;
   width: 50%;
   font-size: larger;
+  display: flex;
+  flex-direction: column;
+ justify-content: center;
 }
 
 .call2action {

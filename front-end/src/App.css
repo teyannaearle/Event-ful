@@ -25,7 +25,9 @@ html,
 
 .site {
   padding-bottom: 100px;
+  /* position: relative; */
 }
+
 
 h1,
 h2,

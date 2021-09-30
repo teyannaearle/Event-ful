@@ -12,7 +12,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
 dotenv.config();
 
@@ -27,27 +27,25 @@ const app = initializeApp({
 
 export const auth = getAuth();
 
-export const userSignUp = (userName, email, password) => {
-  let errorMessage = null
-  createUserWithEmailAndPassword(auth, email, password)
+export const userSignUp = async (userName, email, password) => {
+  console.log(`received this info ${userName} ${email} ${password}`)
+  let result = null;
+  await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      updateProfile(userCredential.user, {displayName: userName})
-      console.log(`Created new user`)
-      console.log(user)
+      updateProfile(userCredential.user, { displayName: userName });
+      console.log(`Created new user`);
+      console.log(user);
     })
-    .catch(e => {
-    errorMessage = e.code
-    console.log(`errorMessage is ${errorMessage}`)
-    return errorMessage
-  });
-    
+    .catch((e) => (result = e.code));
+  console.log(`result from creating a new user is ${result}`);
+  return result;
 };
 
-export const userSignIn = (email, password) => {
-  let errorMessage = null
-  signInWithEmailAndPassword(auth, email, password)
+export const userSignIn = async (email, password) => {
+  let result = null;
+  await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
       // console.log(`userCredential: ${userCredential}`)
@@ -58,18 +56,23 @@ export const userSignIn = (email, password) => {
       // console.log(Object.keys(user));
       // console.log(user);
       //
+      console.log(`${userCredential.user.displayName} is signed in`);
     })
-    .catch(e => {
-      errorMessage = e.code
-      console.log(`errorMessage is ${errorMessage}`)
-      return errorMessage
-    });
+    .catch((e) => (result = e.code));
+  console.log(`result is ${result}`);
+  return result;
 };
 
-export const userGoogleSignIn = () => {
+// export const userSignIn = (email, password) => {
+//   // let result = null;
+//   let result =  new Promise ((resolve, reject) => {signInWithEmailAndPassword(auth, email, password).then((res) => {resolve(res)}).catch(reject)})
+
+export const userGoogleSignIn = async () => {
+  let result = null;
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
+  await signInWithPopup(auth, provider)
     .then((result) => {
+      console.log(result);
       // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
@@ -77,16 +80,22 @@ export const userGoogleSignIn = () => {
       const user = result.user;
       // ...
     })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
-    });
+    .catch(
+      (error) =>
+        // {
+        // Handle Errors here.
+        // const errorCode = error.code;
+        // const errorMessage = error.message;
+        // // The email of the user's account used.
+        // const email = error.email;
+        // // The AuthCredential type that was used.
+        // const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+        (result = error.code)
+      //}
+    );
+  console.log(result);
+  return result;
 };
 
 export const userSignOut = () => {
@@ -100,4 +109,3 @@ export const userSignOut = () => {
       console.warn(error.message);
     });
 };
-

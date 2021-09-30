@@ -23,6 +23,8 @@ link:link {
 }
 
 .Login {
+    padding: 5px;
+    margin: 5px;
     width: 75%;
     padding-top: 2%;
 }
@@ -30,5 +32,6 @@ link:link {
 .divider {
     border-bottom: 1px black solid;
     padding: 2%;
+    margin: 5px
 }
 
