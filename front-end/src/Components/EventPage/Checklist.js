@@ -14,16 +14,15 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
 
     for (let category of categories) {
       booked[category.name] = category.booked;
-      // show[category.name] = false;
-      // cost[category.name] = category.cost;
     }
 
     setBookedStatus(booked);
-
     return () => {
       setBookedStatus({});
     };
   }, [categories]);
+
+  
 
   const updateBookedStatus = (category) => {
     let body = {
@@ -88,15 +87,15 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
   const bookedButton = (category, id) => {
     if (bookedStatus[category.name] === false) {
       return (
-        // <Link to={`/task/${category.name}/${event_id}/${id}`}>
+        <Link to={`/task/${category.name}/${event_id}/${id}`}>
         <label className="check-container"> 
           <input
-            className="book-button x"
+            // className="book-button x"
             onChange={() => updateBookedStatus(category.name)}
             type="checkbox"
             // value={bookedStatus[category.name]}
             checked={bookedStatus[category.name] ? bookedStatus[category.name] : false}
-            defaultChecked={false}
+            // defaultChecked={false}
           >
             {/* {" "}
             &#10007; No */}
@@ -104,13 +103,13 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           <span className="checkmark"></span>
 
           </label>
-        // </Link>
+         </Link>
       );
     } else {
       return (
         <label className="check-container"> 
         <input
-          className="book-button check"
+          // className="book-button check"
           onChange={() => updateBookedStatus(category.name)}
           type="checkbox"
           // value={bookedStatus[category.name]}
@@ -124,16 +123,6 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     }
   };
 
-  const editButton = (category) => {
-    let button = "";
-    if (bookedStatus[category]) {
-      button = "Edit Vendor";
-    } else {
-      button = "Add Vendor";
-    }
-
-    return button;
-  };
 
   const listItem = (category) => {
     let item = "";
@@ -180,9 +169,9 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
 
     return item;
   };
-
+  
   return (
-    <ul className="checklist checklist-ul">
+    <ul className={`checklist ${categories.length < 6 ? "small-ul" : "checklist-ul"} `}>
       {categories.map((category, i) => {
         let id = categories.filter((point) => point.name === category.name)[0]
           .id;
@@ -191,7 +180,9 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
             <div className="book-buttons book-grid">
               {bookedButton(category, id)}
               <Link to={`/task/${category.name}/${event_id}/${id}`}>
-                <button>{editButton(category.name)}</button>
+                <button className={bookedStatus[category.name] ? "check" : "x"}>
+                  {bookedStatus[category.name] ? <>Edit Vendor</> : <>Add Vendor </>}
+                </button>
               </Link>
             </div>
 

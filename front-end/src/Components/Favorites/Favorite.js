@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
-import Ratings from "react-ratings-declarative";
-import gelato from "../../assets/gelato.jpeg";
 import gelato2 from "../../assets/gelato2.jpeg";
 
 const API = apiURL();

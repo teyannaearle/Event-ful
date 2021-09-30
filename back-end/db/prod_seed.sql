@@ -5,12 +5,12 @@ INSERT INTO users ( username, password, email, created_on, last_login) VALUES
 ('ebreo' , 'password' ,'email@email.com','2020-10-19 10:23:54', '2020-10-19 10:23:54');
 
 INSERT INTO events ( event_name , event_budget, event_date, event_time, user_id ) VALUES
-('Lindas Baby Shower' , 1000, '2021-09-30', '00:30:00', 1),
-('Saras Birthday Party' , 1500, '2021-09-30', '00:30:00', 1),
-('Michaels Retirement Party', 2000, '2021-09-30', '00:30:00', 1),
-('Lauras Baby Shower' , 1000, '2021-09-30', '00:30:00', 2),
-('Mindys Birthday Party' , 1500, '2021-09-30', '00:30:00', 2),
-('Justins Retirement Party' , 2000, '2021-09-30', '00:30:00', 2);
+('Lindas Baby Shower' , 1000, '2021-10-30', '00:30:00', 1),
+('Saras Birthday Party' , 1500, '2021-10-30', '00:30:00', 1),
+('Michaels Retirement Party', 2000, '2021-10-30', '00:30:00', 1),
+('Lauras Baby Shower' , 1000, '2021-10-30', '00:30:00', 2),
+('Mindys Birthday Party' , 1500, '2021-10-30', '00:30:00', 2),
+('Justins Retirement Party' , 2000, '2021-10-30', '00:30:00', 2);
 
 INSERT INTO tasklist (task_name , is_completed , user_id, event_id ) VALUES 
 ('catering', false, 1, 1) ,
