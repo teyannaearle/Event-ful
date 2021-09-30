@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
-import gelato2 from "../../assets/gelato2.jpeg";
+// import gelato2 from "../../assets/gelato2.jpeg";
 
 const API = apiURL();
 
@@ -10,7 +10,8 @@ export default function Favorite({ vendor, user_id, deleteFav }) {
   // const { user_id, event_id, vendor_name } = useParams();
   const [favorite, setFavorite] = useState(true);
 
-  const image = vendor.vendor_image ? vendor.vendor_image : gelato2;
+  // const image = vendor.vendor_image ? vendor.vendor_image : gelato2;
+  const image = vendor.vendor_image
 
   useEffect(() => {
     try {
@@ -40,7 +41,8 @@ export default function Favorite({ vendor, user_id, deleteFav }) {
       <li className="flex-col three-d ven-li">
         <img
           src={image}
-          alt={gelato2}
+          // alt={gelato2}
+          alt={vendor.vendor_name}
           height="250"
           width="300"
           className="ven-img"
