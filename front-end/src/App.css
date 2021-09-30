@@ -965,6 +965,10 @@ span.press {
   padding-bottom: 5px;
 }
 
+.booked-section{
+  width: 80%
+}
+
 @media only screen and (max-width: 1200px) {
   /* VENDOR INDEX */
   .ven-ul {
