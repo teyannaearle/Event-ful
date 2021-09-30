@@ -20,7 +20,8 @@ CREATE TABLE events (
     event_budget INTEGER DEFAULT 0 ,
     event_date DATE,
     event_time TIME,
-    user_id  SERIAL, CONSTRAINT fk_events_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE 
+    user_id  SERIAL, CONSTRAINT fk_events_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE, 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 
