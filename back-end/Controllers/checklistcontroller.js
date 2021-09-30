@@ -40,12 +40,11 @@ checklist.get("/:user_id/:event_id", async (req, res) => {
 
 checklist.post("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-  const listItem = await addToList(req.body.task_name, user_id, event_id);
 
   try {
     const listItem = await addToList(req.body.task_name, user_id, event_id);
 
-    if (listItem[0].user_id) {
+    if (listItem.user_id) {
       res.status(200).json({
         success: true,
         payload: listItem,

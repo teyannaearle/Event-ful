@@ -4,12 +4,20 @@
     padding: 20px;
     background-color: rgb(228, 202, 210, 0.8);
     margin: 5%;
+    width: 20%;
+    height: 10%;
 }
 
 .newForm input {
     width: 100%;
+    margin: 1%;
 }
-
+h4:hover {
+    background-color: rgb(221, 180, 118)
+}
+link:link {
+    color: green;
+}
 .newForm input:focus {
     border: 3px solid green;
 }
@@ -23,3 +31,4 @@
     border-bottom: 1px black solid;
     padding: 2%;
 }
+

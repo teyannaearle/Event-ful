@@ -1,16 +1,15 @@
 import { Route, Switch } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { apiURL } from "./util/apiURL";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
-import useGeoLocation from "./hooks/useGeoLocation";
-import axios from "axios";
+import useGeoLocation from "./hooks/useGeoLocation"; 
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
 import Event from "./Pages/EventPage";
 import Favorites from "./Pages/Favorites.js";
 import Landing from "./Pages/Landing.js";
 import SignUp from "./Pages/SignUp.js";
+import SignIn from "./Pages/SignIn.js"
 import VendorIndex from "./Pages/VendorIndex.js";
 import VendorShow from "./Pages/VendorShow.js";
 import EditBooked from "./Pages/EditBooked.js";
@@ -21,7 +20,7 @@ import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
 
 const user_id = 1;
-const name = "jasleen";
+const name = "john";
 
 function App() {
   const location = useGeoLocation();
@@ -53,6 +52,10 @@ function App() {
 
         <Route path="/signup">
           <SignUp />
+        </Route>
+
+        <Route path="/signin">
+          <SignIn />
         </Route>
 
         <Route path="/dashboard/new_event/checklist/:id">
