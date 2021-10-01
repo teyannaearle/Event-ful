@@ -34,6 +34,7 @@ function EditEvent({ user_id }) {
     party_clown: false,
   });
 
+  const [initialState, setInitialState] = useState({})
   //const [checkListCopy, setChecklistCopy] = useState({});
 
   useEffect(() => {
@@ -54,11 +55,12 @@ function EditEvent({ user_id }) {
     axios.get(`${API}/checklist/${user_id}/${event_id}`).then((res) => {
       //setChecklist(res.data.payload);
       //setChecklistCopy(res.data.payload);
-      let checklistCopy = {...checklist}
+      let checklistCopy = { ...checklist };
       res.data.payload.map((service) => {
         checklistCopy[service.task_name] = true;
       });
-      setChecklist(checklistCopy)
+      setChecklist(checklistCopy);
+      setInitialState(checklistCopy)
     });
   }, [event_id]);
 
@@ -66,24 +68,37 @@ function EditEvent({ user_id }) {
     axios
       .put(`${API}/events/${user_id}/${event_id}`, event)
       .then(
-        (res) => console.log("posted"),
+        (res) => { 
+          const categories = Object.keys(initialState); 
+          for(const name of categories){
+            if(initialState[name] === true && event[name] === false){
+              axios.delete(`${API}/events/${user_id}/${event_id}/${name}`).then((res) => {
+                console.log("deleted")
+              })
+              //console.log(initialState[name] + " " + event[name])
+            }
+          }
+          //console.log(categories)
+        },
         (c) => console.warn("catch", c)
       )
       .catch((c) => console.warn("catch", c));
   };
+  // console.log(event)
 
   const handleChange = (e) => {
     setEvent({ ...event, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = (e) => {
-    e.preventdefault();
+    e.preventDefault();
     updateEvent(event, event_id);
   };
 
   const toggleState = (e) => {
     const val = e.target.value;
     setChecklist((prevState) => ({ ...prevState, [val]: !prevState[val] }));
+    //setChecklist({...checklist, })
   };
 
   return (
@@ -138,7 +153,7 @@ function EditEvent({ user_id }) {
 
           <label className="check-container edit-checkbox">
             <input
-              value="dj"
+              value="djs"
               type="checkbox"
               checked={checklist["djs"]}
               onChange={toggleState}
@@ -148,7 +163,7 @@ function EditEvent({ user_id }) {
           </label>
           <label className="check-container edit-checkbox">
             <input
-              value="musician"
+              value="musicians"
               type="checkbox"
               checked={checklist["musicians"]}
               onChange={toggleState}
@@ -158,7 +173,7 @@ function EditEvent({ user_id }) {
           </label>
           <label className="check-container edit-checkbox">
             <input
-              value="photographer"
+              value="photographers"
               type="checkbox"
               checked={checklist["photographers"]}
               onChange={toggleState}
@@ -169,7 +184,7 @@ function EditEvent({ user_id }) {
 
           <label className="check-container edit-checkbox">
             <input
-              //value="party_rental"
+              value="party_rental"
               type="checkbox"
               checked={
                 checklist["party_rental"] ? checklist.party_rental : false
@@ -182,7 +197,7 @@ function EditEvent({ user_id }) {
 
           <label className="check-container edit-checkbox">
             <input
-              //value="videographer"
+              value="videographers"
               type="checkbox"
               checked={
                 checklist["videographers"] ? checklist.videographers : false
@@ -194,7 +209,7 @@ function EditEvent({ user_id }) {
           </label>
           <label className="check-container edit-checkbox">
             <input
-              //value="venues"
+              value="venues"
               type="checkbox"
               checked={checklist["venues"] ? checklist.venues : false}
               onChange={toggleState}
@@ -204,7 +219,7 @@ function EditEvent({ user_id }) {
           </label>
           <label className="check-container edit-checkbox">
             <input
-              //value="balloons"
+              value="balloons"
               type="checkbox"
               checked={checklist.balloons ? checklist.balloons : false}
               onChange={toggleState}
@@ -214,7 +229,7 @@ function EditEvent({ user_id }) {
           </label>
           <label className="check-container edit-checkbox">
             <input
-              //value="floral"
+              value="floral"
               type="checkbox"
               checked={checklist["floral"] ? checklist.floral : false}
               onChange={toggleState}
@@ -225,7 +240,7 @@ function EditEvent({ user_id }) {
 
           <label className="check-container edit-checkbox">
             <input
-              //value="party_magician"
+              value="party_magician"
               type="checkbox"
               checked={
                 checklist["party_magician"] ? checklist.party_magician : false
@@ -238,7 +253,7 @@ function EditEvent({ user_id }) {
 
           <label className="check-container edit-checkbox">
             <input
-              //value="party_characters"
+              value="party_characters"
               type="checkbox"
               checked={
                 checklist["party_characters"]
@@ -253,7 +268,7 @@ function EditEvent({ user_id }) {
 
           <label className="check-container edit-checkbox">
             <input
-              //value="party_clown"
+              value="party_clown"
               type="checkbox"
               checked={checklist["party_clown"] ? checklist.party_clown : false}
               onChange={toggleState}
