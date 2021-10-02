@@ -6,7 +6,7 @@ import { apiURL } from "../../util/apiURL";
 const API = apiURL();
 
 export default function Favorite({ vendor, user_id, deleteFav }) {
-  const [favorite, setFavorite] = useState(true)
+  const [favorite, setFavorite] = useState(true);
 
   useEffect(() => {
     try {
@@ -27,7 +27,7 @@ export default function Favorite({ vendor, user_id, deleteFav }) {
   }, [vendor.name, user_id]);
 
   const handleClick = () => {
-  deleteFav(vendor.vendor_name)
+    deleteFav(vendor.vendor_name);
   };
 
   return (
@@ -38,13 +38,13 @@ export default function Favorite({ vendor, user_id, deleteFav }) {
           alt={vendor.vendor_name}
           height="250"
           width="300"
-          className="ven-img" 
+          className="ven-img"
         />
-                <div className="like-div card-like">
+        <div className="like-div card-like">
           <i
             className={`fas fa-heart fa-lg heart card-heart `}
             onClick={handleClick}
-            style={{ color: "red"}}
+            style={{ color: "red" }}
           ></i>
         </div>
         <h2>{vendor.vendor_name}</h2>
@@ -53,7 +53,6 @@ export default function Favorite({ vendor, user_id, deleteFav }) {
         <h4> Contact Information </h4>
         <p>Phone: {vendor.vendor_phone_number}</p>
         <p>Address: {vendor.vendor_address}</p>
-
       </li>
     </>
   );
