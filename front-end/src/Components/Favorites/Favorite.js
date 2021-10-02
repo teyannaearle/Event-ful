@@ -2,16 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
-// import gelato2 from "../../assets/gelato2.jpeg";
 
 const API = apiURL();
 
 export default function Favorite({ vendor, user_id, deleteFav }) {
-  // const { user_id, event_id, vendor_name } = useParams();
   const [favorite, setFavorite] = useState(true);
-
-  // const image = vendor.vendor_image ? vendor.vendor_image : gelato2;
-  const image = vendor.vendor_image
 
   useEffect(() => {
     try {
@@ -32,31 +27,32 @@ export default function Favorite({ vendor, user_id, deleteFav }) {
   }, [vendor.name, user_id]);
 
   const handleClick = () => {
-    setFavorite(!favorite);
-  deleteFav(vendor.vendor_name)
+    deleteFav(vendor.vendor_name);
   };
 
   return (
     <>
       <li className="flex-col three-d ven-li">
         <img
-          src={image}
-          // alt={gelato2}
+          src={vendor.vendor_image}
           alt={vendor.vendor_name}
           height="250"
           width="300"
           className="ven-img"
         />
+        <div className="like-div card-like">
+          <i
+            className={`fas fa-heart fa-lg heart card-heart `}
+            onClick={handleClick}
+            style={{ color: "red" }}
+          ></i>
+        </div>
         <h2>{vendor.vendor_name}</h2>
+
         <p>Category: {vendor.vendor_category}</p>
         <h4> Contact Information </h4>
         <p>Phone: {vendor.vendor_phone_number}</p>
         <p>Address: {vendor.vendor_address}</p>
-        <div className="book-fav">
-          <button onClick={handleClick} className="pg-buttons">
-            {!favorite ? <> Favorite &#63;</> : <> Favorite &#10003;</>}{" "}
-          </button>
-        </div>
       </li>
     </>
   );
