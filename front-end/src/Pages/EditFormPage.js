@@ -4,7 +4,7 @@ import React from "react";
 
 function EditFormPage({user_id}) {
   return (
-    <div>
+    <div className="edit-page page">
       <EditForm user_id={user_id}/>
     </div>
   );

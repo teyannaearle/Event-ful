@@ -63,11 +63,11 @@ checklist.post("/:user_id/:event_id", async (req, res) => {
 
 // DELETE A SINGLE CATEGORY FROM THE CHECKLIST
 
-checklist.delete("/:user_id/:event_id", async (req, res) => {
-  const { user_id, event_id } = req.params;
+checklist.delete("/:user_id/:event_id/:task_name", async (req, res) => {
+  const { user_id, event_id, task_name } = req.params;
 
   try {
-    const deleted = await deleteFromList(req.body.task_name, user_id, event_id);
+    const deleted = await deleteFromList(task_name, user_id, event_id);
     if (deleted[0].user_id) {
       res.status(200).json({
         success: true,
