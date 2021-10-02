@@ -68,7 +68,7 @@ checklist.delete("/:user_id/:event_id/:task_name", async (req, res) => {
 
   try {
     const deleted = await deleteFromList(task_name, user_id, event_id);
-    if (deleted[0].user_id) {
+    if (deleted.user_id) {
       res.status(200).json({
         success: true,
         payload: deleted,

@@ -11,7 +11,6 @@ createNewUser
 const db = require("../db/dbConfig");
 
 
-
 // SHOW ONE USER
 users.get("/", async (req, res) => {
   console.log("get one user")
