@@ -43,10 +43,11 @@ export default function FavoriteList({ user_id }) {
   return (
     <div>
       {favoriteVendors.length > 0 ? (
-        <ul className="ven-ul">
+        <ul className={`ven-ul ${favoriteVendors.length === 2 ? "two-ul" : null } ${favoriteVendors.length === 1 ? "one-ul" : null}`}>
           {favoriteVendors.map((vendor) => {
             return (
               <Favorite
+              vendors={favoriteVendors}
                 vendor={vendor}
                 user_id={user_id}
                 key={vendor.vendor_id}
