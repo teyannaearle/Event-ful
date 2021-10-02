@@ -27,7 +27,14 @@ export default function FavoriteList({ user_id }) {
 
   const deleteFav = (name) => {
     try {
-      axios.delete(`${API}/favorites/${user_id}/${name}`).then((res) => "");
+      axios.delete(`${API}/favorites/${user_id}/${name}`).then((res) => {
+        const faveCopy = [...favoriteVendors];
+        const index = faveCopy.findIndex(
+          (vendor) => vendor.vendor_name === name
+        );
+        faveCopy.splice(index, 1);
+        setFavoriteVendors(faveCopy);
+      });
     } catch (e) {
       console.warn(e);
     }
@@ -39,14 +46,12 @@ export default function FavoriteList({ user_id }) {
         <ul className="ven-ul">
           {favoriteVendors.map((vendor) => {
             return (
-              // <Link to={`/favorites/${vendor.vendor_id}`} key={vendor.vendor_id}>
               <Favorite
                 vendor={vendor}
                 user_id={user_id}
                 key={vendor.vendor_id}
                 deleteFav={deleteFav}
               />
-              // </Link>
             );
           })}
         </ul>
