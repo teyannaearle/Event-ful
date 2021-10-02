@@ -2,6 +2,10 @@ import React, { useCallback, useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./SignUp.css";
 import { userSignUp } from "../Services/Firebase";
+import axios from "axios";
+import { apiURL } from "../util/apiURL";
+
+const API = apiURL();
 
 export default function SignUp() {
   const history = useHistory();
@@ -9,33 +13,27 @@ export default function SignUp() {
   const [input, setInput] = useState({
     userName: "",
     email: "",
-    password: ""
+    password: "",
   });
-  // console.log(input.userName)
-  // console.log(input.password)
-  //console.log(input.email);
-  
+
   const handleChange = (e) => {
-      setInput({ ...input, [e.target.id]: e.target.value });
-    };
+    setInput({ ...input, [e.target.id]: e.target.value });
+  };
 
   const handleSignUp = async (event) => {
-        event.preventDefault();
-        setErrorMessage(null);
-        //   const { userName, email, password } = event.target.elements;
-      //console.log(`Here is your input.email: ${input.email}`);
-        try {
-          let res = await userSignUp(input.userName, input.email, input.password);
-          if (res === null) {
-             history.push("/dashboard");
-            console.log("great success");
-          } else {
-            setErrorMessage("please enter all required info");
-          }
-        } catch (error) {
-          alert(error);
-        }
-    
+    event.preventDefault();
+    setErrorMessage(null);
+    try {
+      let res = await userSignUp(input.userName, input.email, input.password);
+      if (res === null) {
+        await axios.post(`${API}/users`);
+        history.push("/dashboard");
+      } else {
+        setErrorMessage("please enter all required info");
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

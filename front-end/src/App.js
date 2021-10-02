@@ -20,6 +20,7 @@ import NavBar from "./Components/NavBar/NavBar.js";
 import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
+import FourOFour from "./Pages/FourOFour";
 
 const user_id = 1;
 const name = "john";
@@ -117,6 +118,10 @@ function App() {
             <NavBar user_id={user_id} />
             <Booked user_id={user_id} />
           </Route>
+
+          <Route path="*">
+              <FourOFour />
+            </Route>
         </Switch>
         {/* </Router> */}
       </UserProvider>

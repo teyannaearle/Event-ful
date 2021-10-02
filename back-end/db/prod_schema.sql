@@ -1,15 +1,13 @@
-DROP DATABASE IF EXISTS dda2ivrdt7akio;
-CREATE DATABASE dda2ivrdt7akio;
-\c dda2ivrdt7akio;
+DROP DATABASE IF EXISTS partyplanning_dev;
+CREATE DATABASE partyplanning_dev;
+\c partyplanning_dev;
 
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY, 
-    username VARCHAR (50) UNIQUE NOT NULL, 
     password VARCHAR (50) NOT NULL, 
     email VARCHAR (255) UNIQUE NOT NULL, 
-    created_on TIMESTAMP NOT NULL,
-    last_login TIMESTAMP 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS events CASCADE;
@@ -69,3 +67,4 @@ CREATE TABLE favorites (
     vendor_image VARCHAR NOT NULL,
     vendor_rating INTEGER DEFAULT 0
 );
+

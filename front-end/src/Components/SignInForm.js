@@ -19,43 +19,36 @@ export default function SignInForm() {
   };
 
   const signIn = async (e) => {
-      e.preventDefault();
-      // console.log(e);
-      // const { email, password } = e.target.elements;
-      // console.log(email.value);
-      // console.log(password.value);
-      console.log(input.email, input.password)
-      try {
-        let res = await userSignIn(input.email, input.password);
-        //  console.log(res)
-        if (res === null) {
-          setErrorMessage("");
-          history.push("/dashboard");
-        } else {
-          setErrorMessage("Wrong email or password. Please try again");
-          setInput({
-            email: "",
-            password: "",
-          });
-        }
-      } catch (error) {
-        alert(error);
+    e.preventDefault();
+    try {
+      let res = await userSignIn(input.email, input.password);
+      //  console.log(res)
+      if (res === null) {
+        setErrorMessage("");
+        history.push("/dashboard");
+      } else {
+        setErrorMessage("Wrong email or password. Please try again");
+        setInput({
+          email: "",
+          password: "",
+        });
       }
+    } catch (error) {
+      alert(error);
     }
-  ;
-
-  const signInGoogle = async (e) => {
-      try {
-        let res = await userGoogleSignIn();
-        if (res === null) {
-          // console.log(currentUser);
-          history.push("/dashboard");
-        }
-      } catch (error) {
-        alert(error);
-      }
-    }
+  };
   
+  const signInGoogle = async (e) => {
+    try {
+      let res = await userGoogleSignIn();
+      if (res === null) {
+        // console.log(currentUser);
+        history.push("/dashboard");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   // if (currentUser) {
   //   console.log(Object.keys(currentUser));

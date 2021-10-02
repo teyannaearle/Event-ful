@@ -17,7 +17,7 @@ const getAllFavorites = async (user_id) => {
 const getOneFavorite = async (user_id, vendor_name) => {
   try {
     const oneFavorite = await db.one(
-      "SELECT * FROM favorite WHERE user_id=$1 AND vendor_name=$2",
+      "SELECT * FROM favorites WHERE user_id=$1 AND vendor_name=$2",
       [user_id, vendor_name]
     );
     return oneFavorite;
