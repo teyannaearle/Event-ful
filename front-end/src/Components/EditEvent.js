@@ -37,43 +37,100 @@ function EditEvent({ user_id }) {
 
   const [initialState, setInitialState] = useState({});
 
-  useEffect(() => {
-    axios
-      .get(`${API}/events/${user_id}/${event_id}`)
-      .then(
-        (res) => {
-          const response = res.data.payload;
-          setEvent({
-            //...event,
-            event_name: response.event_name,
-            event_budget: response.event_budget,
-            event_date: response.event_date.split("T")[0],
-            event_time: response.event_time,
-          });
-        },
-        (c) => console.warn("catch", c)
-      )
-      .catch((c) => {
-        console.error(c);
-      });
+  // useEffect(() => {
+  //   axios
+  //     .get(`${API}/events/${user_id}/${event_id}`)
+  //     .then(
+  //       (res) => {
+  //         const response = res.data.payload;
+  //         setEvent({
+  //           //...event,
+  //           event_name: response.event_name,
+  //           event_budget: response.event_budget,
+  //           event_date: response.event_date.split("T")[0],
+  //           event_time: response.event_time,
+  //         });
+  //       },
+  //       (c) => console.warn("catch", c)
+  //     )
+  //     .catch((c) => {
+  //       console.error(c);
+  //     });
 
-    axios
-      .get(`${API}/checklist/${user_id}/${event_id}`)
-      .then(
-        (res) => {
-          let checklistCopy = { ...checklist };
-          res.data.payload.map((service) => {
-            return checklistCopy[service.task_name] = true;
-          });
-          setChecklist(checklistCopy);
-          setInitialState(checklistCopy);
-        },
-        (c) => console.warn("catch", c)
-      )
-      .catch((c) => {
-        console.error(c);
+  //   axios
+  //     .get(`${API}/checklist/${user_id}/${event_id}`)
+  //     .then(
+  //       (res) => {
+  //         let checklistCopy = { ...checklist };
+  //         res.data.payload.map((service) => {
+  //           return checklistCopy[service.task_name] = true;
+  //         });
+  //         setChecklist(checklistCopy);
+  //         setInitialState(checklistCopy);
+  //       },
+  //       (c) => console.warn("catch", c)
+  //     )
+  //     .catch((c) => {
+  //       console.error(c);
+  //     });
+  // }, [event_id, checklist, user_id]);
+
+  useEffect(() => {
+    try {
+      axios.get(`${API}/events/${user_id}/${event_id}`).then((res) => {
+        const response = res.data.payload;
+        setEvent({
+          event_name: response.event_name,
+          event_budget: response.event_budget,
+          event_date: response.event_date.split("T")[0],
+          event_time: response.event_time,
+        });
       });
-  }, [event_id, checklist, user_id]);
+    } catch (e) {
+      console.error(e);
+    }
+
+    return () => {
+      setEvent({
+        event_name: "",
+        event_budget: 0,
+        event_date: "",
+        event_time: "",
+      });
+    };
+  }, [user_id, event_id]);
+
+  let checklistCopy = { ...checklist };
+  useEffect(() => {
+    try {
+      axios.get(`${API}/checklist/${user_id}/${event_id}`).then((res) => {
+        res.data.payload.map((service) => {
+          return (checklistCopy[service.task_name] = true);
+        });
+        setChecklist(checklistCopy);
+        setInitialState(checklistCopy);
+      });
+    } catch (e) {
+      console.error(e);
+    }
+    return () => {
+      setChecklist({
+        catering: false,
+        djs: false,
+        musicians: false,
+        photographers: false,
+        party_rental: false,
+        videographers: false,
+        venues: false,
+        balloons: false,
+        floral: false,
+        party_magician: false,
+        party_characters: false,
+        party_clown: false,
+      });
+      setInitialState({})
+    };
+  }, [user_id, event_id]);
 
   const updateEvent = () => {
     axios
