@@ -29,28 +29,14 @@ export default function BookedVendorList({ user_id }) {
 
   return (
     <div className="booked-section">
-      {/* <section>
-        <table className="three-d">
-          <thead>
-            <tr>
-              <th>Vendor Name</th>
-              <th>Vendor Address</th>
-              <th>Vendor Phone</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookedVendors.length > 0 &&
-              bookedVendors.map((vendor) => {
-                return <BookedVendor vendor={vendor} />;
-              })}
-          </tbody>
-        </table>
-      </section> */}
       {bookedVendors.length > 0 ? (
-        <ul className="ven-ul">
+        <ul className={`ven-ul  ${bookedVendors.length === 1 ? "one-ul" : null}`}>
           {bookedVendors.map((vendor) => {
-            return <BookedVendor vendor={vendor} />;
+
+          return <li className={`flex-col three-d ven-li ${bookedVendors.length === 1 ? "one-li" : null}`} key={vendor.id}>
+
+          <BookedVendor vendor={vendor} /> </li>
+
           })}{" "}
         </ul>
       ) : (
