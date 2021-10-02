@@ -69,7 +69,7 @@ export default function SignInForm() {
   // }
 
   return (
-    <div className="newForm">
+    <div className="newForm three-d">
       <form onSubmit={signIn}>
         <label htmlFor="Email"></label>
         <input
@@ -93,7 +93,7 @@ export default function SignInForm() {
         <div className="divider"></div>
         <p>{errorMessage}</p>
       </form>
-      <button type="button" className="Login" onClick={signInGoogle}>
+      <button type="button" className="pg-button" onClick={signInGoogle}>
         Sign In with Google
       </button>
       <div className="divider"></div>

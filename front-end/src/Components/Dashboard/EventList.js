@@ -2,13 +2,12 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Event from "./Event";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
 
 const API = apiURL();
 
 function EventList({ event, user_id }) {
-  let history = useHistory();
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
