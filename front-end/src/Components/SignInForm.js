@@ -15,16 +15,16 @@ export default function SignInForm() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
-    setInput({ ...input, [e.target.name]: [e.target.value] });
+    setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const signIn = useCallback(
-    async (e) => {
+  const signIn = async (e) => {
       e.preventDefault();
       // console.log(e);
       // const { email, password } = e.target.elements;
       // console.log(email.value);
       // console.log(password.value);
+      console.log(input.email, input.password)
       try {
         let res = await userSignIn(input.email, input.password);
         //  console.log(res)
@@ -41,12 +41,10 @@ export default function SignInForm() {
       } catch (error) {
         alert(error);
       }
-    },
-    [history]
-  );
+    }
+  ;
 
-  const signInGoogle = useCallback(
-    async (e) => {
+  const signInGoogle = async (e) => {
       try {
         let res = await userGoogleSignIn();
         if (res === null) {
@@ -56,9 +54,8 @@ export default function SignInForm() {
       } catch (error) {
         alert(error);
       }
-    },
-    [history]
-  );
+    }
+  
 
   // if (currentUser) {
   //   console.log(Object.keys(currentUser));

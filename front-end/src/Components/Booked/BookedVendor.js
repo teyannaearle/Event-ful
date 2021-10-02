@@ -3,22 +3,14 @@ import React from "react";
 // import celebrate from "../../assets/celebrate.jpeg";
 
 export default function BookedVendor({ vendor }) {
-  // const { user_id, event_id, vendor_name } = useParams();
-  // const image = vendor.vendor_image ? vendor.vendor_image : celebrate;
-  // console.log(vendor);
-  const image = vendor.vendor_image
+  const image = vendor.vendor_image;
+  const formatPhone = (phone) =>
+    phone.length === 11
+      ? `(${phone.substring(1, 4)}) ${phone.substring(4, 7)}-${phone.substring(
+          7
+        )}`
+      : phone;
   return (
-    // <tr>
-    //   <td>
-    //     <Link to={`/booked/${user_id}/${event_id}/${vendor.vendor_name}`}>
-    //       {vendor.vendor_name}
-    //     </Link>
-    //   </td>
-    //   <td>{vendor.vendor_address}</td>
-    //   <td>{vendor.vendor_phone_number}</td>
-    //   <td>{vendor.amount}</td>
-    // </tr>
-
     <>
       <li className="flex-col three-d ven-li">
         <img
@@ -30,7 +22,7 @@ export default function BookedVendor({ vendor }) {
         />
         <h2>{vendor.vendor_name}</h2>
         <h3> Contact Information </h3>
-        <p>Phone: {vendor.vendor_phone_number}</p>
+        <p>Phone: {formatPhone(vendor.vendor_phone_number)}</p>
         <p>Address: {vendor.vendor_address}</p>
         <h3>Amount: ${vendor.amount}</h3>
         <div className="book-fav">

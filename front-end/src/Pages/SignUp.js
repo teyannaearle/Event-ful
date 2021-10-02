@@ -13,7 +13,7 @@ export default function SignUp() {
   });
   // console.log(input.userName)
   // console.log(input.password)
-  console.log(input.email);
+  //console.log(input.email);
   
   const handleChange = (e) => {
       setInput({ ...input, [e.target.id]: e.target.value });
@@ -23,18 +23,18 @@ export default function SignUp() {
         event.preventDefault();
         setErrorMessage(null);
         //   const { userName, email, password } = event.target.elements;
-      console.log(`Here is your input.email: ${input.email}`);
-      //   try {
-      //     let res = await userSignUp(input.userName, input.email, input.password);
-      //     if (res === null) {
-      //       //   history.push("/dashboard");
-      //       console.log("great success");
-      //     } else {
-      //       setErrorMessage("please enter all required info");
-      //     }
-      //   } catch (error) {
-      //     alert(error);
-      //   }
+      //console.log(`Here is your input.email: ${input.email}`);
+        try {
+          let res = await userSignUp(input.userName, input.email, input.password);
+          if (res === null) {
+             history.push("/dashboard");
+            console.log("great success");
+          } else {
+            setErrorMessage("please enter all required info");
+          }
+        } catch (error) {
+          alert(error);
+        }
     
   };
 
