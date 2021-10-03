@@ -196,7 +196,7 @@ background-image: none;
     display: block;
     width: 200px;
     text-align: center;
-    font-size: smaller;
+    font-size: small;
   }
 
   .NavBarItems {
@@ -217,9 +217,7 @@ background-image: none;
     margin-right: 20px;
   }
 
-  .nav-but {
-    font-size: small;
-  }
+
 }
 
 .svg{
