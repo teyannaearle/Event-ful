@@ -1295,6 +1295,16 @@ span.press {
 }
 
 @media only screen and (max-width: 700px) {
+  /* EVENTS PAGE */
+#countdown-container{
+  height: max-content;
+}
+
+.countdown{
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
   /* VENDOR INDEX */
   .ven-ul {
     grid-template-columns: 90%;
