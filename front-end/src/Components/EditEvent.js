@@ -152,8 +152,13 @@ function EditEvent({ user_id }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateEvent(event, event_id);
-    history.push("/dashboard");
+
+    if (Object.values(checklist).includes(true)){
+      updateEvent(event, event_id);
+      history.push("/dashboard");
+    } else {
+      window.alert("Choose at least one vendor to add to your checklist.")
+    }
   };
 
   const toggleState = (e) => {

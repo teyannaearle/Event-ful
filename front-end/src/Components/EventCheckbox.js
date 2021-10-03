@@ -48,8 +48,13 @@ export default function EventCheckbox({ user_id }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToCheckedList();
-    history.push("/dashboard")
+    if (Object.values(eventForm).includes(true)){
+      addToCheckedList();
+      history.push("/dashboard")
+    } else {
+      window.alert("Choose at least one vendor to add to your checklist.")
+    }
+   
   };
 
   return (
