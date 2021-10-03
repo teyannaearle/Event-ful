@@ -58,31 +58,6 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     }
   };
 
-  // const bookedButton = (category, id) => {
-  //   if (bookedStatus[category.name] === false) {
-  //     return (
-  //       <Link to={`/task/${category.name}/${event_id}/${id}`}>
-  //         <button
-  //           className="book-button x"
-  //           onClick={() => updateBookedStatus(category.name)}
-  //         >
-  //           {" "}
-  //           &#10007; No
-  //         </button>
-  //       </Link>
-  //     );
-  //   } else {
-  //     return (
-  //       <button
-  //         className="book-button check"
-  //         onClick={() => updateBookedStatus(category.name)}
-  //       >
-  //         {" "}
-  //         &#10003; Yes
-  //       </button>
-  //     );
-  //   }
-  // };
 
   const bookedButton = (category, id) => {
     if (bookedStatus[category.name] === false) {
@@ -90,15 +65,10 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
         <Link to={`/task/${category.name}/${event_id}/${id}`}>
         <label className="check-container"> 
           <input
-            // className="book-button x"
             onChange={() => updateBookedStatus(category.name)}
             type="checkbox"
-            // value={bookedStatus[category.name]}
             checked={bookedStatus[category.name] ? bookedStatus[category.name] : false}
-            // defaultChecked={false}
           >
-            {/* {" "}
-            &#10007; No */}
           </input>
           <span className="checkmark"></span>
 
@@ -109,13 +79,9 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
       return (
         <label className="check-container"> 
         <input
-          // className="book-button check"
           onChange={() => updateBookedStatus(category.name)}
           type="checkbox"
-          // value={bookedStatus[category.name]}
           checked={bookedStatus[category.name] ? bookedStatus[category.name] : false}        >
-          {/* {" "}
-          &#10003; Yes */}
         </input>
         <span className="checkmark"></span>
         </label>
