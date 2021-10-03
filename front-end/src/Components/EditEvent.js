@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -35,45 +35,20 @@ function EditEvent({ user_id }) {
     party_clown: false,
   });
 
-  const [initialState, setInitialState] = useState({});
-
-  // useEffect(() => {
-  //   axios
-  //     .get(`${API}/events/${user_id}/${event_id}`)
-  //     .then(
-  //       (res) => {
-  //         const response = res.data.payload;
-  //         setEvent({
-  //           //...event,
-  //           event_name: response.event_name,
-  //           event_budget: response.event_budget,
-  //           event_date: response.event_date.split("T")[0],
-  //           event_time: response.event_time,
-  //         });
-  //       },
-  //       (c) => console.warn("catch", c)
-  //     )
-  //     .catch((c) => {
-  //       console.error(c);
-  //     });
-
-  //   axios
-  //     .get(`${API}/checklist/${user_id}/${event_id}`)
-  //     .then(
-  //       (res) => {
-  //         let checklistCopy = { ...checklist };
-  //         res.data.payload.map((service) => {
-  //           return checklistCopy[service.task_name] = true;
-  //         });
-  //         setChecklist(checklistCopy);
-  //         setInitialState(checklistCopy);
-  //       },
-  //       (c) => console.warn("catch", c)
-  //     )
-  //     .catch((c) => {
-  //       console.error(c);
-  //     });
-  // }, [event_id, checklist, user_id]);
+  const initialState = useRef({
+    catering: false,
+    djs: false,
+    musicians: false,
+    photographers: false,
+    party_rental: false,
+    videographers: false,
+    venues: false,
+    balloons: false,
+    floral: false,
+    party_magician: false,
+    party_characters: false,
+    party_clown: false,
+  });
 
   useEffect(() => {
     try {
@@ -100,19 +75,21 @@ function EditEvent({ user_id }) {
     };
   }, [user_id, event_id]);
 
-  let checklistCopy = { ...checklist };
   useEffect(() => {
+    
     try {
       axios.get(`${API}/checklist/${user_id}/${event_id}`).then((res) => {
+        let initial = initialState.current;
         res.data.payload.map((service) => {
-          return (checklistCopy[service.task_name] = true);
+          return (initial[service.task_name] = true);
         });
-        setChecklist(checklistCopy);
-        setInitialState(checklistCopy);
+        setChecklist(initial);
       });
     } catch (e) {
       console.error(e);
     }
+
+
     return () => {
       setChecklist({
         catering: false,
@@ -128,7 +105,6 @@ function EditEvent({ user_id }) {
         party_characters: false,
         party_clown: false,
       });
-      setInitialState({})
     };
   }, [user_id, event_id]);
 
@@ -137,9 +113,9 @@ function EditEvent({ user_id }) {
       .put(`${API}/events/${user_id}/${event_id}`, event)
       .then(
         (res) => {
-          const categories = Object.keys(initialState);
+          const categories = Object.keys(initialState.current);
           for (const name of categories) {
-            if (initialState[name] && !checklist[name]) {
+            if (initialState.current[name] && !checklist[name]) {
               axios
                 .delete(`${API}/checklist/${user_id}/${event_id}/${name}`)
                 .then(
@@ -149,7 +125,7 @@ function EditEvent({ user_id }) {
                 .catch((c) => {
                   console.error(c);
                 });
-            } else if (!initialState[name] && checklist[name]) {
+            } else if (!initialState.current[name] && checklist[name]) {
               const category = {
                 task_name: name,
               };
@@ -183,7 +159,6 @@ function EditEvent({ user_id }) {
   const toggleState = (e) => {
     const val = e.target.value;
     setChecklist((prevState) => ({ ...prevState, [val]: !prevState[val] }));
-    //setChecklist({...checklist, })
   };
 
   return (

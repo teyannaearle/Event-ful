@@ -31,7 +31,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
       user_id: user_id,
       event_id: event_id,
     };
-/// ONLY DELETE IF THE BOOKED VENDOR EXISTS ////
+
     if (!bookedStatus[category] === false) {
       axios
         .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
