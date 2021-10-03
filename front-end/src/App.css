@@ -1206,6 +1206,7 @@ span.press {
   /* EVENT PAGE */
   .eventpage-container {
     grid-template-columns: 100%;
+    width: 75%;
   }
 
   #countdown-container {
@@ -1256,6 +1257,11 @@ span.press {
   .plan {
     left: 20%;
   }
+
+  /* EVENTS PAGE */
+  .eventpage-container {
+    width: 95%;
+  }
   /* VENDOR SHOW
   #vendor-showpage{
     margin-top: 20px;
@@ -1296,14 +1302,17 @@ span.press {
 
 @media only screen and (max-width: 700px) {
   /* EVENTS PAGE */
-#countdown-container{
-  height: max-content;
-}
+  /* .eventpage-container {
+    width: 95%;
+  } */
+  #countdown-container {
+    height: max-content;
+  }
 
-.countdown{
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
+  .countdown {
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
 
   /* VENDOR INDEX */
   .ven-ul {
@@ -1392,6 +1401,15 @@ span.press {
     font-size: 12px;
   }
 
+  .plan {
+    width: 70%;
+    margin: auto;
+  }
+  .ed-but {
+    left: 0;
+    right: 0;
+  }
+
   /*VENDOR SHOW */
   .like-div {
     text-align: center;
@@ -1440,15 +1458,52 @@ span.press {
     width: 90%;
   }
 
-  /* DASHBOARD */
-  .plan {
-    /* left: 0; */
-    width: 70%;
-    margin: auto;
+  /*FAVORITES PAGE*/
+  .dropdown span {
+    width: 200px;
   }
-  .ed-but {
-    left: 0;
-    right: 0;
+
+  .dropdown-content {
+    width: 200px;
+  }
+
+  /*EVENT PAGE*/
+
+  #checklist-container {
+    grid-template-columns: 50% 50%;
+  }
+  .checklist-ul {
+    margin-left: 0px;
+  }
+
+  .checklist {
+    grid-template-columns: 50% 50%;
+  }
+
+  .checklist-span {
+    display: inline;
+  }
+
+  .book-grid {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .checklist-button {
+    height: 45px;
+    text-align: center;
+  }
+
+  #all-booked {
+    width: 80%;
+  }
+
+  #budget-container h2 {
+    margin-bottom: 20px;
+  }
+
+  #budget-container div {
+    margin-bottom: 5px;
   }
 }
 
