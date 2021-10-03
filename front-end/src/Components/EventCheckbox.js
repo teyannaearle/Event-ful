@@ -1,15 +1,17 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
+import { UserContext } from "../Providers/UserProvider.js";
 
 const API = apiURL();
 
-export default function EventCheckbox({ user_id }) {
+export default function EventCheckbox() {
+  const loggedInUser = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
-
+  const [user_id, setUserId] = useState(null);
   const [eventForm, setEventForm] = useState({
     catering: false,
     djs: false,
@@ -48,14 +50,29 @@ export default function EventCheckbox({ user_id }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (Object.values(eventForm).includes(true)){
+    if (Object.values(eventForm).includes(true)) {
       addToCheckedList();
-      history.push("/dashboard")
+      history.push("/dashboard");
     } else {
-      window.alert("Choose at least one vendor to add to your checklist.")
+      window.alert("Choose at least one vendor to add to your checklist.");
     }
-   
   };
+
+  useEffect(() => {
+    (async () => {
+      if (loggedInUser) {
+        const email = loggedInUser.email;
+        let checkUser = await axios.get(`${API}/users/${email}`);
+        if (checkUser.data.success) {
+          setUserId(checkUser.data.payload.user_id);
+        }
+      }
+    })();
+    return () => {
+      // cleanup
+      // setUserId(null)
+    };
+  }, [loggedInUser]);
 
   return (
     <section className="NewEvent">

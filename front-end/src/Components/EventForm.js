@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
+import { UserContext } from "../Providers/UserProvider";
 
 const API = apiURL();
 
-function EventForm({ user_id }) {
+function EventForm() {
+  const loggedInUser = useContext(UserContext);
   let history = useHistory();
   const [myEvent, setEvent] = useState({
     event_name: "",
@@ -14,7 +15,7 @@ function EventForm({ user_id }) {
     event_date: "",
     event_time: "",
   });
-
+  const [user_id, setUserId] = useState(null);
   const addEvent = () => {
     try {
       axios.post(`${API}/events/${user_id}`, myEvent).then((res) => {
@@ -34,6 +35,22 @@ function EventForm({ user_id }) {
     e.preventDefault();
     addEvent();
   };
+
+  useEffect(() => {
+    (async () => {
+      if (loggedInUser) {
+        const email = loggedInUser.email;
+        let checkUser = await axios.get(`${API}/users/${email}`);
+        if (checkUser.data.success) {
+          setUserId(checkUser.data.payload.user_id);
+        }
+      }
+    })();
+    return () => {
+      // cleanup
+      // setUserId(null)
+    };
+  }, [loggedInUser]);
 
   return (
     <section>

@@ -1,18 +1,19 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import "./EditEvent.css";
+import { UserContext } from "../Providers/UserProvider"
 import CapitalizeEvent from "../Components/CapitalizeEvent";
 
 const API = apiURL();
 
-function EditEvent({ user_id }) {
+function EditEvent() {
+  const loggedInUser = useContext(UserContext);
   const { event_id } = useParams();
   const history = useHistory();
-
+  const [user_id, setUserId] = useState(null);
   const [event, setEvent] = useState({
     event_name: "",
     event_budget: 0,
@@ -64,7 +65,6 @@ function EditEvent({ user_id }) {
     } catch (e) {
       console.error(e);
     }
-
     return () => {
       setEvent({
         event_name: "",
@@ -89,6 +89,7 @@ function EditEvent({ user_id }) {
       console.error(e);
     }
 
+    
 
     return () => {
       setChecklist({
@@ -166,6 +167,23 @@ function EditEvent({ user_id }) {
     setChecklist((prevState) => ({ ...prevState, [val]: !prevState[val] }));
   };
 
+  useEffect(() => {
+    (async () => {
+      if (loggedInUser) {
+        const email = loggedInUser.email;
+        let checkUser = await axios.get(`${API}/users/${email}`);
+        if (checkUser.data.success) {
+          setUserId(checkUser.data.payload.user_id);
+         
+        }
+      }
+    })();
+    return () => {
+      // cleanup
+      // setUserId(null)
+    };
+  }, [loggedInUser]);
+  
   return (
     <>
       <h1>

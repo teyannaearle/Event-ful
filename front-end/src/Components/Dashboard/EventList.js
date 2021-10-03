@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import Event from "./Event";
 import { Link } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
+import { UserContext } from "../../Providers/UserProvider.js"
 
 const API = apiURL();
 
-function EventList({ event, user_id }) {
+function EventList() {
+  const loggedInUser = useContext(UserContext);
   const [events, setEvents] = useState([]);
-
+  const [user_id, setUserId] = useState(null);
+console.log(`eventslist user_id is ${user_id}`)
   useEffect(() => {
     axios
       .get(`${API}/events/${user_id}`)
@@ -40,6 +42,22 @@ function EventList({ event, user_id }) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    (async () => {
+      if (loggedInUser) {
+        const email = loggedInUser.email;
+        let checkUser = await axios.get(`${API}/users/${email}`);
+        if (checkUser.data.success) {
+          setUserId(checkUser.data.payload.user_id);
+        }
+      }
+    })();
+    return () => {
+      // cleanup
+      // setUserId(null)
+    };
+  }, [loggedInUser]);
 
   return (
     <>

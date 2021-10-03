@@ -67,10 +67,11 @@ export const userGoogleSignIn = async () => {
       // console.log('logged in with google')
       // console.log(userCredential);
       // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(userCredential);
+      const credential =
+        GoogleAuthProvider.credentialFromResult(userCredential);
       const token = credential.accessToken;
       // The signed-in user info.
-      result = userCredential.user
+      result = userCredential.user;
       // ...
     });
   } catch (e) {
@@ -89,14 +90,15 @@ export const userGoogleSignIn = async () => {
   return result;
 };
 
-export const userSignOut = () => {
-  return signOut(auth)
-    .then(() => {
-      // Sign-out successful.
+export const userSignOut = async () => {
+  let result = null;
+  try {
+    await signOut(auth).then(() => {
       console.log("user signed out");
-    })
-    .catch((e) => {
-      // An error happened.
-      console.warn(e.message);
     });
+  } catch (e) {
+    result = e.code;
+    console.warn(e.message);
+  }
+  return result;
 };

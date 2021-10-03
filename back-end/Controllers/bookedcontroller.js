@@ -91,22 +91,24 @@ booked.get("/category/:category/:user_id/:event_id", async (req, res) => {
 // CREATE
 booked.post("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-
+console.log(req.body)
   try {
     const newBookedVendor = await createBookedVendor(
       req.body,
       user_id,
       event_id,
     );
+    console.log(newBookedVendor)
     if (newBookedVendor.user_id) {
       res.status(200).json({
         success: true,
         payload: newBookedVendor,
       });
     } else {
-      throw `No vendor was booked with name ${req.body.name}`;
+      throw `No vendor was booked with name ${req.body.vendor_name}`;
     }
   } catch (e) {
+    console.log(e)
     res.status(404).json({
       success: false,
       message: e,

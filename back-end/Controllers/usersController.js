@@ -9,7 +9,6 @@ const db = require("../db/dbConfig");
 
 // SHOW ONE USER
 users.get("/:email", async (req, res) => {
-
   const { email } = req.params;
   try {
     const oneUser = await getOneUser(email);

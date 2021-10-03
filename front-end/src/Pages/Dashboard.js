@@ -2,21 +2,26 @@ import React, { useContext } from "react";
 import EventList from "../Components/Dashboard/EventList";
 import { UserContext } from "../Providers/UserProvider";
 
-export default function Dashboard({ user_id, name }) {
-  const user = useContext(UserContext)
-  
-  if (user) {
-    console.log(`Dashboard user is ${user.displayName}`)
-  } else {
-    console.log("Dashboard user is null")
-  }
+export default function Dashboard() {
+  const loggedInUser = useContext(UserContext);
+  const formattedName = loggedInUser
+    ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
+      loggedInUser.displayName.split(" ")[0].substring(1)
+    : "default name";
 
+  // if (user) {
+  //   console.log(`Dashboard user is ${user.displayName}`)
+  // } else {
+  //   console.log("Dashboard user is null")
+  // }
 
   return (
     <div className="page">
-      <h1 className="pg-head">{name}'s Dashboard </h1>
+      <h1 className="pg-head">
+        {loggedInUser && `${formattedName}'s Dashboard`}{" "}
+      </h1>
       <div className="dash-container three-d">
-        <EventList user_id={user_id} />
+        <EventList />
       </div>
     </div>
   );

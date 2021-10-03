@@ -13,9 +13,9 @@ export const UserProvider = ({ children }) => {
       console.log("onAuthStateChanged")
       // console.log(`userprovider line 14, user is ${user}`)
       // console.log(Object.keys(user))
-      console.log(`User provider current user is ${loggedInUser}`)
       if (loggedInUser) {
         // history.push("/dashboard");
+        console.log(`User provider current user is ${loggedInUser.email}`)
         setCurrentUser(loggedInUser);
       } else {
         // history.push("/signin")
@@ -23,7 +23,7 @@ export const UserProvider = ({ children }) => {
       }
     });
   }, [history]);
-console.log(`user provider currentUser ${currentUser}`)
+
   return (
     <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
   );

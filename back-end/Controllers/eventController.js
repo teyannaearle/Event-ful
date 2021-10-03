@@ -56,10 +56,10 @@ events.get("/:user_id", async (req, res) => {
 
 events.post("/:user_id", async (req, res) => {
   const { user_id } = req.params;
-
+console.log(user_id)
   try {
     const newEvent = await createEvent(req.body, user_id);
-
+console.log(newEvent)
     if (newEvent.user_id) {
       res.status(200).json({
         success: true,

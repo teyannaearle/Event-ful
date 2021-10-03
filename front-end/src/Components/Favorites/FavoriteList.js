@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Favorite from "./Favorite";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import { apiURL } from "../../util/apiURL";
 import { VendorMenu } from "../NavBar/VendorMenu";
 import { Link } from "react-router-dom";
-
+import { UserContext } from "../../Providers/UserProvider";
 const API = apiURL();
 
-export default function FavoriteList({ user_id }) {
+export default function FavoriteList() {
+  const loggedInUser = useContext(UserContext);
+  const [user_id, setUserId] = useState(null);
   const [favoriteVendors, setFavoriteVendors] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [filterClicked, setFilterClicked] = useState({
@@ -31,6 +32,22 @@ export default function FavoriteList({ user_id }) {
         console.error(e);
       });
   }, [user_id]);
+
+  useEffect(() => {
+    (async () => {
+      if (loggedInUser) {
+        const email = loggedInUser.email;
+        let checkUser = await axios.get(`${API}/users/${email}`);
+        if (checkUser.data.success) {
+          setUserId(checkUser.data.payload.user_id);
+        }
+      }
+    })();
+    return () => {
+      // cleanup
+      // setUserId(null)
+    };
+  }, [loggedInUser]);
 
   const deleteFav = (name) => {
     try {

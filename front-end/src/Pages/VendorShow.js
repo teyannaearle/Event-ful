@@ -1,12 +1,18 @@
 import api from "../util/apiCalls";
+import { apiURL } from "../util/apiURL";
 import { useParams, useHistory } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import VendorReviews from "../Components/VendorShow/VendorReviews";
 import VendorShowInfo from "../Components/VendorShow/VendorShowInfo";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
+import { UserContext } from "../Providers/UserProvider"
+import axios from "axios"
+const API = apiURL();
 
-export default function VendorShow({ user_id }) {
+export default function VendorShow() {
+  const loggedInUser = useContext(UserContext);
+  const [user_id, setUserId] = useState(null);
   const [business, setbusiness] = useState({
     photos: [],
     categories: [{ title: "" }],
@@ -46,6 +52,22 @@ export default function VendorShow({ user_id }) {
       });
     };
   }, [provider_id]);
+
+  useEffect(() => {
+    (async () => {
+      if (loggedInUser) {
+        const email = loggedInUser.email;
+        let checkUser = await axios.get(`${API}/users/${email}`);
+        if (checkUser.data.success) {
+          setUserId(checkUser.data.payload.user_id);
+        }
+      }
+    })();
+    return () => {
+      // cleanup
+      // setUserId(null)
+    };
+  }, [loggedInUser]);
 
   return (
     <>
