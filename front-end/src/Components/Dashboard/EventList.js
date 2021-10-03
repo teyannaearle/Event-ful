@@ -50,7 +50,7 @@ function EventList({ event, user_id }) {
             <p className="plus-sign"> &#x002B;</p>
           </Link>
         </span>
-        {events.map((event) => {
+        { events ? events.map((event) => {
           return (
             <li key={event.event_id} className="dash-event">
               <Event
@@ -60,7 +60,7 @@ function EventList({ event, user_id }) {
               />
             </li>
           );
-        })}
+        } ) : null}
       </ul>
     </>
   );
