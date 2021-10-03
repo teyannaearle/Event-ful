@@ -16,7 +16,7 @@ const config = () => {
 const getVendorsZip = async (category, zip) => {
   try {
     const { data } = await axios.get(
-      `${proxy}/${yelpBase}/search?term=${category}&location=${zip}&category=${category}&radius=16093`,
+      `${yelpBase}/search?term=${category}&location=${zip}&category=${category}&radius=16093`,
       config()
     );
     return data.businesses;
@@ -28,7 +28,7 @@ const getVendorsZip = async (category, zip) => {
 const getVendorsLongLag = async (lng, lat, category) => {
   try {
     const { data } = await axios.get(
-      `${proxy}/${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
+      `${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
       config()
     );
     return data;
@@ -39,7 +39,7 @@ const getVendorsLongLag = async (lng, lat, category) => {
 
 const getVendor = async (id) => {
   try {
-    const { data } = await axios.get(`${proxy}/${yelpBase}/${id}`, config());
+    const { data } = await axios.get(`${yelpBase}/${id}`, config());
     return data;
   } catch (e) {
     return console.warn(e);
@@ -49,7 +49,7 @@ const getVendor = async (id) => {
 const getReviews = async (id) => {
   try {
     const { data } = await axios.get(
-      `${proxy}/${yelpBase}/${id}/reviews`,
+      `${yelpBase}/${id}/reviews`,
       config()
     );
     return data.reviews;
