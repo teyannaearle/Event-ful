@@ -1,4 +1,4 @@
-\c partyplanning_dev;
+\c dda2ivrdt7akio;
 
 INSERT INTO users ( username, password, email, created_on, last_login) VALUES
 ('tearle92' , 'fakepassword' ,'fakeemail@email.com','2020-10-19 10:23:54', '2020-10-19 10:23:54'),
