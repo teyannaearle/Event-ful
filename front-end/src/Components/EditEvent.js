@@ -12,6 +12,7 @@ const API = apiURL();
 function EditEvent({ user_id }) {
   const { event_id } = useParams();
   const history = useHistory();
+  const head = useRef("")
 
   const [event, setEvent] = useState({
     event_name: "",
@@ -60,6 +61,7 @@ function EditEvent({ user_id }) {
           event_date: response.event_date.split("T")[0],
           event_time: response.event_time,
         });
+        head.current = response.event_name
       });
     } catch (e) {
       console.error(e);
@@ -171,7 +173,7 @@ function EditEvent({ user_id }) {
       <h1>
         Edit{" "}
         {event.event_name
-          ? CapitalizeEvent(event.event_name)
+          ? CapitalizeEvent(head.current)
           : event.event_name}
       </h1>
       <div className="form-container">

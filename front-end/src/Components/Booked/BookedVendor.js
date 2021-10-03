@@ -1,7 +1,7 @@
 import React from "react";
 
-export default function BookedVendor({ vendor}) {
 
+export default function BookedVendor({ vendor}) {
   return (
     <>
         <img

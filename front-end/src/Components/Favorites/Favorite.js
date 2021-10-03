@@ -1,4 +1,5 @@
 import React from "react";
+import CategorySwitch from "../CategorySwitch"
 
 export default function Favorite({ vendors, vendor, deleteFav }) {
 
@@ -24,7 +25,7 @@ export default function Favorite({ vendors, vendor, deleteFav }) {
           ></i>
         </div>
         <h2>{vendor.vendor_name}</h2>
-        <p>Category: {vendor.vendor_category}</p>
+        <p>Category: {CategorySwitch(vendor.vendor_category)}</p>
         <h4> Contact Information </h4>
         <p>Phone: {vendor.vendor_phone_number}</p>
         <p>Address: {vendor.vendor_address}</p>
