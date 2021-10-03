@@ -969,7 +969,8 @@ span.press {
 }
 
 .booked-section {
-  width: 80%;
+  width: 100%;
+  text-align: center;
 }
 
 /* CARDS */
@@ -998,8 +999,16 @@ span.press {
 
 /*FAVORITES PAGE */
 
-.fave-page div {
+.fave-page-div {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fave-page h2 {
+  text-align: center;
+  /* margin-bottom: 20px; */
 }
 
 .one-li {
@@ -1009,6 +1018,153 @@ span.press {
 .two-ul {
   display: grid;
   grid-template-columns: 30% 30%;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+  width: max-content;
+}
+
+.dropdown span {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  width: 160px;
+  padding: 16px;
+  text-align: center;
+  border-radius: 0;
+  box-shadow: 0px 3px 0px #2c6d8f, 0px 2px 10px rgba(0, 0, 0, 0.4),
+    inset 1px 1px 3px rgba(255, 255, 255, 0.927);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  background-image: linear-gradient(
+    to right top,
+    #3b90bf,
+    #3a8fbe,
+    #3a8ebc,
+    #398dbb,
+    #388cba,
+    #388bb9,
+    #378bb8,
+    #378ab7,
+    #3789b5,
+    #3888b4,
+    #3887b2,
+    #3886b1
+  );
+  color: white;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right top,
+    #3b90bf,
+    #3a8fbe,
+    #3a8ebc,
+    #398dbb,
+    #388cba,
+    #388bb9,
+    #378bb8,
+    #378ab7,
+    #3789b5,
+    #3888b4,
+    #3887b2,
+    #3886b1
+  );
+  color: white;
+  font-size: large;
+  border-top: 3px solid white;
+}
+
+.dropdown-content li {
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content li:hover {
+  background-image: linear-gradient(
+    to right top,
+    #7bbce0,
+    #76b7da,
+    #71b1d5,
+    #6daccf,
+    #68a7ca
+  );
+  border-radius: 0;
+  border: 1px dotted white;
+  color: black;
+}
+
+.dropdown:hover span {
+  filter: brightness(110%);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/*FAVORITES PAGE && BOOKED PAGE */
+
+.browse-ul {
+  width: 80%;
+  height: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+
+.browse-li {
+  width: 200px;
+  border: 2px dotted white;
+  border-radius: 8px;
+  font-size: large;
+  font-weight: 700;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  background-image: linear-gradient(
+    to right top,
+    #3b90bf,
+    #3a8fbe,
+    #3a8ebc,
+    #398dbb,
+    #388cba,
+    #388bb9,
+    #378bb8,
+    #378ab7,
+    #3789b5,
+    #3888b4,
+    #3887b2,
+    #3886b1
+  );
+  margin-bottom: 20px;
+}
+
+.browse-li:hover {
+  background-image: linear-gradient(
+    to right top,
+    #7bbce0,
+    #76b7da,
+    #71b1d5,
+    #6daccf,
+    #68a7ca
+  );
+  transform: scale(1.05);
+  color: black;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -1050,6 +1206,7 @@ span.press {
   /* EVENT PAGE */
   .eventpage-container {
     grid-template-columns: 100%;
+    width: 75%;
   }
 
   #countdown-container {
@@ -1100,6 +1257,11 @@ span.press {
   .plan {
     left: 20%;
   }
+
+  /* EVENTS PAGE */
+  .eventpage-container {
+    width: 95%;
+  }
   /* VENDOR SHOW
   #vendor-showpage{
     margin-top: 20px;
@@ -1139,6 +1301,19 @@ span.press {
 }
 
 @media only screen and (max-width: 700px) {
+  /* EVENTS PAGE */
+  /* .eventpage-container {
+    width: 95%;
+  } */
+  #countdown-container {
+    height: max-content;
+  }
+
+  .countdown {
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
   /* VENDOR INDEX */
   .ven-ul {
     grid-template-columns: 90%;
@@ -1226,6 +1401,15 @@ span.press {
     font-size: 12px;
   }
 
+  .plan {
+    width: 70%;
+    margin: auto;
+  }
+  .ed-but {
+    left: 0;
+    right: 0;
+  }
+
   /*VENDOR SHOW */
   .like-div {
     text-align: center;
@@ -1274,15 +1458,61 @@ span.press {
     width: 90%;
   }
 
-  /* DASHBOARD */
-  .plan {
-    /* left: 0; */
-    width: 70%;
-    margin: auto;
+  /*FAVORITES PAGE*/
+  .dropdown span {
+    width: 200px;
   }
-  .ed-but {
-    left: 0;
-    right: 0;
+
+  .dropdown-content {
+    width: 200px;
+  }
+
+  /*EVENT PAGE*/
+
+  #checklist-container {
+    grid-template-columns: 50% 50%;
+  }
+  .checklist-ul {
+    margin-left: 0px;
+  }
+
+  .checklist {
+    grid-template-columns: 50% 50%;
+  }
+
+  .checklist-span {
+    display: inline;
+  }
+
+  .book-grid {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .checklist-button {
+    height: 45px;
+    text-align: center;
+  }
+
+  #all-booked {
+    width: 80%;
+  }
+
+  #budget-container h2 {
+    margin-bottom: 20px;
+  }
+
+  #budget-container div {
+    margin-bottom: 5px;
+  }
+
+  .update p {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .checklist-button{
+    margin-right: 10px;
   }
 }
 

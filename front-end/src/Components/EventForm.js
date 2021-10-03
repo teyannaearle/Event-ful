@@ -7,34 +7,13 @@ import { apiURL } from "../util/apiURL.js";
 const API = apiURL();
 
 function EventForm({ user_id }) {
-  // const { user_id } = useParams();
-  // const [events, setEvents] = useState([]);
-  //    const [id, setId] = useState({});
-
+  let history = useHistory();
   const [myEvent, setEvent] = useState({
     event_name: "",
     event_budget: 0,
     event_date: "",
     event_time: "",
   });
-
-  let history = useHistory();
-
-  //   useEffect(() => {
-  //     axios
-  //       .get(`${API}/events/last`)
-  //       .then(
-  //         (res) => {
-  //           setId(res.data.payload.event_id + 1);
-  //         },
-  //         (e) => {
-  //           console.error(e);
-  //         }
-  //       )
-  //       .catch((e) => {
-  //         console.error(e);
-  //       });
-  //   }, []);
 
   const addEvent = () => {
     try {
@@ -43,7 +22,7 @@ function EventForm({ user_id }) {
         history.push(`/dashboard/new_event/checklist/${id}`);
       });
     } catch (error) {
-      console.log("Not working");
+      console.error(error);
     }
   };
 
