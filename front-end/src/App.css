@@ -969,8 +969,10 @@ span.press {
 }
 
 .booked-section {
-  width: 80%;
+  width: 100%;
+  text-align: center;
 }
+
 
 /* CARDS */
 
@@ -1000,6 +1002,15 @@ span.press {
 
 .fave-page div {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.fave-page h2{
+  text-align: center;
+  /* margin-bottom: 20px; */
 }
 
 .one-li {
@@ -1010,6 +1021,60 @@ span.press {
   display: grid;
   grid-template-columns: 30% 30%;
 }
+
+/*FAVORITES PAGE && BOOKED PAGE */
+
+.browse-ul{
+  width: 80%;
+  height: max-content;  
+display: flex;
+flex-wrap: wrap;
+margin: auto;
+justify-content: space-evenly;
+margin-top: 20px;
+
+}
+
+.browse-li{
+  width: 200px;
+  border: 2px dotted white;
+  border-radius: 8px;
+  font-size: large;
+  font-weight: 700;
+  color: white;
+  padding: 15px;
+text-align: center;
+background-image: linear-gradient(
+  to right top,
+  #3b90bf,
+  #3a8fbe,
+  #3a8ebc,
+  #398dbb,
+  #388cba,
+  #388bb9,
+  #378bb8,
+  #378ab7,
+  #3789b5,
+  #3888b4,
+  #3887b2,
+  #3886b1
+);
+margin-bottom: 20px;
+}
+
+.browse-li:hover{
+  background-image: linear-gradient(
+    to right top,
+    #7bbce0,
+    #76b7da,
+    #71b1d5,
+    #6daccf,
+    #68a7ca
+  );
+  transform: scale(1.05);
+  color: black;
+}
+
 
 @media only screen and (max-width: 1300px) {
   /* DASHBOARD */

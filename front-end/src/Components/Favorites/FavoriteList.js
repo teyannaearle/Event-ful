@@ -3,6 +3,8 @@ import Favorite from "./Favorite";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { apiURL } from "../../util/apiURL";
+import { VendorMenu } from "../NavBar/VendorMenu";
+import { Link } from "react-router-dom";
 
 const API = apiURL();
 
@@ -43,11 +45,15 @@ export default function FavoriteList({ user_id }) {
   return (
     <div>
       {favoriteVendors.length > 0 ? (
-        <ul className={`ven-ul ${favoriteVendors.length === 2 ? "two-ul" : null } ${favoriteVendors.length === 1 ? "one-ul" : null}`}>
+        <ul
+          className={`ven-ul ${
+            favoriteVendors.length === 2 ? "two-ul" : null
+          } ${favoriteVendors.length === 1 ? "one-ul" : null}`}
+        >
           {favoriteVendors.map((vendor) => {
             return (
               <Favorite
-              vendors={favoriteVendors}
+                vendors={favoriteVendors}
                 vendor={vendor}
                 user_id={user_id}
                 key={vendor.vendor_id}
@@ -57,7 +63,24 @@ export default function FavoriteList({ user_id }) {
           })}
         </ul>
       ) : (
-        <h1> No favorite vendors</h1>
+        <>
+          <h2>
+            {" "}
+            No favorite vendors at this time. Browse for vendor's near you to add to your
+            favorites !
+          </h2>
+          <ul className="browse-ul">
+            {VendorMenu.map((vendor) => {
+              return (
+                <Link to={vendor.url}  key={vendor.url}>
+                <li className="browse-li">
+               {vendor.title}
+                </li>
+                </Link>
+              );
+            })}
+          </ul>
+        </>
       )}
     </div>
   );
