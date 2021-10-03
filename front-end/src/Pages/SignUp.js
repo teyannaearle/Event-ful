@@ -26,8 +26,14 @@ export default function SignUp() {
     try {
       let res = await userSignUp(input.userName, input.email, input.password);
       if (res === null) {
-        await axios.post(`${API}/users`);
-        history.push("/dashboard");
+        const newUser = { email: input.email, password: input.password }
+       let result =  await axios.post(`${API}/users`, newUser);
+       console.log(result)
+       if (result.data.success) {
+         history.push("/dashboard");
+       } else {
+         console.log("could not add new user to backend database")
+       }
       } else {
         setErrorMessage("please enter all required info");
       }
@@ -58,7 +64,7 @@ export default function SignUp() {
           placeholder="Email"
         />
         <br />
-        <label htmlFor="PassWord">Select a Password</label> <br />
+        <label htmlFor="PassWord">Select a Password (min 6 characters)</label> <br />
         <input
           type="password"
           id="password"

@@ -9,20 +9,21 @@ export const UserProvider = ({ children }) => {
   const history = useHistory();
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((loggedInUser) => {
       console.log("onAuthStateChanged")
       // console.log(`userprovider line 14, user is ${user}`)
       // console.log(Object.keys(user))
-      if (user) {
+      console.log(`User provider current user is ${loggedInUser}`)
+      if (loggedInUser) {
         // history.push("/dashboard");
-        setCurrentUser(user);
+        setCurrentUser(loggedInUser);
       } else {
         // history.push("/signin")
         setCurrentUser(null);
       }
     });
   }, [history]);
-
+console.log(`user provider currentUser ${currentUser}`)
   return (
     <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
   );

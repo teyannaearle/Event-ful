@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS partyplanning_dev;
-CREATE DATABASE partyplanning_dev;
-\c partyplanning_dev;
+DROP DATABASE IF EXISTS dda2ivrdt7akio;
+CREATE DATABASE dda2ivrdt7akio;
+\c dda2ivrdt7akio;
 
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
@@ -67,4 +67,3 @@ CREATE TABLE favorites (
     vendor_image VARCHAR NOT NULL,
     vendor_rating INTEGER DEFAULT 0
 );
-

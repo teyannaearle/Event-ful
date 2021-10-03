@@ -1,21 +1,30 @@
 const db = require("../db/dbConfig.js");
+const pgp = require("pg-promise")();
+let QRE = pgp.errors.QueryResultError;
+let qrec = pgp.errors.queryResultErrorCode;
 
 //Show
 const getOneUser = async (email) => {
   try {
-    const oneUser = await db.one("SELECT * FROM users WHERE email=$1", [email]);
+    let oneUser = await db.one("SELECT * FROM users WHERE email=$1", [email]);
     return oneUser;
   } catch (err) {
-    return err;
+    if (err instanceof QRE && err.code === qrec.noData) {
+      return null;
+    } else {
+      console.log("query caught an error");
+      console.log(err);
+      return err;
+    }
   }
 };
 
 //create
-const createNewUser = async (user) => {
+const createNewUser = async (email, password) => {
   try {
     const newUser = await db.one(
       "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
-      [user.email, user.password]
+      [email, password]
     );
     return newUser;
   } catch (err) {

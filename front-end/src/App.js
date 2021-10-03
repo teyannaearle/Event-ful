@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { UserProvider } from "./Providers/UserProvider";
+import { useEffect, useState, useContext } from "react";
+import { UserProvider, UserContext } from "./Providers/UserProvider";
 import { apiURL } from "./util/apiURL";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
@@ -21,11 +21,15 @@ import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
 import FourOFour from "./Pages/FourOFour";
+import axios from "axios"
 
-const user_id = 1;
-const name = "john";
+
+
 
 function App() {
+  const user1 = useContext(UserContext);
+  console.log(`app user ${user1}`)
+  console.log(user1)
   const location = useGeoLocation();
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
@@ -33,13 +37,42 @@ function App() {
     style: "currency",
     currency: "USD",
   });
+  const {userid, setUserid} = useState(null)
+  const {userName, setUserName} = useState("")
+
+const user_id = 1;
+const name = "john";
 
   useEffect(() => {
     if (location.coordinates) {
       setLat(location.coordinates.latitude);
       setLng(location.coordinates.longitude);
     }
+
+
   }, [location]);
+
+
+
+  //useEffect(() => {
+   // (async () => {
+  
+
+  //       if (data.businesses[0].id) {
+  //         setVendors(data.businesses);
+  //       }
+  //       setSearched(true);
+  //     }
+  //   })();
+  //   return () => {
+  //     setVendors([]);
+  //     setSearched(false);
+  //   };
+  // }, [category, lng, lat]
+  //);
+
+
+
 
   const capitalizeName = (name) => {
     return name[0].toUpperCase() + name.slice(1);
@@ -47,13 +80,13 @@ function App() {
 
   return (
     <div className="site">
-      <UserProvider>
-        {/* <Router> */}
+      {/* <UserProvider> */}
+        <Router>
 
         <ScrollToTop />
         <Switch>
           <Route exact path="/">
-            <Landing />
+            <Landing email={user1 ? user1.email : "no email"}/>
           </Route>
 
           <Route path="/signup">
@@ -123,8 +156,8 @@ function App() {
               <FourOFour />
             </Route>
         </Switch>
-        {/* </Router> */}
-      </UserProvider>
+        </Router>
+      {/* </UserProvider> */}
     </div>
   );
 }
