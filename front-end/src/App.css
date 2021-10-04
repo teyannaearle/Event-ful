@@ -190,6 +190,11 @@ button:hover {
   border-radius: 8px;
 }
 
+.eventformpg-container {
+  width: 100%;
+  background-color: white;
+}
+
 .eventform-container {
   width: 100%;
   display: grid;
