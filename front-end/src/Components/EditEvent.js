@@ -1,18 +1,20 @@
-import React from "react";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useParams } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import "./EditEvent.css";
+import { UserContext } from "../Providers/UserProvider";
 import CapitalizeEvent from "../Components/CapitalizeEvent";
 
 const API = apiURL();
 
-function EditEvent({ user_id }) {
+function EditEvent() {
+  const loggedInUser = useContext(UserContext);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const { event_id } = useParams();
   const history = useHistory();
-  const head = useRef("")
+  const head = useRef("");
 
   const [event, setEvent] = useState({
     event_name: "",
@@ -61,12 +63,11 @@ function EditEvent({ user_id }) {
           event_date: response.event_date.split("T")[0],
           event_time: response.event_time,
         });
-        head.current = response.event_name
+        head.current = response.event_name;
       });
     } catch (e) {
       console.error(e);
     }
-
     return () => {
       setEvent({
         event_name: "",
@@ -78,7 +79,6 @@ function EditEvent({ user_id }) {
   }, [user_id, event_id]);
 
   useEffect(() => {
-    
     try {
       axios.get(`${API}/checklist/${user_id}/${event_id}`).then((res) => {
         let initial = initialState.current;
@@ -90,7 +90,6 @@ function EditEvent({ user_id }) {
     } catch (e) {
       console.error(e);
     }
-
 
     return () => {
       setChecklist({
@@ -155,11 +154,11 @@ function EditEvent({ user_id }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (Object.values(checklist).includes(true)){
+    if (Object.values(checklist).includes(true)) {
       updateEvent(event, event_id);
       history.push("/dashboard");
     } else {
-      window.alert("Choose at least one vendor to add to your checklist.")
+      window.alert("Choose at least one vendor to add to your checklist.");
     }
   };
 
@@ -168,13 +167,15 @@ function EditEvent({ user_id }) {
     setChecklist((prevState) => ({ ...prevState, [val]: !prevState[val] }));
   };
 
+  if (loggedInUser) {
+    console.log(`edit event form user_id is ${loggedInUser.user_id}`);
+  }
+
   return (
     <>
       <h1>
         Edit{" "}
-        {event.event_name
-          ? CapitalizeEvent(head.current)
-          : event.event_name}
+        {event.event_name ? CapitalizeEvent(head.current) : event.event_name}
       </h1>
       <div className="form-container">
         <form className="edit-eventform three-d" onSubmit={handleSubmit}>

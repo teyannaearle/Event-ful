@@ -10,8 +10,10 @@ const API = apiURL();
 function EventList({ user_id }) {
   const [events, setEvents] = useState([]);
   const location = useLocation()
+  console.log(`event list user_id is ${user_id}`)
 
   useEffect(() => {
+    if (user_id) {
     axios
       .get(`${API}/events/${user_id}`)
       .then(
@@ -24,7 +26,7 @@ function EventList({ user_id }) {
       )
       .catch((e) => {
         console.error(e);
-      });
+      })};
   }, [user_id, location.pathname]);
 
   // console.log(location)

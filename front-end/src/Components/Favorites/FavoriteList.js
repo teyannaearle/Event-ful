@@ -1,22 +1,27 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Favorite from "./Favorite";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import { apiURL } from "../../util/apiURL";
 import { VendorMenu } from "../NavBar/VendorMenu";
 import { Link } from "react-router-dom";
-
+import { UserContext } from "../../Providers/UserProvider";
 const API = apiURL();
 
-export default function FavoriteList({ user_id }) {
+export default function FavoriteList() {
+  const loggedInUser = useContext(UserContext);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const [favoriteVendors, setFavoriteVendors] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [filterClicked, setFilterClicked] = useState({
     clicked: false,
     category: "",
   });
+  console.log(`favoriteslist user_id is ${user_id}`);
 
   useEffect(() => {
+    if (user_id) {
+
+    
     axios
       .get(`${API}/favorites/${user_id}`)
       .then(
@@ -29,7 +34,10 @@ export default function FavoriteList({ user_id }) {
       )
       .catch((e) => {
         console.error(e);
-      });
+      })};
+      return () => {
+       setFavoriteVendors([])
+      }
   }, [user_id]);
 
   const deleteFav = (name) => {
@@ -103,6 +111,8 @@ export default function FavoriteList({ user_id }) {
   };
 
   return (
+    // only show this div if user_id
+    // else Loading component
     <>
       <div className="dropdown">
         <span>Filter By Category &#x2195;</span>

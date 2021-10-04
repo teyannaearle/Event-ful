@@ -10,7 +10,7 @@ const {
   deleteBookedVendor,
   updateBookedVendor,
   getOneCategory,
-  updateCost
+  updateCost,
 } = require("../queries/booked");
 
 const db = require("../db/dbConfig");
@@ -18,25 +18,35 @@ const db = require("../db/dbConfig");
 // INDEX
 booked.get("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-  try {
-    const allBookedVendors = await getAllBookedVendors(user_id, event_id);
-    if (allBookedVendors[0].user_id) {
-      res.status(200).json({
-        success: true,
-        message: allBookedVendors,
-      });
-    } else {
-      throw `No booked vendors found for user ID ${user_id}`;
-    }
-  } catch (e) {
-    res.status(404).json({
-      success: false,
-      message: e,
-    });
-  }
+  // try {
+  //   const allBookedVendors = await getAllBookedVendors(user_id, event_id);
+  //   console.log(allBookedVendors)
+  //   if (allBookedVendors.length > 0) {
+  //     res.status(200).json({
+  //       success: true,
+  //       message: allBookedVendors,
+  //     });
+  //   } else {
+  //     // throw `No booked vendors found for user ID ${user_id}`;
+  //     res.status(200).json({
+  //       success: false,
+  //       message: `No booked vendors found for user_id ${user_id}`,
+  //     });
+  //   }
+  // } catch (e) {
+  //   res.status(404).json({
+  //     success: false,
+  //     message: e,
+  //   });
+  // }
+
+  const allBookedVendors = await getAllBookedVendors(user_id, event_id)
+  console.log(allBookedVendors)
+  res.status(200).json({
+    success: true,
+    payload: allBookedVendors
+  })
 });
-
-
 
 // SHOW
 booked.get("/:user_id/:event_id/:vendor_name", async (req, res) => {
@@ -47,13 +57,18 @@ booked.get("/:user_id/:event_id/:vendor_name", async (req, res) => {
       event_id,
       vendor_name
     );
-    if (bookedVendor.user_id) {
+    console.log(bookedVendor)
+    if (bookedVendor) {
       res.status(200).json({
         success: true,
         payload: bookedVendor,
       });
     } else {
-      throw `No booked vendor found with name ${vendor_name}`;
+      // throw `No booked vendor found with name ${vendor_name}`;
+      res.status(200).json({
+        success: false,
+        payload: `No booked vendor ${vendor_name} found`,
+      });
     }
   } catch (e) {
     res.status(404).json({
@@ -63,22 +78,21 @@ booked.get("/:user_id/:event_id/:vendor_name", async (req, res) => {
   }
 });
 
-
 booked.get("/category/:category/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id, category } = req.params;
   try {
-    const bookedVendor = await getOneCategory(
-      user_id,
-      event_id,
-      category
-    );
-    if (bookedVendor.user_id) {
+    const bookedVendor = await getOneCategory(user_id, event_id, category);
+    if (bookedVendor) {
       res.status(200).json({
         success: true,
         payload: bookedVendor,
       });
     } else {
-      throw `No booked vendor found with name ${vendor_name}`;
+      // throw `No booked vendor found with name ${vendor_name}`;
+      res.status(404).json({
+        success: false,
+        payload: `No booked vendor ${vendor_name} found`,
+      });
     }
   } catch (e) {
     res.status(404).json({
@@ -91,22 +105,23 @@ booked.get("/category/:category/:user_id/:event_id", async (req, res) => {
 // CREATE
 booked.post("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-
   try {
     const newBookedVendor = await createBookedVendor(
       req.body,
       user_id,
-      event_id,
+      event_id
     );
-    if (newBookedVendor.user_id) {
+    console.log(newBookedVendor);
+    if (newBookedVendor) {
       res.status(200).json({
         success: true,
         payload: newBookedVendor,
       });
     } else {
-      throw `No vendor was booked with name ${req.body.name}`;
+      throw `No vendor was booked with name ${req.body.vendor_name}`;
     }
   } catch (e) {
+    console.log(e);
     res.status(404).json({
       success: false,
       message: e,
@@ -116,7 +131,7 @@ booked.post("/:user_id/:event_id", async (req, res) => {
 
 // DELETE
 booked.delete("/:user_id/:event_id/:category", async (req, res) => {
-  const { user_id, event_id, category} = req.params;
+  const { user_id, event_id, category } = req.params;
   // const vendorName = req.body.vendor_name;
   try {
     const deletedBookedVendor = await deleteBookedVendor(
@@ -165,17 +180,12 @@ booked.put("/:user_id/:event_id", async (req, res) => {
   }
 });
 
-
 booked.put("/cost/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
   const vendor = req.body;
 
   try {
-    const updatedBookedVendor = await updateCost(
-      vendor,
-      user_id,
-      event_id
-    );
+    const updatedBookedVendor = await updateCost(vendor, user_id, event_id);
     if (updatedBookedVendor.user_id) {
       res.status(200).json({
         success: true,
@@ -192,7 +202,5 @@ booked.put("/cost/:user_id/:event_id", async (req, res) => {
     });
   }
 });
-
-
 
 module.exports = booked;

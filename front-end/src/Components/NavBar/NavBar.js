@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { VendorMenu } from "./VendorMenu";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
+import { userSignOut } from "../../Services/Firebase";
+import { UserContext } from "../../Providers/UserProvider";
 
 export default function NavBar() {
   const [vendorClicked, setVendorClicked] = useState(false);
-
+  const history = useHistory();
   const handleVendorClick = () => {
     setVendorClicked(!vendorClicked);
   };
-
+  const loggedInUser = useContext(UserContext);
   const closeNav = () => {
     setVendorClicked(false);
   };
@@ -23,27 +25,35 @@ export default function NavBar() {
     {
       title: "My Favorites",
       url: `/favorites`,
-      cName:"pg-buttons nav-but",
+      cName: "pg-buttons nav-but",
     },
     // {
     //   title: "Settings",
     //   url: `/settings`,
     //   cName: "nav-links",
     // },
-    {
-      title: "Logout",
-      url: "/logo",
-      cName: "pg-buttons nav-but logout",
-    },
+    // {
+    //   title: "Logout",
+    //   url: "/logo",
+    //   cName: "nav-links-mobile",
+    // },
   ];
+  const signOut = async () => {
+    try {
+      let res = await userSignOut();
+      if (res === null) {
+        history.push("/");
+      }
+    } catch (e) {
+      console.warn(e);
+    }
+  };
 
   return (
     <nav className="NavBarItems">
-
-
-      <h1 className="navbar-logo">
-        Event(ful) &#127881;
-      </h1>
+      <Link to="/">
+        <h1 className="navbar-logo">Event(ful) &#127881;</h1>
+      </Link>
 
       <ul className="accountNav">
         <li className="accountLinks" onClick={handleVendorClick}>
@@ -60,6 +70,10 @@ export default function NavBar() {
             </li>
           );
         })}
+        <li className="accountLinks" onClick={signOut}>
+          {" "}
+          <span className="pg-buttons nav-but">Logout</span>
+        </li>
       </ul>
 
       <ul className={vendorClicked ? "nav-menu active" : "nav-menu"}>

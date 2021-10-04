@@ -7,6 +7,13 @@ export default function Favorite({ vendors, vendor, deleteFav }) {
     deleteFav(vendor.vendor_name);
   };
 
+  const formatPhone = (phone) =>
+    phone.length === 11
+      ? `(${phone.substring(1, 4)}) ${phone.substring(4, 7)}-${phone.substring(
+          7
+        )}`
+      : phone;
+
   return (
     <>
       <li className={`flex-col three-d ven-li ${vendors.length === 1 ? "one-li" : null}`}>
@@ -27,7 +34,7 @@ export default function Favorite({ vendors, vendor, deleteFav }) {
         <h2>{vendor.vendor_name}</h2>
         <p>Category: {CategorySwitch(vendor.vendor_category)}</p>
         <h4> Contact Information </h4>
-        <p>Phone: {vendor.vendor_phone_number}</p>
+        <p>Phone: {formatPhone(vendor.vendor_phone_number)}</p>
         <p>Address: {vendor.vendor_address}</p>
       </li>
     </>
