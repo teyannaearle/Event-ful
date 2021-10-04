@@ -43,9 +43,11 @@ export default function SignUp() {
   };
 
   return (
-    <div className="three-d">
+    <div>
+      <h1 className="brand">EVENT( FUL ) &#127881;</h1>
+    <div className="Container three-d">
       <form onSubmit={handleSignUp}>
-        <h1>Sign up for Event(ful) Here!</h1>
+        <h1>Sign up Here!</h1>
         <label htmlFor="userName">Please Enter Your Name</label> <br />
         <input
           type="text"
@@ -79,5 +81,7 @@ export default function SignUp() {
       </form>
       <p>{errorMessage}</p>
     </div>
+    </div>
+
   );
 }
