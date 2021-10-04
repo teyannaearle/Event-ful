@@ -58,6 +58,7 @@ export default function SignInForm() {
           console.log("no such user found, creating new user");
           const newUser = { email: res.email, password: "password" };
           let result = await axios.post(`${API}/users`, newUser);
+          console.log(newUser)
           console.log(result);
           if (result.data.success) {
             history.push("/dashboard");
