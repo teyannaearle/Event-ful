@@ -22,7 +22,7 @@ export default function BookedVendorList() {
             console.log("got booked api response")
             console.log(res)
             if (res.data.payload.length > 0) {
-              setBookedVendors(res.data.message);
+              setBookedVendors(res.data.payload);
             }
           },
           (e) => {
@@ -39,6 +39,7 @@ export default function BookedVendorList() {
   }, [user_id, event_id]);
 
   return (
+    // loading while waiting for user_id
     <div className="booked-section">
       {bookedVendors.length > 0 ? (
         <ul
