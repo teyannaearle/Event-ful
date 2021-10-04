@@ -1,25 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import Event from "./Event";
 import { Link, useLocation } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
-import { UserContext } from "../../Providers/UserProvider.js";
 
 const API = apiURL();
 
-<<<<<<< HEAD
-function EventList() {
-  const loggedInUser = useContext(UserContext);
-  const [events, setEvents] = useState([]);
-  const user_id = loggedInUser ? loggedInUser.user_id : null;
-  console.log(`eventslist user_id is ${user_id}`);
-=======
 function EventList({ user_id }) {
   const [events, setEvents] = useState([]);
   const location = useLocation()
->>>>>>> b05922ff1baaeb34229f8b0b9cc80cb88997ac9d
+  console.log(`event list user_id is ${user_id}`)
 
   useEffect(() => {
+    if (user_id) {
     axios
       .get(`${API}/events/${user_id}`)
       .then(
@@ -32,15 +26,8 @@ function EventList({ user_id }) {
       )
       .catch((e) => {
         console.error(e);
-      });
-<<<<<<< HEAD
-      return () => {
-     setEvents([])
-      }
-  }, [user_id]);
-=======
+      })};
   }, [user_id, location.pathname]);
->>>>>>> b05922ff1baaeb34229f8b0b9cc80cb88997ac9d
 
   // console.log(location)
   const handleDelete = async (event_id) => {
@@ -67,19 +54,17 @@ function EventList({ user_id }) {
             <p className="plus-sign"> &#x002B;</p>
           </Link>
         </span>
-        {events
-          ? events.map((event) => {
-              return (
-                <li key={event.event_id} className="dash-event">
-                  <Event
-                    event={event}
-                    user_id={user_id}
-                    handleDelete={handleDelete}
-                  />
-                </li>
-              );
-            })
-          : null}
+        { events ? events.map((event) => {
+          return (
+            <li key={event.event_id} className="dash-event">
+              <Event
+                event={event}
+                user_id={user_id}
+                handleDelete={handleDelete}
+              />
+            </li>
+          );
+        } ) : null}
       </ul>
     </>
   );

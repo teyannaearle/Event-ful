@@ -19,6 +19,9 @@ export default function FavoriteList() {
   console.log(`favoriteslist user_id is ${user_id}`);
 
   useEffect(() => {
+    if (user_id) {
+
+    
     axios
       .get(`${API}/favorites/${user_id}`)
       .then(
@@ -31,7 +34,7 @@ export default function FavoriteList() {
       )
       .catch((e) => {
         console.error(e);
-      });
+      })};
       return () => {
        setFavoriteVendors([])
       }
@@ -108,6 +111,8 @@ export default function FavoriteList() {
   };
 
   return (
+    // only show this div if user_id
+    // else Loading component
     <>
       <div className="dropdown">
         <span>Filter By Category &#x2195;</span>

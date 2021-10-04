@@ -70,7 +70,7 @@ function App() {
         <ScrollToTop />
         <Switch>
           <Route exact path="/">
-            <NavBar />
+            
             <Landing />
           </Route>
 
@@ -99,7 +99,7 @@ function App() {
 
           <Route path="/dashboard">
             <NavBar />
-            <Dashboard />
+            <Dashboard user_id={user_id}/>
           </Route>
 
           <Route path="/task/:category/:event_id/:task_id">
