@@ -115,7 +115,7 @@ nav {
 
 .accountLinks:hover {
   border-radius: 4px;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .accountLinks:active{
@@ -130,14 +130,12 @@ nav {
     inset 1px 1px 3px rgba(255, 255, 255, 0.927);
   font-size: large;
 }
-/* 
-.logout{
+
+.accountNav .logout{
+background-color: #2c6b8e;
 background-image: none;
-background-color: #68a7ca;
-box-shadow: 0px 3px 0px #2c6d8f, 0px 2px 10px rgba(0, 0, 0, 0.4),
-inset 0px 0px 3px rgba(19, 19, 19, 0.927);
-color: black;
-} */
+}
+
 
 @media only screen and (max-width: 742px) {
   .accountLinks {
@@ -196,9 +194,9 @@ color: black;
 
   .nav-but {
     display: block;
-    width: 150px;
+    width: 200px;
     text-align: center;
-    font-size: smaller;
+    font-size: small;
   }
 
   .NavBarItems {
@@ -219,9 +217,7 @@ color: black;
     margin-right: 20px;
   }
 
-  .nav-but {
-    font-size: small;
-  }
+
 }
 
 .svg{

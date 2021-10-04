@@ -1,16 +1,14 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
+import { UserContext } from "../Providers/UserProvider";
 
 const API = apiURL();
 
-function EventForm({ user_id }) {
-  // const { user_id } = useParams();
-  // const [events, setEvents] = useState([]);
-  //    const [id, setId] = useState({});
-
+function EventForm() {
+  const loggedInUser = useContext(UserContext);
+  let history = useHistory();
   const [myEvent, setEvent] = useState({
     event_name: "",
     event_budget: 0,
@@ -18,32 +16,15 @@ function EventForm({ user_id }) {
     event_time: "",
   });
 
-  let history = useHistory();
-
-  //   useEffect(() => {
-  //     axios
-  //       .get(`${API}/events/last`)
-  //       .then(
-  //         (res) => {
-  //           setId(res.data.payload.event_id + 1);
-  //         },
-  //         (e) => {
-  //           console.error(e);
-  //         }
-  //       )
-  //       .catch((e) => {
-  //         console.error(e);
-  //       });
-  //   }, []);
-
   const addEvent = () => {
+    const { user_id } = loggedInUser
     try {
       axios.post(`${API}/events/${user_id}`, myEvent).then((res) => {
         const id = res.data.payload.event_id;
         history.push(`/dashboard/new_event/checklist/${id}`);
       });
     } catch (error) {
-      console.log("Not working");
+      console.error(error);
     }
   };
 
@@ -55,6 +36,10 @@ function EventForm({ user_id }) {
     e.preventDefault();
     addEvent();
   };
+
+if (loggedInUser) {
+  console.log(`event form user_id is ${loggedInUser.user_id}`)
+}
 
   return (
     <section>

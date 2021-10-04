@@ -1,10 +1,12 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
-const bookedController = require("./controllers/bookedController.js")
-const checklistController = require("./controllers/checklistController.js")
-const eventsController = require("./controllers/eventController.js")
-const favoritesController = require("./controllers/favoritesController.js")
+const bookedController = require("./Controllers/bookedcontroller.js")
+const checklistController = require("./Controllers/checklistcontroller.js")
+const eventsController = require("./Controllers/eventController.js")
+const favoritesController = require("./Controllers/favoritescontroller.js")
+const usersController = require("./Controllers/usersController")
+
 
 // CONFIGURATION
 const app = express();
@@ -25,6 +27,9 @@ app.use("/checklist", checklistController)
 app.use("/favorites", favoritesController)
 
 app.use("/booked", bookedController)
+
+app.use("/users", usersController)
+
 
 app.get("*", (req,res)=>{
   res.send("page not found")

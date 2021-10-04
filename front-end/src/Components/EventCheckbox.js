@@ -1,15 +1,17 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
+import { UserContext } from "../Providers/UserProvider.js";
+import { ToastContainer, toast } from 'react-toastify';
 
 const API = apiURL();
 
-export default function EventCheckbox({ user_id }) {
+export default function EventCheckbox() {
+  const loggedInUser = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
-
   const [eventForm, setEventForm] = useState({
     catering: false,
     djs: false,
@@ -28,9 +30,7 @@ export default function EventCheckbox({ user_id }) {
   //pass props from eventForm to represent the name,date, budget, etc.
   const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
-    // console.log(categories);
-    // const id = lastEvent.event_id + 1;
-
+    const { user_id } = loggedInUser;
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
@@ -38,8 +38,6 @@ export default function EventCheckbox({ user_id }) {
         };
         axios
           .post(`${API}/checklist/${user_id}/${id}`, category)
-          // .then((res) => history.push("/dashboard"))
-          // .then((res) => console.log(res))
           .catch((c) => console.warn("catch", c));
       }
     }
@@ -52,12 +50,22 @@ export default function EventCheckbox({ user_id }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToCheckedList();
-    history.push("/dashboard")
+    if (Object.values(eventForm).includes(true)) {
+      addToCheckedList();
+      history.push("/dashboard");
+    } else {
+      // window.alert("Choose at least one vendor to add to your checklist.")
+      // toast("Wow so easy !")
+    }
   };
+
+  if (loggedInUser) {
+    console.log(`checklist user_id is ${loggedInUser.user_id}`);
+  }
 
   return (
     <section className="NewEvent">
+             <ToastContainer />
       <form className=" col-h three-d" onSubmit={handleSubmit}>
         <span className="checkbox-span">
           <label className="check-container edit-checkbox">

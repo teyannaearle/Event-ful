@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import Event from "./Event";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
+import { UserContext } from "../../Providers/UserProvider.js";
 
 const API = apiURL();
 
-function EventList({ event, user_id }) {
+<<<<<<< HEAD
+function EventList() {
+  const loggedInUser = useContext(UserContext);
   const [events, setEvents] = useState([]);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
+  console.log(`eventslist user_id is ${user_id}`);
+=======
+function EventList({ user_id }) {
+  const [events, setEvents] = useState([]);
+  const location = useLocation()
+>>>>>>> b05922ff1baaeb34229f8b0b9cc80cb88997ac9d
 
   useEffect(() => {
     axios
@@ -24,8 +33,16 @@ function EventList({ event, user_id }) {
       .catch((e) => {
         console.error(e);
       });
+<<<<<<< HEAD
+      return () => {
+     setEvents([])
+      }
   }, [user_id]);
+=======
+  }, [user_id, location.pathname]);
+>>>>>>> b05922ff1baaeb34229f8b0b9cc80cb88997ac9d
 
+  // console.log(location)
   const handleDelete = async (event_id) => {
     try {
       await axios.delete(`${API}/events/${user_id}/${event_id}`).then((res) => {
@@ -39,7 +56,7 @@ function EventList({ event, user_id }) {
     } catch (error) {
       console.error(error);
     }
-  };
+  }; 
 
   return (
     <>
@@ -50,17 +67,19 @@ function EventList({ event, user_id }) {
             <p className="plus-sign"> &#x002B;</p>
           </Link>
         </span>
-        {events.map((event) => {
-          return (
-            <li key={event.event_id} className="dash-event">
-              <Event
-                event={event}
-                user_id={user_id}
-                handleDelete={handleDelete}
-              />
-            </li>
-          );
-        })}
+        {events
+          ? events.map((event) => {
+              return (
+                <li key={event.event_id} className="dash-event">
+                  <Event
+                    event={event}
+                    user_id={user_id}
+                    handleDelete={handleDelete}
+                  />
+                </li>
+              );
+            })
+          : null}
       </ul>
     </>
   );

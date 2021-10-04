@@ -5,11 +5,9 @@ CREATE DATABASE partyplanning_dev;
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY, 
-    username VARCHAR (50) UNIQUE NOT NULL, 
     password VARCHAR (50) NOT NULL, 
     email VARCHAR (255) UNIQUE NOT NULL, 
-    created_on TIMESTAMP NOT NULL,
-    last_login TIMESTAMP 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 DROP TABLE IF EXISTS events CASCADE;
@@ -50,7 +48,7 @@ CREATE TABLE booked (
     vendor_name VARCHAR (255) NOT NULL, 
     vendor_address VARCHAR (255) NOT NULL,
     vendor_phone_number VARCHAR (11) NOT NULL,
-    vendor_image VARCHAR,
+    vendor_image VARCHAR NOT NULL,
     rating INTEGER DEFAULT 0,
     category VARCHAR (255) NOT NULL,
     amount numeric DEFAULT 0
@@ -66,6 +64,6 @@ CREATE TABLE favorites (
     vendor_phone_number VARCHAR (15) NOT NULL,
     vendor_id  VARCHAR (255) NOT NULL,
     vendor_category VARCHAR (255) NOT NULL, 
-    vendor_image VARCHAR,
+    vendor_image VARCHAR NOT NULL,
     vendor_rating INTEGER DEFAULT 0
 );

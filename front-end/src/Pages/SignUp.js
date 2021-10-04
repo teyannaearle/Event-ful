@@ -1,45 +1,83 @@
-import React from 'react'
-import { Link } from "react-router-dom"
-import './SignUp.css'
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./SignUp.css";
+import { userSignUp } from "../Services/Firebase";
+import axios from "axios";
+import { apiURL } from "../util/apiURL";
+
+const API = apiURL();
 
 export default function SignUp() {
-    return (
-        <div className="three-d">
-           <form >
-               <label htmlFor="FullName">Please Enter Your Full Name</label> <br/>
-               <input 
-               type="text" 
-               value="" 
-               placeholder="Full Name"/> <br/>
-               <br/>
+  const history = useHistory();
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [input, setInput] = useState({
+    userName: "",
+    email: "",
+    password: "",
+  });
 
-               <label htmlFor="UserName">Select a Username</label> <br/>
-               <input 
-               type="text" 
-               value="" 
-               placeholder="Username"/> <br/>
-               <br/>
+  const handleChange = (e) => {
+    setInput({ ...input, [e.target.id]: e.target.value });
+  };
 
-               <label htmlFor="Email">Please Enter your Email</label> <br/>
-               <input 
-               type="text" 
-               value="" 
-               placeholder="Email"/> <br/>
-               <br/>
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    setErrorMessage(null);
+    try {
+      let res = await userSignUp(input.userName, input.email, input.password);
+      if (res === null) {
+        const newUser = { email: input.email, password: input.password }
+       let result =  await axios.post(`${API}/users`, newUser);
+       console.log(result)
+       if (result.data.success) {
+         history.push("/");
+       } else {
+         console.log("could not add new user to backend database")
+       }
+      } else {
+        setErrorMessage("please enter all required info");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
 
-               <label htmlFor="PassWord">Select a Password</label> <br/>
-               <input 
-               type="text" 
-               value="" 
-               placeholder="Password"/> <br/>
-               <br/>
-
-               <Link to="/dashboard">
-               <button type="submit" className="pg-buttons">Sign Up</button>
-               </Link>
-           </form>
-            
-        </div>
-    )
-
+  return (
+    <div className="three-d">
+      <form onSubmit={handleSignUp}>
+        <h1>Sign up for Event(ful) Here!</h1>
+        <label htmlFor="userName">Please Enter Your Name</label> <br />
+        <input
+          type="text"
+          id="userName"
+          value={input.userName}
+          onChange={handleChange}
+          placeholder="Name"
+        />{" "}
+        <br />
+        <label htmlFor="Email">Please Enter your Email</label> <br />
+        <input
+          type="email"
+          id="email"
+          value={input.email}
+          onChange={handleChange}
+          placeholder="Email"
+        />
+        <br />
+        <label htmlFor="PassWord">Select a Password (min 6 characters)</label> <br />
+        <input
+          type="password"
+          id="password"
+          value={input.password}
+          onChange={handleChange}
+          placeholder="Password"
+        />{" "}
+        <br />
+        <button type="submit" className="pg-buttons">
+          Sign Up
+        </button>
+      </form>
+      <p>{errorMessage}</p>
+    </div>
+  );
 }
