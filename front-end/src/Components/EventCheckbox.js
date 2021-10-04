@@ -28,8 +28,6 @@ export default function EventCheckbox({ user_id }) {
   //pass props from eventForm to represent the name,date, budget, etc.
   const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
-    // console.log(categories);
-    // const id = lastEvent.event_id + 1;
 
     for (const checked of categories) {
       if (eventForm[checked] === true) {
@@ -37,11 +35,7 @@ export default function EventCheckbox({ user_id }) {
           task_name: checked,
         };
         axios
-          .post(`${API}/checklist/${user_id}/${id}`, category).then((res) => {
-            console.log(res.data.payload)
-          })
-          // .then((res) => history.push("/dashboard"))
-          // .then((res) => console.log(res))
+          .post(`${API}/checklist/${user_id}/${id}`, category)
           .catch((c) => console.warn("catch", c));
       }
     }
@@ -54,8 +48,13 @@ export default function EventCheckbox({ user_id }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addToCheckedList();
-    history.push("/dashboard")
+    if (Object.values(eventForm).includes(true)){
+      addToCheckedList();
+      history.push("/dashboard")
+    } else {
+      window.alert("Choose at least one vendor to add to your checklist.")
+    }
+   
   };
 
   return (

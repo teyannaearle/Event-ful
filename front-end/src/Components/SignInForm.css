@@ -1,12 +1,11 @@
 .newForm {
     
     border: 2px solid black;
-    border-radius: 15%;
+    border-radius: 10%;
     padding: 20px;
     background-color: rgb(228, 202, 210, 0.8);
     margin: 5%;
-    width: 20%;
-    height: 10%;
+    width: 50%;
 }
 
 .newForm input {
@@ -14,11 +13,7 @@
     margin: 1%;
 }
 h4:hover {
-    background: linear-gradient(
-        90deg,
-        rgba(165, 197, 215, 1) 0%,
-        rgba(178, 211, 230, 1) 100%
-      );
+    background-color: rgb(221, 180, 118)
 }
 link:link {
     color: green;

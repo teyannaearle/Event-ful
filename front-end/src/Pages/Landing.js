@@ -2,6 +2,7 @@ import React from "react";
 import "./Landing.css";
 import { Link } from "react-router-dom";
 import call2action from "../assets/call2action.jpg"
+import giphy from "../assets/giphy.gif"
 
 export default function Landing() {
   return (

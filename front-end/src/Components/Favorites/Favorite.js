@@ -1,62 +1,34 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import axios from "axios";
-import { apiURL } from "../../util/apiURL";
-// import gelato2 from "../../assets/gelato2.jpeg";
+import React from "react";
+import CategorySwitch from "../CategorySwitch"
 
-const API = apiURL();
-
-export default function Favorite({ vendor, user_id, deleteFav }) {
-  // const { user_id, event_id, vendor_name } = useParams();
-  const [favorite, setFavorite] = useState(true);
-
-  // const image = vendor.vendor_image ? vendor.vendor_image : gelato2;
-  const image = vendor.vendor_image
-
-  useEffect(() => {
-    try {
-      axios.get(`${API}/favorites/${user_id}`).then((res) => {
-        let index = res.data.message.findIndex(
-          (elem) => elem.vendor_name === vendor.name
-        );
-        if (index > -1) {
-          setFavorite(true);
-        }
-      });
-    } catch (e) {
-      console.warn(e);
-    }
-    return () => {
-      setFavorite(false);
-    };
-  }, [vendor.name, user_id]);
+export default function Favorite({ vendors, vendor, deleteFav }) {
 
   const handleClick = () => {
-    setFavorite(!favorite);
-  deleteFav(vendor.vendor_name)
+    deleteFav(vendor.vendor_name);
   };
 
   return (
     <>
-      <li className="flex-col three-d ven-li">
+      <li className={`flex-col three-d ven-li ${vendors.length === 1 ? "one-li" : null}`}>
         <img
-          src={image}
-          // alt={gelato2}
+          src={vendor.vendor_image}
           alt={vendor.vendor_name}
           height="250"
           width="300"
           className="ven-img"
         />
+        <div className="like-div card-like">
+          <i
+            className={`fas fa-heart fa-lg heart card-heart `}
+            onClick={handleClick}
+            style={{ color: "red" }}
+          ></i>
+        </div>
         <h2>{vendor.vendor_name}</h2>
-        <p>Category: {vendor.vendor_category}</p>
+        <p>Category: {CategorySwitch(vendor.vendor_category)}</p>
         <h4> Contact Information </h4>
         <p>Phone: {vendor.vendor_phone_number}</p>
         <p>Address: {vendor.vendor_address}</p>
-        <div className="book-fav">
-          <button onClick={handleClick} className="pg-buttons">
-            {!favorite ? <> Favorite &#63;</> : <> Favorite &#10003;</>}{" "}
-          </button>
-        </div>
       </li>
     </>
   );
