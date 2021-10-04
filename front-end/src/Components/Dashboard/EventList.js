@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import Event from "./Event";
 import { Link, useLocation } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
+import { UserContext } from "../../Providers/UserProvider.js";
 
 const API = apiURL();
 
@@ -52,17 +52,19 @@ function EventList({ user_id }) {
             <p className="plus-sign"> &#x002B;</p>
           </Link>
         </span>
-        { events ? events.map((event) => {
-          return (
-            <li key={event.event_id} className="dash-event">
-              <Event
-                event={event}
-                user_id={user_id}
-                handleDelete={handleDelete}
-              />
-            </li>
-          );
-        } ) : null}
+        {events
+          ? events.map((event) => {
+              return (
+                <li key={event.event_id} className="dash-event">
+                  <Event
+                    event={event}
+                    user_id={user_id}
+                    handleDelete={handleDelete}
+                  />
+                </li>
+              );
+            })
+          : null}
       </ul>
     </>
   );

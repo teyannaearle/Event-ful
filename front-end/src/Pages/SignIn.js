@@ -1,16 +1,10 @@
 import React from 'react'
-import SignInForm from "../Components/SignInForm"
-import "./signin.css"
+import SignInForm from '../Components/SignInForm'
 
-function SignIn() {
+export default function SignIn() {
     return (
-        <div className="signin-container">
-     <SignInForm />
-
+        <div>
+            <SignInForm />
         </div>
-
-        
     )
 }
-
-export default SignIn

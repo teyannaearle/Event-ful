@@ -1,12 +1,15 @@
 import api from "../util/apiCalls";
 import { useParams, useHistory } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import VendorReviews from "../Components/VendorShow/VendorReviews";
 import VendorShowInfo from "../Components/VendorShow/VendorShowInfo";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
+import { UserContext } from "../Providers/UserProvider";
 
-export default function VendorShow({ user_id }) {
+export default function VendorShow() {
+  const loggedInUser = useContext(UserContext);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const [business, setbusiness] = useState({
     photos: [],
     categories: [{ title: "" }],
@@ -22,7 +25,6 @@ export default function VendorShow({ user_id }) {
   const { provider_id, category } = useParams();
   const history = useHistory();
 
-
   useEffect(() => {
     (async () => {
       const data = await api.getVendor(provider_id);
@@ -30,7 +32,7 @@ export default function VendorShow({ user_id }) {
       if (data && reviewData) {
         setReviews(reviewData);
         setbusiness(data);
-      } 
+      }
     })();
 
     return () => {

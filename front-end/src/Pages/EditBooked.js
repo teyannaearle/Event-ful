@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router";
 import CategorySwitch from "../Components/CategorySwitch";
 import Vendor from "../Components/VendorIndex/Vendor";
@@ -6,12 +6,14 @@ import api from "../util/apiCalls";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import Loading from "../Components/Loading";
+import { UserContext } from "../Providers/UserProvider"
 
 const API = apiURL();
 
 const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 
-function EditBooked({ user_id, lat, lng, formatter }) {
+function EditBooked({ lat, lng, formatter }) {
+  const loggedInUser = useContext(UserContext)
   const { event_id, category } = useParams();
   const [vendors, setVendors] = useState([]);
   const [vendor, setVendor] = useState("");
@@ -20,7 +22,7 @@ function EditBooked({ user_id, lat, lng, formatter }) {
   const [bookedStatus, setBookedStatus] = useState({});
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false);
-
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const [selected, setSelected] = useState(false)
   const history = useHistory();
 
@@ -294,6 +296,11 @@ function EditBooked({ user_id, lat, lng, formatter }) {
 
     return direction;
   };
+
+  if (loggedInUser) {
+    console.log(`edit booked user_id is ${loggedInUser.user_id}`)
+  }
+
 
   return (
     <>
