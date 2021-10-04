@@ -8,7 +8,7 @@ import { apiURL } from "../util/apiURL";
 
 const API = apiURL();
 
-export default function SignInForm() {
+export default function SignInForm({ updateId }) {
   const history = useHistory();
   // const currentUser = useContext(UserContext);
   const [input, setInput] = useState({
@@ -29,7 +29,11 @@ export default function SignInForm() {
       //  console.log(res)
       if (res === null) {
         setErrorMessage("");
-        history.push("/");
+        let checkUser = await axios.get(`${API}/users/${email}`);
+        if (checkUser.data.success) {
+          updateId(checkUser.data.payload.user_id);
+          history.push("/");
+        }
       } else {
         setErrorMessage("Wrong email or password. Please try again");
         setInput({
@@ -49,18 +53,19 @@ export default function SignInForm() {
       console.log(res);
       if (res.email) {
         const { email } = res;
-        let checkUser = await axios.get(`${API}/users/${email}`)
+        let checkUser = await axios.get(`${API}/users/${email}`);
         console.log("checkUser");
         console.log(checkUser);
         if (checkUser.data.success) {
-          history.push("/");
+          history.push("/dashboard");
         } else {
           console.log("no such user found, creating new user");
           const newUser = { email: res.email, password: "password" };
-          console.log(newUser)
+          console.log(newUser);
           let result = await axios.post(`${API}/users`, newUser);
           console.log(result);
           if (result.data.success) {
+            updateId(result.data.payload.user_id);
             history.push("/dashboard");
           } else {
             console.log("could not add new user to backend database");
