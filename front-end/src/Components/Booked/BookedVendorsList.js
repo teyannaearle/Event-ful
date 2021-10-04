@@ -9,7 +9,7 @@ const API = apiURL();
 
 export default function BookedVendorList() {
   const loggedInUser = useContext(UserContext);
-  const [user_id, setUserId] = useState(null);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const [bookedVendors, setBookedVendors] = useState([]);
   const { event_id } = useParams();
 
@@ -27,23 +27,10 @@ export default function BookedVendorList() {
       .catch((e) => {
         console.error(e);
       });
-  }, [user_id, event_id]);
-
-  useEffect(() => {
-    (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          setUserId(checkUser.data.payload.user_id);
-        }
+      return () => {
+       setBookedVendors([])
       }
-    })();
-    return () => {
-      // cleanup
-      // setUserId(null)
-    };
-  }, [loggedInUser]);
+  }, [user_id, event_id]);
 
   return (
     <div className="booked-section">

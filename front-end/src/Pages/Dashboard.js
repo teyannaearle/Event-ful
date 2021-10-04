@@ -9,12 +9,6 @@ export default function Dashboard() {
       loggedInUser.displayName.split(" ")[0].substring(1)
     : "default name";
 
-  // if (user) {
-  //   console.log(`Dashboard user is ${user.displayName}`)
-  // } else {
-  //   console.log("Dashboard user is null")
-  // }
-
   return (
     <div className="page">
       <h1 className="pg-head">

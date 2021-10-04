@@ -17,7 +17,7 @@ import {
 
 dotenv.config();
 
-const app = initializeApp({
+initializeApp({
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
@@ -67,9 +67,8 @@ export const userGoogleSignIn = async () => {
       // console.log('logged in with google')
       // console.log(userCredential);
       // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential =
-        GoogleAuthProvider.credentialFromResult(userCredential);
-      const token = credential.accessToken;
+      //const credential = GoogleAuthProvider.credentialFromResult(userCredential);
+      // const token = credential.accessToken;
       // The signed-in user info.
       result = userCredential.user;
       // ...

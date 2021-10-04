@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
-import { UserProvider, UserContext } from "./Providers/UserProvider";
+import { UserContext } from "./Providers/UserProvider";
 import { apiURL } from "./util/apiURL";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
@@ -40,7 +40,6 @@ function App() {
   });
   const [user_id, setUserId] = useState(null);
 
-
   useEffect(() => {
     if (location.coordinates) {
       setLat(location.coordinates.latitude);
@@ -54,10 +53,7 @@ function App() {
         const email = loggedInUser.email;
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
-          // console.log("checkuser app");
-          // console.log(checkUser.data.payload.user_id);
           setUserId(checkUser.data.payload.user_id);
-         
         }
       }
     })();
@@ -65,11 +61,7 @@ function App() {
       // cleanup
       // setUserId(null)
     };
-  }, [loggedInUser]);
-
-  const capitalizeName = (name) => {
-    return name[0].toUpperCase() + name.slice(1);
-  };
+  }, [loggedInUser])
 
   return (
     <div className="site">
@@ -78,6 +70,7 @@ function App() {
         <ScrollToTop />
         <Switch>
           <Route exact path="/">
+            <NavBar />
             <Landing />
           </Route>
 
@@ -90,58 +83,53 @@ function App() {
           </Route>
 
           <Route path="/dashboard/new_event/checklist/:id">
-            <NavBar  />
-            <EventCheckboxPg user_id={user_id} />
+            <NavBar />
+            <EventCheckboxPg />
           </Route>
 
           <Route path="/dashboard/new_event">
-            <NavBar  />
-            <NewEventForm user_id={user_id} />
+            <NavBar />
+            <NewEventForm />
           </Route>
 
           <Route path="/dashboard/:event_id/edit">
-            <NavBar  />
-            <EditFormPage user_id={user_id} />
+            <NavBar />
+            <EditFormPage />
           </Route>
 
           <Route path="/dashboard">
-            <NavBar  />
-            <Dashboard user_id={user_id} />
+            <NavBar />
+            <Dashboard />
           </Route>
 
           <Route path="/task/:category/:event_id/:task_id">
             <NavBar />
-            <EditBooked
-              user_id={user_id}
-              lat={lat}
-              lng={lng}
-              formatter={formatter}
-            />
+            <EditBooked lat={lat} lng={lng} formatter={formatter} />
           </Route>
 
           <Route path="/event/:event_id">
-            <NavBar  />
-            <Event formatter={formatter} user_id={user_id} />
+            <NavBar />
+            <Event formatter={formatter} />
           </Route>
 
           <Route path="/vendor/:category/:provider_id">
             <NavBar />
-            <VendorShow user_id={user_id} />
+            <VendorShow />
           </Route>
 
           <Route path="/favorites">
             <NavBar />
-            <Favorites user_id={user_id} />
+            <Favorites />
           </Route>
 
           <Route path="/vendors/:category">
-            <NavBar  />
+            <NavBar />
             <VendorIndex location={location} />
           </Route>
 
           <Route path="/booked/:event_id/:event_name">
             <NavBar />
-            <Booked user_id={user_id} />
+            <Booked />
           </Route>
 
           <Route path="*">

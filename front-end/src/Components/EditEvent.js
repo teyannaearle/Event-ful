@@ -4,17 +4,17 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import "./EditEvent.css";
-import { UserContext } from "../Providers/UserProvider"
+import { UserContext } from "../Providers/UserProvider";
 import CapitalizeEvent from "../Components/CapitalizeEvent";
 
 const API = apiURL();
 
 function EditEvent() {
   const loggedInUser = useContext(UserContext);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const { event_id } = useParams();
   const history = useHistory();
-  const [user_id, setUserId] = useState(null);
-  const head = useRef("")
+  const head = useRef("");
 
   const [event, setEvent] = useState({
     event_name: "",
@@ -63,7 +63,7 @@ function EditEvent() {
           event_date: response.event_date.split("T")[0],
           event_time: response.event_time,
         });
-        head.current = response.event_name
+        head.current = response.event_name;
       });
     } catch (e) {
       console.error(e);
@@ -79,7 +79,6 @@ function EditEvent() {
   }, [user_id, event_id]);
 
   useEffect(() => {
-    
     try {
       axios.get(`${API}/checklist/${user_id}/${event_id}`).then((res) => {
         let initial = initialState.current;
@@ -91,8 +90,6 @@ function EditEvent() {
     } catch (e) {
       console.error(e);
     }
-
-    
 
     return () => {
       setChecklist({
@@ -157,11 +154,11 @@ function EditEvent() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (Object.values(checklist).includes(true)){
+    if (Object.values(checklist).includes(true)) {
       updateEvent(event, event_id);
       history.push("/dashboard");
     } else {
-      window.alert("Choose at least one vendor to add to your checklist.")
+      window.alert("Choose at least one vendor to add to your checklist.");
     }
   };
 
@@ -170,30 +167,15 @@ function EditEvent() {
     setChecklist((prevState) => ({ ...prevState, [val]: !prevState[val] }));
   };
 
-  useEffect(() => {
-    (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          setUserId(checkUser.data.payload.user_id);
-         
-        }
-      }
-    })();
-    return () => {
-      // cleanup
-      // setUserId(null)
-    };
-  }, [loggedInUser]);
-  
+  if (loggedInUser) {
+    console.log(`edit event form user_id is ${loggedInUser.user_id}`);
+  }
+
   return (
     <>
       <h1>
         Edit{" "}
-        {event.event_name
-          ? CapitalizeEvent(head.current)
-          : event.event_name}
+        {event.event_name ? CapitalizeEvent(head.current) : event.event_name}
       </h1>
       <div className="form-container">
         <form className="edit-eventform three-d" onSubmit={handleSubmit}>

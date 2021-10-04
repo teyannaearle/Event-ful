@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
@@ -15,8 +15,9 @@ function EventForm() {
     event_date: "",
     event_time: "",
   });
-  const [user_id, setUserId] = useState(null);
+
   const addEvent = () => {
+    const { user_id } = loggedInUser
     try {
       axios.post(`${API}/events/${user_id}`, myEvent).then((res) => {
         const id = res.data.payload.event_id;
@@ -36,21 +37,9 @@ function EventForm() {
     addEvent();
   };
 
-  useEffect(() => {
-    (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          setUserId(checkUser.data.payload.user_id);
-        }
-      }
-    })();
-    return () => {
-      // cleanup
-      // setUserId(null)
-    };
-  }, [loggedInUser]);
+if (loggedInUser) {
+  console.log(`event form user_id is ${loggedInUser.user_id}`)
+}
 
   return (
     <section>

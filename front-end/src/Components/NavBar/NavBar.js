@@ -1,17 +1,12 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { VendorMenu } from "./VendorMenu";
 import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import { userSignOut } from "../../Services/Firebase";
 import { UserContext } from "../../Providers/UserProvider";
-import { apiURL } from "../../util/apiURL";
-import axios from "axios";
-
-const API = apiURL();
 
 export default function NavBar() {
   const [vendorClicked, setVendorClicked] = useState(false);
-  const [user_id, setUserId] = useState(null);
   const history = useHistory();
   const handleVendorClick = () => {
     setVendorClicked(!vendorClicked);
@@ -53,24 +48,6 @@ export default function NavBar() {
       console.warn(e);
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          // console.log("checkuser app");
-          // console.log(checkUser.data.payload.user_id);
-          setUserId(checkUser.data.payload.user_id);
-        }
-      }
-    })();
-    return () => {
-      // cleanup
-      // setUserId(null)
-    };
-  }, [loggedInUser]);
 
   return (
     <nav className="NavBarItems">

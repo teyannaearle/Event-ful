@@ -9,13 +9,14 @@ const API = apiURL();
 
 export default function FavoriteList() {
   const loggedInUser = useContext(UserContext);
-  const [user_id, setUserId] = useState(null);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const [favoriteVendors, setFavoriteVendors] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [filterClicked, setFilterClicked] = useState({
     clicked: false,
     category: "",
   });
+  console.log(`favoriteslist user_id is ${user_id}`);
 
   useEffect(() => {
     axios
@@ -31,23 +32,10 @@ export default function FavoriteList() {
       .catch((e) => {
         console.error(e);
       });
-  }, [user_id]);
-
-  useEffect(() => {
-    (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          setUserId(checkUser.data.payload.user_id);
-        }
+      return () => {
+       setFavoriteVendors([])
       }
-    })();
-    return () => {
-      // cleanup
-      // setUserId(null)
-    };
-  }, [loggedInUser]);
+  }, [user_id]);
 
   const deleteFav = (name) => {
     try {

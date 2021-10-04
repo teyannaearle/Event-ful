@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./SignUp.css";
 import { userSignUp } from "../Services/Firebase";
 import axios from "axios";
@@ -30,7 +30,7 @@ export default function SignUp() {
        let result =  await axios.post(`${API}/users`, newUser);
        console.log(result)
        if (result.data.success) {
-         history.push("/dashboard");
+         history.push("/");
        } else {
          console.log("could not add new user to backend database")
        }

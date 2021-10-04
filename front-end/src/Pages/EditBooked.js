@@ -22,7 +22,7 @@ function EditBooked({ lat, lng, formatter }) {
   const [bookedStatus, setBookedStatus] = useState({});
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false);
-  const [user_id, setUserId] = useState(null);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const [selected, setSelected] = useState(false)
   const history = useHistory();
 
@@ -99,22 +99,6 @@ function EditBooked({ lat, lng, formatter }) {
   const handleZipChange = (e) => {
     setZip(e.target.value);
   };
-
-  useEffect(() => {
-    (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          setUserId(checkUser.data.payload.user_id);
-        }
-      }
-    })();
-    return () => {
-      // cleanup
-      // setUserId(null)
-    };
-  }, [loggedInUser]);
 
   const handleZipSubmit = async (e) => {
     e.preventDefault();
@@ -312,6 +296,11 @@ function EditBooked({ lat, lng, formatter }) {
 
     return direction;
   };
+
+  if (loggedInUser) {
+    console.log(`edit booked user_id is ${loggedInUser.user_id}`)
+  }
+
 
   return (
     <>

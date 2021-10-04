@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./SignInForm.css";
 import { userGoogleSignIn, userSignIn } from "../Services/Firebase";
-import { UserContext } from "../Providers/UserProvider";
+// import { UserContext } from "../Providers/UserProvider";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 
@@ -10,7 +10,7 @@ const API = apiURL();
 
 export default function SignInForm() {
   const history = useHistory();
-  const currentUser = useContext(UserContext);
+  // const currentUser = useContext(UserContext);
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -29,7 +29,7 @@ export default function SignInForm() {
       //  console.log(res)
       if (res === null) {
         setErrorMessage("");
-        history.push("/dashboard");
+        history.push("/");
       } else {
         setErrorMessage("Wrong email or password. Please try again");
         setInput({
@@ -53,7 +53,7 @@ export default function SignInForm() {
         console.log("checkUser");
         console.log(checkUser);
         if (checkUser.data.success) {
-          history.push("/dashboard");
+          history.push("/");
         } else {
           console.log("no such user found, creating new user");
           const newUser = { email: res.email, password: "password" };

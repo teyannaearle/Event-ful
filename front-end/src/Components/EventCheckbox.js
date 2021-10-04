@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
 import { UserContext } from "../Providers/UserProvider.js";
@@ -11,7 +11,6 @@ export default function EventCheckbox() {
   const loggedInUser = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
-  const [user_id, setUserId] = useState(null);
   const [eventForm, setEventForm] = useState({
     catering: false,
     djs: false,
@@ -30,7 +29,7 @@ export default function EventCheckbox() {
   //pass props from eventForm to represent the name,date, budget, etc.
   const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
-
+    const { user_id } = loggedInUser;
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
@@ -58,21 +57,9 @@ export default function EventCheckbox() {
     }
   };
 
-  useEffect(() => {
-    (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          setUserId(checkUser.data.payload.user_id);
-        }
-      }
-    })();
-    return () => {
-      // cleanup
-      // setUserId(null)
-    };
-  }, [loggedInUser]);
+  if (loggedInUser) {
+    console.log(`checklist user_id is ${loggedInUser.user_id}`);
+  }
 
   return (
     <section className="NewEvent">
