@@ -10,7 +10,7 @@ const getAllBookedVendors = async (user_id, event_id) => {
     return allBookedVendors;
   } catch (err) {
     return err;
-  }
+  } 
 };
 
 //Show
