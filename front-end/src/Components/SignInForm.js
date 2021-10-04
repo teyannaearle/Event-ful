@@ -29,11 +29,12 @@ export default function SignInForm({ updateId }) {
       //  console.log(res)
       if (res === null) {
         setErrorMessage("");
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          updateId(checkUser.data.payload.user_id);
+        // const { email } = input
+        // let checkUser = await axios.get(`${API}/users/${email}`);
+        // if (checkUser.data.success) {
+          // updateId(checkUser.data.payload.user_id);
           history.push("/");
-        }
+        // }
       } else {
         setErrorMessage("Wrong email or password. Please try again");
         setInput({
@@ -65,7 +66,7 @@ export default function SignInForm({ updateId }) {
           let result = await axios.post(`${API}/users`, newUser);
           console.log(result);
           if (result.data.success) {
-            updateId(result.data.payload.user_id);
+            // updateId(result.data.payload.user_id);
             history.push("/dashboard");
           } else {
             console.log("could not add new user to backend database");

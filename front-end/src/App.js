@@ -52,21 +52,21 @@ setUserId(id)
     }
   }, [location]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (loggedInUser) {
-  //       const email = loggedInUser.email;
-  //       let checkUser = await axios.get(`${API}/users/${email}`);
-  //       if (checkUser.data.success) {
-  //         setUserId(checkUser.data.payload.user_id);
-  //       }
-  //     }
-  //   })();
-  //   return () => {
-  //     // cleanup
-  //     // setUserId(null)
-  //   };
-  // }, [loggedInUser])
+  useEffect(() => {
+    (async () => {
+      if (loggedInUser) {
+        const email = loggedInUser.email;
+        let checkUser = await axios.get(`${API}/users/${email}`);
+        if (checkUser.data.success) {
+          setUserId(checkUser.data.payload.user_id);
+        }
+      }
+    })();
+    return () => {
+      // cleanup
+      // setUserId(null)
+    };
+  }, [loggedInUser])
 
   return (
     <div className="site">
