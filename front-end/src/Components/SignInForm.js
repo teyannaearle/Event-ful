@@ -4,7 +4,7 @@ import './SignInForm.css'
 
 export default function SignInForm () {
     return (
-        <div className="eventpage-container three-d"> 
+        <div className="newForm three-d">
             <h3>Sign In Here To Get Started</h3>
         <form>
                 <label htmlFor="Email"></label>

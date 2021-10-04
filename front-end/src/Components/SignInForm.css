@@ -1,11 +1,15 @@
 .newForm {
-    
+    text-align: center;
     border: 2px solid black;
     border-radius: 10%;
     padding: 20px;
     background-color: rgb(228, 202, 210, 0.8);
-    margin: 5%;
+    /* margin: 5%; */
     width: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .newForm input {
