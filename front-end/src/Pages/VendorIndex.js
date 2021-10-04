@@ -89,7 +89,7 @@ export default function VendorIndex({ location }) {
           <input
             className="three-d pg-input"
             type="text"
-            placeholder="Zip Code - Must be 5 digits -"
+            placeholder="5 Digit Zip Code"
             onChange={handleZipChange}
             value={zip}
             id="zip-search"

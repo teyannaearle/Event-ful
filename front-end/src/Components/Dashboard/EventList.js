@@ -2,13 +2,14 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Event from "./Event";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
 
 const API = apiURL();
 
-function EventList({ event, user_id }) {
+function EventList({ user_id }) {
   const [events, setEvents] = useState([]);
+  const location = useLocation()
 
   useEffect(() => {
     axios
@@ -24,8 +25,9 @@ function EventList({ event, user_id }) {
       .catch((e) => {
         console.error(e);
       });
-  }, [user_id]);
+  }, [user_id, location.pathname]);
 
+  // console.log(location)
   const handleDelete = async (event_id) => {
     try {
       await axios.delete(`${API}/events/${user_id}/${event_id}`).then((res) => {
@@ -39,7 +41,7 @@ function EventList({ event, user_id }) {
     } catch (error) {
       console.error(error);
     }
-  };
+  }; 
 
   return (
     <>

@@ -36,7 +36,7 @@ export default function BookedVendorList({ user_id }) {
         }`}>
           {bookedVendors.map((vendor) => {
 
-          return <li className={`flex-col three-d ven-li ${bookedVendors.length === 1 ? "one-li" : null}`} key={vendor.id}>
+          return <li className={`flex-col three-d ven-li ${bookedVendors.length === 1 ? "one-li" : null}`} key={vendor.vendor_name}>
 
           <BookedVendor vendor={vendor} /> </li>
 
