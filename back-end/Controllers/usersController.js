@@ -3,9 +3,19 @@ const users = express.Router({ mergeParams: true });
 
 // validation, error handling
 
-const { getOneUser, createNewUser } = require("../queries/users");
+const { getOneUser, createNewUser, allUsers } = require("../queries/users");
 
 const db = require("../db/dbConfig");
+
+// INDEX
+users.get("/", async (req, res)  => {
+  const allUsers = await allUsers()
+  console.log(allUsers)
+  res.status(200).json({
+    success: true, 
+    payload: allUsers
+  })
+})
 
 // SHOW ONE USER
 users.get("/:email", async (req, res) => {
@@ -44,7 +54,7 @@ users.post("/", async (req, res) => {
         payload: newUser,
       });
     } else {
-      throw `No vendor was created with email ${email}`;
+      throw `No user was created with email ${email}`;
     }
   } catch (e) {
     res.status(404).json({

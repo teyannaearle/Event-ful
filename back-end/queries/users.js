@@ -3,6 +3,16 @@ const pgp = require("pg-promise")();
 let QRE = pgp.errors.QueryResultError;
 let qrec = pgp.errors.queryResultErrorCode;
 
+
+//INDEX
+const allUsers = async () => {
+  try {
+    const everybody = await db.any("SELECT * FROM users;")
+    return everybody
+  } catch (e) {
+    return e
+  }
+}
 //Show
 const getOneUser = async (email) => {
   try {
@@ -35,4 +45,5 @@ const createNewUser = async (email, password) => {
 module.exports = {
   getOneUser,
   createNewUser,
+  allUsers
 };
