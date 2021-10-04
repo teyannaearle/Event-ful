@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import "./Landing.css";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Providers/UserProvider";
+import call2action from "../assets/call2action.jpg"
+import LandingPageImage3 from "../assets/LandingPageImage3.png"
 
 export default function Landing() {
   const user = useContext(UserContext);
