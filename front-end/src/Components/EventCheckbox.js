@@ -54,7 +54,9 @@ export default function EventCheckbox({ user_id }) {
       history.push("/dashboard")
     } else {
       // window.alert("Choose at least one vendor to add to your checklist.")
-      // toast("Wow so easy !")
+      toast.error("I cannot be duplicated!", {
+        toastId: "custom-toast"
+      })
     }
    
   };
