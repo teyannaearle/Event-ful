@@ -15,7 +15,6 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     for (let category of categories) {
       booked[category.name] = category.booked;
     }
-
     setBookedStatus(booked);
     return () => {
       setBookedStatus({});

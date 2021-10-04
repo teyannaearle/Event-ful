@@ -1,0 +1,57 @@
+const express = require("express");
+const users = express.Router({ mergeParams: true });
+
+// validation, error handling
+
+const { getOneUser, createNewUser } = require("../queries/users");
+
+const db = require("../db/dbConfig");
+
+// SHOW ONE USER
+users.get("/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const oneUser = await getOneUser(email);
+    console.log(oneUser);
+    if (oneUser) {
+      res.status(200).json({
+        success: true,
+        payload: oneUser,
+      });
+    } else {
+      res.status(200).json({
+        success: false,
+        payload: `No registered user found with email ${email}`,
+      });
+    }
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      payload: e,
+    });
+  }
+});
+
+// CREATE
+users.post("/", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const newUser = await createNewUser(email, password);
+    if (newUser.user_id) {
+      console.log("success creating new user");
+      res.status(200).json({
+        success: true,
+        payload: newUser,
+      });
+    } else {
+      throw `No vendor was created with email ${email}`;
+    }
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      message: e,
+    });
+  }
+});
+
+module.exports = users;
