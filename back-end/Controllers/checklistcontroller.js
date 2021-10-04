@@ -7,36 +7,25 @@ const {
   deleteFromList,
   updateTask,
   updateCost,
-  deleteAll
+  deleteAll,
 } = require("../queries/checklist");
 
 const db = require("../db/dbConfig");
 
-//GET ENTIRE CHECKLIST RELATED TO AN EVENT 
+// INDEX
 
 checklist.get("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
 
-  try {
-    const checklist = await getChecklist(user_id, event_id);
+  const checklist = await getChecklist(user_id, event_id);
 
-    if (checklist[0].user_id) {
-      res.status(200).json({
-        success: true,
-        payload: checklist,
-      });
-    } else {
-      throw checklist;
-    }
-  } catch (e) {
-    res.status(404).json({
-      success: false,
-      message: e,
-    });
-  }
+  res.status(200).json({
+    success: true,
+    payload: checklist,
+  });
 });
 
-//POST A SINGLE CATEGORY TO THE CHECKLIST 
+// POST
 
 checklist.post("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
@@ -60,8 +49,7 @@ checklist.post("/:user_id/:event_id", async (req, res) => {
   }
 });
 
-
-// DELETE A SINGLE CATEGORY FROM THE CHECKLIST
+// DELETE ONE
 
 checklist.delete("/:user_id/:event_id/:task_name", async (req, res) => {
   const { user_id, event_id, task_name } = req.params;
@@ -84,7 +72,7 @@ checklist.delete("/:user_id/:event_id/:task_name", async (req, res) => {
   }
 });
 
-// DELETE ENTIRE CHECKLIST RELATED TO AN EVENT
+// DELETE ALL
 
 checklist.delete("/all/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
@@ -106,7 +94,7 @@ checklist.delete("/all/:user_id/:event_id", async (req, res) => {
   }
 });
 
-//UPDATE IF A CATEGORY IS COMPLETED
+// PUT
 
 checklist.put("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
@@ -136,7 +124,7 @@ checklist.put("/:user_id/:event_id", async (req, res) => {
   }
 });
 
-//UPDATE A CATEGORY'S COST
+//UPDATE COST
 
 checklist.put("/cost/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;

@@ -47,16 +47,11 @@ export default function BookedVendorList() {
           }`}
         >
           {bookedVendors.map((vendor) => {
-            return (
-              <li
-                className={`flex-col three-d ven-li ${
-                  bookedVendors.length === 1 ? "one-li" : null
-                }`}
-                key={vendor.vendor_name}
-              >
-                <BookedVendor vendor={vendor} />{" "}
-              </li>
-            );
+
+          return <li className={`flex-col three-d ven-li ${bookedVendors.length === 1 ? "one-li" : null}`} key={vendor.vendor_name}>
+
+          <BookedVendor vendor={vendor} /> </li>
+
           })}{" "}
         </ul>
       ) : (

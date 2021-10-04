@@ -11,6 +11,21 @@ const {
 
 const db = require("../db/dbConfig");
 
+// INDEX
+
+events.get("/:user_id", async (req, res) => {
+  const { user_id } = req.params;
+
+  const events = await getAllEvents(user_id);
+
+  res.status(200).json({
+    success: true,
+    message: events,
+  });
+});
+
+// SHOW
+
 events.get("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
   try {
@@ -22,29 +37,10 @@ events.get("/:user_id/:event_id", async (req, res) => {
         payload: event,
       });
     } else {
-      throw event;
-    }
-  } catch (e) {
-    res.status(404).json({
-      success: false,
-      message: e,
-    });
-  }
-});
-
-events.get("/:user_id", async (req, res) => {
-  const { user_id } = req.params;
-
-  try {
-    const events = await getAllEvents(user_id);
-
-    if (events[0].user_id) {
       res.status(200).json({
-        success: true,
-        message: events,
+        success: false,
+        payload: `No Events found with event id ${event_id}`,
       });
-    } else {
-      throw events;
     }
   } catch (e) {
     res.status(404).json({
@@ -53,6 +49,8 @@ events.get("/:user_id", async (req, res) => {
     });
   }
 });
+
+// POST 
 
 events.post("/:user_id", async (req, res) => {
   const { user_id } = req.params;
@@ -76,6 +74,8 @@ console.log(newEvent)
   }
 });
 
+// DELETE 
+
 events.delete("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
 
@@ -93,6 +93,8 @@ events.delete("/:user_id/:event_id", async (req, res) => {
     });
   }
 });
+
+// PUT
 
 events.put("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;

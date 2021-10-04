@@ -12,12 +12,8 @@ const getAllBookedVendors = async (user_id, event_id) => {
     );
     return allBookedVendors;
   } catch (err) {
-    if (err instanceof QRE && err.code === qrec.noData) {
-      return null;
-    } else {
-      return err;
-    }
-  }
+    return err;
+  } 
 };
 
 //Show
