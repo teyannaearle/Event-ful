@@ -22,11 +22,11 @@ h1 {
 h4:hover {
     background-color: rgb(221, 180, 118)
 }
-link:link {
+/* link:link {
     color: green;
-}
+} */
 .newForm input:focus {
-    border: 3px solid green;
+    border: 3px solid #71b1d5;
 }
 
 .Login {

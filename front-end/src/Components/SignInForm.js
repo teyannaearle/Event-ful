@@ -104,18 +104,18 @@ export default function SignInForm() {
           onChange={handleChange}
           placeholder="Password"
         />{" "}
-        <button type="submit" className="Login">
+        <button type="submit" className="Login pg-buttons">
           Sign In
         </button>
         <div className="divider"></div>
         <p>{errorMessage}</p>
       </form>
-      <button type="button" className="Login" onClick={signInGoogle}>
+      <button type="button" className="Login pg-buttons" onClick={signInGoogle}>
         Sign In with Google
       </button>
       <div className="divider"></div>
       <Link to="/signup">
-        <button type="button" className="Login">
+        <button type="button" className="Login pg-buttons">
           Sign Up
         </button>
       </Link>
