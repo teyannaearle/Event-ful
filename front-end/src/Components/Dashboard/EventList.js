@@ -1,17 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import Event from "./Event";
 import { Link, useLocation } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
-import { UserContext } from "../../Providers/UserProvider.js";
 
 const API = apiURL();
 
 function EventList({ user_id }) {
   const [events, setEvents] = useState([]);
   const location = useLocation()
+  console.log(`event list user_id is ${user_id}`)
 
   useEffect(() => {
+    if (user_id) {
     axios
       .get(`${API}/events/${user_id}`)
       .then(
@@ -24,7 +26,7 @@ function EventList({ user_id }) {
       )
       .catch((e) => {
         console.error(e);
-      });
+      })};
   }, [user_id, location.pathname]);
 
   // console.log(location)
@@ -52,19 +54,17 @@ function EventList({ user_id }) {
             <p className="plus-sign"> &#x002B;</p>
           </Link>
         </span>
-        {events
-          ? events.map((event) => {
-              return (
-                <li key={event.event_id} className="dash-event">
-                  <Event
-                    event={event}
-                    user_id={user_id}
-                    handleDelete={handleDelete}
-                  />
-                </li>
-              );
-            })
-          : null}
+        { events ? events.map((event) => {
+          return (
+            <li key={event.event_id} className="dash-event">
+              <Event
+                event={event}
+                user_id={user_id}
+                handleDelete={handleDelete}
+              />
+            </li>
+          );
+        } ) : null}
       </ul>
     </>
   );
