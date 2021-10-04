@@ -6,7 +6,7 @@ let qrec = pgp.errors.queryResultErrorCode;
 //Show
 const getOneUser = async (email) => {
   try {
-    let oneUser = await db.one("SELECT * FROM users WHERE email=$1", [email]);
+    const oneUser = await db.one("SELECT * FROM users WHERE email=$1", [email]);
     return oneUser;
   } catch (err) {
     if (err instanceof QRE && err.code === qrec.noData) {

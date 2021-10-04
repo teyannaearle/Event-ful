@@ -11,7 +11,7 @@ export default function Favorites() {
 
   return (
     <div className="page fave-page">
-      <h1 className="pg-head">{loggedInUser && `${formattedName}'s Favorites'`}</h1>
+      <h1 className="pg-head">{loggedInUser && `${formattedName}'s Favorites`}</h1>
       <FavoriteList />
     </div>
   );

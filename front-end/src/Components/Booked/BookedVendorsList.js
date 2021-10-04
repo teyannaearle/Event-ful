@@ -14,22 +14,28 @@ export default function BookedVendorList() {
   const { event_id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`${API}/booked/${user_id}/${event_id}`)
-      .then(
-        (res) => {
-          setBookedVendors(res.data.message);
-        },
-        (e) => {
+    if (user_id) {
+      axios
+        .get(`${API}/booked/${user_id}/${event_id}`)
+        .then(
+          (res) => {
+            console.log("got booked api response")
+            console.log(res)
+            if (res.data.payload.length > 0) {
+              setBookedVendors(res.data.message);
+            }
+          },
+          (e) => {
+            console.error(e);
+          }
+        )
+        .catch((e) => {
           console.error(e);
-        }
-      )
-      .catch((e) => {
-        console.error(e);
-      });
-      return () => {
-       setBookedVendors([])
-      }
+        });
+    }
+    return () => {
+      setBookedVendors([]);
+    };
   }, [user_id, event_id]);
 
   return (
@@ -46,7 +52,7 @@ export default function BookedVendorList() {
                 className={`flex-col three-d ven-li ${
                   bookedVendors.length === 1 ? "one-li" : null
                 }`}
-                key={vendor.id}
+                key={vendor.vendor_name}
               >
                 <BookedVendor vendor={vendor} />{" "}
               </li>

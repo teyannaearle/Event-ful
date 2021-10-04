@@ -1,4 +1,7 @@
 const db = require("../db/dbConfig.js");
+const pgp = require("pg-promise")();
+let QRE = pgp.errors.QueryResultError;
+let qrec = pgp.errors.queryResultErrorCode;
 
 //index
 const getAllFavorites = async (user_id) => {
@@ -9,7 +12,11 @@ const getAllFavorites = async (user_id) => {
     );
     return allFavorites;
   } catch (err) {
-    return err;
+    if (err instanceof QRE && err.code === qrec.noData) {
+      return null;
+    } else {
+      return err;
+    }
   }
 };
 
@@ -22,7 +29,11 @@ const getOneFavorite = async (user_id, vendor_name) => {
     );
     return oneFavorite;
   } catch (err) {
-    return err;
+    if (err instanceof QRE && err.code === qrec.noData) {
+      return null;
+    } else {
+      return err;
+    }
   }
 };
 
@@ -38,7 +49,7 @@ const createFavorite = async (vendor, user_id) => {
         vendor.vendor_phone_number,
         vendor.vendor_category,
         vendor.vendor_id,
-        vendor.vendor_image
+        vendor.vendor_image,
       ]
     );
     return newFavorite;
@@ -70,7 +81,7 @@ const updateFavorite = async (vendor, user_id) => {
         vendor.vendor_phone_number,
         vendor.vendor_category,
         user_id,
-        vendor.vendor_name
+        vendor.vendor_name,
       ]
     );
     return updatedFavorite;

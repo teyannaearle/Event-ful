@@ -1,4 +1,7 @@
 const db = require("../db/dbConfig.js");
+const pgp = require("pg-promise")();
+let QRE = pgp.errors.QueryResultError;
+let qrec = pgp.errors.queryResultErrorCode;
 
 //index
 const getAllBookedVendors = async (user_id, event_id) => {
@@ -9,7 +12,11 @@ const getAllBookedVendors = async (user_id, event_id) => {
     );
     return allBookedVendors;
   } catch (err) {
-    return err;
+    if (err instanceof QRE && err.code === qrec.noData) {
+      return null;
+    } else {
+      return err;
+    }
   }
 };
 
@@ -22,10 +29,13 @@ const getOneBookedVendor = async (user_id, event_id, vendor_name) => {
     );
     return oneBookedVendor;
   } catch (err) {
-    return err;
+    if (err instanceof QRE && err.code === qrec.noData) {
+      return null;
+    } else {
+      return err;
+    }
   }
 };
-
 
 const getOneCategory = async (user_id, event_id, category) => {
   try {
@@ -52,7 +62,7 @@ const createBookedVendor = async (vendor, user_id, event_id) => {
         vendor.vendor_phone_number,
         vendor.category,
         vendor.rating,
-        vendor.vendor_image
+        vendor.vendor_image,
       ]
     );
     return newBookedVendor;
@@ -87,7 +97,7 @@ const updateBookedVendor = async (vendor, user_id, event_id) => {
         vendor.rating,
         user_id,
         event_id,
-        vendor.category
+        vendor.category,
       ]
     );
     return updatedBookedVendor;
@@ -100,19 +110,13 @@ const updateCost = async (vendor, user_id, event_id) => {
   try {
     const updatedBookedVendor = await db.one(
       "UPDATE booked SET amount=$1 WHERE user_id=$2 AND event_id=$3 AND vendor_name=$4 RETURNING *",
-      [
-        vendor.amount,
-        user_id,
-        event_id,
-        vendor.vendor_name
-      ]
+      [vendor.amount, user_id, event_id, vendor.vendor_name]
     );
     return updatedBookedVendor;
   } catch (err) {
     return err;
   }
 };
-
 
 module.exports = {
   getAllBookedVendors,
@@ -121,5 +125,5 @@ module.exports = {
   createBookedVendor,
   deleteBookedVendor,
   updateBookedVendor,
-  updateCost
+  updateCost,
 };
