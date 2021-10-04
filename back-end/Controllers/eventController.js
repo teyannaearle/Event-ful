@@ -96,7 +96,6 @@ events.delete("/:user_id/:event_id", async (req, res) => {
 
 events.put("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-
   try {
     const updated = await updateEvent(req.body, user_id, event_id);
 

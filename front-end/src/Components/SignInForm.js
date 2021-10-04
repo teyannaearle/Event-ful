@@ -27,14 +27,10 @@ export default function SignInForm () {
 
                 <div className="divider"></div>
                 <br/>
-                {/* <Route path="/signup">
-                    <Link>Click here
-                    </Link>
-                </Route> */}
-                {/* <SignUp /> */}
+            
                 <Link to="/SignUp">
                 <h4>Dont have an account? <br/>
-                Click Here to get Started.
+                Click Here to make one!
                 </h4>
                 </Link>
 

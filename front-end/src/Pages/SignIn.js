@@ -1,10 +1,10 @@
 import React from 'react'
 import SignInForm from "../Components/SignInForm"
-
+import "./signin.css"
 
 function SignIn() {
     return (
-        <div>
+        <div className="signin-container">
      <SignInForm />
 
         </div>

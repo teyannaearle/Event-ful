@@ -37,7 +37,9 @@ export default function EventCheckbox({ user_id }) {
           task_name: checked,
         };
         axios
-          .post(`${API}/checklist/${user_id}/${id}`, category)
+          .post(`${API}/checklist/${user_id}/${id}`, category).then((res) => {
+            console.log(res.data.payload)
+          })
           // .then((res) => history.push("/dashboard"))
           // .then((res) => console.log(res))
           .catch((c) => console.warn("catch", c));

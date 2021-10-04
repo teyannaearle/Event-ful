@@ -28,7 +28,7 @@ export default function BookedVendorList({ user_id }) {
   }, [user_id, event_id]);
 
   return (
-    <div>
+    <div className="booked-section">
       {/* <section>
         <table className="three-d">
           <thead>

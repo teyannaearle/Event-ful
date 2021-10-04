@@ -57,7 +57,7 @@ const deleteEvent = async (user_id, event_id) => {
 const updateEvent = async (body, user_id, event_id) => {
   try {
     const updated = await db.one(
-      "UPDATE events SET event_name=$1 , event_zip=$2 , event_budget=$3 , event_date=$4 , event_time=$5 WHERE user_id=$6 AND event_id=$7 RETURNING *",
+      "UPDATE events SET event_name=$1, event_budget=$2 , event_date=$3 , event_time=$4 WHERE user_id=$5 AND event_id=$6 RETURNING *",
       [
         body.event_name,
         body.event_budget,
