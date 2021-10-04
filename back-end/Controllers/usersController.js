@@ -9,11 +9,11 @@ const db = require("../db/dbConfig");
 
 // INDEX
 users.get("/", async (req, res)  => {
-  const allUsers = await allUsers()
-  console.log(allUsers)
+  const allRegistered = await allUsers()
+  console.log(allRegistered)
   res.status(200).json({
     success: true, 
-    payload: allUsers
+    payload: allRegistered
   })
 })
 
