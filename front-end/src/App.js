@@ -39,6 +39,11 @@ function App() {
     currency: "USD",
   });
   const [user_id, setUserId] = useState(null);
+  
+const updateId = (id) => {
+setUserId(id)
+}
+
 
   useEffect(() => {
     if (location.coordinates) {
@@ -47,21 +52,21 @@ function App() {
     }
   }, [location]);
 
-  useEffect(() => {
-    (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          setUserId(checkUser.data.payload.user_id);
-        }
-      }
-    })();
-    return () => {
-      // cleanup
-      // setUserId(null)
-    };
-  }, [loggedInUser])
+  // useEffect(() => {
+  //   (async () => {
+  //     if (loggedInUser) {
+  //       const email = loggedInUser.email;
+  //       let checkUser = await axios.get(`${API}/users/${email}`);
+  //       if (checkUser.data.success) {
+  //         setUserId(checkUser.data.payload.user_id);
+  //       }
+  //     }
+  //   })();
+  //   return () => {
+  //     // cleanup
+  //     // setUserId(null)
+  //   };
+  // }, [loggedInUser])
 
   return (
     <div className="site">
@@ -79,7 +84,7 @@ function App() {
           </Route>
 
           <Route path="/signin">
-            <SignIn />
+            <SignIn updateId={updateId}/>
           </Route>
 
           <Route path="/dashboard/new_event/checklist/:id">
