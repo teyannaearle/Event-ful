@@ -83,7 +83,10 @@ export default function SignInForm() {
   // }
 
   return (
+      <div>
+      <h1 className="brand">EVENT( FUL ) &#127881;</h1>
     <div className="newForm three-d">
+
       <form onSubmit={signIn}>
         <label htmlFor="Email"></label>
         <input
@@ -111,12 +114,12 @@ export default function SignInForm() {
         Sign In with Google
       </button>
       <div className="divider"></div>
-      <div className="divider"></div>
       <Link to="/signup">
         <button type="button" className="Login">
           Sign Up
         </button>
       </Link>
+    </div>
     </div>
   );
 }

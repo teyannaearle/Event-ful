@@ -17,7 +17,7 @@ export default function Landing() {
     <div className="Landing-Container">
       <div className="Landing">
         <section className="Landing-Item">
-          <h1>EVENT( FUL ) &#127881;</h1>
+          <h1 className="brand">EVENT( FUL ) &#127881;</h1>
           {/* <p>{user && `Hello, ${user.userName}`}</p> */}
           <img
           src={LandingPageImage3}

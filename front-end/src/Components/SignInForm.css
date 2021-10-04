@@ -3,15 +3,18 @@
     border: 2px solid black;
     border-radius: 10%;
     padding: 20px;
-    background-color: rgb(228, 202, 210, 0.8);
+    background-color: rgba(243, 241, 241, 0.8);
     /* margin: 5%; */
-    width: 50%;
+    width: 40%;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
+h1 {
+    text-align: center;
+    padding: 3%;
+}
 .newForm input {
     width: 100%;
     margin: 1%;
@@ -36,6 +39,6 @@ link:link {
 .divider {
     border-bottom: 1px black solid;
     padding: 2%;
-    margin: 5px
+    /* margin: 5px */
 }
 

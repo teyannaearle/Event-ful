@@ -37,7 +37,9 @@
 h1 {
   margin-bottom: 2%;
 }
-
+.brand {
+  font-size: 75px;
+}
 .Landing-Item {
   flex-wrap: wrap;
   width: 50%;
