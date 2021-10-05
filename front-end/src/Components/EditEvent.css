@@ -1,16 +1,17 @@
 .form-container {
   background-color: white;
+  font-size: larger;
   display: grid;
   text-align: center;
   height: 100%;
   width: 50%;
   margin: 0 auto;
-} 
+  border-radius: 10px;
+}
 
 /* .edit-checkbox {
   width: 100%;
 } */
-
 
 .checkbox-span label {
   /* display: flex;
@@ -19,7 +20,7 @@
   display: block;
 }
 
-.edit-checkbox .checkmark{
+.edit-checkbox .checkmark {
   margin-left: 10px;
   margin-right: 10px;
   height: 23px;
@@ -36,11 +37,44 @@
   display: block;
 } */
 
-.checkbox-span{
+.checkbox-span {
   display: block;
-text-align: left;
+  text-align: left;
 }
 
-.edit-page{
+.edit-page {
   text-align: center;
 }
+
+.edit-page h1{
+  padding-bottom: 20px;
+}
+
+.edit-eventform input {
+  display: flex;
+  margin: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
+.button-container button {
+  padding: 5px;
+}
+
+.edit-eventform{
+  border-radius: 10px;
+}
+
+.edit-input label,
+.edit-input input {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  margin-top: 10px;
+}
+

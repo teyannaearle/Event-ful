@@ -20,7 +20,7 @@ events.get("/:user_id", async (req, res) => {
 
   res.status(200).json({
     success: true,
-    message: events,
+    message: events
   });
 });
 
@@ -28,24 +28,19 @@ events.get("/:user_id", async (req, res) => {
 
 events.get("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
+
   try {
     const event = await getEvent(user_id, event_id);
-
     if (event.user_id) {
       res.status(200).json({
         success: true,
-        payload: event,
+        payload: event
       });
-    } else {
-      res.status(200).json({
-        success: false,
-        payload: `No Events found with event id ${event_id}`,
-      });
-    }
+    } 
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });
@@ -61,7 +56,7 @@ console.log(newEvent)
     if (newEvent.user_id) {
       res.status(200).json({
         success: true,
-        payload: newEvent,
+        payload: newEvent
       });
     } else {
       throw newEvent;
@@ -69,7 +64,7 @@ console.log(newEvent)
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });
@@ -89,7 +84,7 @@ events.delete("/:user_id/:event_id", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });
@@ -112,7 +107,7 @@ events.put("/:user_id/:event_id", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });

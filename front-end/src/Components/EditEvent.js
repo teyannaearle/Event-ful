@@ -6,10 +6,12 @@ import { apiURL } from "../util/apiURL";
 import "./EditEvent.css";
 import { UserContext } from "../Providers/UserProvider";
 import CapitalizeEvent from "../Components/CapitalizeEvent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API = apiURL();
 
-function EditEvent() {
+function EditEvent({ setUpdateEvent }) {
   const loggedInUser = useContext(UserContext);
   const user_id = loggedInUser ? loggedInUser.user_id : null;
   const { event_id } = useParams();
@@ -64,6 +66,7 @@ function EditEvent() {
           event_time: response.event_time,
         });
         head.current = response.event_name;
+        setUpdateEvent(false);
       });
     } catch (e) {
       console.error(e);
@@ -76,7 +79,7 @@ function EditEvent() {
         event_time: "",
       });
     };
-  }, [user_id, event_id]);
+  }, [user_id, event_id, setUpdateEvent]);
 
   useEffect(() => {
     try {
@@ -114,6 +117,7 @@ function EditEvent() {
       .put(`${API}/events/${user_id}/${event_id}`, event)
       .then(
         (res) => {
+          setUpdateEvent(true);
           const categories = Object.keys(initialState.current);
           for (const name of categories) {
             if (initialState.current[name] && !checklist[name]) {
@@ -158,7 +162,9 @@ function EditEvent() {
       updateEvent(event, event_id);
       history.push("/dashboard");
     } else {
-      window.alert("Choose at least one vendor to add to your checklist.");
+      toast.error("Choose at least one vendor to add to your checklist", {
+        toastId: "customId",
+      });
     }
   };
 
@@ -179,38 +185,48 @@ function EditEvent() {
       </h1>
       <div className="form-container">
         <form className="edit-eventform three-d" onSubmit={handleSubmit}>
-          <input
-            id="event_name"
-            type="text"
-            required
-            value={event.event_name}
-            placeholder="Name"
-            onChange={handleChange}
-          />
-          <input
-            id="event_budget"
-            type="number"
-            required
-            value={event.event_budget}
-            placeholder="$0.00"
-            onChange={handleChange}
-          />
-          <input
-            id="appt-time"
-            type="time"
-            required
-            value={event.event_time}
-            placeholder="Time"
-            onChange={handleChange}
-          />
-          <input
-            id="event_date"
-            type="date"
-            required
-            value={event.event_date}
-            placeholder="Date"
-            onChange={handleChange}
-          />
+          <div className="edit-input">
+            <label>Event Name: </label>
+            <input
+              className="three-d pg-input"
+              id="event_name"
+              type="text"
+              required
+              value={event.event_name}
+              placeholder="Name"
+              onChange={handleChange}
+            />
+            <label>Budget: </label>
+            <input
+              className="three-d pg-input"
+              id="event_budget"
+              type="number"
+              required
+              value={event.event_budget}
+              placeholder="$0.00"
+              onChange={handleChange}
+            />
+            <label>Time: </label>
+            <input
+              className="three-d pg-input"
+              id="appt-time"
+              type="time"
+              required
+              value={event.event_time}
+              placeholder="Time"
+              onChange={handleChange}
+            />
+            <label>Date: </label>
+            <input
+              className="three-d pg-input"
+              id="event_date"
+              type="date"
+              required
+              value={event.event_date}
+              placeholder="Date"
+              onChange={handleChange}
+            />
+          </div>
 
           <span className="checkbox-span">
             <label className="check-container edit-checkbox">
@@ -352,11 +368,14 @@ function EditEvent() {
               <span className="category"> Clowns</span>
             </label>
           </span>
-          <button className="pg-buttons">Save Changes</button>
-          <Link to={`/dashboard/${user_id}`}>
-            <button className="pg-buttons">Cancel Edit</button>
-          </Link>
+          <div className="button-container">
+            <button className="pg-buttons">Save Changes</button>
+            <Link to={`/dashboard/${user_id}`}>
+              <button className="pg-buttons">Cancel Edit</button>
+            </Link>
+          </div>
         </form>
+        <ToastContainer autoClose={false} position="bottom-center" />
       </div>
     </>
   );

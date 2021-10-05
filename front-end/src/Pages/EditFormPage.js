@@ -2,10 +2,10 @@ import EditForm from "../Components/EditEvent";
 
 import React from "react";
 
-function EditFormPage() {
+function EditFormPage({setUpdateEvent}) {
   return (
     <div className="edit-page page">
-      <EditForm />
+      <EditForm setUpdateEvent={setUpdateEvent}/>
     </div>
   );
 }

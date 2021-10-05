@@ -21,7 +21,7 @@ checklist.get("/:user_id/:event_id", async (req, res) => {
 
   res.status(200).json({
     success: true,
-    payload: checklist,
+    payload: checklist
   });
 });
 
@@ -36,7 +36,7 @@ checklist.post("/:user_id/:event_id", async (req, res) => {
     if (listItem.user_id) {
       res.status(200).json({
         success: true,
-        payload: listItem,
+        payload: listItem
       });
     } else {
       throw listItem;
@@ -44,7 +44,7 @@ checklist.post("/:user_id/:event_id", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });
@@ -59,7 +59,7 @@ checklist.delete("/:user_id/:event_id/:task_name", async (req, res) => {
     if (deleted.user_id) {
       res.status(200).json({
         success: true,
-        payload: deleted,
+        payload: deleted
       });
     } else {
       throw deleted;
@@ -67,7 +67,7 @@ checklist.delete("/:user_id/:event_id/:task_name", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });
@@ -81,7 +81,7 @@ checklist.delete("/all/:user_id/:event_id", async (req, res) => {
     if (deleted[0].user_id) {
       res.status(200).json({
         success: true,
-        payload: deleted,
+        payload: deleted
       });
     } else {
       throw deleted;
@@ -89,7 +89,7 @@ checklist.delete("/all/:user_id/:event_id", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });
@@ -111,7 +111,7 @@ checklist.put("/:user_id/:event_id", async (req, res) => {
     if (updated.user_id) {
       res.status(200).json({
         success: true,
-        payload: updated,
+        payload: updated
       });
     } else {
       throw updated;
@@ -119,7 +119,7 @@ checklist.put("/:user_id/:event_id", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });
@@ -136,7 +136,7 @@ checklist.put("/cost/:user_id/:event_id", async (req, res) => {
     if (updated.user_id) {
       res.status(200).json({
         success: true,
-        payload: updated,
+        payload: updated
       });
     } else {
       throw updated;
@@ -144,7 +144,7 @@ checklist.put("/cost/:user_id/:event_id", async (req, res) => {
   } catch (e) {
     res.status(404).json({
       success: false,
-      message: e,
+      message: e
     });
   }
 });

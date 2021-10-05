@@ -11,6 +11,9 @@ a:hover,
 a:focus,
 a:active {
   text-decoration: none;
+}
+
+a {
   color: inherit;
 }
 
@@ -18,9 +21,12 @@ html,
 #root,
 .site {
   min-height: 100vh;
-  flex: 1;
   width: 100%;
   overflow-x: hidden;
+}
+
+img {
+  border-radius: 4px;
 }
 
 .site {
@@ -128,7 +134,7 @@ button:hover {
 }
 
 .pg-head {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .pg-input {
@@ -163,16 +169,21 @@ button:hover {
 }
 
 .page {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.NotFound a {
+  padding: 20px;
 }
 
 /* EVENT PAGE */
 
 .event-page {
   margin-top: 0;
+  /* padding-bottom: 100px; */
 }
 
 #all-booked {
@@ -183,7 +194,8 @@ button:hover {
 }
 
 .eventpage-container {
-  width: 95%;
+  /* width: 95%; */
+  width: 80%;
   display: grid;
   grid-template-columns: 50% 50%;
   justify-items: center;
@@ -432,21 +444,35 @@ button:hover {
 
 .budget-list {
   width: 100%;
-  height: 90%;
-}
-
-.update {
+  height: 70%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: larger;
+}
+
+.update {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  font-size: x-large;
+  margin-top: 10px;
 }
 
 #budget-update {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* #budget-update {
   height: 100%;
   display: grid;
   grid-template-rows: 10% 90%;
-}
+} */
 
 .budget-sum {
   border: 0;
@@ -491,7 +517,7 @@ button:hover {
   justify-content: center;
 }
 .countdown {
-  width: 70%;
+  width: 60%;
   margin: auto;
   display: flex;
   justify-content: space-around;
@@ -503,6 +529,7 @@ button:hover {
 
 .col-h {
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 /* VENDOR SHOW PAGE */
@@ -971,17 +998,36 @@ span.press {
     grid-template-columns: 45% 45%;
     width: 90%;
   }
+  /* EVENT PAGE */
+  .eventpage-container {
+    grid-template-columns: 100%;
+    width: 75%;
+  }
+  #countdown-container {
+    grid-column: span 1;
+    margin-top: 20px;
+  }
+
+  .budget-list {
+    height: 100%;
+  }
+
+  .update {
+    order: -1;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
   /* EVENT PAGE */
+
   .eventpage-container {
-    grid-template-columns: 100%;
+    /* grid-template-columns: 100%; */
+    width: 75%;
   }
 
-  #countdown-container {
+  /* #countdown-container {
     grid-column: span 1;
-  }
+  } */
   /* VENDOR SHOW */
   .like-span {
     /* top: 0;
@@ -1088,6 +1134,9 @@ span.press {
   }
 }
 @media only screen and (max-width: 500px) {
+  .page {
+    margin-top: 30px;
+  }
   .pg-buttons:hover {
     transform: none;
   }
@@ -1143,26 +1192,86 @@ span.press {
   .ven-info {
     margin-top: 0px;
   }
-}
-
-@media only screen and (max-width: 320px) {
-  /* VENDOR INDEX */
-  #zip-form {
-    flex-direction: column;
-    align-items: center;
+  .single-ven {
+    width: 90%;
   }
 
-  #zip-search {
-    margin-bottom: 10px;
+  /*FAVORITES PAGE*/
+  .dropdown span {
+    width: 200px;
   }
 
-  #zip-form button {
-    width: 80%;
+  .dropdown-content {
+    width: 200px;
   }
-  /* VENDOR SHOW */
-  #vendor-showpage h1 {
+
+  /*EVENT PAGE*/
+
+  #checklist-container {
+    grid-template-columns: 50% 50%;
+  }
+  .checklist-ul {
+    margin-left: 0px;
+  }
+
+  .checklist {
+    grid-template-columns: 50% 50%;
+  }
+
+  .checklist-span {
+    display: inline;
+  }
+
+  .book-grid {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .checklist-button {
+    height: 45px;
     text-align: center;
   }
+
+  #all-booked {
+    width: 80%;
+  }
+
+  /* #budget-container h2 {
+    margin-bottom: 20px;
+  } */
+
+  #budget-container div {
+    margin-bottom: 5px;
+  }
+
+  .update p {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .checklist-button {
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* VENDOR INDEX */
+#zip-form {
+  flex-direction: column;
+  align-items: center;
+}
+
+#zip-search {
+  margin-bottom: 10px;
+}
+
+#zip-form button {
+  width: 80%;
+}
+/* VENDOR SHOW */
+#vendor-showpage h1 {
+  text-align: center;
 }
 
 svg .widget {
