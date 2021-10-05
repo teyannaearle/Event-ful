@@ -5,6 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
 import { UserContext } from "../Providers/UserProvider.js";
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const API = apiURL();
 
@@ -55,7 +56,9 @@ export default function EventCheckbox() {
       history.push("/dashboard");
     } else {
       // window.alert("Choose at least one vendor to add to your checklist.")
-      // toast("Wow so easy !")
+      toast.error("Choose at least one vendor to add to your checklist", {
+        toastId: "customId"
+      });
     }
   };
 
@@ -65,7 +68,10 @@ export default function EventCheckbox() {
 
   return (
     <section className="NewEvent">
-             <ToastContainer />
+             <ToastContainer 
+             autoClose={false}
+             position="center"
+             />
       <form className=" col-h three-d" onSubmit={handleSubmit}>
         <span className="checkbox-span">
           <label className="check-container edit-checkbox">

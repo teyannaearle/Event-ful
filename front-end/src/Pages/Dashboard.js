@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import EventList from "../Components/Dashboard/EventList";
 import { UserContext } from "../Providers/UserProvider";
 
-export default function Dashboard({user_id}) {
+export default function Dashboard({user_id, events, deleteEvent}) {
   const loggedInUser = useContext(UserContext);
   const formattedName = loggedInUser
     ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
@@ -15,7 +15,7 @@ export default function Dashboard({user_id}) {
         {loggedInUser && `${formattedName}'s Dashboard`}{" "}
       </h1>
       <div className="dash-container three-d">
-        <EventList user_id={user_id}/>
+        <EventList user_id={user_id} events={events} deleteEvent={deleteEvent}/>
       </div>
     </div>
   );

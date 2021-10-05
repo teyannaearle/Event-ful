@@ -9,7 +9,7 @@ import CapitalizeEvent from "../Components/CapitalizeEvent";
 
 const API = apiURL();
 
-function EditEvent() {
+function EditEvent({setUpdateEvent}) {
   const loggedInUser = useContext(UserContext);
   const user_id = loggedInUser ? loggedInUser.user_id : null;
   const { event_id } = useParams();
@@ -64,6 +64,7 @@ function EditEvent() {
           event_time: response.event_time,
         });
         head.current = response.event_name;
+        setUpdateEvent(false)
       });
     } catch (e) {
       console.error(e);
@@ -114,6 +115,7 @@ function EditEvent() {
       .put(`${API}/events/${user_id}/${event_id}`, event)
       .then(
         (res) => {
+          setUpdateEvent(true)
           const categories = Object.keys(initialState.current);
           for (const name of categories) {
             if (initialState.current[name] && !checklist[name]) {

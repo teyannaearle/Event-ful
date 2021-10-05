@@ -44,7 +44,7 @@ export default function SignUp() {
 
   return (
     <div>
-      <h1 className="brand">EVENT( FUL ) &#127881;</h1>
+      <h1 className="brand h1-SignIn">EVENT( FUL ) &#127881;</h1>
     <div className="Container three-d">
       <form onSubmit={handleSignUp}>
         <h1>Sign up Here!</h1>

@@ -7,7 +7,7 @@ import axios from "axios";
 import { apiURL } from "../util/apiURL";
 
 const API = apiURL();
-
+ 
 export default function SignInForm({ updateId }) {
   const history = useHistory();
   // const currentUser = useContext(UserContext);
@@ -91,7 +91,7 @@ export default function SignInForm({ updateId }) {
 
   return (
       <div>
-      <h1 className="brand">EVENT( FUL ) &#127881;</h1>
+      <h1 className="brand h1-SignIn">EVENT( FUL ) &#127881;</h1>
     <div className="newForm three-d">
 
       <form onSubmit={signIn}>
