@@ -1,32 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import Event from "./Event";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../Providers/UserProvider";
 
 function EventList({ events, deleteEvent }) {
-  const loggedInUser = useContext(UserContext);
-  const user_id = loggedInUser ? loggedInUser.user_id : null;
-  const location = useLocation();
-  console.log(`event list user_id is ${user_id}`);
-
-  useEffect(() => {
-    if (user_id) {
-      axios
-        .get(`${API}/events/${user_id}`)
-        .then(
-          (res) => {
-            setEvents(res.data.message);
-          },
-          (e) => {
-            console.error(e);
-          }
-        )
-        .catch((e) => {
-          console.error(e);
-        });
-    }
-  }, [user_id, location.pathname]);
-
   return (
     <>
       <ul className="dash-events">
@@ -40,10 +16,7 @@ function EventList({ events, deleteEvent }) {
           ? events.map((event) => {
               return (
                 <li key={event.event_id} className="dash-event">
-                  <Event
-                    event={event}
-                    deleteEvent={deleteEvent}
-                  />
+                  <Event event={event} deleteEvent={deleteEvent} />
                 </li>
               );
             })

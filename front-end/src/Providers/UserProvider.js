@@ -10,14 +10,12 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [pending, setPending] = useState(true)
   const history = useHistory();
 
   useEffect(() => {
     auth.onAuthStateChanged((loggedInUser) => {
       console.log("onAuthStateChanged");
-      console.log("!!!!!!!!!!!")
-      console.log(loggedInUser)
+      console.log(loggedInUser);
       if (loggedInUser) {
         console.log(`User provider current user is ${loggedInUser.email}`);
         setCurrentUser(loggedInUser);
@@ -34,7 +32,6 @@ export const UserProvider = ({ children }) => {
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           currentUser.user_id = checkUser.data.payload.user_id;
-          setPending(false)
         }
       }
     })();
@@ -43,10 +40,6 @@ export const UserProvider = ({ children }) => {
       // setUserId(null)
     };
   }, [currentUser]);
-
-  if (pending) {
-    return <Loading />;
-};
 
   console.log("current user");
   console.log(currentUser);
