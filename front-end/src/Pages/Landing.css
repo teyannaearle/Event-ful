@@ -1,8 +1,9 @@
-.Landing-Container{
+.Landing-Container {
   height: 100%;
   width: 100%;
-  position: absolute;
-  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  font-size: 20px;
 }
 
 .Landing-Container::before{
@@ -18,43 +19,106 @@
 }
 
 .Landing {
-  /* position: relative; */
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: max-content;
-  background-color: #b2d3e6 ;
-  margin-right: 100px;
   border-radius: 30px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 90%;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+
+  padding: 25px;
+  background: rgb(104, 168, 202, 0.5);
 }
 
-h1 {
-  margin-bottom: 2%;
-}
 .brand {
+  margin-top: 0;
+  color: white;
   font-size: 75px;
+
+  background-image: linear-gradient(
+    to right top,
+    #7bbce0,
+    #76b7da,
+    #71b1d5,
+    #6daccf,
+    #68a7ca
+  );
+
+  text-align: center;
+  box-sizing: border-box;
+  border-bottom: 1px solid white;
 }
 .Landing-Item {
-  flex-wrap: wrap;
-  width: 50%;
-  /* font-size: 30px; */
-  /* display: inline; */
-  flex-direction: column;
- justify-content: center;
+  margin-bottom: 20px;
 }
-p {
+
+.Landing-Item p {
   font-size: 25px;
 }
 
-img {
-    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+.a {
+  grid-row: span 3;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* font-size: 25px; */
+}
+
+.Landing-Item img {
+  width: 95%;
+}
+.a img {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 3px 0px #7d97a5, 0px 2px 10px rgba(0, 0, 0, 0.4),
     inset 0px 0px 3px rgba(255, 255, 255, 0.927);
+  width: 80%;
+}
+
+.a img:hover {
+  transform: scale(1.04);
+}
+
+.a h2 {
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .Landing {
+    grid-template-columns: 100%;
+    margin-top: 40px;
   }
 
+  .a {
+    order: -1;
+    margin-bottom: 20px;
+  }
+
+  .a img {
+    width: 70%;
+  }
+
+  .Landing-Item {
+    /* order: 1;
+  margin-top: 20px; */
+    display: none;
+  }
+
+  .Landing-Item img {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .brand {
+    font-size: 60px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .brand {
+    font-size: 50px;
+  }
+}

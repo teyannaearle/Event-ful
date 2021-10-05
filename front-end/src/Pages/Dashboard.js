@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext , useEffect} from "react";
 import EventList from "../Components/Dashboard/EventList";
 import { UserContext } from "../Providers/UserProvider";
 import Loading from "../Components/Loading";
 
-export default function Dashboard() {
+export default function Dashboard({ events, deleteEvent, setUpdateEvent}) {
   const loggedInUser = useContext(UserContext);
   const user_id = loggedInUser ? loggedInUser.user_id : null;
   const formattedName = loggedInUser
@@ -11,13 +11,20 @@ export default function Dashboard() {
       loggedInUser.displayName.split(" ")[0].substring(1)
     : "default name";
 
+    useEffect(() => {
+      setUpdateEvent(false)
+      return () => {
+      setUpdateEvent(false)
+      }
+    }, [setUpdateEvent])
+
   return (
     <div className="page">
       <h1 className="pg-head">
         {loggedInUser && `${formattedName}'s Dashboard`}{" "}
       </h1>
       <div className="dash-container three-d">
-        <EventList /> 
+        <EventList events={events} deleteEvent={deleteEvent}/>
       </div>
     </div>
   );

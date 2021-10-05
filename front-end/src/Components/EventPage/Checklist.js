@@ -32,6 +32,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     };
 
     if (!bookedStatus[category] === false) {
+      try{
       axios
         .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
         .then((res) => {
@@ -40,7 +41,11 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
             task_name: category,
           };
           updateCost(checklistBody, category);
+
         });
+      }catch (e) {
+        console.warn(e);
+      }
     }
 
     try {

@@ -1,16 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import Event from "./Event";
-import { Link, useLocation } from "react-router-dom";
-import { apiURL } from "../../util/apiURL";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../Providers/UserProvider";
 
-const API = apiURL();
-
-function EventList() {
+function EventList({ events, deleteEvent }) {
   const loggedInUser = useContext(UserContext);
   const user_id = loggedInUser ? loggedInUser.user_id : null;
-  const [events, setEvents] = useState([]);
   const location = useLocation();
   console.log(`event list user_id is ${user_id}`);
 
@@ -32,22 +27,6 @@ function EventList() {
     }
   }, [user_id, location.pathname]);
 
-  // console.log(location)
-  const handleDelete = async (event_id) => {
-    try {
-      await axios.delete(`${API}/events/${user_id}/${event_id}`).then((res) => {
-        const eventsCopy = [...events];
-        const index = eventsCopy.findIndex(
-          (event) => event.event_id === event_id
-        );
-        eventsCopy.splice(index, 1);
-        setEvents(eventsCopy);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <>
       <ul className="dash-events">
@@ -63,8 +42,7 @@ function EventList() {
                 <li key={event.event_id} className="dash-event">
                   <Event
                     event={event}
-                    user_id={user_id}
-                    handleDelete={handleDelete}
+                    deleteEvent={deleteEvent}
                   />
                 </li>
               );
