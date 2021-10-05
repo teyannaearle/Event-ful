@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "./Providers/UserProvider";
 import { apiURL } from "./util/apiURL";
@@ -23,14 +23,13 @@ import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
 
-
 const API = apiURL();
 
 function App() {
   const loggedInUser = useContext(UserContext);
   const [user_id, setUserId] = useState(null);
   const [events, setEvents] = useState([]);
-  const [updateEvent, setUpdateEvent] = useState(false)
+  const [updateEvent, setUpdateEvent] = useState(false);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const location = useGeoLocation();
@@ -60,23 +59,24 @@ function App() {
       // cleanup
       // setUserId(null)
     };
-  }, [loggedInUser])
+  }, [loggedInUser]);
 
   useEffect(() => {
     if (user_id) {
-    axios
-      .get(`${API}/events/${user_id}`)
-      .then(
-        (res) => {
-          setEvents(res.data.message);
-        },
-        (e) => {
+      axios
+        .get(`${API}/events/${user_id}`)
+        .then(
+          (res) => {
+            setEvents(res.data.message);
+          },
+          (e) => {
+            console.error(e);
+          }
+        )
+        .catch((e) => {
           console.error(e);
-        }
-      )
-      .catch((e) => {
-        console.error(e);
-      })};
+        });
+    }
   }, [user_id, updateEvent]);
 
   const deleteEvent = async (event_id) => {
@@ -92,9 +92,8 @@ function App() {
     } catch (error) {
       console.error(error);
     }
-  }; 
+  };
 
- 
   return (
     <div className="site">
       {/* <UserProvider> */}
@@ -102,7 +101,7 @@ function App() {
         <ScrollToTop />
         <Switch>
           <Route exact path="/">
-            
+            {user_id ? <NavBar /> : null}
             <Landing />
           </Route>
 
@@ -116,7 +115,7 @@ function App() {
 
           <Route path="/dashboard/new_event/checklist/:id">
             <NavBar />
-            <EventCheckboxPg />
+            <EventCheckboxPg setUpdateEvent={setUpdateEvent} />
           </Route>
 
           <Route path="/dashboard/new_event">
@@ -131,7 +130,12 @@ function App() {
 
           <Route path="/dashboard">
             <NavBar />
-            <Dashboard user_id={user_id} deleteEvent={deleteEvent} events={events} />
+            <Dashboard
+              user_id={user_id}
+              deleteEvent={deleteEvent}
+              events={events}
+              setUpdateEvent={setUpdateEvent}
+            />
           </Route>
 
           <Route path="/task/:category/:event_id/:task_id">

@@ -6,6 +6,8 @@ import { apiURL } from "../util/apiURL";
 import "./EditEvent.css";
 import { UserContext } from "../Providers/UserProvider";
 import CapitalizeEvent from "../Components/CapitalizeEvent";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const API = apiURL();
 
@@ -77,7 +79,7 @@ function EditEvent({ setUpdateEvent }) {
         event_time: "",
       });
     };
-  }, [user_id, event_id]);
+  }, [user_id, event_id, setUpdateEvent]);
 
   useEffect(() => {
     try {
@@ -160,7 +162,9 @@ function EditEvent({ setUpdateEvent }) {
       updateEvent(event, event_id);
       history.push("/dashboard");
     } else {
-      window.alert("Choose at least one vendor to add to your checklist.");
+      toast.error("Choose at least one vendor to add to your checklist", {
+        toastId: "customId"
+      });
     }
   };
 
@@ -365,6 +369,10 @@ function EditEvent({ setUpdateEvent }) {
             </Link>
           </div>
         </form>
+        <ToastContainer 
+             autoClose={false}
+             position="bottom-center"
+             />
       </div>
     </>
   );
