@@ -205,11 +205,38 @@ button:hover {
 .eventform-container {
   width: 100%;
   display: grid;
-  grid-template-columns: 50% 50%;
-  text-align: center;
+  grid-template-columns: max-content 50%;
+  text-align: left;
   justify-content: center;
   border-radius: 10px;
   gap: 8px;
+  margin: auto;
+  row-gap: 20px;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.eventform-container label {
+  font-weight: bold;
+  font-size: large;
+}
+
+.eventform-container input {
+  width: 100%;
+  font-size: large;
+}
+
+.eventform-container button {
+  grid-column: span 2;
+  /* grid-row: span 2; */
+  width: 60%;
+  font-size: large;
+  margin: auto;
+  margin-top: 15px;
+}
+
+.newevent-pg {
+  height: 100vh;
 }
 
 #checklist-container {
@@ -832,9 +859,20 @@ span.press {
 /* DASHBOARD */
 
 .dash-container {
-  width: 85%;
+  width: 100%;
   border-radius: 8px;
+  height: 50%;
+  /* margin: auto; */
+}
+
+.dash-container section {
+  display: flex;
+  align-items: center;
+  width: 70%;
   margin: auto;
+  padding: 20px;
+  border-radius: 20px;
+  height: 100%;
 }
 
 .dash-events {

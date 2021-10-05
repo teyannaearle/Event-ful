@@ -54,7 +54,7 @@ function App() {
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           setUserId(checkUser.data.payload.user_id);
-          setSignedOut(false)
+          setSignedOut(false);
         }
       }
     })();
@@ -107,6 +107,7 @@ function App() {
         ) : (
           <Banner />
         )}
+        <NavBar />
         <Switch>
           <Route exact path="/">
             <Landing />

@@ -42,8 +42,8 @@ function EventForm() {
   }
 
   return (
-    <section>
-      <form className="eventform-container three-d" onSubmit={handleSubmit}>
+    <section className="three-d">
+      <form className="eventform-container" onSubmit={handleSubmit}>
         <label htmlFor="event_name">New Event</label>
         <input
           className="three-d pg-input"
@@ -65,7 +65,7 @@ function EventForm() {
           min={1}
           required
         />
-        <label htmlFor="event_time">Time of your Event</label>
+        <label htmlFor="event_time">Event Time</label>
         <input
           className="three-d pg-input"
           id="event_time"
