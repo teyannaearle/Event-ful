@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const API = apiURL();
 
-export default function EventCheckbox() {
+export default function EventCheckbox({setUpdateEvent}) {
   const loggedInUser = useContext(UserContext);
   const { id } = useParams();
   const history = useHistory();
@@ -39,6 +39,7 @@ export default function EventCheckbox() {
         };
         axios
           .post(`${API}/checklist/${user_id}/${id}`, category)
+          .then((res) => {setUpdateEvent(true)})
           .catch((c) => console.warn("catch", c));
       }
     }
@@ -55,7 +56,6 @@ export default function EventCheckbox() {
       addToCheckedList();
       history.push("/dashboard");
     } else {
-      // window.alert("Choose at least one vendor to add to your checklist.")
       toast.error("Choose at least one vendor to add to your checklist", {
         toastId: "customId"
       });
@@ -68,10 +68,6 @@ export default function EventCheckbox() {
 
   return (
     <section className="NewEvent">
-             <ToastContainer 
-             autoClose={false}
-             position="center"
-             />
       <form className=" col-h three-d" onSubmit={handleSubmit}>
         <span className="checkbox-span">
           <label className="check-container edit-checkbox">
@@ -199,6 +195,10 @@ export default function EventCheckbox() {
           Submit
         </button>
       </form>
+      <ToastContainer 
+             autoClose={false}
+             position="bottom-center"
+             />
     </section>
   );
 }

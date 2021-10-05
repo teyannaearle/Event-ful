@@ -1,13 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext , useEffect} from "react";
 import EventList from "../Components/Dashboard/EventList";
 import { UserContext } from "../Providers/UserProvider";
 
-export default function Dashboard({user_id, events, deleteEvent}) {
+export default function Dashboard({user_id, events, deleteEvent, setUpdateEvent}) {
   const loggedInUser = useContext(UserContext);
   const formattedName = loggedInUser
     ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
       loggedInUser.displayName.split(" ")[0].substring(1)
     : "default name";
+
+    useEffect(() => {
+      setUpdateEvent(false)
+      return () => {
+      setUpdateEvent(false)
+      }
+    }, [setUpdateEvent])
 
   return (
     <div className="page">
