@@ -1,15 +1,14 @@
 import React from "react";
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
-import { UserContext } from "../Providers/UserProvider.js";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API = apiURL();
 
-export default function EventCheckbox() {
-  const loggedInUser = useContext(UserContext);
+export default function EventCheckbox({ setUpdateEvent, user_id }) {
   const { id } = useParams();
   const history = useHistory();
   const [eventForm, setEventForm] = useState({
@@ -27,10 +26,8 @@ export default function EventCheckbox() {
     party_clown: false,
   });
 
-  //pass props from eventForm to represent the name,date, budget, etc.
   const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
-    const { user_id } = loggedInUser;
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
@@ -38,6 +35,9 @@ export default function EventCheckbox() {
         };
         axios
           .post(`${API}/checklist/${user_id}/${id}`, category)
+          .then((res) => {
+            setUpdateEvent(true);
+          })
           .catch((c) => console.warn("catch", c));
       }
     }
@@ -54,20 +54,16 @@ export default function EventCheckbox() {
       addToCheckedList();
       history.push("/dashboard");
     } else {
-      // window.alert("Choose at least one vendor to add to your checklist.")
-      // toast("Wow so easy !")
+      toast.error("Choose at least one vendor to add to your checklist", {
+        toastId: "customId",
+      });
     }
   };
 
-  if (loggedInUser) {
-    console.log(`checklist user_id is ${loggedInUser.user_id}`);
-  }
-
   return (
-    <section className="NewEvent">
-             <ToastContainer />
+    <section className="eventcheckbox">
       <form className=" col-h three-d" onSubmit={handleSubmit}>
-        <span className="checkbox-span">
+        <span className="checkbox-span new-checkbox">
           <label className="check-container edit-checkbox">
             <input
               value="catering"
@@ -76,7 +72,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category">Caterer</span>
+            <span className="category">&#127869; Caterer</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -86,7 +82,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category">DJ</span>
+            <span className="category"> &#128266; DJ</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -96,7 +92,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Musician</span>
+            <span className="category"> &#127926; Musician</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -106,7 +102,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Photographer</span>
+            <span className="category"> &#128248; Photographer</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -116,7 +112,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Party Rental</span>
+            <span className="category"> &#129681; Party Rental</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -126,7 +122,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Videographer</span>
+            <span className="category"> &#128249; Videographer</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -136,7 +132,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Venues</span>
+            <span className="category"> &#127976; Venues</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -146,7 +142,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Balloon Services</span>
+            <span className="category"> &#127880; Balloon Services</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -156,7 +152,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Floral Designer</span>
+            <span className="category"> &#128144; Floral Designer</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -166,7 +162,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Magician</span>
+            <span className="category"> &#127913; Magician</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -176,7 +172,7 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Character Actors</span>
+            <span className="category"> &#129464; Character Actors</span>
           </label>
           <label className="check-container edit-checkbox">
             <input
@@ -186,13 +182,14 @@ export default function EventCheckbox() {
               onChange={toggleState}
             />
             <span className="checkmark"></span>
-            <span className="category"> Clowns</span>
+            <span className="category"> &#129313; Clowns</span>
           </label>
         </span>
         <button className="three-d pg-buttons" type="submit">
           Submit
         </button>
       </form>
+      <ToastContainer autoClose={false} position="bottom-center" />
     </section>
   );
 }

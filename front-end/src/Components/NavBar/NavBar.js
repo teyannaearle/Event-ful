@@ -5,7 +5,7 @@ import "./NavBar.css";
 import { userSignOut } from "../../Services/Firebase";
 import { UserContext } from "../../Providers/UserProvider";
 
-export default function NavBar() {
+export default function NavBar({setSignedOut}) {
   const [vendorClicked, setVendorClicked] = useState(false);
   const history = useHistory();
   const handleVendorClick = () => {
@@ -26,23 +26,15 @@ export default function NavBar() {
       title: "My Favorites",
       url: `/favorites`,
       cName: "pg-buttons nav-but",
-    },
-    // {
-    //   title: "Settings",
-    //   url: `/settings`,
-    //   cName: "nav-links",
-    // },
-    // {
-    //   title: "Logout",
-    //   url: "/logo",
-    //   cName: "nav-links-mobile",
-    // },
+    }
   ];
+  
   const signOut = async () => {
     try {
       let res = await userSignOut();
       if (res === null) {
-        history.push("/");
+        setSignedOut(true)
+        history.push("/")
       }
     } catch (e) {
       console.warn(e);
@@ -51,8 +43,8 @@ export default function NavBar() {
 
   return (
     <nav className="NavBarItems">
-      <Link to="/">
-        <h1 className="navbar-logo">Event(ful) &#127881;</h1>
+      <Link to="/" className="navbar-logo">
+        <h1> Event(ful) &#127881;</h1>
       </Link>
 
       <ul className="accountNav">

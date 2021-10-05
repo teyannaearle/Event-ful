@@ -2,7 +2,7 @@ import React from "react";
 import BookedVendorsList from "../Components/Booked/BookedVendorsList";
 import { useHistory, useParams } from "react-router";
 
-export default function Booked() {
+export default function Booked({user_id}) {
   let history = useHistory();
   const { event_name } = useParams();
   return (
@@ -17,7 +17,7 @@ export default function Booked() {
 
       <div className="page">
         <h1 className="pg-head"> Booked Vendors for {event_name} </h1>
-        <BookedVendorsList />
+        <BookedVendorsList user_id={user_id}/>
       </div>
     </>
   );

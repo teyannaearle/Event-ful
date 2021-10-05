@@ -11,22 +11,30 @@ a:hover,
 a:focus,
 a:active {
   text-decoration: none;
+}
+
+a{
   color: inherit;
 }
+
 
 html,
 #root,
 .site {
   min-height: 100vh;
-  flex: 1;
   width: 100%;
   overflow-x: hidden;
+}
+
+img{
+  border-radius: 4px;
 }
 
 .site {
   padding-bottom: 100px;
   /* position: relative; */
 }
+
 
 h1,
 h2,
@@ -128,7 +136,7 @@ button:hover {
 }
 
 .pg-head {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .pg-input {
@@ -163,16 +171,22 @@ button:hover {
 }
 
 .page {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.NotFound a{
+  padding: 20px;
+}
+
+
 /* EVENT PAGE */
 
 .event-page {
   margin-top: 0;
+   /* padding-bottom: 100px; */
 }
 
 #all-booked {
@@ -183,7 +197,8 @@ button:hover {
 }
 
 .eventpage-container {
-  width: 95%;
+  /* width: 95%; */
+  width: 80%;
   display: grid;
   grid-template-columns: 50% 50%;
   justify-items: center;
@@ -193,12 +208,37 @@ button:hover {
 .eventform-container {
   width: 100%;
   display: grid;
-  grid-template-columns: 50% 50%;
-  text-align: center;
+  grid-template-columns: max-content 50%;
+  text-align: left;
   justify-content: center;
   border-radius: 10px;
   gap: 8px;
+  margin: auto;
+  row-gap: 20px;
+  align-items: center;
+  column-gap: 10px;
 }
+
+.eventform-container label {
+  font-weight: bold;
+  font-size: large;
+}
+
+.eventform-container input {
+  width: 100%;
+  font-size: large;
+}
+
+.eventform-container button {
+  grid-column: span 2;
+  /* grid-row: span 2; */
+  width: 60%;
+  font-size: large;
+  margin: auto;
+  margin-top: 15px;
+}
+
+
 
 #checklist-container {
   width: 100%;
@@ -264,19 +304,19 @@ button:hover {
 }
 
 .check-container {
-  display: block;
-  position: relative;
+  /* display: block;
+  position: relative; */
   /* padding-left: 35px;
   margin-bottom: 12px; */
   cursor: pointer;
-  font-size: 22px;
+  /* font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; */
+  /* justify-content: center; */
 }
 
 .check-container input {
@@ -432,21 +472,35 @@ button:hover {
 
 .budget-list {
   width: 100%;
-  height: 90%;
-}
-
-.update {
+  height: 70%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: larger;
 }
 
-#budget-update {
+.update {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  font-size: x-large;
+  margin-top: 10px;
+}
+
+#budget-update{
+  width: 100%;
+  height: 100% ;
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* #budget-update {
   height: 100%;
   display: grid;
   grid-template-rows: 10% 90%;
-}
+} */
 
 .budget-sum {
   border: 0;
@@ -491,7 +545,7 @@ button:hover {
   justify-content: center;
 }
 .countdown {
-  width: 70%;
+  width: 60%;
   margin: auto;
   display: flex;
   justify-content: space-around;
@@ -503,6 +557,7 @@ button:hover {
 
 .col-h {
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 /* VENDOR SHOW PAGE */
@@ -1167,6 +1222,53 @@ span.press {
   color: black;
 }
 
+/* NEW EVENT PAGE */
+
+.newEvent-container {
+  width: 100%;
+  border-radius: 8px;
+  height: 50%;
+}
+
+.newEvent-container section {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 20px;
+  height: 100%;
+}
+
+.eventcheckbox-pg section {
+  width: 50%;
+}
+
+.eventcheckbox form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.eventcheckbox form button {
+  width: 50%;
+  margin-top: 10px;
+  font-size: large;
+}
+
+.new-checkbox label {
+  margin-bottom: 12px;
+  font-size: x-large;
+  display: flex;
+  align-items: center;
+}
+
+.newevent-pg {
+  height: 100vh;
+}
+
 @media only screen and (max-width: 1300px) {
   /* DASHBOARD */
   .plan {
@@ -1200,18 +1302,36 @@ span.press {
     /* width: 150px;  */
     left: 18%;
   }
+    /* EVENT PAGE */
+    .eventpage-container {
+      grid-template-columns: 100%;
+      width: 75%;
+    }
+    #countdown-container {
+      grid-column: span 1;
+      margin-top: 20px;
+    }
+
+    .budget-list{
+      height: 100%;
+    }
+
+ .update{
+   order: -1;
+ }
 }
 
 @media only screen and (max-width: 1000px) {
   /* EVENT PAGE */
+
   .eventpage-container {
-    grid-template-columns: 100%;
+    /* grid-template-columns: 100%; */
     width: 75%;
   }
 
-  #countdown-container {
+  /* #countdown-container {
     grid-column: span 1;
-  }
+  } */
   /* VENDOR SHOW */
   .like-span {
     /* top: 0;
@@ -1388,6 +1508,9 @@ span.press {
   }
 }
 @media only screen and (max-width: 500px) {
+  .page{
+    margin-top: 30px;
+  }
   .pg-buttons:hover {
     transform: none;
   }
@@ -1498,9 +1621,10 @@ span.press {
     width: 80%;
   }
 
-  #budget-container h2 {
+  /* #budget-container h2 {
     margin-bottom: 20px;
-  }
+  } */
+  
 
   #budget-container div {
     margin-bottom: 5px;

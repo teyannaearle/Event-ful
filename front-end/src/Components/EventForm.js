@@ -6,8 +6,7 @@ import { UserContext } from "../Providers/UserProvider";
 
 const API = apiURL();
 
-function EventForm() {
-  const loggedInUser = useContext(UserContext);
+function EventForm({user_id}) {
   let history = useHistory();
   const [myEvent, setEvent] = useState({
     event_name: "",
@@ -17,7 +16,6 @@ function EventForm() {
   });
 
   const addEvent = () => {
-    const { user_id } = loggedInUser
     try {
       axios.post(`${API}/events/${user_id}`, myEvent).then((res) => {
         const id = res.data.payload.event_id;
@@ -37,13 +35,9 @@ function EventForm() {
     addEvent();
   };
 
-if (loggedInUser) {
-  console.log(`event form user_id is ${loggedInUser.user_id}`)
-}
-
   return (
-    <section>
-      <form className="eventform-container three-d" onSubmit={handleSubmit}>
+    <section className="three-d">
+      <form className="eventform-container" onSubmit={handleSubmit}>
         <label htmlFor="event_name">New Event</label>
         <input
           className="three-d pg-input"
@@ -52,6 +46,7 @@ if (loggedInUser) {
           value={myEvent.name}
           placeholder="Name your Event"
           onChange={handleTextChange}
+          required
         />
         <label htmlFor="event_budget">Event Budget</label>
         <input
@@ -61,8 +56,10 @@ if (loggedInUser) {
           value={myEvent.budget}
           placeholder="Set your Budget"
           onChange={handleTextChange}
+          min={1}
+          required
         />
-        <label htmlFor="event_time">Time of your Event</label>
+        <label htmlFor="event_time">Event Time</label>
         <input
           className="three-d pg-input"
           id="event_time"
@@ -70,6 +67,7 @@ if (loggedInUser) {
           value={myEvent.time}
           placeholder="Enter Event Time"
           onChange={handleTextChange}
+          required
         />
         <label htmlFor="event_date">Event Date</label>
         <input
@@ -79,6 +77,7 @@ if (loggedInUser) {
           value={myEvent.date}
           placeholder="Enter Event Date"
           onChange={handleTextChange}
+          required
         />
         <button className="pg-buttons" type="submit">
           Create Event

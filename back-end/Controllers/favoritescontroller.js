@@ -16,26 +16,34 @@ const db = require("../db/dbConfig");
 // INDEX
 favorites.get("/:user_id", async (req, res) => {
   const { user_id } = req.params;
-  try {
-    const allFavoriteVendors = await getAllFavorites(user_id);
-    if (allFavoriteVendors.length > 0) {
-      res.status(200).json({
-        success: true,
-        message: allFavoriteVendors,
-      });
-    } else {
-      // throw `No favorite vendors found for user ID ${user_id}`;
-      res.status(404).json({
-        success: false,
-        message: `No favorite vendors found for user ID ${user_id}`,
-      });
-    }
-  } catch (e) {
-    res.status(404).json({
-      success: false,
-      message: e,
+
+  const allFavoriteVendors = await getAllFavorites(user_id);
+  console.log(allFavoriteVendors)
+ 
+    res.status(200).json({
+      success: true,
+      message: allFavoriteVendors,
     });
-  }
+  // try {
+  //   const allFavoriteVendors = await getAllFavorites(user_id);
+  //   if (allFavoriteVendors.length > 0) {
+  //     res.status(200).json({
+  //       success: true,
+  //       message: allFavoriteVendors,
+  //     });
+  //   } else {
+  //     // throw `No favorite vendors found for user ID ${user_id}`;
+  //     res.status(404).json({
+  //       success: false,
+  //       message: `No favorite vendors found for user ID ${user_id}`,
+  //     });
+  //   }
+  // } catch (e) {
+  //   res.status(404).json({
+  //     success: false,
+  //     message: e,
+  //   });
+  // }
 });
 
 // SHOW

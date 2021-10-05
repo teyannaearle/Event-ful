@@ -2,8 +2,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "./Providers/UserProvider";
 import { apiURL } from "./util/apiURL";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "./App.css";
 import useGeoLocation from "./hooks/useGeoLocation";
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
@@ -21,24 +19,27 @@ import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
 import FourOFour from "./Pages/FourOFour";
+import Banner from "./Components/Banner";
 import axios from "axios";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./App.css";
 
 const API = apiURL();
 
 function App() {
   const loggedInUser = useContext(UserContext);
-  if (loggedInUser) {
-    console.log(`app user email is ${loggedInUser.email}`);
-    // console.log(`app user name is ${loggedInUser.displayName.split(" ")[0][0].toUpperCase()+loggedInUser.displayName.split(" ")[0].substring(1)}`)
-  }
-  const location = useGeoLocation();
+  const [user_id, setUserId] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [updateEvent, setUpdateEvent] = useState(false);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
+  const [signedOut, setSignedOut] = useState(true);
+  const [formattedName, setFormattedName] = useState("")
+  const location = useGeoLocation();
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
-  const [user_id, setUserId] = useState(null);
 
   useEffect(() => {
     if (location.coordinates) {
@@ -54,23 +55,71 @@ function App() {
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           setUserId(checkUser.data.payload.user_id);
+          setSignedOut(false);
         }
+
+        const name = loggedInUser
+        ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
+          loggedInUser.displayName.split(" ")[0].substring(1)
+        : "default name";
+
+        setFormattedName(name)
+        console.log(name)
       }
     })();
     return () => {
       // cleanup
       // setUserId(null)
     };
-  }, [loggedInUser])
+  }, [loggedInUser]);
+
+  useEffect(() => {
+    if (user_id) {
+      axios
+        .get(`${API}/events/${user_id}`)
+        .then(
+          (res) => {
+            setEvents(res.data.message);
+          },
+          (e) => {
+            console.error(e);
+          }
+        )
+        .catch((e) => {
+          console.error(e);
+        });
+    }
+  }, [user_id, updateEvent]);
+
+  const deleteEvent = async (event_id) => {
+    try {
+      await axios.delete(`${API}/events/${user_id}/${event_id}`).then((res) => {
+        const eventsCopy = [...events];
+        const index = eventsCopy.findIndex(
+          (event) => event.event_id === event_id
+        );
+        eventsCopy.splice(index, 1);
+        setEvents(eventsCopy);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
 
   return (
     <div className="site">
       {/* <UserProvider> */}
       <Router>
         <ScrollToTop />
+        {signedOut ? (
+           <Banner /> 
+        ) : (
+          <NavBar setSignedOut={setSignedOut} />
+        )}
         <Switch>
           <Route exact path="/">
-            
             <Landing />
           </Route>
 
@@ -83,53 +132,49 @@ function App() {
           </Route>
 
           <Route path="/dashboard/new_event/checklist/:id">
-            <NavBar />
-            <EventCheckboxPg />
+            <EventCheckboxPg setUpdateEvent={setUpdateEvent} user_id={user_id} />
           </Route>
 
           <Route path="/dashboard/new_event">
-            <NavBar />
-            <NewEventForm />
+            <NewEventForm user_id={user_id} />
           </Route>
 
           <Route path="/dashboard/:event_id/edit">
-            <NavBar />
-            <EditFormPage />
+            <EditFormPage setUpdateEvent={setUpdateEvent} user_id={user_id}  />
           </Route>
 
           <Route path="/dashboard">
-            <NavBar />
-            <Dashboard user_id={user_id}/>
+            <Dashboard
+              deleteEvent={deleteEvent}
+              events={events}
+              setUpdateEvent={setUpdateEvent}
+              user_id={user_id}
+              formattedName={formattedName}
+            />
           </Route>
 
           <Route path="/task/:category/:event_id/:task_id">
-            <NavBar />
-            <EditBooked lat={lat} lng={lng} formatter={formatter} />
+            <EditBooked lat={lat} lng={lng} formatter={formatter} user_id={user_id} />
           </Route>
 
           <Route path="/event/:event_id">
-            <NavBar />
-            <Event formatter={formatter} />
+            <Event formatter={formatter} user_id={user_id} />
           </Route>
 
           <Route path="/vendor/:category/:provider_id">
-            <NavBar />
-            <VendorShow />
+            <VendorShow user_id={user_id} />
           </Route>
 
           <Route path="/favorites">
-            <NavBar />
-            <Favorites />
+            <Favorites user_id={user_id} formattedName={formattedName}/>
           </Route>
 
           <Route path="/vendors/:category">
-            <NavBar />
-            <VendorIndex location={location} />
+            <VendorIndex location={location}  />
           </Route>
 
           <Route path="/booked/:event_id/:event_name">
-            <NavBar />
-            <Booked />
+            <Booked user_id={user_id} />
           </Route>
 
           <Route path="*">

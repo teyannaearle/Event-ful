@@ -1,22 +1,40 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import EventList from "../Components/Dashboard/EventList";
-import { UserContext } from "../Providers/UserProvider";
+import Loading from "../Components/Loading";
 
-export default function Dashboard({user_id}) {
-  const loggedInUser = useContext(UserContext);
-  const formattedName = loggedInUser
-    ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
-      loggedInUser.displayName.split(" ")[0].substring(1)
-    : "default name";
+export default function Dashboard({
+  events,
+  deleteEvent,
+  setUpdateEvent,
+  user_id,
+  formattedName,
+}) {
+  
+  useEffect(() => {
+    setUpdateEvent(false);
+    return () => {
+      setUpdateEvent(false);
+    };
+  }, [setUpdateEvent]);
 
   return (
     <div className="page">
-      <h1 className="pg-head">
-        {loggedInUser && `${formattedName}'s Dashboard`}{" "}
-      </h1>
-      <div className="dash-container three-d">
-        <EventList user_id={user_id}/>
-      </div>
+      {user_id ? (
+        <>
+          <h1 className="pg-head">
+            {`${formattedName}'s Dashboard`}{" "}
+          </h1>
+          <div className="dash-container three-d">
+            <EventList
+              events={events}
+              deleteEvent={deleteEvent}
+              user_id={user_id}
+            />
+          </div>
+        </>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

@@ -28,16 +28,16 @@ function Budget({ categories, budget, shownCost, formatter }) {
       budgetStatus === budget
     ) {
       status = (
-        <p>
+        <p style={{color: "green"}}>
           {" "}
-          You have {formatter.format(budgetStatus)} left before you hit your
+          You have {formatter.format(budgetStatus)} left until you hit your
           budget
         </p>
       );
     } else if (budgetStatus === 0) {
-      status = <p>You've reached your budget!</p>;
+      status = <p style={{color: "green"}}>You've reached your budget!</p>;
     } else {
-      status = <p>You're {formatter.format(budgetStatus * -1)} over budget</p>;
+      status = <p style={{color: "red"}}>You're {formatter.format(budgetStatus * -1)} over budget</p>;
     }
 
     return status;
@@ -46,7 +46,6 @@ function Budget({ categories, budget, shownCost, formatter }) {
   return (
     <div className="budget-list">
       <div id="budget-update">
-        <div className="update">{budgetUpdate()}</div>
         <div className="budget-sum">
           <div>
             <h3>Summary of Costs</h3>
@@ -68,6 +67,7 @@ function Budget({ categories, budget, shownCost, formatter }) {
             </ul>
           </div>
         </div>
+        <div className="update">{budgetUpdate()}</div>
       </div>
     </div>
   );
