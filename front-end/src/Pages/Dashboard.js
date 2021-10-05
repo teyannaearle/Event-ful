@@ -6,7 +6,7 @@ import Loading from "../Components/Loading";
 export default function Dashboard({ events, deleteEvent, setUpdateEvent }) {
   const loggedInUser = useContext(UserContext);
   const user_id = loggedInUser ? loggedInUser.user_id : null;
-  const formattedName = loggedInUser
+  const formattedName = user_id
     ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
       loggedInUser.displayName.split(" ")[0].substring(1)
     : "default name";
@@ -20,22 +20,23 @@ export default function Dashboard({ events, deleteEvent, setUpdateEvent }) {
 
   return (
     <div className="page">
-      {user_id ? (
+      {user_id && (
         <>
           <h1 className="pg-head">
-            {loggedInUser && `${formattedName}'s Dashboard`}{" "}
+            {user_id && `${formattedName}'s Dashboard`}{" "}
           </h1>
           <div className="dash-container three-d">
             <EventList
               events={events}
               deleteEvent={deleteEvent}
-              user_id={user_id}
             />
           </div>
         </>
-      ) : (
-        <Loading />
-      )}   
+      ) 
+      //: (
+        // <Loading />
+     // )
+      }   
     </div>
   );
 }
