@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { UserContext } from "../Providers/UserProvider";
+import Loading from "./Loading";
 
 const PrivateRoute = ({
   component: RouteComponent,
@@ -16,7 +17,7 @@ const PrivateRoute = ({
   ...rest
 }) => {
   const currentUser = useContext(UserContext);
-  const [loaded, setLoaded] = useState(false);
+ 
 
   // useEffect(() => {
   //   setTimeout(() => {
@@ -27,6 +28,9 @@ const PrivateRoute = ({
   //   };
   // }, []);
 
+  // if (!loaded) {
+  //   return <Loading />
+  // }
   return (
     <Route
       {...rest}
