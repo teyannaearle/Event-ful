@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { auth } from "../Services/Firebase";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+import Loading from "../Components/Loading";
 
 const API = apiURL();
 export const UserContext = createContext();
@@ -14,14 +15,11 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     auth.onAuthStateChanged((loggedInUser) => {
       console.log("onAuthStateChanged");
-      // console.log(`userprovider line 14, user is ${user}`)
-      // console.log(Object.keys(user))
+      console.log(loggedInUser);
       if (loggedInUser) {
-        // history.push("/dashboard");
         console.log(`User provider current user is ${loggedInUser.email}`);
         setCurrentUser(loggedInUser);
       } else {
-        // history.push("/signin")
         setCurrentUser(null);
       }
     });
