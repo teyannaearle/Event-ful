@@ -309,6 +309,7 @@ button:hover {
   /* padding-left: 35px;
   margin-bottom: 12px; */
   cursor: pointer;
+
   /* font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -317,6 +318,12 @@ button:hover {
   display: flex;
   align-items: center; */
   /* justify-content: center; */
+}
+
+.tasklist{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .check-container input {
@@ -825,6 +832,10 @@ span.press {
 .directions {
   font-size: larger;
   text-align: center;
+  /* font-weight: bold; */
+  margin-bottom: 20px;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+
 }
 
 .ven-info {
@@ -1513,6 +1524,27 @@ span.press {
   }
   .pg-buttons:hover {
     transform: none;
+  }
+
+  /* EVENT FORM */
+
+  .newEvent-container section {
+    width: 95%;
+    padding: 0;
+  }
+
+  .eventform-container{
+    width: 100%;
+  }
+
+  .eventform-container label {
+    font-size: medium;
+  }
+
+  .eventform-container input{
+    font-size: medium;
+    width: 80%;
+    
   }
   /*DASHBOARD*/
   .plan-ev {

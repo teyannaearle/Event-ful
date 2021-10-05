@@ -67,7 +67,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     if (bookedStatus[category.name] === false) {
       return (
         <Link to={`/task/${category.name}/${event_id}/${id}`}>
-        <label className="check-container"> 
+        <label className="check-container tasklist"> 
           <input
             onChange={() => updateBookedStatus(category.name)}
             type="checkbox"
