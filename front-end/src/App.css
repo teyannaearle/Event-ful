@@ -249,15 +249,15 @@ button:hover {
 
 .eventcheckbox form button {
   width: 50%;
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: large;
 }
 
 .new-checkbox label {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   font-size: x-large;
-  /* display: flex;
-  justify-content: center; */
+  display: flex;
+  align-items: center;
 }
 
 .newevent-pg {
@@ -328,19 +328,19 @@ button:hover {
 }
 
 .check-container {
-  display: block;
-  position: relative;
+  /* display: block;
+  position: relative; */
   /* padding-left: 35px;
   margin-bottom: 12px; */
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
+  /* cursor: pointer;
+  font-size: 22px; */
+  /* -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
-  display: flex;
+  user-select: none; */
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .check-container input {
