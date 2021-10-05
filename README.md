@@ -56,7 +56,6 @@ For the event that they are planning.
 ### Back-end
 * `cd` into back-end (Must be same level as `package.json`)
 * run `npm install` to install dependencies
-* fix errors if any
 * run `nodemon`
 
 [Documentation](https://documenter.getpostman.com/view/16788389/UUy65PT5)
@@ -66,7 +65,6 @@ For the event that they are planning.
 * `cd` into directory where Event(ful) was cloned
 * `cd` into front-end (Must be same level as `package.json`)
 * run `npm install` to install dependencies
-* fix errors if any
 * run `npm start`
 
 ## Contributors
