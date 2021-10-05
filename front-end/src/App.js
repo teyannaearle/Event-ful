@@ -54,7 +54,7 @@ function App() {
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           setUserId(checkUser.data.payload.user_id);
-          setSignedOut(false)
+          setSignedOut(false);
         }
       }
     })();
@@ -134,7 +134,6 @@ function App() {
 
           <Route path="/dashboard">
             <Dashboard
-              user_id={user_id}
               deleteEvent={deleteEvent}
               events={events}
               setUpdateEvent={setUpdateEvent}

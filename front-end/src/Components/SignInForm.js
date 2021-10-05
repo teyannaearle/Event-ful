@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./SignInForm.css";
 import { userGoogleSignIn, userSignIn } from "../Services/Firebase";
-// import { UserContext } from "../Providers/UserProvider";
+import { UserContext } from "../Providers/UserProvider";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 
 const API = apiURL();
- 
-export default function SignInForm({ updateId }) {
+
+export default function SignInForm() {
   const history = useHistory();
-  // const currentUser = useContext(UserContext);
+  const loggedInUser = useContext(UserContext);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -29,12 +30,7 @@ export default function SignInForm({ updateId }) {
       //  console.log(res)
       if (res === null) {
         setErrorMessage("");
-        // const { email } = input
-        // let checkUser = await axios.get(`${API}/users/${email}`);
-        // if (checkUser.data.success) {
-          // updateId(checkUser.data.payload.user_id);
-          history.push("/");
-        // }
+        history.push("/dashboard");
       } else {
         setErrorMessage("Wrong email or password. Please try again");
         setInput({
@@ -66,7 +62,6 @@ export default function SignInForm({ updateId }) {
           let result = await axios.post(`${API}/users`, newUser);
           console.log(result);
           if (result.data.success) {
-            // updateId(result.data.payload.user_id);
             history.push("/dashboard");
           } else {
             console.log("could not add new user to backend database");
