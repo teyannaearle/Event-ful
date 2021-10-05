@@ -868,6 +868,14 @@ span.press {
   );
 }
 
+.inital-box{
+grid-template-rows: 255px 255px ;
+}
+
+.inital-box span{
+  order: -1;
+}
+
 .dash-event {
   height: 255px;
   width: 100%;
