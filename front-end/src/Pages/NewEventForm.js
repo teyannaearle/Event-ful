@@ -5,9 +5,9 @@ export default function NewEventForm() {
   return (
     <div className="page newevent-pg">
       <h1 className="pg-head">Create a New Event </h1>
-      <div className="dash-container ">
+      <div className="newEvent-container ">
         <EventForm />
       </div>
-    </div>
+     </div>
   );
 }
