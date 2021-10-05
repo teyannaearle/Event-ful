@@ -56,20 +56,22 @@ function EditEvent({ setUpdateEvent }) {
   });
 
   useEffect(() => {
-    try {
-      axios.get(`${API}/events/${user_id}/${event_id}`).then((res) => {
-        const response = res.data.payload;
-        setEvent({
-          event_name: response.event_name,
-          event_budget: response.event_budget,
-          event_date: response.event_date.split("T")[0],
-          event_time: response.event_time,
+    if (user_id) {
+      try {
+        axios.get(`${API}/events/${user_id}/${event_id}`).then((res) => {
+          const response = res.data.payload;
+          setEvent({
+            event_name: response.event_name,
+            event_budget: response.event_budget,
+            event_date: response.event_date.split("T")[0],
+            event_time: response.event_time,
+          });
+          head.current = response.event_name;
+          setUpdateEvent(false);
         });
-        head.current = response.event_name;
-        setUpdateEvent(false);
-      });
-    } catch (e) {
-      console.error(e);
+      } catch (e) {
+        console.error(e);
+      }
     }
     return () => {
       setEvent({
@@ -82,18 +84,19 @@ function EditEvent({ setUpdateEvent }) {
   }, [user_id, event_id, setUpdateEvent]);
 
   useEffect(() => {
-    try {
-      axios.get(`${API}/checklist/${user_id}/${event_id}`).then((res) => {
-        let initial = initialState.current;
-        res.data.payload.map((service) => {
-          return (initial[service.task_name] = true);
+    if (user_id) {
+      try {
+        axios.get(`${API}/checklist/${user_id}/${event_id}`).then((res) => {
+          let initial = initialState.current;
+          res.data.payload.map((service) => {
+            return (initial[service.task_name] = true);
+          });
+          setChecklist(initial);
         });
-        setChecklist(initial);
-      });
-    } catch (e) {
-      console.error(e);
+      } catch (e) {
+        console.error(e);
+      }
     }
-
     return () => {
       setChecklist({
         catering: false,
@@ -185,6 +188,9 @@ function EditEvent({ setUpdateEvent }) {
       </h1>
       <div className="form-container">
         <form className="edit-eventform three-d" onSubmit={handleSubmit}>
+        <Link to={`/dashboard/${user_id}`}>
+              <button className="pg-buttons cancel-edit">Cancel Edit</button>
+            </Link>
           <div className="edit-input">
             <label>Event Name: </label>
             <input
@@ -227,6 +233,8 @@ function EditEvent({ setUpdateEvent }) {
               onChange={handleChange}
             />
           </div>
+<span className="checkSpan-container">
+<h2>Select Your Event Requirements: </h2>
 
           <span className="checkbox-span">
             <label className="check-container edit-checkbox">
@@ -368,11 +376,9 @@ function EditEvent({ setUpdateEvent }) {
               <span className="category"> Clowns</span>
             </label>
           </span>
+          </span>
           <div className="button-container">
             <button className="pg-buttons">Save Changes</button>
-            <Link to={`/dashboard/${user_id}`}>
-              <button className="pg-buttons">Cancel Edit</button>
-            </Link>
           </div>
         </form>
         <ToastContainer autoClose={false} position="bottom-center" />
