@@ -1,3 +1,12 @@
+.SignUp-Form {
+  position: relative;
+  min-height: 70vh;
+  width: 80%;
+  background: rgb(104, 168, 202, 0.5);
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 8px;
+}
 .Container {
   position: absolute;
   text-align: center;
@@ -7,14 +16,21 @@
   font-family: "Rampart One";
   border: 2px solid black;
   border-radius: 15%;
-  width: 40%;
+  width: 60%;
+  height: 60%;
   padding: 10px;
   background-color: rgba(243, 241, 241, 0.8);
 }
 
+.Container h1 {
+  margin-bottom: 10px;
+}
 .Container form input {
   width: 50%;
   border: 2px solid #000000;
+  font-size: large;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .Container form input:focus {
@@ -25,5 +41,24 @@
   padding: 5px;
   margin: 5px;
   width: 40%;
-  padding-top: 2%;
+}
+
+@media only screen and (max-width: 1200px) {
+  .Container {
+    width: 80%;
+    height: 60%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .SignUp-Form {
+    background: none;
+  }
+  .Container form input {
+    width: 100%;
+  }
+
+  .Container button {
+    width: 80%;
+  }
 }

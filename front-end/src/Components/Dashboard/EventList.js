@@ -1,11 +1,6 @@
 import React from "react";
-import axios from "axios";
-import { useState, useEffect } from "react";
 import Event from "./Event";
 import { Link } from "react-router-dom";
-import { apiURL } from "../../util/apiURL";
-
-const API = apiURL();
 
 function EventList({ user_id, events, deleteEvent }) {
   return (

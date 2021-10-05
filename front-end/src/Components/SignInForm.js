@@ -90,10 +90,11 @@ export default function SignInForm({ updateId }) {
   // }
 
   return (
-      <div>
-      <h1 className="brand h1-SignIn">EVENT( FUL ) &#127881;</h1>
-    <div className="newForm three-d">
-
+      <div className="SignIn-Form ">
+        <p>  &nbsp; </p>  
+      {/* <h1 className="brand h1-SignIn">EVENT( FUL ) &#127881;</h1> */}
+    <div className=" newForm three-d" >
+    &nbsp;
       <form onSubmit={signIn}>
         <label htmlFor="Email"></label>
         <input
@@ -121,11 +122,16 @@ export default function SignInForm({ updateId }) {
         Sign In with Google
       </button>
       <div className="divider"></div>
-      <Link to="/signup">
+      {/* <Link to="/signup">
         <button type="button" className="Login pg-buttons">
           Sign Up
         </button>
-      </Link>
+      </Link> */}
+            <Link to="/SignUp" className="SignUp-But">
+                <p> Dont have an account? <br/>
+                Click Here to make one!
+                </p>
+                </Link>
     </div>
     </div>
   );
