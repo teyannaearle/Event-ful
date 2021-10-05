@@ -1,5 +1,3 @@
-# EVENT(FUL)
-
 # Event(ful) Capstone Party Planning App
 
 
@@ -60,6 +58,8 @@ For the event that they are planning.
 * run `npm install` to install dependencies
 * fix errors if any
 * run `nodemon`
+
+[Documentation](https://documenter.getpostman.com/view/16788389/UUy65PT5)
 
 ### Front-end
 * open new terminal
