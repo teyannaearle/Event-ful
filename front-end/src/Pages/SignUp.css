@@ -18,8 +18,16 @@
   border-radius: 15%;
   width: 60%;
   height: 60%;
-  padding: 10px;
+  padding: 20px;
   background-color: rgba(243, 241, 241, 0.8);
+  display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.Container form{
+  width: 100%;
+  height: max-content;
 }
 
 .Container h1 {
@@ -60,5 +68,12 @@
 
   .Container button {
     width: 80%;
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .Container{
+    height: 75%;
+    width: 95%;
   }
 }
