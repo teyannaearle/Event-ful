@@ -1,6 +1,8 @@
 # Event(ful) Capstone Party Planning App
 
+[Live Site](https://eventful-capstone.netlify.app/)
 
+[Back-end](https://eventful-capstone.herokuapp.com/)
 
 ## Table of Content
 * Overview
