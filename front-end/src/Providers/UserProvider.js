@@ -3,25 +3,25 @@ import { useHistory } from "react-router-dom";
 import { auth } from "../Services/Firebase";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
+import Loading from "../Components/Loading";
 
 const API = apiURL();
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [pending, setPending] = useState(true)
   const history = useHistory();
 
   useEffect(() => {
     auth.onAuthStateChanged((loggedInUser) => {
       console.log("onAuthStateChanged");
-      // console.log(`userprovider line 14, user is ${user}`)
-      // console.log(Object.keys(user))
+      console.log("!!!!!!!!!!!")
+      console.log(loggedInUser)
       if (loggedInUser) {
-        // history.push("/dashboard");
         console.log(`User provider current user is ${loggedInUser.email}`);
         setCurrentUser(loggedInUser);
       } else {
-        // history.push("/signin")
         setCurrentUser(null);
       }
     });
@@ -34,6 +34,7 @@ export const UserProvider = ({ children }) => {
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           currentUser.user_id = checkUser.data.payload.user_id;
+          setPending(false)
         }
       }
     })();
@@ -42,6 +43,10 @@ export const UserProvider = ({ children }) => {
       // setUserId(null)
     };
   }, [currentUser]);
+
+  if (pending) {
+    return <Loading />;
+};
 
   console.log("current user");
   console.log(currentUser);
