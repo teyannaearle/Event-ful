@@ -38,11 +38,9 @@ function App() {
     style: "currency",
     currency: "USD",
   });
-  const [user_id, setUserId] = useState(null);
+  // const [user_id, setUserId] = useState(null);
   
-const updateId = (id) => {
-setUserId(id)
-}
+
 
 
   useEffect(() => {
@@ -84,7 +82,7 @@ setUserId(id)
           </Route>
 
           <Route path="/signin">
-            <SignIn updateId={updateId}/>
+            <SignIn />
           </Route>
 
           <Route path="/dashboard/new_event/checklist/:id">
@@ -104,7 +102,7 @@ setUserId(id)
 
           <Route path="/dashboard">
             <NavBar />
-            <Dashboard user_id={user_id}/>
+            <Dashboard />
           </Route>
 
           <Route path="/task/:category/:event_id/:task_id">

@@ -21,7 +21,7 @@ export default function FavoriteList() {
   useEffect(() => {
     if (user_id) {
 
-    
+  
     axios
       .get(`${API}/favorites/${user_id}`)
       .then(

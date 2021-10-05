@@ -1,10 +1,10 @@
 import React from 'react'
 import SignInForm from '../Components/SignInForm'
 
-export default function SignIn({updateId}) {
+export default function SignIn() {
     return (
         <div>
-            <SignInForm updateId={updateId}/>
+            <SignInForm />
         </div>
     )
 }
