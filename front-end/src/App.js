@@ -107,7 +107,7 @@ function App() {
         ) : (
           <Banner />
         )}
-        <NavBar />
+        {/* <NavBar /> */}
         <Switch>
           <Route exact path="/">
             <Landing />

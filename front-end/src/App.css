@@ -235,6 +235,31 @@ button:hover {
   margin-top: 15px;
 }
 
+.eventcheckbox-pg section {
+  width: 50%;
+}
+
+.eventcheckbox form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.eventcheckbox form button {
+  width: 50%;
+  margin-top: 20px;
+  font-size: large;
+}
+
+.new-checkbox label {
+  margin-bottom: 15px;
+  font-size: x-large;
+  /* display: flex;
+  justify-content: center; */
+}
+
 .newevent-pg {
   height: 100vh;
 }
