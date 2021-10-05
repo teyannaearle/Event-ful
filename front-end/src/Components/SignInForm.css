@@ -1,13 +1,20 @@
 .newForm {
+    text-align: center;
     border: 2px solid black;
-    border-radius: 15%;
+    border-radius: 10%;
     padding: 20px;
-    background-color: rgb(228, 202, 210, 0.8);
-    margin: 5%;
-    width: 20%;
-    height: 10%;
+    background-color: rgba(243, 241, 241, 0.8);
+    /* margin: 5%; */
+    width: 40%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-
+h1 {
+    text-align: center;
+    padding: 3%;
+}
 .newForm input {
     width: 100%;
     margin: 1%;
@@ -15,11 +22,11 @@
 h4:hover {
     background-color: rgb(221, 180, 118)
 }
-link:link {
+/* link:link {
     color: green;
-}
+} */
 .newForm input:focus {
-    border: 3px solid green;
+    border: 3px solid #71b1d5;
 }
 
 .Login {
@@ -32,6 +39,6 @@ link:link {
 .divider {
     border-bottom: 1px black solid;
     padding: 2%;
-    margin: 5px
+    /* margin: 5px */
 }
 
