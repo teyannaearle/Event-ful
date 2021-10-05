@@ -3,10 +3,10 @@ import EventList from "../Components/Dashboard/EventList";
 import { UserContext } from "../Providers/UserProvider";
 import Loading from "../Components/Loading";
 
-export default function Dashboard({ events, deleteEvent, setUpdateEvent }) {
+export default function Dashboard({ events, deleteEvent, setUpdateEvent, user_id}) {
   const loggedInUser = useContext(UserContext);
-  const user_id = loggedInUser ? loggedInUser.user_id : null;
-  const formattedName = user_id
+  // const user_id = loggedInUser ? loggedInUser.user_id : null;
+  const formattedName = loggedInUser
     ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
       loggedInUser.displayName.split(" ")[0].substring(1)
     : "default name";

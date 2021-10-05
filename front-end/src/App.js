@@ -97,16 +97,23 @@ function App() {
     }
   };
 
+
+
   return (
     <div className="site">
       {/* <UserProvider> */}
       <Router>
         <ScrollToTop />
-        {user_id && !signedOut ? (
+        {signedOut ? (
+           <Banner /> 
+        ) : (
+          <NavBar setSignedOut={setSignedOut} />
+        )}
+        {/* {user_id && !signedOut ? (
           <NavBar setSignedOut={setSignedOut} />
         ) : (
           <Banner />
-        )}
+        )} */}
         {/* <NavBar /> */}
         <Switch>
           <Route exact path="/">
@@ -138,6 +145,7 @@ function App() {
               deleteEvent={deleteEvent}
               events={events}
               setUpdateEvent={setUpdateEvent}
+              user_id={user_id}
             />
           </Route>
 
