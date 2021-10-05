@@ -208,12 +208,37 @@ button:hover {
 .eventform-container {
   width: 100%;
   display: grid;
-  grid-template-columns: 50% 50%;
-  text-align: center;
+  grid-template-columns: max-content 50%;
+  text-align: left;
   justify-content: center;
   border-radius: 10px;
   gap: 8px;
+  margin: auto;
+  row-gap: 20px;
+  align-items: center;
+  column-gap: 10px;
 }
+
+.eventform-container label {
+  font-weight: bold;
+  font-size: large;
+}
+
+.eventform-container input {
+  width: 100%;
+  font-size: large;
+}
+
+.eventform-container button {
+  grid-column: span 2;
+  /* grid-row: span 2; */
+  width: 60%;
+  font-size: large;
+  margin: auto;
+  margin-top: 15px;
+}
+
+
 
 #checklist-container {
   width: 100%;
@@ -279,19 +304,19 @@ button:hover {
 }
 
 .check-container {
-  display: block;
-  position: relative;
+  /* display: block;
+  position: relative; */
   /* padding-left: 35px;
   margin-bottom: 12px; */
   cursor: pointer;
-  font-size: 22px;
+  /* font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; */
+  /* justify-content: center; */
 }
 
 .check-container input {
@@ -1195,6 +1220,53 @@ span.press {
   );
   transform: scale(1.05);
   color: black;
+}
+
+/* NEW EVENT PAGE */
+
+.newEvent-container {
+  width: 100%;
+  border-radius: 8px;
+  height: 50%;
+}
+
+.newEvent-container section {
+  display: flex;
+  align-items: center;
+  width: 70%;
+  margin: auto;
+  padding: 20px;
+  border-radius: 20px;
+  height: 100%;
+}
+
+.eventcheckbox-pg section {
+  width: 50%;
+}
+
+.eventcheckbox form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.eventcheckbox form button {
+  width: 50%;
+  margin-top: 10px;
+  font-size: large;
+}
+
+.new-checkbox label {
+  margin-bottom: 12px;
+  font-size: x-large;
+  display: flex;
+  align-items: center;
+}
+
+.newevent-pg {
+  height: 100vh;
 }
 
 @media only screen and (max-width: 1300px) {

@@ -245,7 +245,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category">Caterer</span>
+              <span className="category">&#127869; Caterer</span>
             </label>
 
             <label className="check-container edit-checkbox">
@@ -256,7 +256,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category">DJ</span>
+              <span className="category">&#128266; DJ</span>
             </label>
             <label className="check-container edit-checkbox">
               <input
@@ -266,7 +266,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Musician</span>
+              <span className="category">&#127926; Musician</span>
             </label>
             <label className="check-container edit-checkbox">
               <input
@@ -276,7 +276,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Photographer</span>
+              <span className="category">&#128248; Photographer</span>
             </label>
 
             <label className="check-container edit-checkbox">
@@ -289,7 +289,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Party Rental</span>
+              <span className="category">&#129681; Party Rental</span>
             </label>
 
             <label className="check-container edit-checkbox">
@@ -302,7 +302,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Videographers</span>
+              <span className="category">&#128249; Videographer</span>
             </label>
             <label className="check-container edit-checkbox">
               <input
@@ -312,7 +312,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Venue</span>
+              <span className="category">&#127976; Venue</span>
             </label>
             <label className="check-container edit-checkbox">
               <input
@@ -322,7 +322,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Balloon Services</span>
+              <span className="category">&#127880; Balloon Services</span>
             </label>
             <label className="check-container edit-checkbox">
               <input
@@ -332,7 +332,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Floral Designer</span>
+              <span className="category">&#128144; Floral Designer</span>
             </label>
 
             <label className="check-container edit-checkbox">
@@ -345,7 +345,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Magician</span>
+              <span className="category">  &#127913; Magician</span>
             </label>
 
             <label className="check-container edit-checkbox">
@@ -360,7 +360,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Character Actors</span>
+              <span className="category">&#129464; Character Actors</span>
             </label>
 
             <label className="check-container edit-checkbox">
@@ -373,7 +373,7 @@ function EditEvent({ setUpdateEvent }) {
                 onChange={toggleState}
               />
               <span className="checkmark"></span>
-              <span className="category"> Clowns</span>
+              <span className="category">&#129313; Clowns</span>
             </label>
           </span>
           </span>
