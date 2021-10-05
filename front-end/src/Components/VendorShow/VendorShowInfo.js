@@ -35,7 +35,6 @@ function VendorShowInfo({ business, user_id, category }) {
 
   const handleFav = () => {
     setFavorite(!favorite);
-    // setPressed(!pressed);
     if (!favorite === false) {
       try {
         axios
@@ -51,7 +50,6 @@ function VendorShowInfo({ business, user_id, category }) {
         vendor_name: business.name,
         vendor_address: loc,
         vendor_phone_number: parseNum(business.phone),
-        // vendor_phone_number: business.display_phone,
         vendor_id: business.id,
         vendor_image: business.photos[0],
         vendor_category: category,
@@ -73,8 +71,6 @@ function VendorShowInfo({ business, user_id, category }) {
     if (hover && !favorite) {
       color = "#666";
     } else if (favorite) {
-      // color = "#68a7ca";
-      // color = "#D8BFD8";
       color = "white";
       color = "red";
     } else {
@@ -87,20 +83,20 @@ function VendorShowInfo({ business, user_id, category }) {
   return (
     <>
       <span className="show-header">
-   <span> 
-        <div className="like-div">
-          <i
-            className={`fas fa-heart fa-lg heart ${pressed ? "press" : null}`}
-            onClick={handleFav}
-            style={{ color: heartColor() }}
-            onMouseEnter={() => setHover(!hover)}
-            onMouseLeave={() => setHover(!hover)}
-          ></i>
-          <span className={`like-span ${pressed ? "press" : null}`}>
-            Added to Favorites !
-          </span>
-        </div>
-        <h1>{business.name} </h1>
+        <span>
+          <div className="like-div">
+            <i
+              className={`fas fa-heart fa-lg heart ${pressed ? "press" : null}`}
+              onClick={handleFav}
+              style={{ color: heartColor() }}
+              onMouseEnter={() => setHover(!hover)}
+              onMouseLeave={() => setHover(!hover)}
+            ></i>
+            <span className={`like-span ${pressed ? "press" : null}`}>
+              Added to Favorites !
+            </span>
+          </div>
+          <h1>{business.name} </h1>
         </span>
       </span>
       <div className="ven-info page three-d">
@@ -118,7 +114,12 @@ function VendorShowInfo({ business, user_id, category }) {
           </div>
 
           <div className="flex-row">
-            <Ratings rating={business.rating} widgetRatedColors="#efcc00" widgetSpacings="5px" widgetEmptyColors="#aaa">
+            <Ratings
+              rating={business.rating}
+              widgetRatedColors="#efcc00"
+              widgetSpacings="5px"
+              widgetEmptyColors="#aaa"
+            >
               <Ratings.Widget widgetDimension="30px" />
               <Ratings.Widget widgetDimension="30px" />
               <Ratings.Widget widgetDimension="35px" />

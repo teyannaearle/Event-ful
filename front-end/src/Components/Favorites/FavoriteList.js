@@ -109,9 +109,6 @@ export default function FavoriteList() {
   };
 
   return (
-    // only show this div if user_id
-    // else Loading component
-
     <>
       <div className="dropdown">
         <span>Filter By Category &#x2195;</span>

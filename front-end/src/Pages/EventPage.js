@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import Checklist from "../Components/EventPage/Checklist";
 import Budget from "../Components/EventPage/Budget";
@@ -6,13 +6,11 @@ import Timer from "../Components/EventPage/Timer";
 import { apiURL } from "../util/apiURL";
 import CapitalizeEvent from "../Components/CapitalizeEvent";
 import axios from "axios";
-import { UserContext } from "../Providers/UserProvider";
+
 
 const api = apiURL();
 
-export default function Event({ formatter }) {
-  const loggedInUser = useContext(UserContext);
-  const user_id = loggedInUser ? loggedInUser.user_id : null;
+export default function Event({ formatter, user_id }) {
   const { event_id } = useParams();
   const [eventName, setEventName] = useState("");
   const [categories, setCategories] = useState([]);
