@@ -9,7 +9,7 @@ import CapitalizeEvent from "../Components/CapitalizeEvent";
 
 const API = apiURL();
 
-function EditEvent({setUpdateEvent}) {
+function EditEvent({ setUpdateEvent }) {
   const loggedInUser = useContext(UserContext);
   const user_id = loggedInUser ? loggedInUser.user_id : null;
   const { event_id } = useParams();
@@ -64,7 +64,7 @@ function EditEvent({setUpdateEvent}) {
           event_time: response.event_time,
         });
         head.current = response.event_name;
-        setUpdateEvent(false)
+        setUpdateEvent(false);
       });
     } catch (e) {
       console.error(e);
@@ -115,7 +115,7 @@ function EditEvent({setUpdateEvent}) {
       .put(`${API}/events/${user_id}/${event_id}`, event)
       .then(
         (res) => {
-          setUpdateEvent(true)
+          setUpdateEvent(true);
           const categories = Object.keys(initialState.current);
           for (const name of categories) {
             if (initialState.current[name] && !checklist[name]) {
@@ -181,6 +181,7 @@ function EditEvent({setUpdateEvent}) {
       </h1>
       <div className="form-container">
         <form className="edit-eventform three-d" onSubmit={handleSubmit}>
+        <label>Event Name: </label>
           <input
             id="event_name"
             type="text"
@@ -189,6 +190,7 @@ function EditEvent({setUpdateEvent}) {
             placeholder="Name"
             onChange={handleChange}
           />
+          <label>Budget: </label>
           <input
             id="event_budget"
             type="number"
@@ -197,6 +199,7 @@ function EditEvent({setUpdateEvent}) {
             placeholder="$0.00"
             onChange={handleChange}
           />
+          <label>Time: </label>
           <input
             id="appt-time"
             type="time"
@@ -205,6 +208,7 @@ function EditEvent({setUpdateEvent}) {
             placeholder="Time"
             onChange={handleChange}
           />
+          <label>Time: </label>
           <input
             id="event_date"
             type="date"
@@ -354,10 +358,12 @@ function EditEvent({setUpdateEvent}) {
               <span className="category"> Clowns</span>
             </label>
           </span>
-          <button className="pg-buttons">Save Changes</button>
-          <Link to={`/dashboard/${user_id}`}>
-            <button className="pg-buttons">Cancel Edit</button>
-          </Link>
+          <div className="button-container">
+            <button className="pg-buttons">Save Changes</button>
+            <Link to={`/dashboard/${user_id}`}>
+              <button className="pg-buttons">Cancel Edit</button>
+            </Link>
+          </div>
         </form>
       </div>
     </>
