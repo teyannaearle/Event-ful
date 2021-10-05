@@ -4,7 +4,7 @@
   display: grid;
   text-align: center;
   height: 100%;
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
   border-radius: 10px;
 }
@@ -37,16 +37,37 @@
   display: block;
 } */
 
+.cancel-edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: medium;
+}
+
+.checkSpan-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.checkSpan-container h2{
+  margin-bottom: 20px;
+}
+
 .checkbox-span {
   display: block;
   text-align: left;
+  width: max-content;
 }
 
 .edit-page {
   text-align: center;
 }
 
-.edit-page h1{
+.edit-page h1 {
   padding-bottom: 20px;
 }
 
@@ -64,10 +85,13 @@
 
 .button-container button {
   padding: 5px;
+  width: 50%;
 }
 
-.edit-eventform{
+.edit-eventform {
   border-radius: 10px;
+  position: relative;
+  padding-bottom: 30px;
 }
 
 .edit-input label,
@@ -77,4 +101,11 @@
   text-align: center;
   margin-top: 10px;
 }
+.edit-input label {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
 
+.edit-input {
+  margin-top: 30px;
+}
