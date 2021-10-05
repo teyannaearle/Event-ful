@@ -19,6 +19,7 @@ import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
 import FourOFour from "./Pages/FourOFour";
+import PrivateRoute from "./Components/PrivateRoute";
 import Banner from "./Components/Banner";
 import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -97,18 +98,12 @@ function App() {
     }
   };
 
-
-
   return (
     <div className="site">
       {/* <UserProvider> */}
       <Router>
         <ScrollToTop />
-        {signedOut ? (
-           <Banner /> 
-        ) : (
-          <NavBar setSignedOut={setSignedOut} />
-        )}
+        {signedOut ? <Banner /> : <NavBar setSignedOut={setSignedOut} />}
         {/* {user_id && !signedOut ? (
           <NavBar setSignedOut={setSignedOut} />
         ) : (
@@ -148,6 +143,19 @@ function App() {
               user_id={user_id}
             />
           </Route>
+
+          {/* <PrivateRoute
+            path="/"
+            render={(props) => (
+              <Dashboard
+                {...props}
+                deleteEvent={deleteEvent}
+                events={events}
+                setUpdateEvent={setUpdateEvent}
+                user_id={user_id}
+              />
+            )}
+          /> */}
 
           <Route path="/task/:category/:event_id/:task_id">
             <EditBooked lat={lat} lng={lng} formatter={formatter} />

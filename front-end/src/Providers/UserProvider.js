@@ -45,9 +45,9 @@ export const UserProvider = ({ children }) => {
     };
   }, [currentUser]);
 
-  if (pending) {
-    return <>Loading...</>;
-};
+//   if (pending) {
+//     return <>Loading...</>;
+// };
 
   console.log("current user");
   console.log(currentUser);
