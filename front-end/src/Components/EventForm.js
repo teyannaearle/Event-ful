@@ -17,7 +17,7 @@ function EventForm() {
   });
 
   const addEvent = () => {
-    const { user_id } = loggedInUser
+    const { user_id } = loggedInUser;
     try {
       axios.post(`${API}/events/${user_id}`, myEvent).then((res) => {
         const id = res.data.payload.event_id;
@@ -37,9 +37,9 @@ function EventForm() {
     addEvent();
   };
 
-if (loggedInUser) {
-  console.log(`event form user_id is ${loggedInUser.user_id}`)
-}
+  if (loggedInUser) {
+    console.log(`event form user_id is ${loggedInUser.user_id}`);
+  }
 
   return (
     <section>
