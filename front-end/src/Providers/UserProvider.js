@@ -10,7 +10,7 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [pending, setPending] = useState(true)
+  const [pending, setPending] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -20,10 +20,8 @@ export const UserProvider = ({ children }) => {
       if (loggedInUser) {
         console.log(`User provider current user is ${loggedInUser.email}`);
         setCurrentUser(loggedInUser);
-       
       } else {
         setCurrentUser(null);
-      
       }
     });
   }, [history]);
@@ -35,7 +33,7 @@ export const UserProvider = ({ children }) => {
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           currentUser.user_id = checkUser.data.payload.user_id;
-          setPending(false)
+          setPending(false);
         }
       }
     })();
@@ -45,9 +43,9 @@ export const UserProvider = ({ children }) => {
     };
   }, [currentUser]);
 
-//   if (pending) {
-//     return <>Loading...</>;
-// };
+  //   if (pending) {
+  //     return <>Loading...</>;
+  // };
 
   console.log("current user");
   console.log(currentUser);

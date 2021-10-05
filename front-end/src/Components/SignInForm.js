@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { withRouter } from "react-router";
 import "./SignInForm.css";
 import { userGoogleSignIn, userSignIn } from "../Services/Firebase";
 import { UserContext } from "../Providers/UserProvider";
@@ -8,7 +9,7 @@ import { apiURL } from "../util/apiURL";
 
 const API = apiURL();
 
-export default function SignInForm() {
+function SignInForm() {
   const history = useHistory();
   const loggedInUser = useContext(UserContext);
   const [input, setInput] = useState({
@@ -122,3 +123,5 @@ export default function SignInForm() {
     </div>
   );
 }
+
+export default withRouter(SignInForm)

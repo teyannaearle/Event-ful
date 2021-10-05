@@ -34,8 +34,8 @@ function App() {
   const [updateEvent, setUpdateEvent] = useState(false);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  const [signedOut, setSignedOut] = useState(false);
-  const [formattedName, setFormattedName] = useState("")
+  const [signedOut, setSignedOut] = useState(true);
+  const [formattedName, setFormattedName] = useState("");
   const location = useGeoLocation();
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -60,12 +60,12 @@ function App() {
         }
 
         const name = loggedInUser
-        ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
-          loggedInUser.displayName.split(" ")[0].substring(1)
-        : "default name";
+          ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
+            loggedInUser.displayName.split(" ")[0].substring(1)
+          : "default name";
 
-        setFormattedName(name)
-        console.log(name)
+        setFormattedName(name);
+        console.log(name);
       }
     })();
     return () => {
@@ -113,12 +113,6 @@ function App() {
       <Router>
         <ScrollToTop />
         {signedOut ? <Banner /> : <NavBar setSignedOut={setSignedOut} />}
-        {/* {user_id && !signedOut ? (
-          <NavBar setSignedOut={setSignedOut} />
-        ) : (
-          <Banner />
-        )} */}
-        {/* <NavBar /> */}
         <Switch>
           <Route exact path="/">
             <Landing />
@@ -132,64 +126,76 @@ function App() {
             <SignIn />
           </Route>
 
-          <Route path="/dashboard/new_event/checklist/:id">
-            <EventCheckboxPg setUpdateEvent={setUpdateEvent} user_id={user_id} />
-          </Route>
+          <PrivateRoute
+            path="/dashboard/new_event/checklist/:id"
+            component={EventCheckboxPg}
+            setUpdateEvent={setUpdateEvent}
+            user_id={user_id}
+          />
 
-          <Route path="/dashboard/new_event">
-            <NewEventForm user_id={user_id} />
-          </Route>
+          <PrivateRoute
+            path="/dashboard/new_event"
+            component={NewEventForm}
+            user_id={user_id}
+          />
 
-          <Route path="/dashboard/:event_id/edit">
-            <EditFormPage setUpdateEvent={setUpdateEvent} user_id={user_id}  />
-          </Route>
+          <PrivateRoute
+            path="/dashboard/:event_id/edit"
+            component={EditFormPage}
+            setUpdateEvent={setUpdateEvent}
+            user_id={user_id}
+          />
 
-          <Route path="/dashboard">
-            <Dashboard
-              deleteEvent={deleteEvent}
-              events={events}
-              setUpdateEvent={setUpdateEvent}
-              user_id={user_id}
-              formattedName={formattedName}
-            />
-          </Route>
+          <PrivateRoute
+            path="/dashboard"
+            component={Dashboard}
+            deleteEvent={deleteEvent}
+            events={events}
+            setUpdateEvent={setUpdateEvent}
+            user_id={user_id}
+            formattedName={formattedName}
+          />
 
-          {/* <PrivateRoute
-            path="/"
-            render={(props) => (
-              <Dashboard
-                {...props}
-                deleteEvent={deleteEvent}
-                events={events}
-                setUpdateEvent={setUpdateEvent}
-                user_id={user_id}
-              />
-            )}
-          /> */}
+          <PrivateRoute
+            path="/task/:category/:event_id/:task_id"
+            component={EditBooked}
+            lat={lat}
+            lng={lng}
+            formatter={formatter}
+            user_id={user_id}
+          />
 
-          <Route path="/task/:category/:event_id/:task_id">
-            <EditBooked lat={lat} lng={lng} formatter={formatter} user_id={user_id} />
-          </Route>
+          <PrivateRoute
+            path="/event/:event_id"
+            component={Event}
+            formatter={formatter}
+            user_id={user_id}
+          />
 
-          <Route path="/event/:event_id">
-            <Event formatter={formatter} user_id={user_id} />
-          </Route>
+          <PrivateRoute
+            path="/vendor/:category/:provider_id"
+            component={VendorShow}
+            user_id={user_id}
+          />
 
-          <Route path="/vendor/:category/:provider_id">
-            <VendorShow user_id={user_id} />
-          </Route>
+          <PrivateRoute
+            path="/favorites"
+            component={Favorites}
+            user_id={user_id}
+            formattedName={formattedName}
+          />
 
-          <Route path="/favorites">
-            <Favorites user_id={user_id} formattedName={formattedName}/>
-          </Route>
+          <PrivateRoute
+            path="/vendors/:category"
+            component={VendorIndex}
+            location={location}
+          />
 
-          <Route path="/vendors/:category">
-            <VendorIndex location={location}  />
-          </Route>
-
-          <Route path="/booked/:event_id/:event_name">
-            <Booked user_id={user_id} />
-          </Route>
+          <PrivateRoute
+            path="/booked/:event_id/:event_name"
+            component={Booked}
+            user_id={user_id}
+          />
 
           <Route path="*">
             <FourOFour />
