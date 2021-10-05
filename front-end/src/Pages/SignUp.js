@@ -30,9 +30,9 @@ export default function SignUp() {
         let result = await axios.post(`${API}/users`, newUser);
         console.log(result);
         if (result.data.success) {
-          history.push("/");
+          history.push("/dashboard");
         } else {
-          console.log("could not add new user to backend database");
+          console.warn("could not add new user to backend database");
         }
       } else {
         setErrorMessage("please enter all required info");

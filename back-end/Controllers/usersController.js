@@ -47,13 +47,7 @@ users.post("/", async (req, res) => {
   const { email, password } = req.body;
   try {
     const newUser = await createNewUser(email, password);
-    console.log(newUser)
-    res.status(200).json({
-          success: true,
-          payload: newUser,
-        });
-
-    if (newUser) {
+    if (newUser.user_id) {
       console.log("success creating new user");
       res.status(200).json({
         success: true,
