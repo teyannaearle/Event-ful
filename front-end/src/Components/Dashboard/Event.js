@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import CapitalizeEvent from "../CapitalizeEvent";
 
-function Event({ event, handleDelete }) {
+function Event({ event, deleteEvent }) {
   const emoji = () => {
     let item = "";
     const name = event.event_name.toLowerCase();
@@ -27,7 +27,7 @@ function Event({ event, handleDelete }) {
 
   return (
     <div className="event-sq">
-      <button onClick={() => handleDelete(event.event_id)} className="del-but">
+      <button onClick={() => deleteEvent(event.event_id)} className="del-but">
         &#x2718;
       </button>
       <h2>

@@ -52,6 +52,7 @@ if (loggedInUser) {
           value={myEvent.name}
           placeholder="Name your Event"
           onChange={handleTextChange}
+          required
         />
         <label htmlFor="event_budget">Event Budget</label>
         <input
@@ -61,6 +62,8 @@ if (loggedInUser) {
           value={myEvent.budget}
           placeholder="Set your Budget"
           onChange={handleTextChange}
+          min={1}
+          required
         />
         <label htmlFor="event_time">Time of your Event</label>
         <input
@@ -70,6 +73,7 @@ if (loggedInUser) {
           value={myEvent.time}
           placeholder="Enter Event Time"
           onChange={handleTextChange}
+          required
         />
         <label htmlFor="event_date">Event Date</label>
         <input
@@ -79,6 +83,7 @@ if (loggedInUser) {
           value={myEvent.date}
           placeholder="Enter Event Date"
           onChange={handleTextChange}
+          required
         />
         <button className="pg-buttons" type="submit">
           Create Event

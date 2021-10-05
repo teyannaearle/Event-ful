@@ -7,7 +7,7 @@ let qrec = pgp.errors.queryResultErrorCode;
 //INDEX
 const allUsers = async () => {
   try {
-    const everybody = await db.any("SELECT * FROM users;")
+    const everybody = await db.any("SELECT * FROM users")
     return everybody
   } catch (e) {
     return e

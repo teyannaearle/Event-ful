@@ -7,8 +7,8 @@ import axios from "axios";
 import { apiURL } from "../util/apiURL";
 
 const API = apiURL();
-
-export default function SignInForm() {
+ 
+export default function SignInForm({ updateId }) {
   const history = useHistory();
   // const currentUser = useContext(UserContext);
   const [input, setInput] = useState({
@@ -29,7 +29,12 @@ export default function SignInForm() {
       //  console.log(res)
       if (res === null) {
         setErrorMessage("");
-        history.push("/");
+        // const { email } = input
+        // let checkUser = await axios.get(`${API}/users/${email}`);
+        // if (checkUser.data.success) {
+          // updateId(checkUser.data.payload.user_id);
+          history.push("/");
+        // }
       } else {
         setErrorMessage("Wrong email or password. Please try again");
         setInput({
@@ -49,17 +54,19 @@ export default function SignInForm() {
       console.log(res);
       if (res.email) {
         const { email } = res;
-        let checkUser = await axios.get(`${API}/users/${email}`)
+        let checkUser = await axios.get(`${API}/users/${email}`);
         console.log("checkUser");
         console.log(checkUser);
         if (checkUser.data.success) {
-          history.push("/");
+          history.push("/dashboard");
         } else {
           console.log("no such user found, creating new user");
           const newUser = { email: res.email, password: "password" };
+          console.log(newUser);
           let result = await axios.post(`${API}/users`, newUser);
           console.log(result);
           if (result.data.success) {
+            // updateId(result.data.payload.user_id);
             history.push("/dashboard");
           } else {
             console.log("could not add new user to backend database");
@@ -83,7 +90,10 @@ export default function SignInForm() {
   // }
 
   return (
+      <div>
+      <h1 className="brand h1-SignIn">EVENT( FUL ) &#127881;</h1>
     <div className="newForm three-d">
+
       <form onSubmit={signIn}>
         <label htmlFor="Email"></label>
         <input
@@ -101,22 +111,22 @@ export default function SignInForm() {
           onChange={handleChange}
           placeholder="Password"
         />{" "}
-        <button type="submit" className="Login">
+        <button type="submit" className="Login pg-buttons">
           Sign In
         </button>
         <div className="divider"></div>
         <p>{errorMessage}</p>
       </form>
-      <button type="button" className="Login" onClick={signInGoogle}>
+      <button type="button" className="Login pg-buttons" onClick={signInGoogle}>
         Sign In with Google
       </button>
       <div className="divider"></div>
-      <div className="divider"></div>
       <Link to="/signup">
-        <button type="button" className="Login">
+        <button type="button" className="Login pg-buttons">
           Sign Up
         </button>
       </Link>
+    </div>
     </div>
   );
 }

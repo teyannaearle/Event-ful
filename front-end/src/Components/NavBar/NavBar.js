@@ -51,8 +51,8 @@ export default function NavBar() {
 
   return (
     <nav className="NavBarItems">
-      <Link to="/">
-        <h1 className="navbar-logo">Event(ful) &#127881;</h1>
+      <Link to="/" className="navbar-logo">
+        <h1> Event(ful) &#127881;</h1>
       </Link>
 
       <ul className="accountNav">
