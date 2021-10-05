@@ -135,7 +135,6 @@ function App() {
 
           <Route path="/dashboard">
             <Dashboard
-              user_id={user_id}
               deleteEvent={deleteEvent}
               events={events}
               setUpdateEvent={setUpdateEvent}

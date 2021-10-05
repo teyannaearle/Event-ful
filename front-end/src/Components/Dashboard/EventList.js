@@ -2,7 +2,7 @@ import React from "react";
 import Event from "./Event";
 import { Link } from "react-router-dom";
 
-function EventList({ user_id, events, deleteEvent }) {
+function EventList({ events, deleteEvent }) {
   return (
     <>
       <ul className="dash-events">
@@ -12,17 +12,15 @@ function EventList({ user_id, events, deleteEvent }) {
             <p className="plus-sign"> &#x002B;</p>
           </Link>
         </span>
-        { events ? events.map((event) => {
-          return (
-            <li key={event.event_id} className="dash-event">
-              <Event
-                event={event}
-                user_id={user_id}
-                deleteEvent={deleteEvent}
-              />
-            </li>
-          );
-        } ) : null}
+        {events
+          ? events.map((event) => {
+              return (
+                <li key={event.event_id} className="dash-event">
+                  <Event event={event} deleteEvent={deleteEvent} />
+                </li>
+              );
+            })
+          : null}
       </ul>
     </>
   );

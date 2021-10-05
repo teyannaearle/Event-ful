@@ -9,7 +9,7 @@ const API = apiURL();
 
 export default function FavoriteList() {
   const loggedInUser = useContext(UserContext);
-  const user_id = loggedInUser ? loggedInUser.user_id : null;
+  const user_id = loggedInUser && loggedInUser.user_id;
   const [favoriteVendors, setFavoriteVendors] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [filterClicked, setFilterClicked] = useState({
@@ -20,24 +20,23 @@ export default function FavoriteList() {
 
   useEffect(() => {
     if (user_id) {
-
-    
-    axios
-      .get(`${API}/favorites/${user_id}`)
-      .then(
-        (res) => {
-          setFavoriteVendors(res.data.message);
-        },
-        (e) => {
+      axios
+        .get(`${API}/favorites/${user_id}`)
+        .then(
+          (res) => {
+            setFavoriteVendors(res.data.message);
+          },
+          (e) => {
+            console.error(e);
+          }
+        )
+        .catch((e) => {
           console.error(e);
-        }
-      )
-      .catch((e) => {
-        console.error(e);
-      })};
-      return () => {
-       setFavoriteVendors([])
-      }
+        });
+    }
+    return () => {
+      setFavoriteVendors([]);
+    };
   }, [user_id]);
 
   const deleteFav = (name) => {
@@ -97,7 +96,6 @@ export default function FavoriteList() {
               <Favorite
                 vendors={filtered}
                 vendor={vendor}
-                user_id={user_id}
                 key={vendor.vendor_id}
                 deleteFav={deleteFav}
               />
@@ -113,6 +111,7 @@ export default function FavoriteList() {
   return (
     // only show this div if user_id
     // else Loading component
+
     <>
       <div className="dropdown">
         <span>Filter By Category &#x2195;</span>
@@ -133,7 +132,7 @@ export default function FavoriteList() {
       </div>
 
       <div className="fave-page-div">
-        {favoriteVendors.length > 0 ? (
+        {favoriteVendors.length > 0 && user_id ? (
           vendorList()
         ) : (
           <>
