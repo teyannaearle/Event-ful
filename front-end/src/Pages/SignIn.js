@@ -3,7 +3,7 @@ import SignInForm from '../Components/SignInForm'
 
 export default function SignIn({updateId}) {
     return (
-        <div>
+        <div className="Landing-Container">
             <SignInForm updateId={updateId}/>
         </div>
     )

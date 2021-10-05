@@ -26,10 +26,13 @@ function EditBooked({ lat, lng, formatter }) {
   const [selected, setSelected] = useState(false)
   const history = useHistory();
 
+  console.log(user_id)
 
   useEffect(() => {
     let vendorCategories = [];
     let booked = {};
+
+    if (user_id){
 
     try {
       axios.get(`${API}/checklist/${user_id}/${event_id}`).then((response) => {
@@ -52,13 +55,14 @@ function EditBooked({ lat, lng, formatter }) {
     } catch (e) {
       console.error(e);
     }
-
+  }
     return () => {
       setBookedStatus({});
     };
   }, [event_id, user_id]);
 
   useEffect(() => {
+  
     if (bookedStatus[category] === true) {
       try {
         axios
@@ -78,7 +82,7 @@ function EditBooked({ lat, lng, formatter }) {
         console.error(e);
       }
     }
-
+  
     return () => {
       setVendor("");
       setCost(0);

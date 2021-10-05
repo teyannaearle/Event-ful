@@ -26,14 +26,14 @@ export default function SignUp() {
     try {
       let res = await userSignUp(input.userName, input.email, input.password);
       if (res === null) {
-        const newUser = { email: input.email, password: input.password }
-       let result =  await axios.post(`${API}/users`, newUser);
-       console.log(result)
-       if (result.data.success) {
-         history.push("/");
-       } else {
-         console.log("could not add new user to backend database")
-       }
+        const newUser = { email: input.email, password: input.password };
+        let result = await axios.post(`${API}/users`, newUser);
+        console.log(result);
+        if (result.data.success) {
+          history.push("/");
+        } else {
+          console.log("could not add new user to backend database");
+        }
       } else {
         setErrorMessage("please enter all required info");
       }
@@ -43,45 +43,48 @@ export default function SignUp() {
   };
 
   return (
-    <div>
-      <h1 className="brand h1-SignIn">EVENT( FUL ) &#127881;</h1>
-    <div className="Container three-d">
-      <form onSubmit={handleSignUp}>
-        <h1>Sign up Here!</h1>
-        <label htmlFor="userName">Please Enter Your Name</label> <br />
-        <input
-          type="text"
-          id="userName"
-          value={input.userName}
-          onChange={handleChange}
-          placeholder="Name"
-        />{" "}
-        <br />
-        <label htmlFor="Email">Please Enter your Email</label> <br />
-        <input
-          type="email"
-          id="email"
-          value={input.email}
-          onChange={handleChange}
-          placeholder="Email"
-        />
-        <br />
-        <label htmlFor="PassWord">Select a Password (min 6 characters)</label> <br />
-        <input
-          type="password"
-          id="password"
-          value={input.password}
-          onChange={handleChange}
-          placeholder="Password"
-        />{" "}
-        <br />
-        <button type="submit" className="pg-buttons">
-          Sign Up
-        </button>
-      </form>
-      <p>{errorMessage}</p>
+    <div className="Landing-Container">
+      <div className="SignUp-Form">
+        <div className="Container three-d">
+          <form onSubmit={handleSignUp}>
+            <h1>Sign up Here!</h1>
+            <label htmlFor="userName">Please Enter Your Name</label> <br />
+            <input
+              type="text"
+              id="userName"
+              value={input.userName}
+              onChange={handleChange}
+              placeholder="Name"
+            />{" "}
+            <br />
+            <label htmlFor="Email">Please Enter your Email</label> <br />
+            <input
+              type="email"
+              id="email"
+              value={input.email}
+              onChange={handleChange}
+              placeholder="Email"
+            />
+            <br />
+            <label htmlFor="PassWord">
+              Select a Password (min 6 characters)
+            </label>{" "}
+            <br />
+            <input
+              type="password"
+              id="password"
+              value={input.password}
+              onChange={handleChange}
+              placeholder="Password"
+            />{" "}
+            <br />
+            <button type="submit" className="pg-buttons">
+              Sign Up
+            </button>
+          </form>
+          <p>{errorMessage}</p>
+        </div>
+      </div>
     </div>
-    </div>
-
   );
 }

@@ -19,6 +19,7 @@ import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
 import EventCheckboxPg from "./Pages/EventCheckboxPg";
 import FourOFour from "./Pages/FourOFour";
+import Banner from "./Components/Banner";
 import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
@@ -32,6 +33,7 @@ function App() {
   const [updateEvent, setUpdateEvent] = useState(false);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
+  const [signedOut, setSignedOut] = useState(false);
   const location = useGeoLocation();
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -52,6 +54,7 @@ function App() {
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           setUserId(checkUser.data.payload.user_id);
+          setSignedOut(false)
         }
       }
     })();
@@ -99,9 +102,13 @@ function App() {
       {/* <UserProvider> */}
       <Router>
         <ScrollToTop />
+        {user_id && !signedOut ? (
+          <NavBar setSignedOut={setSignedOut} />
+        ) : (
+          <Banner />
+        )}
         <Switch>
           <Route exact path="/">
-            {user_id ? <NavBar /> : null}
             <Landing />
           </Route>
 
@@ -114,22 +121,18 @@ function App() {
           </Route>
 
           <Route path="/dashboard/new_event/checklist/:id">
-            <NavBar />
             <EventCheckboxPg setUpdateEvent={setUpdateEvent} />
           </Route>
 
           <Route path="/dashboard/new_event">
-            <NavBar />
             <NewEventForm />
           </Route>
 
           <Route path="/dashboard/:event_id/edit">
-            <NavBar />
             <EditFormPage setUpdateEvent={setUpdateEvent} />
           </Route>
 
           <Route path="/dashboard">
-            <NavBar />
             <Dashboard
               user_id={user_id}
               deleteEvent={deleteEvent}
@@ -139,32 +142,26 @@ function App() {
           </Route>
 
           <Route path="/task/:category/:event_id/:task_id">
-            <NavBar />
             <EditBooked lat={lat} lng={lng} formatter={formatter} />
           </Route>
 
           <Route path="/event/:event_id">
-            <NavBar />
             <Event formatter={formatter} />
           </Route>
 
           <Route path="/vendor/:category/:provider_id">
-            <NavBar />
             <VendorShow />
           </Route>
 
           <Route path="/favorites">
-            <NavBar />
             <Favorites />
           </Route>
 
           <Route path="/vendors/:category">
-            <NavBar />
             <VendorIndex location={location} />
           </Route>
 
           <Route path="/booked/:event_id/:event_name">
-            <NavBar />
             <Booked />
           </Route>
 
