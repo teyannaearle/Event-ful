@@ -163,7 +163,7 @@ background-image: none;
     height: 120px;
   }
 
-  .nav-menu {
+  .nav-menu.active {
     top: 120px;
   }
   .accountNav {

@@ -11,8 +11,8 @@ import { UserContext } from "../Providers/UserProvider";
 const api = apiURL();
 
 export default function Event({ formatter }) {
-  const loggedInUser = useContext(UserContext)
-  const user_id = loggedInUser ? loggedInUser.user_id : null
+  const loggedInUser = useContext(UserContext);
+  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const { event_id } = useParams();
   const [eventName, setEventName] = useState("");
   const [categories, setCategories] = useState([]);
@@ -21,37 +21,41 @@ export default function Event({ formatter }) {
   const history = useHistory();
 
   useEffect(() => {
-    try {
-      axios.get(`${api}/events/${user_id}/${event_id}`).then((response) => {
-        const data = response.data.payload;
-        setEventName(data.event_name);
-        setBudget(data.event_budget);
-      });
-    } catch (e) {
-      console.error(e);
-    }
-
-    try {
-      axios.get(`${api}/checklist/${user_id}/${event_id}`).then((response) => {
-        const data = response.data.payload;
-        const vendorCategories = data.map((point) => {
-          return {
-            name: point.task_name,
-            booked: point.is_completed,
-            cost: point.task_cost,
-            id: point.task_id,
-          };
+    if (user_id) {
+      try {
+        axios.get(`${api}/events/${user_id}/${event_id}`).then((response) => {
+          const data = response.data.payload;
+          setEventName(data.event_name);
+          setBudget(data.event_budget);
         });
-        let vendorCategories2 = {};
-        for (let category of data) {
-          vendorCategories2[category.task_name] = category.task_cost;
-        }
+      } catch (e) {
+        console.error(e);
+      }
 
-        setShownCost(vendorCategories2);
-        setCategories(vendorCategories);
-      });
-    } catch (e) {
-      console.error(e);
+      try {
+        axios
+          .get(`${api}/checklist/${user_id}/${event_id}`)
+          .then((response) => {
+            const data = response.data.payload;
+            const vendorCategories = data.map((point) => {
+              return {
+                name: point.task_name,
+                booked: point.is_completed,
+                cost: point.task_cost,
+                id: point.task_id,
+              };
+            });
+            let vendorCategories2 = {};
+            for (let category of data) {
+              vendorCategories2[category.task_name] = category.task_cost;
+            }
+
+            setShownCost(vendorCategories2);
+            setCategories(vendorCategories);
+          });
+      } catch (e) {
+        console.error(e);
+      }
     }
 
     return () => {
