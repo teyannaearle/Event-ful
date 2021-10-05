@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import BookedVendor from "./BookedVendor";
 import { apiURL } from "../../util/apiURL";
 import { VendorMenu } from "../NavBar/VendorMenu";
-import { UserContext } from "../../Providers/UserProvider";
 const API = apiURL();
 
-export default function BookedVendorList() {
-  const loggedInUser = useContext(UserContext);
-  const user_id = loggedInUser ? loggedInUser.user_id : null;
+export default function BookedVendorList({ user_id }) {
   const [bookedVendors, setBookedVendors] = useState([]);
   const { event_id } = useParams();
 
@@ -19,8 +16,8 @@ export default function BookedVendorList() {
         .get(`${API}/booked/${user_id}/${event_id}`)
         .then(
           (res) => {
-            console.log("got booked api response")
-            console.log(res)
+            console.log("got booked api response");
+            console.log(res);
             if (res.data.payload.length > 0) {
               setBookedVendors(res.data.payload);
             }
@@ -39,7 +36,6 @@ export default function BookedVendorList() {
   }, [user_id, event_id]);
 
   return (
-    // loading while waiting for user_id
     <div className="booked-section">
       {bookedVendors.length > 0 ? (
         <ul
@@ -48,11 +44,16 @@ export default function BookedVendorList() {
           }`}
         >
           {bookedVendors.map((vendor) => {
-
-          return <li className={`flex-col three-d ven-li ${bookedVendors.length === 1 ? "one-li" : null}`} key={vendor.vendor_name}>
-
-          <BookedVendor vendor={vendor} /> </li>
-
+            return (
+              <li
+                className={`flex-col three-d ven-li ${
+                  bookedVendors.length === 1 ? "one-li" : null
+                }`}
+                key={vendor.vendor_name}
+              >
+                <BookedVendor vendor={vendor} />{" "}
+              </li>
+            );
           })}{" "}
         </ul>
       ) : (

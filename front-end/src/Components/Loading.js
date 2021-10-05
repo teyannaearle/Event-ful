@@ -1,5 +1,4 @@
 import React from 'react'
-// import loading from "../assets/loading.gif"
 import discoBall from "../assets/giphy.gif"
 
 function Loading() {
