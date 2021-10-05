@@ -33,7 +33,7 @@ function App() {
   const [updateEvent, setUpdateEvent] = useState(false);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
-  const [signedOut, setSignedOut] = useState(false);
+  const [signedOut, setSignedOut] = useState(true);
   const [formattedName, setFormattedName] = useState("")
   const location = useGeoLocation();
   const formatter = new Intl.NumberFormat("en-US", {
@@ -118,12 +118,6 @@ function App() {
         ) : (
           <NavBar setSignedOut={setSignedOut} />
         )}
-        {/* {user_id && !signedOut ? (
-          <NavBar setSignedOut={setSignedOut} />
-        ) : (
-          <Banner />
-        )} */}
-        {/* <NavBar /> */}
         <Switch>
           <Route exact path="/">
             <Landing />
