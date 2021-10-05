@@ -14,17 +14,10 @@ function Vendor({ vendor, selected }) {
             : "ven-li"
         }`}
       >
-        <img
-          src={vendor.image_url}
-          alt={vendor.name}
-          // height="250"
-          // width="300"
-          className="ven-img"
-        />
+        <img src={vendor.image_url} alt={vendor.name} className="ven-img" />
         <h2>{vendor.name}</h2>
         <p>Phone: {vendor.display_phone}</p>
         <div className="flex-row">
-          {/* <p>Avg Rating: </p> */}
           <Ratings
             rating={vendor.rating}
             widgetRatedColors="#efcc00"

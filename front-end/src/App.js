@@ -34,6 +34,7 @@ function App() {
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
   const [signedOut, setSignedOut] = useState(false);
+  const [formattedName, setFormattedName] = useState("")
   const location = useGeoLocation();
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -56,6 +57,14 @@ function App() {
           setUserId(checkUser.data.payload.user_id);
           setSignedOut(false);
         }
+
+        const name = loggedInUser
+        ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
+          loggedInUser.displayName.split(" ")[0].substring(1)
+        : "default name";
+
+        setFormattedName(name)
+        console.log(name)
       }
     })();
     return () => {
@@ -129,15 +138,15 @@ function App() {
           </Route>
 
           <Route path="/dashboard/new_event/checklist/:id">
-            <EventCheckboxPg setUpdateEvent={setUpdateEvent} />
+            <EventCheckboxPg setUpdateEvent={setUpdateEvent} user_id={user_id} />
           </Route>
 
           <Route path="/dashboard/new_event">
-            <NewEventForm />
+            <NewEventForm user_id={user_id} />
           </Route>
 
           <Route path="/dashboard/:event_id/edit">
-            <EditFormPage setUpdateEvent={setUpdateEvent} />
+            <EditFormPage setUpdateEvent={setUpdateEvent} user_id={user_id}  />
           </Route>
 
           <Route path="/dashboard">
@@ -146,31 +155,32 @@ function App() {
               events={events}
               setUpdateEvent={setUpdateEvent}
               user_id={user_id}
+              formattedName={formattedName}
             />
           </Route>
 
           <Route path="/task/:category/:event_id/:task_id">
-            <EditBooked lat={lat} lng={lng} formatter={formatter} />
+            <EditBooked lat={lat} lng={lng} formatter={formatter} user_id={user_id} />
           </Route>
 
           <Route path="/event/:event_id">
-            <Event formatter={formatter} />
+            <Event formatter={formatter} user_id={user_id} />
           </Route>
 
           <Route path="/vendor/:category/:provider_id">
-            <VendorShow />
+            <VendorShow user_id={user_id} />
           </Route>
 
           <Route path="/favorites">
-            <Favorites />
+            <Favorites user_id={user_id} formattedName={formattedName}/>
           </Route>
 
           <Route path="/vendors/:category">
-            <VendorIndex location={location} />
+            <VendorIndex location={location}  />
           </Route>
 
           <Route path="/booked/:event_id/:event_name">
-            <Booked />
+            <Booked user_id={user_id} />
           </Route>
 
           <Route path="*">

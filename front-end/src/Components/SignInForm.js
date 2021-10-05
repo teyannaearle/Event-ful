@@ -11,7 +11,6 @@ const API = apiURL();
 export default function SignInForm() {
   const history = useHistory();
   const loggedInUser = useContext(UserContext);
-  const user_id = loggedInUser ? loggedInUser.user_id : null;
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -76,58 +75,50 @@ export default function SignInForm() {
     }
   };
 
-  // if (currentUser) {
-  //   console.log(Object.keys(currentUser));
-  // }
-
-  // if (currentUser.uid) {
-  //   history.push("/dashboard");
-  // }
-
   return (
-      <div className="SignIn-Form ">
-        <p>  &nbsp; </p>  
-      {/* <h1 className="brand h1-SignIn">EVENT( FUL ) &#127881;</h1> */}
-    <div className=" newForm three-d" >
-    &nbsp;
-      <form onSubmit={signIn}>
-        <label htmlFor="Email"></label>
-        <input
-          type="email"
-          name="email"
-          value={input.email}
-          onChange={handleChange}
-          placeholder="Email"
-        />{" "}
-        <label htmlFor="Password"></label>
-        <input
-          type="password"
-          name="password"
-          value={input.password}
-          onChange={handleChange}
-          placeholder="Password"
-        />{" "}
-        <button type="submit" className="Login pg-buttons">
-          Sign In
+    <div className="SignIn-Form ">
+      <p> &nbsp; </p>
+      <div className=" newForm three-d">
+        &nbsp;
+        <form onSubmit={signIn}>
+          <label htmlFor="Email"></label>
+          <input
+            type="email"
+            name="email"
+            value={input.email}
+            onChange={handleChange}
+            placeholder="Email"
+          />{" "}
+          <label htmlFor="Password"></label>
+          <input
+            type="password"
+            name="password"
+            value={input.password}
+            onChange={handleChange}
+            placeholder="Password"
+          />{" "}
+          <button type="submit" className="Login pg-buttons">
+            Sign In
+          </button>
+          <div className="divider"></div>
+          <p>{errorMessage}</p>
+        </form>
+        <button
+          type="button"
+          className="Login pg-buttons"
+          onClick={signInGoogle}
+        >
+          Sign In with Google
         </button>
         <div className="divider"></div>
-        <p>{errorMessage}</p>
-      </form>
-      <button type="button" className="Login pg-buttons" onClick={signInGoogle}>
-        Sign In with Google
-      </button>
-      <div className="divider"></div>
-      {/* <Link to="/signup">
-        <button type="button" className="Login pg-buttons">
-          Sign Up
-        </button>
-      </Link> */}
-            <Link to="/SignUp" className="SignUp-But">
-                <p> Dont have an account? <br/>
-                Click Here to make one!
-                </p>
-                </Link>
-    </div>
+        <Link to="/SignUp" className="SignUp-But">
+          <p>
+            {" "}
+            Dont have an account? <br />
+            Click Here to make one!
+          </p>
+        </Link>
+      </div>
     </div>
   );
 }

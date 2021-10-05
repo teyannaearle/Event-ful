@@ -1,16 +1,14 @@
 import React from "react";
 import axios from "axios";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { apiURL } from "../util/apiURL.js";
-import { UserContext } from "../Providers/UserProvider.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const API = apiURL();
 
-export default function EventCheckbox({ setUpdateEvent }) {
-  const loggedInUser = useContext(UserContext);
+export default function EventCheckbox({ setUpdateEvent, user_id }) {
   const { id } = useParams();
   const history = useHistory();
   const [eventForm, setEventForm] = useState({
@@ -28,10 +26,8 @@ export default function EventCheckbox({ setUpdateEvent }) {
     party_clown: false,
   });
 
-  //pass props from eventForm to represent the name,date, budget, etc.
   const addToCheckedList = () => {
     const categories = Object.keys(eventForm);
-    const { user_id } = loggedInUser;
     for (const checked of categories) {
       if (eventForm[checked] === true) {
         const category = {
@@ -63,10 +59,6 @@ export default function EventCheckbox({ setUpdateEvent }) {
       });
     }
   };
-
-  if (loggedInUser) {
-    console.log(`checklist user_id is ${loggedInUser.user_id}`);
-  }
 
   return (
     <section className="eventcheckbox">

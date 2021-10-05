@@ -26,18 +26,9 @@ export default function NavBar({setSignedOut}) {
       title: "My Favorites",
       url: `/favorites`,
       cName: "pg-buttons nav-but",
-    },
-    // {
-    //   title: "Settings",
-    //   url: `/settings`,
-    //   cName: "nav-links",
-    // },
-    // {
-    //   title: "Logout",
-    //   url: "/logo",
-    //   cName: "nav-links-mobile",
-    // },
+    }
   ];
+  
   const signOut = async () => {
     try {
       let res = await userSignOut();
