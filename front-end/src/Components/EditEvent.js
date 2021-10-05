@@ -6,8 +6,8 @@ import { apiURL } from "../util/apiURL";
 import "./EditEvent.css";
 import { UserContext } from "../Providers/UserProvider";
 import CapitalizeEvent from "../Components/CapitalizeEvent";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API = apiURL();
 
@@ -163,7 +163,7 @@ function EditEvent({ setUpdateEvent }) {
       history.push("/dashboard");
     } else {
       toast.error("Choose at least one vendor to add to your checklist", {
-        toastId: "customId"
+        toastId: "customId",
       });
     }
   };
@@ -185,42 +185,48 @@ function EditEvent({ setUpdateEvent }) {
       </h1>
       <div className="form-container">
         <form className="edit-eventform three-d" onSubmit={handleSubmit}>
-        <label>Event Name: </label>
-          <input
-            id="event_name"
-            type="text"
-            required
-            value={event.event_name}
-            placeholder="Name"
-            onChange={handleChange}
-          />
-          <label>Budget: </label>
-          <input
-            id="event_budget"
-            type="number"
-            required
-            value={event.event_budget}
-            placeholder="$0.00"
-            onChange={handleChange}
-          />
-          <label>Time: </label>
-          <input
-            id="appt-time"
-            type="time"
-            required
-            value={event.event_time}
-            placeholder="Time"
-            onChange={handleChange}
-          />
-          <label>Time: </label>
-          <input
-            id="event_date"
-            type="date"
-            required
-            value={event.event_date}
-            placeholder="Date"
-            onChange={handleChange}
-          />
+          <div className="edit-input">
+            <label>Event Name: </label>
+            <input
+              className="three-d pg-input"
+              id="event_name"
+              type="text"
+              required
+              value={event.event_name}
+              placeholder="Name"
+              onChange={handleChange}
+            />
+            <label>Budget: </label>
+            <input
+              className="three-d pg-input"
+              id="event_budget"
+              type="number"
+              required
+              value={event.event_budget}
+              placeholder="$0.00"
+              onChange={handleChange}
+            />
+            <label>Time: </label>
+            <input
+              className="three-d pg-input"
+              id="appt-time"
+              type="time"
+              required
+              value={event.event_time}
+              placeholder="Time"
+              onChange={handleChange}
+            />
+            <label>Date: </label>
+            <input
+              className="three-d pg-input"
+              id="event_date"
+              type="date"
+              required
+              value={event.event_date}
+              placeholder="Date"
+              onChange={handleChange}
+            />
+          </div>
 
           <span className="checkbox-span">
             <label className="check-container edit-checkbox">
@@ -369,10 +375,7 @@ function EditEvent({ setUpdateEvent }) {
             </Link>
           </div>
         </form>
-        <ToastContainer 
-             autoClose={false}
-             position="bottom-center"
-             />
+        <ToastContainer autoClose={false} position="bottom-center" />
       </div>
     </>
   );
