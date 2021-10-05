@@ -26,6 +26,7 @@ function EditBooked({ lat, lng, formatter }) {
   const [selected, setSelected] = useState(false)
   const history = useHistory();
 
+  console.log(user_id)
 
   useEffect(() => {
     let vendorCategories = [];
