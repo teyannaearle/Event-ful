@@ -88,7 +88,7 @@ export default function SignInForm() {
     <div className="newForm three-d">
 
       <form onSubmit={signIn}>
-        <label htmlFor="Email"></label>
+        <label htmlFor="Email">Please Enter your Email</label>
         <input
           type="email"
           name="email"
@@ -96,7 +96,7 @@ export default function SignInForm() {
           onChange={handleChange}
           placeholder="Email"
         />{" "}
-        <label htmlFor="Password"></label>
+        <label htmlFor="Password">Please Enter your Password</label>
         <input
           type="password"
           name="password"
