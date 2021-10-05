@@ -1,11 +1,11 @@
 import React from "react";
 import EventCheckbox from "../Components/EventCheckbox.js";
 
-export default function EventCheckboxPg({setUpdateEvent}) {
+export default function EventCheckboxPg({ setUpdateEvent }) {
   return (
-    <div>
+    <div className="page eventcheckbox-pg">
       <h2 className="pg-head">Select Your Event Requirements: </h2>
-      <EventCheckbox  setUpdateEvent={setUpdateEvent}/>
+      <EventCheckbox setUpdateEvent={setUpdateEvent} />
     </div>
   );
 }

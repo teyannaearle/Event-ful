@@ -17,7 +17,7 @@ function EventForm() {
   });
 
   const addEvent = () => {
-    const { user_id } = loggedInUser
+    const { user_id } = loggedInUser;
     try {
       axios.post(`${API}/events/${user_id}`, myEvent).then((res) => {
         const id = res.data.payload.event_id;
@@ -37,13 +37,13 @@ function EventForm() {
     addEvent();
   };
 
-if (loggedInUser) {
-  console.log(`event form user_id is ${loggedInUser.user_id}`)
-}
+  if (loggedInUser) {
+    console.log(`event form user_id is ${loggedInUser.user_id}`);
+  }
 
   return (
-    <section>
-      <form className="eventform-container three-d" onSubmit={handleSubmit}>
+    <section className="three-d">
+      <form className="eventform-container" onSubmit={handleSubmit}>
         <label htmlFor="event_name">New Event</label>
         <input
           className="three-d pg-input"
@@ -65,7 +65,7 @@ if (loggedInUser) {
           min={1}
           required
         />
-        <label htmlFor="event_time">Time of your Event</label>
+        <label htmlFor="event_time">Event Time</label>
         <input
           className="three-d pg-input"
           id="event_time"
