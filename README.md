@@ -6,6 +6,8 @@
 
 [Back-end](https://eventful-capstone.herokuapp.com/)
 
+![Live Site](images/LandingPageImg.png)
+
 ## Table of Content
 * Overview
 * Project Structure
