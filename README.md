@@ -111,7 +111,7 @@ The Event(ful) App is a one-stop-shop for your vendor-booking organization. The 
 ### Future Implementations
 * Allow users to search for vendors without signing-in.
 * Allow users to change personal settings i.e. name, password, etc. 
-* A map function to dispay vendor locations 
+* Display vendor's locations in a map view.
 
 
 
@@ -121,9 +121,6 @@ We would like to thank
 * our Pursuit Instructors Myra Smith and Tristan Angieri.
 * our technical mentor Ferdy Budhiharma.
 * our design mentor Daniela Shuffler.
-
-
-
 
 
 
