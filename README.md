@@ -7,6 +7,7 @@
 [Back-end](https://eventful-capstone.herokuapp.com/)
 
 ![Landing Page](./images/LandingPageImg.png)
+![Create an Event Page](./images/CreateEvent.png)
 ![Event Page](./images/Event.png)
 
 ## Table of Content
