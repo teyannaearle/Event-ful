@@ -79,7 +79,6 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
       );
     } else {
       return (
-<<<<<<< HEAD
         <label className="check-container tasklist"> 
         <input
           onChange={() => updateBookedStatus(category.name)}
@@ -87,17 +86,6 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
           checked={bookedStatus[category.name] ? bookedStatus[category.name] : false}        >
         </input>
         <span className="checkmark"></span>
-=======
-        <label className="check-container">
-          <input
-            onChange={() => updateBookedStatus(category.name)}
-            type="checkbox"
-            checked={
-              bookedStatus[category.name] ? bookedStatus[category.name] : false
-            }
-          ></input>
-          <span className="checkmark"></span>
->>>>>>> e0bd7e41bb85e1e8fd790797de76395ee0daec90
         </label>
       );
     }
