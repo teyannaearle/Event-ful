@@ -120,3 +120,16 @@
     width: 85%;
   }
 }
+
+@media only screen and (max-width: 320px){
+  .edit-page .form-container{
+    margin: 0;
+    width: 95%;
+  }
+
+  .edit-eventform{
+    margin: 0;
+  }
+
+
+}

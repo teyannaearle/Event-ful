@@ -3,7 +3,7 @@ import { VendorMenu } from "./VendorMenu";
 import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import { userSignOut } from "../../Services/Firebase";
-import { UserContext } from "../../Providers/UserProvider";
+// import { UserContext } from "../../Providers/UserProvider";
 
 export default function NavBar({setSignedOut}) {
   const [vendorClicked, setVendorClicked] = useState(false);
@@ -11,7 +11,7 @@ export default function NavBar({setSignedOut}) {
   const handleVendorClick = () => {
     setVendorClicked(!vendorClicked);
   };
-  const loggedInUser = useContext(UserContext);
+  // const loggedInUser = useContext(UserContext);
   const closeNav = () => {
     setVendorClicked(false);
   };
@@ -64,7 +64,7 @@ export default function NavBar({setSignedOut}) {
         })}
         <li className="accountLinks" onClick={signOut}>
           {" "}
-          <span className="pg-buttons nav-but">Logout</span>
+          <span className="pg-buttons nav-but logout">Logout</span>
         </li>
       </ul>
 

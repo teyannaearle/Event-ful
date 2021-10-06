@@ -82,7 +82,8 @@ function SignInForm() {
       <div className=" newForm three-d">
         &nbsp;
         <form onSubmit={signIn}>
-          <label htmlFor="Email">Please Enter your Email</label>
+          <span id="SignIn-Labels">
+          <label htmlFor="Email">Please Enter Your Email</label>
           <input
             type="email"
             name="email"
@@ -98,6 +99,7 @@ function SignInForm() {
             onChange={handleChange}
             placeholder="Password"
           />{" "}
+          </span>
           <button type="submit" className="Login pg-buttons">
             Sign In
           </button>

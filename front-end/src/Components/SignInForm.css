@@ -64,6 +64,33 @@
   background-color: rgb(221, 180, 118, 0.8);
 }
 
+#SignIn-Labels{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#SignIn-Labels label{
+ font-weight: 700;
+
+}
+
+#SignIn-Labels form{
+  margin-bottom: 10px;
+}
+
+.newForm form{
+  text-shadow: none;
+}
+.Container form label{
+  font-size: medium;
+ text-shadow: none;
+ font-weight: 700;
+
+}
+
+
+
 @media only screen and (max-width: 1200px) {
   .newForm {
     width: 60%;

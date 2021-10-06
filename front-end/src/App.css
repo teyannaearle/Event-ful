@@ -309,6 +309,7 @@ button:hover {
   /* padding-left: 35px;
   margin-bottom: 12px; */
   cursor: pointer;
+
   /* font-size: 22px;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -317,6 +318,12 @@ button:hover {
   display: flex;
   align-items: center; */
   /* justify-content: center; */
+}
+
+.tasklist{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .check-container input {
@@ -825,6 +832,10 @@ span.press {
 .directions {
   font-size: larger;
   text-align: center;
+  /* font-weight: bold; */
+  margin-bottom: 20px;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+
 }
 
 .ven-info {
@@ -1240,6 +1251,10 @@ span.press {
   height: 100%;
 }
 
+.eventcheckbox-pg {
+text-align: center;
+}
+
 .eventcheckbox-pg section {
   width: 50%;
 }
@@ -1514,6 +1529,31 @@ span.press {
   .pg-buttons:hover {
     transform: none;
   }
+
+  /* EVENT FORM */
+
+  .eventcheckbox-pg section{
+width: 80%;
+  }
+
+  .newEvent-container section {
+    width: 95%;
+    padding: 0;
+  }
+
+  .eventform-container{
+    width: 100%;
+  }
+
+  .eventform-container label {
+    font-size: medium;
+  }
+
+  .eventform-container input{
+    font-size: medium;
+    width: 80%;
+    
+  }
   /*DASHBOARD*/
   .plan-ev {
     font-size: medium;
@@ -1660,6 +1700,44 @@ span.press {
   #vendor-showpage h1 {
     text-align: center;
   }
+
+    /* EVENT FORM */
+
+    /* .newEvent-container section {
+margin: auto
+    } */
+  
+    .eventform-container{
+      width: 100%;
+     /* display: flex;
+     flex-direction: column; */
+     grid-template-columns: 100%;
+     gap: 0; 
+     text-align: center;
+     row-gap: 10px;
+    }
+    .newEvent-container{
+      height: 60%;
+    }
+
+   .eventform-container button{
+     grid-column: span 1
+   }
+    .eventform-container label {
+      width: 100%;
+    }
+  
+    .eventform-container input{
+      /* font-size: medium; */
+      width: 70%;
+      margin: auto;
+      
+    }
+
+
+  .eventcheckbox-pg section{
+    width: 95%;
+      }
 }
 
 svg .widget {
