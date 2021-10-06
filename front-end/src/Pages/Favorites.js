@@ -10,7 +10,7 @@ export default function Favorites({user_id, formattedName}) {
           <h1 className="pg-head">
             {`${formattedName}'s Favorites`}
           </h1>
-          <FavoriteList />
+          <FavoriteList user_id={user_id}/>
         </>
       ) : (
         <Loading />

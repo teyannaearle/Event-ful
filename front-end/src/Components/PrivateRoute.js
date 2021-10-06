@@ -17,11 +17,12 @@ const PrivateRoute = ({
   ...rest
 }) => {
   const currentUser = useContext(UserContext);
+
   return (
     <Route
       {...rest}
       render={(props) =>
-        !!currentUser ? (
+        (!!currentUser.currentUser ) ? (
           <Component
             {...props}
             deleteEvent={deleteEvent}

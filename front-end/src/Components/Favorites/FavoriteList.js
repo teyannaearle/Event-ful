@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Favorite from "./Favorite";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
 import { VendorMenu } from "../NavBar/VendorMenu";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../Providers/UserProvider";
 const API = apiURL();
 
-export default function FavoriteList() {
-  const loggedInUser = useContext(UserContext);
-  const user_id = loggedInUser && loggedInUser.user_id;
+export default function FavoriteList({user_id}) {
   const [favoriteVendors, setFavoriteVendors] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [filterClicked, setFilterClicked] = useState({

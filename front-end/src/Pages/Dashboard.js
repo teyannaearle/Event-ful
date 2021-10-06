@@ -9,8 +9,6 @@ export default function Dashboard({
   user_id,
   formattedName,
 }) {
-
-  console.log("OKOKOKOKOKOKOKOK")
   
   useEffect(() => {
     setUpdateEvent(false);

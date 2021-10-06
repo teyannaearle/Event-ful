@@ -149,11 +149,13 @@ function EditBooked({ lat, lng, formatter, user_id }) {
       category: category,
       rating: selected.rating,
       vendor_image: selected.image_url,
+      amount: 0
     };
 
     let checklistBody = {
       is_completed: true,
       task_name: category,
+      task_cost: 0
     };
 
     if (!vendor) {
@@ -190,7 +192,7 @@ function EditBooked({ lat, lng, formatter, user_id }) {
                   setVendors([]);
                   setSearched(false);
                   setSelected(true)
-
+                  setCost(0)
                 });
             } catch (e) {
               console.error(e);

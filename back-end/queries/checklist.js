@@ -48,11 +48,11 @@ const deleteAll = async (user_id, event_id) => {
   }
 }
 
-const updateTask = async (is_completed, task_name, user_id, event_id) => {
+const updateTask = async (is_completed, task_name, user_id, event_id, task_cost) => {
   try {
     const updatedTask = await db.one(
-      "UPDATE tasklist SET is_completed=$1 WHERE task_name=$2 AND user_id=$3 AND event_id=$4 RETURNING *",
-      [is_completed, task_name, user_id, event_id]
+      "UPDATE tasklist SET is_completed=$1, task_cost=$2 WHERE task_name=$3 AND user_id=$4 AND event_id=$5 RETURNING *",
+      [is_completed, task_cost, task_name, user_id, event_id]
     );
     return updatedTask;
   } catch (err) {

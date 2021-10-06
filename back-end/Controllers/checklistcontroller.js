@@ -98,14 +98,15 @@ checklist.delete("/all/:user_id/:event_id", async (req, res) => {
 
 checklist.put("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-  const { is_completed, task_name } = req.body;
+  const { is_completed, task_name, task_cost } = req.body;
 
   try {
     const updated = await updateTask(
       is_completed,
       task_name,
       user_id,
-      event_id
+      event_id,
+      task_cost
     );
 
     if (updated.user_id) {

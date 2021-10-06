@@ -98,6 +98,7 @@ function SignInForm() {
             value={input.password}
             onChange={handleChange}
             placeholder="Password"
+            autoComplete="on"
           />{" "}
           </span>
           <button type="submit" className="Login pg-buttons">
