@@ -5,20 +5,11 @@ import VendorList from "../Components/VendorIndex/VendorList";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
 
-export default function VendorIndex({ location }) {
+export default function VendorIndex({ location, lat, lng }) {
   const [vendors, setVendors] = useState([]);
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false);
   const { category } = useParams();
-
-  useEffect(() => {
-    if (location.coordinates) {
-      setLat(location.coordinates.latitude);
-      setLng(location.coordinates.longitude);
-    }
-  }, [location]);
 
   useEffect(() => {
     (async () => {

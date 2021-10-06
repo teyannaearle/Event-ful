@@ -20,7 +20,7 @@ CREATE TABLE events (
     user_id  SERIAL, CONSTRAINT fk_events_users FOREIGN KEY(user_id) REFERENCES users(user_id) ON DELETE CASCADE, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
+ 
 
 DROP TABLE IF EXISTS tasklist CASCADE;
 CREATE TABLE tasklist (

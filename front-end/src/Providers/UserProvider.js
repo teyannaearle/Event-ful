@@ -34,6 +34,6 @@ export const UserProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{currentUser, pending}}>{children}</UserContext.Provider>
   );
 };

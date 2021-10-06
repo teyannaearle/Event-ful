@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
-import "./SignInForm.css";
-import { userGoogleSignIn, userSignIn } from "../Services/Firebase";
+import "../../css/SignInForm.css";
+import { userGoogleSignIn, userSignIn } from "../../Services/Firebase";
 import axios from "axios";
-import { apiURL } from "../util/apiURL";
+import { apiURL } from "../../util/apiURL";
 
 const API = apiURL();
 
@@ -87,6 +87,7 @@ function SignInForm() {
             value={input.password}
             onChange={handleChange}
             placeholder="Password"
+            autoComplete="on"
           />{" "}
           </span>
           <button type="submit" className="Login pg-buttons">

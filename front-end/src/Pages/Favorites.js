@@ -7,8 +7,10 @@ export default function Favorites({ user_id, formattedName }) {
     <div className="page fave-page">
       {user_id ? (
         <>
-          <h1 className="pg-head">{`${formattedName}'s Favorites`}</h1>
-          <FavoriteList />
+          <h1 className="pg-head">
+            {`${formattedName}'s Favorites`}
+          </h1>
+          <FavoriteList user_id={user_id}/>
         </>
       ) : (
         <Loading />

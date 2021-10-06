@@ -51,8 +51,8 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      if (loggedInUser) {
-        const email = loggedInUser.email;
+      if (loggedInUser.currentUser) {
+        const email = loggedInUser.currentUser.email;
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           setUserId(checkUser.data.payload.user_id);
@@ -60,8 +60,8 @@ function App() {
         }
 
         const name = loggedInUser
-          ? loggedInUser.displayName.split(" ")[0][0].toUpperCase() +
-            loggedInUser.displayName.split(" ")[0].substring(1)
+          ? loggedInUser.currentUser.displayName.split(" ")[0][0].toUpperCase() +
+            loggedInUser.currentUser.displayName.split(" ")[0].substring(1)
           : "default name";
 
         setFormattedName(name);
@@ -188,6 +188,8 @@ function App() {
           <PrivateRoute
             path="/vendors/:category"
             component={VendorIndex}
+            lat={lat}
+            lng={lng}
             location={location}
           />
 

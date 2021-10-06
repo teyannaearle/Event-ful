@@ -1,5 +1,5 @@
 import React from "react";
-import EventForm from "../Components/EventForm";
+import EventForm from "../Components/Dashboard/EventForm"
 
 export default function NewEventForm({ user_id }) {
   return (

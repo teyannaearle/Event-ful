@@ -31,7 +31,6 @@ export const userSignUp = async (userName, email, password) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password).then(
       (userCredential) => {
-        // Signed in
         updateProfile(userCredential.user, { displayName: userName });
       }
     );
@@ -46,8 +45,6 @@ export const userSignIn = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password).then(
       (userCredential) => {
-        // Signed in
-        console.log(`${userCredential.user.displayName} is signed in`);
       }
     );
   } catch (e) {
@@ -73,7 +70,8 @@ export const userGoogleSignIn = async () => {
 export const userSignOut = async () => {
   let result = null;
   try {
-    await signOut(auth)
+    await signOut(auth).then(() => {
+    });
   } catch (e) {
     result = e.code;
     console.warn(e.message);

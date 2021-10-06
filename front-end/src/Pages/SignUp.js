@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "./SignUp.css";
+import "../css/SignUp.css"
 import { userSignUp } from "../Services/Firebase";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
