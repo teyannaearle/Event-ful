@@ -27,7 +27,6 @@ function SignInForm() {
     e.preventDefault();
     try {
       let res = await userSignIn(input.email, input.password);
-      //  console.log(res)
       if (res === null) {
         setErrorMessage("");
         history.push("/dashboard");
@@ -46,32 +45,24 @@ function SignInForm() {
   const signInGoogle = async (e) => {
     try {
       let res = await userGoogleSignIn();
-      console.log("awaiting google sign in");
-      console.log(res);
       if (res.email) {
         const { email } = res;
         let checkUser = await axios.get(`${API}/users/${email}`);
-        console.log("checkUser");
-        console.log(checkUser);
         if (checkUser.data.success) {
           history.push("/dashboard");
         } else {
-          console.log("no such user found, creating new user");
           const newUser = { email: res.email, password: "password" };
-          console.log(newUser);
           let result = await axios.post(`${API}/users`, newUser);
-          console.log(result);
           if (result.data.success) {
             history.push("/dashboard");
           } else {
-            console.log("could not add new user to backend database");
+            console.warn("could not add new user to backend database");
           }
         }
       } else {
-        console.log("Google user could not sign in");
+        console.warn("Google user could not sign in");
       }
     } catch (error) {
-      console.log("caught an error");
       console.warn(error);
     }
   };
@@ -126,4 +117,4 @@ function SignInForm() {
   );
 }
 
-export default withRouter(SignInForm)
+export default withRouter(SignInForm);

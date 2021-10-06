@@ -9,9 +9,6 @@ export default function Dashboard({
   user_id,
   formattedName,
 }) {
-
-  console.log("OKOKOKOKOKOKOKOK")
-  
   useEffect(() => {
     setUpdateEvent(false);
     return () => {
@@ -23,9 +20,7 @@ export default function Dashboard({
     <div className="page">
       {user_id ? (
         <>
-          <h1 className="pg-head">
-            {`${formattedName}'s Dashboard`}{" "}
-          </h1>
+          <h1 className="pg-head">{`${formattedName}'s Dashboard`} </h1>
           <div className="dash-container three-d">
             <EventList
               events={events}

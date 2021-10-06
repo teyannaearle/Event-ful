@@ -106,10 +106,9 @@ function App() {
     }
   };
 
-  // console.log(formattedName)
+
   return (
     <div className="site">
-      {/* <UserProvider> */}
       <Router>
         <ScrollToTop />
         {signedOut ? <Banner /> : <NavBar setSignedOut={setSignedOut} />}
@@ -156,7 +155,7 @@ function App() {
             formattedName={formattedName}
           />
 
-           <PrivateRoute
+          <PrivateRoute
             path="/task/:category/:event_id/:task_id"
             component={EditBooked}
             lat={lat}
@@ -181,6 +180,7 @@ function App() {
           <PrivateRoute
             path="/favorites"
             component={Favorites}
+            loggedInUser={loggedInUser}
             user_id={user_id}
             formattedName={formattedName}
           />
@@ -195,14 +195,13 @@ function App() {
             path="/booked/:event_id/:event_name"
             component={Booked}
             user_id={user_id}
-          /> 
+          />
 
           <Route path="*">
             <FourOFour />
           </Route>
         </Switch>
       </Router>
-      {/* </UserProvider> */}
     </div>
   );
 }

@@ -13,10 +13,9 @@ a:active {
   text-decoration: none;
 }
 
-a{
+a {
   color: inherit;
 }
-
 
 html,
 #root,
@@ -26,7 +25,7 @@ html,
   overflow-x: hidden;
 }
 
-img{
+img {
   border-radius: 4px;
 }
 
@@ -34,7 +33,6 @@ img{
   padding-bottom: 100px;
   /* position: relative; */
 }
-
 
 h1,
 h2,
@@ -177,16 +175,15 @@ button:hover {
   align-items: center;
 }
 
-.NotFound a{
+.NotFound a {
   padding: 20px;
 }
-
 
 /* EVENT PAGE */
 
 .event-page {
   margin-top: 0;
-   /* padding-bottom: 100px; */
+  /* padding-bottom: 100px; */
 }
 
 #all-booked {
@@ -237,8 +234,6 @@ button:hover {
   margin: auto;
   margin-top: 15px;
 }
-
-
 
 #checklist-container {
   width: 100%;
@@ -493,9 +488,9 @@ button:hover {
   margin-top: 10px;
 }
 
-#budget-update{
+#budget-update {
   width: 100%;
-  height: 100% ;
+  height: 100%;
   display: flex;
 
   flex-direction: column;
@@ -1317,23 +1312,23 @@ text-align: center;
     /* width: 150px;  */
     left: 18%;
   }
-    /* EVENT PAGE */
-    .eventpage-container {
-      grid-template-columns: 100%;
-      width: 75%;
-    }
-    #countdown-container {
-      grid-column: span 1;
-      margin-top: 20px;
-    }
+  /* EVENT PAGE */
+  .eventpage-container {
+    grid-template-columns: 100%;
+    width: 75%;
+  }
+  #countdown-container {
+    grid-column: span 1;
+    margin-top: 20px;
+  }
 
-    .budget-list{
-      height: 100%;
-    }
+  .budget-list {
+    height: 100%;
+  }
 
- .update{
-   order: -1;
- }
+  .update {
+    order: -1;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -1523,7 +1518,7 @@ text-align: center;
   }
 }
 @media only screen and (max-width: 500px) {
-  .page{
+  .page {
     margin-top: 30px;
   }
   .pg-buttons:hover {
@@ -1664,7 +1659,6 @@ width: 80%;
   /* #budget-container h2 {
     margin-bottom: 20px;
   } */
-  
 
   #budget-container div {
     margin-bottom: 5px;
@@ -1675,7 +1669,7 @@ width: 80%;
     padding-right: 10px;
   }
 
-  .checklist-button{
+  .checklist-button {
     margin-right: 10px;
     padding-left: 10px;
     padding-right: 10px;

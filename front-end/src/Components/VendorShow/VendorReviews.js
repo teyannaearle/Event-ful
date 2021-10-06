@@ -1,7 +1,7 @@
 import React from "react";
 import VendorReview from "./VendorReview";
 
-function VendorReviews({reviews}) {
+function VendorReviews({ reviews }) {
   return (
     <div className="reviews">
       {reviews.map((review, i) => {

@@ -18,28 +18,6 @@ const db = require("../db/dbConfig");
 // INDEX
 booked.get("/:user_id/:event_id", async (req, res) => {
   const { user_id, event_id } = req.params;
-  // try {
-  //   const allBookedVendors = await getAllBookedVendors(user_id, event_id);
-  //   console.log(allBookedVendors)
-  //   if (allBookedVendors.length > 0) {
-  //     res.status(200).json({
-  //       success: true,
-  //       message: allBookedVendors,
-  //     });
-  //   } else {
-  //     // throw `No booked vendors found for user ID ${user_id}`;
-  //     res.status(200).json({
-  //       success: false,
-  //       message: `No booked vendors found for user_id ${user_id}`,
-  //     });
-  //   }
-  // } catch (e) {
-  //   res.status(404).json({
-  //     success: false,
-  //     message: e,
-  //   });
-  // }
-
   const allBookedVendors = await getAllBookedVendors(user_id, event_id)
   console.log(allBookedVendors)
   res.status(200).json({
