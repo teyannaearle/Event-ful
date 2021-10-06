@@ -65,7 +65,6 @@ function App() {
           : "default name";
 
         setFormattedName(name);
-        console.log(name);
       }
     })();
     return () => {
@@ -107,6 +106,7 @@ function App() {
     }
   };
 
+  // console.log(formattedName)
   return (
     <div className="site">
       {/* <UserProvider> */}
@@ -147,7 +147,7 @@ function App() {
           />
 
           <PrivateRoute
-            path="/dashboard"
+            path={"/dashboard"}
             component={Dashboard}
             deleteEvent={deleteEvent}
             events={events}
@@ -156,7 +156,7 @@ function App() {
             formattedName={formattedName}
           />
 
-          <PrivateRoute
+           <PrivateRoute
             path="/task/:category/:event_id/:task_id"
             component={EditBooked}
             lat={lat}
@@ -195,7 +195,7 @@ function App() {
             path="/booked/:event_id/:event_name"
             component={Booked}
             user_id={user_id}
-          />
+          /> 
 
           <Route path="*">
             <FourOFour />
