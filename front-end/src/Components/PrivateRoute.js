@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { UserContext } from "../Providers/UserProvider";
-import Loading from "./Loading";
 
 const PrivateRoute = ({
   component: Component,

@@ -73,9 +73,7 @@ export const userGoogleSignIn = async () => {
 export const userSignOut = async () => {
   let result = null;
   try {
-    await signOut(auth).then(() => {
-      console.log("user signed out");
-    });
+    await signOut(auth)
   } catch (e) {
     result = e.code;
     console.warn(e.message);
