@@ -772,6 +772,10 @@ span.press {
   height: 100%;
 }
 
+.indexpg-container h2{
+text-align: center;
+}
+
 #zip-search {
   width: 200px;
   margin-right: 10px;
