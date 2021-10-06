@@ -2,7 +2,7 @@ import React from "react";
 import FavoriteList from "../Components/Favorites/FavoriteList";
 import Loading from "../Components/Loading";
 
-export default function Favorites({user_id, formattedName}) {
+export default function Favorites({ user_id, formattedName }) {
   return (
     <div className="page fave-page">
       {user_id ? (

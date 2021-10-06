@@ -28,16 +28,20 @@ function Budget({ categories, budget, shownCost, formatter }) {
       budgetStatus === budget
     ) {
       status = (
-        <p style={{color: "green"}}>
+        <p style={{ color: "green" }}>
           {" "}
           You have {formatter.format(budgetStatus)} left until you hit your
           budget
         </p>
       );
     } else if (budgetStatus === 0) {
-      status = <p style={{color: "green"}}>You've reached your budget!</p>;
+      status = <p style={{ color: "green" }}>You've reached your budget!</p>;
     } else {
-      status = <p style={{color: "red"}}>You're {formatter.format(budgetStatus * -1)} over budget</p>;
+      status = (
+        <p style={{ color: "red" }}>
+          You're {formatter.format(budgetStatus * -1)} over budget
+        </p>
+      );
     }
 
     return status;

@@ -28,7 +28,6 @@ export default function SignUp() {
       if (res === null) {
         const newUser = { email: input.email, password: input.password };
         let result = await axios.post(`${API}/users`, newUser);
-        console.log(result);
         if (result.data.success) {
           history.push("/dashboard");
         } else {

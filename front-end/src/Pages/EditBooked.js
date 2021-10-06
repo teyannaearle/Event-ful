@@ -20,51 +20,51 @@ function EditBooked({ lat, lng, formatter, user_id }) {
   const [bookedStatus, setBookedStatus] = useState({});
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false);
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
     let vendorCategories = [];
     let booked = {};
 
-    if (user_id){
+    if (user_id) {
+      try {
+        axios
+          .get(`${API}/checklist/${user_id}/${event_id}`)
+          .then((response) => {
+            const data = response.data.payload;
+            vendorCategories = data.map((point) => {
+              return {
+                name: point.task_name,
+                booked: point.is_completed,
+                cost: point.task_cost,
+                id: point.task_id,
+              };
+            });
 
-    try {
-      axios.get(`${API}/checklist/${user_id}/${event_id}`).then((response) => {
-        const data = response.data.payload;
-        vendorCategories = data.map((point) => {
-          return {
-            name: point.task_name,
-            booked: point.is_completed,
-            cost: point.task_cost,
-            id: point.task_id,
-          };
-        });
+            for (let category of vendorCategories) {
+              booked[category.name] = category.booked;
+            }
 
-        for (let category of vendorCategories) {
-          booked[category.name] = category.booked;
-        }
-
-        setBookedStatus(booked);
-      });
-    } catch (e) {
-      console.error(e);
+            setBookedStatus(booked);
+          });
+      } catch (e) {
+        console.error(e);
+      }
     }
-  }
     return () => {
       setBookedStatus({});
     };
   }, [event_id, user_id]);
 
   useEffect(() => {
-  
     if (bookedStatus[category] === true) {
       try {
         axios
           .get(`${API}/booked/category/${category}/${user_id}/${event_id}`)
           .then((res) => {
             let result = res.data.payload;
-            setSelected(true)
+            setSelected(true);
             setVendor({
               name: result.vendor_name,
               image_url: result.vendor_image,
@@ -77,7 +77,7 @@ function EditBooked({ lat, lng, formatter, user_id }) {
         console.error(e);
       }
     }
-  
+
     return () => {
       setVendor("");
       setCost(0);
@@ -106,7 +106,7 @@ function EditBooked({ lat, lng, formatter, user_id }) {
       setVendors(data);
     }
     setSearched(true);
-    setSelected(false)
+    setSelected(false);
   };
 
   const handleFormChange = (e) => {
@@ -170,7 +170,7 @@ function EditBooked({ lat, lng, formatter, user_id }) {
                   setVendor(selected);
                   setVendors([]);
                   setSearched(false);
-                  setSelected(true)
+                  setSelected(true);
                 });
             } catch (e) {
               console.error(e);
@@ -211,7 +211,11 @@ function EditBooked({ lat, lng, formatter, user_id }) {
           {vendors.map((vendor) => {
             return (
               <button onClick={() => handleSelection(vendor)} key={vendor.id}>
-                <Vendor vendor={vendor} category={category} selected={selected}/>
+                <Vendor
+                  vendor={vendor}
+                  category={category}
+                  selected={selected}
+                />
               </button>
             );
           })}
@@ -225,7 +229,7 @@ function EditBooked({ lat, lng, formatter, user_id }) {
   const vendorShow = () => {
     return (
       <div className="single-ven">
-        <Vendor vendor={vendor} category={category} selected={selected}/>
+        <Vendor vendor={vendor} category={category} selected={selected} />
         <div className="three-d ven-cost">
           <p>Cost: {formatter.format(cost)}</p>
 

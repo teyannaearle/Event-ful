@@ -18,7 +18,6 @@ export const UserProvider = ({ children }) => {
       console.log("onAuthStateChanged");
       console.log(loggedInUser);
       if (loggedInUser) {
-        console.log(`User provider current user is ${loggedInUser.email}`);
         setCurrentUser(loggedInUser);
       } else {
         setCurrentUser(null);
@@ -47,8 +46,7 @@ export const UserProvider = ({ children }) => {
   //     return <>Loading...</>;
   // };
 
-  console.log("current user");
-  console.log(currentUser);
+
   return (
     <UserContext.Provider value={{currentUser, pending}}>{children}</UserContext.Provider>
   );

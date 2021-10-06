@@ -13,7 +13,6 @@ export default function FavoriteList({user_id}) {
     clicked: false,
     category: "",
   });
-  console.log(`favoriteslist user_id is ${user_id}`);
 
   useEffect(() => {
     if (user_id) {
