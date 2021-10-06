@@ -9,7 +9,6 @@ export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [pending, setPending] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -29,16 +28,10 @@ export const UserProvider = ({ children }) => {
         let checkUser = await axios.get(`${API}/users/${email}`);
         if (checkUser.data.success) {
           currentUser.user_id = checkUser.data.payload.user_id;
-          setPending(false);
         }
       }
     })();
-    return () => {
-    };
   }, [currentUser]);
-
-
-
 
   return (
     <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
