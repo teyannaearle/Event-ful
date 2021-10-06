@@ -1,6 +1,7 @@
 import React from "react";
 import BookedVendorsList from "../Components/Booked/BookedVendorsList";
 import { useHistory, useParams } from "react-router";
+import CapitalizeEvent from "../Components/CapitalizeEvent"
 
 export default function Booked({ user_id }) {
   let history = useHistory();
@@ -16,7 +17,7 @@ export default function Booked({ user_id }) {
       </button>
 
       <div className="page">
-        <h1 className="pg-head"> Booked Vendors for {event_name} </h1>
+        <h1 className="pg-head"> Booked Vendors for {CapitalizeEvent(event_name)} </h1>
         <BookedVendorsList user_id={user_id} />
       </div>
     </>

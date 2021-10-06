@@ -1,17 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
-import "./SignInForm.css";
-import { userGoogleSignIn, userSignIn } from "../Services/Firebase";
-import { UserContext } from "../Providers/UserProvider";
+import "../../css/SignInForm.css";
+import { userGoogleSignIn, userSignIn } from "../../Services/Firebase";
 import axios from "axios";
-import { apiURL } from "../util/apiURL";
+import { apiURL } from "../../util/apiURL";
 
 const API = apiURL();
 
 function SignInForm() {
   const history = useHistory();
-  const loggedInUser = useContext(UserContext);
   const [input, setInput] = useState({
     email: "",
     password: "",

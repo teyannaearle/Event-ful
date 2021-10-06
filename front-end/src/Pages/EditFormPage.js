@@ -1,4 +1,4 @@
-import EditForm from "../Components/EditEvent";
+import EditForm from "../Components/Dashboard/EditEvent"
 
 import React from "react";
 

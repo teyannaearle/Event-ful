@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { auth } from "../Services/Firebase";
 import { apiURL } from "../util/apiURL";
 import axios from "axios";
-import Loading from "../Components/Loading";
 
 const API = apiURL();
 export const UserContext = createContext();
@@ -15,8 +14,6 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged((loggedInUser) => {
-      console.log("onAuthStateChanged");
-      console.log(loggedInUser);
       if (loggedInUser) {
         setCurrentUser(loggedInUser);
       } else {
@@ -37,15 +34,8 @@ export const UserProvider = ({ children }) => {
       }
     })();
     return () => {
-      // cleanup
-      // setUserId(null)
     };
   }, [currentUser]);
-
-  //   if (pending) {
-  //     return <>Loading...</>;
-  // };
-
 
   return (
     <UserContext.Provider value={{currentUser, pending}}>{children}</UserContext.Provider>

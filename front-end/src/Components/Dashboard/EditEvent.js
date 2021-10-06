@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import { apiURL } from "../util/apiURL";
-import "./EditEvent.css";
-import CapitalizeEvent from "../Components/CapitalizeEvent";
+import { apiURL } from "../../util/apiURL";
+import "../../css/EditEvent.css";
+import CapitalizeEvent from "../CapitalizeEvent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -208,11 +208,10 @@ function EditEvent({ setUpdateEvent, user_id }) {
             <label>Time: </label>
             <input
               className="three-d pg-input"
-              id="appt-time"
+              id="event_time"
               type="time"
               required
               value={event.event_time}
-              placeholder="Time"
               onChange={handleChange}
             />
             <label>Date: </label>

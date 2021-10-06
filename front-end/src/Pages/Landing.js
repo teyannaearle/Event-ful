@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "./Landing.css";
+import "../css/Landing.css";
 import { Link } from "react-router-dom";
 import { UserContext } from "../Providers/UserProvider";
 import call2action from "../assets/call2action.jpg";

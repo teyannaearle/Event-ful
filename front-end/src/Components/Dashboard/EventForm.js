@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { apiURL } from "../util/apiURL.js";
-import { UserContext } from "../Providers/UserProvider";
+import { apiURL } from "../../util/apiURL.js";
 
 const API = apiURL();
 

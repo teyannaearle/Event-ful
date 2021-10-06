@@ -1,5 +1,5 @@
 import React from "react";
-import EventCheckbox from "../Components/EventCheckbox.js";
+import EventCheckbox from "../Components/Dashboard/EventCheckbox.js";
 
 export default function EventCheckboxPg({ setUpdateEvent, user_id }) {
   return (
