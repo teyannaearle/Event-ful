@@ -3,7 +3,7 @@ import SignInForm from "../Components/SignInForm";
 
 export default function SignIn() {
   return (
-    <div>
+    <div className="Landing-Container">
       <SignInForm />
     </div>
   );

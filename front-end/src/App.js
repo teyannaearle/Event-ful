@@ -65,7 +65,6 @@ function App() {
           : "default name";
 
         setFormattedName(name);
-        console.log(name);
       }
     })();
     return () => {
@@ -107,9 +106,9 @@ function App() {
     }
   };
 
+
   return (
     <div className="site">
-      {/* <UserProvider> */}
       <Router>
         <ScrollToTop />
         {signedOut ? <Banner /> : <NavBar setSignedOut={setSignedOut} />}
@@ -146,26 +145,15 @@ function App() {
             user_id={user_id}
           />
 
-          {/* <PrivateRoute
-            path="/dashboard"
+          <PrivateRoute
+            path={"/dashboard"}
             component={Dashboard}
             deleteEvent={deleteEvent}
             events={events}
             setUpdateEvent={setUpdateEvent}
             user_id={user_id}
             formattedName={formattedName}
-          /> */}
-          <Route
-            path="/dashboard">
-            <Dashboard
-            deleteEvent={deleteEvent}
-            events={events}
-            setUpdateEvent={setUpdateEvent}
-            user_id={user_id}
-            formattedName={formattedName}
-        />
-            {" "}
-          </Route>
+          />
 
           <PrivateRoute
             path="/task/:category/:event_id/:task_id"
@@ -214,7 +202,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-      {/* </UserProvider> */}
     </div>
   );
 }

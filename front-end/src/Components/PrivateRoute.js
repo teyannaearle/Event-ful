@@ -4,8 +4,7 @@ import { UserContext } from "../Providers/UserProvider";
 import Loading from "./Loading";
 
 const PrivateRoute = ({
-  component: RouteComponent,
-  loggedInUser,
+  component: Component,
   deleteEvent,
   events,
   user_id,
@@ -18,25 +17,12 @@ const PrivateRoute = ({
   ...rest
 }) => {
   const currentUser = useContext(UserContext);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoaded(true);
-  //   }, 1000);
-  //   return () => {
-  //     // cleanup
-  //   };
-  // }, []);
-
-  // if (!loaded) {
-  //   return <Loading />
-  // }
   return (
     <Route
       {...rest}
-      render={(props) => {
+      render={(props) =>
         !!currentUser ? (
-          <RouteComponent
+          <Component
             {...props}
             deleteEvent={deleteEvent}
             events={events}
@@ -49,9 +35,9 @@ const PrivateRoute = ({
             location={location}
           />
         ) : (
-          <Redirect to={"/signin"} />
-        );
-      }}
+          <Redirect to="/signin" />
+        )
+      }
     />
   );
 };
