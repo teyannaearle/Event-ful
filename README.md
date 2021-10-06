@@ -14,6 +14,7 @@
 * Overview
 * Project Structure
 * Usage 
+* Future Implementation
 * Contributors
 
 ## Overview
@@ -106,6 +107,12 @@ The Event(ful) App is a one-stop-shop for your vendor-booking organization. The 
 
 
 [Detailed Back-end Documentation](https://documenter.getpostman.com/view/16788389/UUy65PT5)
+
+### Future Implementations
+* Allow users to search for vendors without signing-in.
+* Allow users to change personal settings i.e. name, password, etc. 
+* A map function to dispay vendor locations 
+
 
 
 
