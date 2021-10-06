@@ -1,14 +1,13 @@
 import React from "react";
 import EventForm from "../Components/EventForm";
 
-export default function NewEventForm({user_id}) {
-  console.log(user_id)
+export default function NewEventForm({ user_id }) {
   return (
     <div className="page newevent-pg">
       <h1 className="pg-head">Create a New Event </h1>
       <div className="newEvent-container ">
-        <EventForm user_id={user_id}/>
+        <EventForm user_id={user_id} />
       </div>
-     </div>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import VendorShowInfo from "../Components/VendorShow/VendorShowInfo";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
 
-export default function VendorShow({user_id}) {
+export default function VendorShow({ user_id }) {
   const [business, setbusiness] = useState({
     photos: [],
     categories: [{ title: "" }],

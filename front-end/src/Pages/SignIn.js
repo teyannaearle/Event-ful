@@ -1,10 +1,10 @@
-import React from 'react'
-import SignInForm from '../Components/SignInForm'
+import React from "react";
+import SignInForm from "../Components/SignInForm";
 
 export default function SignIn() {
-    return (
-        <div>
-            <SignInForm />
-        </div>
-    )
+  return (
+    <div>
+      <SignInForm />
+    </div>
+  );
 }

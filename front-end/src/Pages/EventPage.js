@@ -7,7 +7,6 @@ import { apiURL } from "../util/apiURL";
 import CapitalizeEvent from "../Components/CapitalizeEvent";
 import axios from "axios";
 
-
 const api = apiURL();
 
 export default function Event({ formatter, user_id }) {

@@ -5,6 +5,7 @@ import Loading from "./Loading";
 
 const PrivateRoute = ({
   component: RouteComponent,
+  loggedInUser,
   deleteEvent,
   events,
   user_id,
@@ -17,7 +18,6 @@ const PrivateRoute = ({
   ...rest
 }) => {
   const currentUser = useContext(UserContext);
- 
 
   // useEffect(() => {
   //   setTimeout(() => {

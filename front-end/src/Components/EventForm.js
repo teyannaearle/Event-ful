@@ -6,7 +6,7 @@ import { UserContext } from "../Providers/UserProvider";
 
 const API = apiURL();
 
-function EventForm({user_id}) {
+function EventForm({ user_id }) {
   let history = useHistory();
   const [myEvent, setEvent] = useState({
     event_name: "",

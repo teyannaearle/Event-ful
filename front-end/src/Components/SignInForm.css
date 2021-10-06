@@ -87,13 +87,13 @@
   }
 }
 
-@media only screen and (max-width: 500px){
-  .Container{
+@media only screen and (max-width: 500px) {
+  .Container {
     height: 75%;
     width: 95%;
   }
 
-  .newForm{
+  .newForm {
     width: 100%;
   }
 }

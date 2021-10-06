@@ -146,7 +146,7 @@ function App() {
             user_id={user_id}
           />
 
-          <PrivateRoute
+          {/* <PrivateRoute
             path="/dashboard"
             component={Dashboard}
             deleteEvent={deleteEvent}
@@ -154,7 +154,18 @@ function App() {
             setUpdateEvent={setUpdateEvent}
             user_id={user_id}
             formattedName={formattedName}
-          />
+          /> */}
+          <Route
+            path="/dashboard">
+            <Dashboard
+            deleteEvent={deleteEvent}
+            events={events}
+            setUpdateEvent={setUpdateEvent}
+            user_id={user_id}
+            formattedName={formattedName}
+        />
+            {" "}
+          </Route>
 
           <PrivateRoute
             path="/task/:category/:event_id/:task_id"
@@ -181,6 +192,7 @@ function App() {
           <PrivateRoute
             path="/favorites"
             component={Favorites}
+            loggedInUser={loggedInUser}
             user_id={user_id}
             formattedName={formattedName}
           />

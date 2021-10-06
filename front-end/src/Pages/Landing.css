@@ -6,14 +6,14 @@
   font-size: 20px;
 }
 
-.Landing-Container::before{
-  content: '';
+.Landing-Container::before {
+  content: "";
   position: absolute;
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
-  opacity: 0.10;
+  opacity: 0.1;
   background-image: url(../assets/sparkle.webp);
   z-index: -1;
 }

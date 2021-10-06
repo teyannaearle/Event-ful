@@ -1,8 +1,7 @@
 import React from "react";
-import CategorySwitch from "../CategorySwitch"
+import CategorySwitch from "../CategorySwitch";
 
 export default function Favorite({ vendors, vendor, deleteFav }) {
-
   const handleClick = () => {
     deleteFav(vendor.vendor_name);
   };
@@ -16,7 +15,11 @@ export default function Favorite({ vendors, vendor, deleteFav }) {
 
   return (
     <>
-      <li className={`flex-col three-d ven-li ${vendors.length === 1 ? "one-li" : null}`}>
+      <li
+        className={`flex-col three-d ven-li ${
+          vendors.length === 1 ? "one-li" : null
+        }`}
+      >
         <img
           src={vendor.vendor_image}
           alt={vendor.vendor_name}
