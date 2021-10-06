@@ -6,7 +6,8 @@
 
 [Back-end](https://eventful-capstone.herokuapp.com/)
 
-![Live Site](./images/LandingPageImg.png)
+![Landing Page](./images/LandingPageImg.png)
+![Event Page](images/Screen Shot 2021-10-05 at 9.50.48 PM.png)
 
 ## Table of Content
 * Overview
