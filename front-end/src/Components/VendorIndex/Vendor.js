@@ -10,13 +10,12 @@ function Vendor({ vendor, selected }) {
       <li
         className={`flex-col three-d ${
           (location[1] === "task" && !selected) || location[1] === "vendors"
-            ? "ven-li-blue"
+            ? "ven-li-blue task-blue"
             : "ven-li"
-        } ${location[1] === "task" && !selected ? "task-blue" : null }`}
+        }`}
       >
-        {location[1] === "task" ? <h2 className="task-head col-h"> ( {vendor.name} )</h2> : null}
+        <h2 className="task-head col-h"> {vendor.name}  </h2>
         <img src={vendor.image_url} alt={vendor.name} className="ven-img" />
-        {location[1] !== "task" ? <h2>{vendor.name}</h2> : null}
         <p>Phone: {vendor.display_phone}</p>
         <div className="flex-row">
           <Ratings
