@@ -18,6 +18,8 @@ function Event({ event, deleteEvent }) {
       item = <>&#65039;</>;
     } else if (name.includes("halloween")) {
       item = <>&#127875;</>;
+    } else if (name.includes("sweet" || "quince")){
+      item = <>&#128131;</> ;
     } else {
       item = <>&#127882;</>;
     }
