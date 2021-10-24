@@ -105,7 +105,7 @@ function SignInForm() {
         <Link to="/SignUp" className="SignUp-But">
           <p>
             {" "}
-            Dont have an account? <br />
+            Dont have an account? 
             Click Here to make one!
           </p>
         </Link>
