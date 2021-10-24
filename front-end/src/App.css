@@ -1333,11 +1333,11 @@ span.press {
     width: 75%;
   }
 
-  #budget-container{
+  #budget-container {
     height: max-content;
   }
 
-  #budget-update .update{
+  #budget-update .update {
     margin-bottom: 20px;
   }
   #countdown-container {
@@ -1546,6 +1546,14 @@ span.press {
     right: 0;
   }
 
+  .new-event-container {
+    width: 90%;
+  }
+
+  .category {
+    margin-left: 50px;
+  }
+
   /*VENDOR SHOW */
   .like-div {
     text-align: center;
@@ -1572,6 +1580,9 @@ span.press {
     margin-left: 0px;
   }
 
+  .show-header2 {
+    width: 100%;
+  }
   .like-span {
     top: 0;
     left: 80px;
@@ -1586,7 +1597,14 @@ span.press {
   }
 
   .ven-info {
-    margin-top: 0px;
+    margin-top: 5px;
+    width: 100%;
+  }
+  .reviews {
+    width: 100%;
+  }
+  .reviews .show-header {
+    width: 100%;
   }
 
   /* BOOKED PAGE */
@@ -1601,6 +1619,10 @@ span.press {
 
   .dropdown-content {
     width: 200px;
+  }
+
+  .ven-ul {
+    grid-row-gap: 40px;
   }
 
   /*EVENT PAGE*/
@@ -1647,6 +1669,36 @@ span.press {
     margin-right: 10px;
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  #countdown-container .col-h {
+    font-size: medium;
+  }
+
+  /* LANDING PAGE */
+  .Landing .col-h {
+    width: 90%;
+  }
+
+  .Landing span p {
+    font-size: large;
+  }
+
+  .signIn-container {
+    margin: auto;
+    margin-top: 40px;
+    width: 80%;
+  }
+
+  .SignIn-Form .newForm {
+    width: 90%;
+    padding: 0;
+  }
+
+  .new-form input,
+  .newForm button {
+    width: 80%;
+    margin-bottom: 20px;
   }
 }
 
