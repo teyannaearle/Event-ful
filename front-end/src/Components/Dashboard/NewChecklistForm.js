@@ -1,16 +1,19 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
 import { apiURL } from "../../util/apiURL.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const API = apiURL();
 
-export default function EventCheckbox({ setUpdateEvent, user_id }) {
-  const { id } = useParams();
-  const history = useHistory();
+export default function NewChecklistForm({
+  setUpdateEvent,
+  user_id,
+  id,
+  setCreated,
+  setEventId,
+}) {
   const [eventForm, setEventForm] = useState({
     catering: false,
     djs: false,
@@ -52,7 +55,11 @@ export default function EventCheckbox({ setUpdateEvent, user_id }) {
     e.preventDefault();
     if (Object.values(eventForm).includes(true)) {
       addToCheckedList();
-      history.push("/dashboard");
+      setEventId(null);
+      setCreated(true);
+      setTimeout(() => {
+        setCreated(false);
+      }, 1000);
     } else {
       toast.error("Choose at least one vendor to add to your checklist", {
         toastId: "customId",
@@ -62,7 +69,9 @@ export default function EventCheckbox({ setUpdateEvent, user_id }) {
 
   return (
     <section className="eventcheckbox">
-      <form className=" col-h three-d" onSubmit={handleSubmit}>
+      <h2>Select Your Event Requirements: </h2>
+
+      <form onSubmit={handleSubmit}>
         <span className="checkbox-span new-checkbox">
           <label className="check-container edit-checkbox">
             <input
@@ -104,6 +113,8 @@ export default function EventCheckbox({ setUpdateEvent, user_id }) {
             <span className="checkmark"></span>
             <span className="category"> &#128248; Photographer</span>
           </label>
+        </span>
+        <span className="checkbox-span new-checkbox">
           <label className="check-container edit-checkbox">
             <input
               value="party_rental"
@@ -144,6 +155,8 @@ export default function EventCheckbox({ setUpdateEvent, user_id }) {
             <span className="checkmark"></span>
             <span className="category"> &#127880; Balloon Services</span>
           </label>
+        </span>
+        <span className="checkbox-span new-checkbox">
           <label className="check-container edit-checkbox">
             <input
               value="floral"
@@ -185,10 +198,12 @@ export default function EventCheckbox({ setUpdateEvent, user_id }) {
             <span className="category"> &#129313; Clowns</span>
           </label>
         </span>
-        <button className="three-d pg-buttons" type="submit">
-          Submit
+
+        <button className="pg-buttons drop" id="create" type="submit">
+          Create Event
         </button>
       </form>
+
       <ToastContainer autoClose={false} position="bottom-center" />
     </section>
   );

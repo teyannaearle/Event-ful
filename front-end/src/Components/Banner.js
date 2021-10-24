@@ -4,7 +4,7 @@ function Banner() {
   return (
     <div>
       <div>
-        <h1 className="brand">Event(ful) &#127881;</h1>
+        <h1 className="brand drop">Event(ful) &#127881;</h1>
       </div>
     </div>
   );

@@ -13,6 +13,10 @@ const PrivateRoute = ({
   lng,
   formatter,
   location,
+  created,
+  setCreated,
+  city,
+  setCity,
   ...rest
 }) => {
   const currentUser = useContext(UserContext);
@@ -33,6 +37,10 @@ const PrivateRoute = ({
             lng={lng}
             formatter={formatter}
             location={location}
+            created={created}
+            setCreated={setCreated}
+            city={city}
+            setCity={setCity}
           />
         ) : (
           <Redirect to="/signin" />

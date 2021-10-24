@@ -1,17 +1,15 @@
 nav {
   box-sizing: border-box;
-  border-bottom: 1px solid white;
 }
 
 .NavBarItems {
-  background-image: linear-gradient(
-    to right top,
-    #7bbce0,
-    #76b7da,
-    #71b1d5,
-    #6daccf,
-    #68a7ca
+  background: radial-gradient(
+    circle,
+    rgba(123, 188, 224, 1) 0%,
+    rgba(104, 167, 202, 1) 35%,
+    rgba(98, 145, 189, 1) 100%
   );
+  color: #7bbce0;
   height: 80px;
   display: flex;
   justify-content: center;
@@ -24,11 +22,9 @@ nav {
   justify-self: start;
   margin-left: 20px;
   width: 30%;
-  /* display: inline; */
 }
 
 .nav-links {
-  color: white;
   padding: 0.5rem 1rem;
 }
 
@@ -46,26 +42,19 @@ nav {
 }
 
 .nav-menu.active {
-  background-image: linear-gradient(
-    to right top,
-    #3b90bf,
-    #3a8fbe,
-    #3a8ebc,
-    #398dbb,
-    #388cba,
-    #388bb9,
-    #378bb8,
-    #378ab7,
-    #3789b5,
-    #3888b4,
-    #3887b2,
-    #3886b1
+  background: linear-gradient(
+    90deg,
+    rgb(60, 145, 191) 0%,
+    rgb(52, 127, 167)35%,
+    rgb(48, 118, 155)100%
   );
   top: 80px;
   opacity: 1;
   visibility: visible;
   transition: all 0.3s ease;
   z-index: 100;
+  -webkit-box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.5);
+  box-shadow: -1px 10px 20px -4px rgba(0, 0, 0, 0.5);
 }
 
 .nav-links {
@@ -74,20 +63,20 @@ nav {
   width: 100%;
   display: table;
   letter-spacing: 1px;
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.4);
+  color: white;
+  font-weight: 700;
 }
 
 .nav-links:hover {
-  background-image: linear-gradient(
-    to right top,
-    #7bbce0,
-    #76b7da,
-    #71b1d5,
-    #6daccf,
-    #68a7ca
+  background: radial-gradient(
+    circle,
+    rgba(123, 188, 224, 1) 0%,
+    rgba(104, 167, 202, 1) 35%,
+    rgba(98, 145, 189, 1) 100%
   );
+  color: black;
   border-radius: 0;
-  border: 1px dotted white;
+  font-size: larger;
 }
 
 .nav-links-mobile {
@@ -111,7 +100,6 @@ nav {
 
 .accountLinks {
   margin-left: 1.5rem;
-  color: #fff;
 }
 
 .accountLinks:hover {
@@ -133,6 +121,11 @@ nav {
 }
 
 .accountNav .logout {
+  background-color: #2c6b8e;
+  background-image: none;
+}
+
+.accountNav .nav-but {
   background-color: #2c6b8e;
   background-image: none;
 }
@@ -168,7 +161,6 @@ nav {
   .accountNav {
     width: 100%;
     justify-content: center;
-    /* justify-content: space-evenly; */
   }
 
   .accountLinks {

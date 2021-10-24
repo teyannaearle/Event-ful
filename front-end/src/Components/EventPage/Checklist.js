@@ -151,7 +151,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
             <div className="book-buttons book-grid">
               {bookedButton(category, id)}
               <Link to={`/task/${category.name}/${event_id}/${id}`}>
-                <button className={bookedStatus[category.name] ? "check" : "x"}>
+                <button className={`eventpg-buttons drop ${bookedStatus[category.name] ? "check" : "x"}`}>
                   {bookedStatus[category.name] ? (
                     <>Edit Vendor</>
                   ) : (
@@ -162,10 +162,10 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
             </div>
 
             <div>
-              <button className="checklist-button">
+              <button className="checklist-button drop ">
                 <Link
                   to={`/vendors/${category.name}`}
-                  className="checklist-span"
+                  className="checklist-span "
                 >
                   <span> {listItem(category.name)} </span> <span>&#187;</span>
                 </Link>
@@ -175,7 +175,7 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
         );
       })}
       <button
-        className="book-buttons check"
+        className="book-buttons check drop"
         id="all-booked"
         onClick={() => history.push(`/booked/${event_id}/${eventName}`)}
       >

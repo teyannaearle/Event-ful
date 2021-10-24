@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import EventList from "../Components/Dashboard/EventList";
 import Loading from "../Components/Loading";
+import NewEventForm from "../Components/Dashboard/NewEventForm";
 
 export default function Dashboard({
   events,
@@ -8,6 +9,8 @@ export default function Dashboard({
   setUpdateEvent,
   user_id,
   formattedName,
+  created,
+  setCreated,
 }) {
   useEffect(() => {
     setUpdateEvent(false);
@@ -21,13 +24,18 @@ export default function Dashboard({
       {user_id ? (
         <>
           <h1 className="pg-head">{`${formattedName}'s Dashboard`} </h1>
-          <div className="dash-container three-d">
+          <NewEventForm
+            user_id={user_id}
+            created={created}
+            setCreated={setCreated}
+          />
+          <>
             <EventList
               events={events}
               deleteEvent={deleteEvent}
               user_id={user_id}
             />
-          </div>
+          </>
         </>
       ) : (
         <Loading />

@@ -5,6 +5,7 @@ import "../../css/SignInForm.css";
 import { userGoogleSignIn, userSignIn } from "../../Services/Firebase";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
+import { ToastContainer, toast } from "react-toastify";
 
 const API = apiURL();
 
@@ -14,9 +15,6 @@ function SignInForm() {
     email: "",
     password: "",
   });
-
-  const [errorMessage, setErrorMessage] = useState("");
-
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
@@ -26,10 +24,11 @@ function SignInForm() {
     try {
       let res = await userSignIn(input.email, input.password);
       if (res === null) {
-        setErrorMessage("");
         history.push("/dashboard");
       } else {
-        setErrorMessage("Wrong email or password. Please try again");
+        toast.error("Wrong email or password. Please try again", {
+          toastId: "customId",
+        });
         setInput({
           email: "",
           password: "",
@@ -71,30 +70,29 @@ function SignInForm() {
       <div className=" newForm three-d">
         &nbsp;
         <form onSubmit={signIn}>
-          <span id="SignIn-Labels">
-          <label htmlFor="Email">Please Enter Your Email</label>
-          <input
-            type="email"
-            name="email"
-            value={input.email}
-            onChange={handleChange}
-            placeholder="Email"
-          />{" "}
-          <label htmlFor="Password">Please Enter Your Password</label>
-          <input
-            type="password"
-            name="password"
-            value={input.password}
-            onChange={handleChange}
-            placeholder="Password"
-            autoComplete="on"
-          />{" "}
+          <span className="SignIn-Labels">
+            <label htmlFor="Email">Please Enter Your Email</label>
+            <input
+              type="email"
+              name="email"
+              value={input.email}
+              onChange={handleChange}
+              placeholder="Email"
+            />{" "}
+            <label htmlFor="Password">Please Enter Your Password</label>
+            <input
+              type="password"
+              name="password"
+              value={input.password}
+              onChange={handleChange}
+              placeholder="Password"
+              autoComplete="on"
+            />{" "}
           </span>
           <button type="submit" className="Login pg-buttons">
             Sign In
           </button>
           <div className="divider"></div>
-          <p>{errorMessage}</p>
         </form>
         <button
           type="button"
@@ -112,6 +110,7 @@ function SignInForm() {
           </p>
         </Link>
       </div>
+      <ToastContainer autoClose={false} position="center" />
     </div>
   );
 }

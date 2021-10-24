@@ -20,6 +20,7 @@ export default function Favorite({ vendors, vendor, deleteFav }) {
           vendors.length === 1 ? "one-li" : null
         }`}
       >
+        <h2 className="col-h">{vendor.vendor_name}</h2>
         <img
           src={vendor.vendor_image}
           alt={vendor.vendor_name}
@@ -34,8 +35,7 @@ export default function Favorite({ vendors, vendor, deleteFav }) {
             style={{ color: "red" }}
           ></i>
         </div>
-        <h2>{vendor.vendor_name}</h2>
-        <p>Category: {CategorySwitch(vendor.vendor_category)}</p>
+        <p>( {CategorySwitch(vendor.vendor_category)} )</p>
         <h4> Contact Information </h4>
         <p>Phone: {formatPhone(vendor.vendor_phone_number)}</p>
         <p>Address: {vendor.vendor_address}</p>

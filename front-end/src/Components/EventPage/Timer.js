@@ -68,7 +68,7 @@ function Timer({ user_id }) {
         <CountdownCircleTimer
           {...timerProps}
           size={150}
-          colors={[["#0F5298"]]}
+          colors={[["#7bbce0"]]}
           duration={daysDuration}
           initialRemainingTime={remainingTime}
         >
@@ -79,7 +79,7 @@ function Timer({ user_id }) {
         <CountdownCircleTimer
           {...timerProps}
           size={150}
-          colors={[["#3C99DC"]]}
+          colors={[["#68a7ca"]]} 
           duration={daySeconds}
           initialRemainingTime={remainingTime % daySeconds}
           onComplete={(totalElapsedTime) => [
@@ -93,7 +93,7 @@ function Timer({ user_id }) {
         <CountdownCircleTimer
           {...timerProps}
           size={150}
-          colors={[["#4390BC"]]}
+          colors={[["#6291bd"]]}
           duration={hourSeconds}
           initialRemainingTime={remainingTime % hourSeconds}
           onComplete={(totalElapsedTime) => [
@@ -107,7 +107,7 @@ function Timer({ user_id }) {
         <CountdownCircleTimer
           {...timerProps}
           size={150}
-          colors={[["#68a7ca"]]}
+          colors={[["#2c6b8e"]]}
           duration={minuteSeconds}
           initialRemainingTime={remainingTime % minuteSeconds}
           onComplete={(totalElapsedTime) => [

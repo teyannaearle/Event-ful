@@ -40,7 +40,7 @@ export default function NavBar({setSignedOut}) {
   };
 
   return (
-    <nav className="NavBarItems">
+    <nav className="NavBarItems drop">
       <Link to="/" className="navbar-logo">
         <h1> Event(ful) &#127881;</h1>
       </Link>

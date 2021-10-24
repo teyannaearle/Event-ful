@@ -9,6 +9,7 @@ export default function BookedVendor({ vendor }) {
       : phone;
   return (
     <>
+    <h2 className="col-h">{vendor.vendor_name}</h2>
       <img
         src={vendor.vendor_image}
         alt={vendor.vendor_name}
@@ -16,7 +17,6 @@ export default function BookedVendor({ vendor }) {
         width="300"
         className="ven-img"
       />
-      <h2>{vendor.vendor_name}</h2>
       <h3> Contact Information </h3>
       <p>Phone: {formatPhone(vendor.vendor_phone_number)}</p>
       <p>Address: {vendor.vendor_address}</p>

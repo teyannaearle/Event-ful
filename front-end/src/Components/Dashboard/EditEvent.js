@@ -4,7 +4,6 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
 import "../../css/EditEvent.css";
-import CapitalizeEvent from "../CapitalizeEvent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -176,8 +175,7 @@ function EditEvent({ setUpdateEvent, user_id }) {
   return (
     <>
       <h1>
-        Edit{" "}
-        {event.event_name ? CapitalizeEvent(head.current) : event.event_name}
+        Edit Event Details
       </h1>
       <div className="form-container">
         <form className="edit-eventform three-d" onSubmit={handleSubmit}>

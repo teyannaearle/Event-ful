@@ -82,24 +82,37 @@ function VendorShowInfo({ business, user_id, category }) {
 
   return (
     <>
-      <span className="show-header">
+      <span className="show-header drop">
         <span>
           <div className="like-div">
             <i
-              className={`fas fa-heart fa-lg heart ${pressed ? "press" : null}`}
+              className={`fas fa-heart fa-lg heart drop ${
+                pressed ? "press" : null
+              }`}
               onClick={handleFav}
               style={{ color: heartColor() }}
               onMouseEnter={() => setHover(!hover)}
               onMouseLeave={() => setHover(!hover)}
             ></i>
-            <span className={`like-span ${pressed ? "press" : null}`}>
-              Added to Favorites !
-            </span>
           </div>
           <h1>{business.name} </h1>
         </span>
       </span>
-      <div className="ven-info page three-d">
+      <div className="flex-row show-header2 drop">
+        <Ratings
+          rating={business.rating}
+          widgetRatedColors="#efcc00"
+          widgetSpacings="5px"
+          widgetEmptyColors="#aaa"
+        >
+          <Ratings.Widget widgetDimension="30px" />
+          <Ratings.Widget widgetDimension="30px" />
+          <Ratings.Widget widgetDimension="35px" />
+          <Ratings.Widget widgetDimension="30px" />
+          <Ratings.Widget widgetDimension="30px" />
+        </Ratings>
+      </div>
+      <div className="ven-info page drop ">
         <div className="car-wrap">
           <Carousel showThumbs={false} autoPlay={true}>
             {business.photos.map((photo, i) => (
@@ -110,22 +123,7 @@ function VendorShowInfo({ business, user_id, category }) {
 
         <div id="ven-info">
           <div className="flex-row">
-            <p>{business.categories[0].title}</p>
-          </div>
-
-          <div className="flex-row">
-            <Ratings
-              rating={business.rating}
-              widgetRatedColors="#efcc00"
-              widgetSpacings="5px"
-              widgetEmptyColors="#aaa"
-            >
-              <Ratings.Widget widgetDimension="30px" />
-              <Ratings.Widget widgetDimension="30px" />
-              <Ratings.Widget widgetDimension="35px" />
-              <Ratings.Widget widgetDimension="30px" />
-              <Ratings.Widget widgetDimension="30px" />
-            </Ratings>
+            <p className="cat-title">( {business.categories[0].title} )</p>
           </div>
           <div>
             <h2> Contact Information </h2>

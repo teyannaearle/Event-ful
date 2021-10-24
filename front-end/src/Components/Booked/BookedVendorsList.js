@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import BookedVendor from "./BookedVendor";
 import { apiURL } from "../../util/apiURL";
-import { VendorMenu } from "../NavBar/VendorMenu";
+import breakdance from "../../assets/breakdance.gif"
 const API = apiURL();
 
 export default function BookedVendorList({ user_id }) {
@@ -57,18 +57,11 @@ export default function BookedVendorList({ user_id }) {
           })}{" "}
         </ul>
       ) : (
-        <>
-          <h2>No booked vendors at this time. Browse for vendor's near you.</h2>
-          <ul className="browse-ul">
-            {VendorMenu.map((vendor) => {
-              return (
-                <Link to={vendor.url} key={vendor.url}>
-                  <li className="browse-li">{vendor.title}</li>
-                </Link>
-              );
-            })}
-          </ul>
-        </>
+
+      <> <h2 className="none">No booked vendors ... </h2> <p className="yet">( yet ! )</p>
+      
+      <img src={breakdance} alt="breakdance" /> </>
+   
       )}
     </div>
   );
