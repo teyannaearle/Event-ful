@@ -14,8 +14,9 @@ function Vendor({ vendor, selected }) {
             : "ven-li"
         }`}
       >
+        {location[1] === "task" ? <h2>{vendor.name}</h2> : null}
         <img src={vendor.image_url} alt={vendor.name} className="ven-img" />
-        <h2>{vendor.name}</h2>
+        {location[1] !== "task" ? <h2>{vendor.name}</h2> : null}
         <p>Phone: {vendor.display_phone}</p>
         <div className="flex-row">
           <Ratings

@@ -4,28 +4,49 @@ import api from "../util/apiCalls";
 import VendorList from "../Components/VendorIndex/VendorList";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
+import axios from "axios";
 
-export default function VendorIndex({ location, lat, lng }) {
+const apiKey = process.env.REACT_APP_API_KEY;
+const proxy = "https://morning-spire-06380.herokuapp.com";
+const yelpBase = "https://api.yelp.com/v3/businesses";
+const config = () => {
+  return {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      withCredentials: true,
+    },
+  };
+};
+
+export default function VendorIndex({ lat, lng, city }) {
   const [vendors, setVendors] = useState([]);
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false);
   const { category } = useParams();
 
   useEffect(() => {
-    (async () => {
-      if (lng && lat) {
-        const data = await api.getVendorsLongLag(lng, lat, category);
-
-        if (data.businesses[0].id) {
-          setVendors(data.businesses);
+    try{
+      axios.get(
+        `${proxy}/${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
+        config()
+      )
+      .then(res => { 
+        const {data} = res
+        if (data.businesses[0].id){
+          setVendors(data.businesses)
         }
-        setSearched(true);
-      }
-    })();
-    return () => {
-      setVendors([]);
-      setSearched(false);
-    };
+        setSearched(true)
+      })
+      
+    } catch (e) {
+      return console.warn(e);
+    }
+
+    // return () => {
+    //   setVendors([])
+    //   setSearched(false)
+    // }
+
   }, [category, lng, lat]);
 
   const handleZipChange = (e) => {
@@ -44,7 +65,7 @@ export default function VendorIndex({ location, lat, lng }) {
 
   const vendorsList = () => {
     let result = "";
-    if (!location.coordinates && !searched) {
+    if (!lat && !searched) {
       result = (
         <>
           {" "}
@@ -62,7 +83,7 @@ export default function VendorIndex({ location, lat, lng }) {
           another zip code.{" "}
         </h2>
       );
-    } else if (location.coordinates && !vendors[0]) {
+    } else if (lat && !vendors[0]) {
       result = <Loading />;
     } else {
       result = <VendorList vendors={vendors} category={category} />;
@@ -76,6 +97,7 @@ export default function VendorIndex({ location, lat, lng }) {
         {category ? (
           <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1>
         ) : null}
+       <p> ( near {searched && zip ? zip : city} ) </p>
         <form onSubmit={handleSubmit} id="zip-form">
           <input
             className="three-d pg-input"

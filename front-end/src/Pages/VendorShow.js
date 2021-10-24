@@ -31,7 +31,7 @@ export default function VendorShow({ user_id }) {
         setbusiness(data);
       }
     })();
-
+    
     return () => {
       setReviews([
         {

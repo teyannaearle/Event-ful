@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import "../css/SignUp.css"
 import { userSignUp } from "../Services/Firebase";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
+import { ToastContainer, toast } from "react-toastify";
 
 const API = apiURL();
 
 export default function SignUp() {
   const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState(null);
   const [input, setInput] = useState({
     userName: "",
     email: "",
@@ -22,7 +21,6 @@ export default function SignUp() {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    setErrorMessage(null);
     try {
       let res = await userSignUp(input.userName, input.email, input.password);
       if (res === null) {
@@ -34,7 +32,9 @@ export default function SignUp() {
           console.warn("could not add new user to backend database");
         }
       } else {
-        setErrorMessage("please enter all required info");
+        toast.error("Please enter all required info", {
+          toastId: "customId",
+        });
       }
     } catch (error) {
       alert(error);
@@ -43,45 +43,44 @@ export default function SignUp() {
 
   return (
     <div className="Landing-Container">
-      <div className="SignUp-Form">
-        <div className="Container three-d">
+      <div className="SignIn-Form ">
+        <p> &nbsp; </p>
+        <div className=" newForm three-d">
+          &nbsp;
           <form onSubmit={handleSignUp}>
-            <h1>Sign up Here!</h1>
-            <label htmlFor="userName">Please Enter Your Name</label> <br />
-            <input
-              type="text"
-              id="userName"
-              value={input.userName}
-              onChange={handleChange}
-              placeholder="Name"
-            />{" "}
-            <br />
-            <label htmlFor="Email">Please Enter your Email</label> <br />
-            <input
-              type="email"
-              id="email"
-              value={input.email}
-              onChange={handleChange}
-              placeholder="Email"
-            />
-            <br />
-            <label htmlFor="PassWord">
-              Select a Password (min 6 characters)
-            </label>{" "}
-            <br />
-            <input
-              type="password"
-              id="password"
-              value={input.password}
-              onChange={handleChange}
-              placeholder="Password"
-            />{" "}
-            <br />
-            <button type="submit" className="pg-buttons">
+            <span className="SignIn-Labels">
+              <label htmlFor="userName">Please Enter Your Name</label>
+              <input
+                type="text"
+                id="userName"
+                value={input.userName}
+                onChange={handleChange}
+                placeholder="Name"
+              />{" "}
+              <label htmlFor="Email">Please Enter your Email</label>
+              <input
+                type="email"
+                id="email"
+                value={input.email}
+                onChange={handleChange}
+                placeholder="Email"
+              />
+              <label htmlFor="PassWord">
+                Select a Password (min 6 characters)
+              </label>{" "}
+              <input
+                type="password"
+                id="password"
+                value={input.password}
+                onChange={handleChange}
+                placeholder="Password"
+              />{" "}
+            </span>
+            <button type="submit" className="Login SignUp pg-buttons">
               Sign Up
             </button>
           </form>
-          <p>{errorMessage}</p>
+          <ToastContainer autoClose={false} position="center" />
         </div>
       </div>
     </div>

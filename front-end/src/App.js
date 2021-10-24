@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "./Providers/UserProvider";
 import { apiURL } from "./util/apiURL";
-import useGeoLocation from "./hooks/useGeoLocation";
 import Booked from "./Pages/Booked.js";
 import Dashboard from "./Pages/Dashboard.js";
 import Event from "./Pages/EventPage";
@@ -15,9 +14,7 @@ import VendorShow from "./Pages/VendorShow.js";
 import EditBooked from "./Pages/EditBooked.js";
 import ScrollToTop from "./Components/ScrollToTop.js";
 import NavBar from "./Components/NavBar/NavBar.js";
-import NewEventForm from "./Pages/NewEventForm.js";
 import EditFormPage from "./Pages/EditFormPage.js";
-import EventCheckboxPg from "./Pages/EventCheckboxPg";
 import FourOFour from "./Pages/FourOFour";
 import PrivateRoute from "./Components/PrivateRoute";
 import Banner from "./Components/Banner";
@@ -30,24 +27,34 @@ const API = apiURL();
 function App() {
   const loggedInUser = useContext(UserContext);
   const [user_id, setUserId] = useState(null);
+  const [created, setCreated] = useState(false);
   const [events, setEvents] = useState([]);
   const [updateEvent, setUpdateEvent] = useState(false);
   const [lat, setLat] = useState("");
   const [lng, setLng] = useState("");
+  const [city, setCity] = useState("");
   const [signedOut, setSignedOut] = useState(true);
   const [formattedName, setFormattedName] = useState("");
-  const location = useGeoLocation();
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
   });
 
   useEffect(() => {
-    if (location.coordinates) {
-      setLat(location.coordinates.latitude);
-      setLng(location.coordinates.longitude);
+    try {
+      axios
+        .get(
+          "https://morning-spire-06380.herokuapp.com/https://api.freegeoip.app/json?apikey=94974ea0-347f-11ec-a667-11ee2dd024a0"
+        )
+        .then((res) => {
+          setLat(res.data.latitude);
+          setLng(res.data.longitude);
+          setCity(`${res.data.city}, ${res.data.region_name}`);
+        });
+    } catch (e) {
+      console.warn(e);
     }
-  }, [location]);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -60,7 +67,9 @@ function App() {
         }
 
         const name = loggedInUser
-          ? loggedInUser.currentUser.displayName.split(" ")[0][0].toUpperCase() +
+          ? loggedInUser.currentUser.displayName
+              .split(" ")[0][0]
+              .toUpperCase() +
             loggedInUser.currentUser.displayName.split(" ")[0].substring(1)
           : "default name";
 
@@ -89,7 +98,7 @@ function App() {
           console.error(e);
         });
     }
-  }, [user_id, updateEvent]);
+  }, [user_id, updateEvent, created]);
 
   const deleteEvent = async (event_id) => {
     try {
@@ -105,7 +114,6 @@ function App() {
       console.error(error);
     }
   };
-
 
   return (
     <div className="site">
@@ -126,19 +134,6 @@ function App() {
           </Route>
 
           <PrivateRoute
-            path="/dashboard/new_event/checklist/:id"
-            component={EventCheckboxPg}
-            setUpdateEvent={setUpdateEvent}
-            user_id={user_id}
-          />
-
-          <PrivateRoute
-            path="/dashboard/new_event"
-            component={NewEventForm}
-            user_id={user_id}
-          />
-
-          <PrivateRoute
             path="/dashboard/:event_id/edit"
             component={EditFormPage}
             setUpdateEvent={setUpdateEvent}
@@ -153,6 +148,10 @@ function App() {
             setUpdateEvent={setUpdateEvent}
             user_id={user_id}
             formattedName={formattedName}
+            created={created}
+            setCreated={setCreated}
+            //   eventId={eventId}
+            // setEventId={setEventId}
           />
 
           <PrivateRoute
@@ -190,7 +189,8 @@ function App() {
             component={VendorIndex}
             lat={lat}
             lng={lng}
-            location={location}
+            // location={location}
+            city={city}
           />
 
           <PrivateRoute

@@ -3,10 +3,11 @@ import Favorite from "./Favorite";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
 import { VendorMenu } from "../NavBar/VendorMenu";
-import { Link } from "react-router-dom";
+import breakdance from "../../assets/breakdance.gif";
+
 const API = apiURL();
 
-export default function FavoriteList({user_id}) {
+export default function FavoriteList({ user_id }) {
   const [favoriteVendors, setFavoriteVendors] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [filterClicked, setFilterClicked] = useState({
@@ -100,14 +101,43 @@ export default function FavoriteList({user_id}) {
         </ul>
       );
     } else {
-      return <h2>No {filterClicked.category} are saved in your favorites.</h2>;
+      return (
+        <>
+          {" "}
+          <h2 className="none">
+            No {filterClicked.category} saved to your favorites ...{" "}
+          </h2>{" "}
+          <p className="yet">( yet ! )</p>
+          <img
+            src="https://media.giphy.com/media/JKNWxtuhgr9JZgzz5k/giphy.gif"
+            alt="breakdance"
+          />{" "}
+        </>
+      );
     }
   };
 
   return (
     <>
-      <div className="dropdown">
-        <span>Filter By Category &#x2195;</span>
+      <div className="filter">
+        <ul className="browse-ul">
+          <li className="browse-li" onClick={() => setFilterClicked(false)}>
+            {" "}
+            View all{" "}
+          </li>
+
+          {VendorMenu.map((vendor) => {
+            return (
+              <li
+                className="browse-li"
+                onClick={() => filterFavorites(vendor.category, vendor.title)}
+                key={vendor.title}
+              >
+                {vendor.title}
+              </li>
+            );
+          })}
+        </ul>
 
         <ul className="dropdown-content">
           {VendorMenu.map((vendor) => {
@@ -129,20 +159,9 @@ export default function FavoriteList({user_id}) {
           vendorList()
         ) : (
           <>
-            <h2>
-              {" "}
-              No favorite vendors at this time. Browse for vendor's near you to
-              add to your favorites !
-            </h2>
-            <ul className="browse-ul">
-              {VendorMenu.map((vendor) => {
-                return (
-                  <Link to={vendor.url} key={vendor.url}>
-                    <li className="browse-li">{vendor.title}</li>
-                  </Link>
-                );
-              })}
-            </ul>
+            <h2 className="none">No saved favorites ... </h2>{" "}
+            <p className="yet">( yet ! )</p>
+            <img src={breakdance} alt="breakdance" />
           </>
         )}
       </div>

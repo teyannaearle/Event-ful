@@ -31,8 +31,9 @@ function Event({ event, deleteEvent }) {
         &#x2718;
       </button>
       <h2>
+    <span className="icon">  ( {emoji()} ) </span><br />
         {" "}
-        {emoji()} {CapitalizeEvent(event.event_name)}{" "}
+       {CapitalizeEvent(event.event_name)}{" "}
       </h2>
       <Link to={`/event/${event.event_id}`} className="pg-buttons plan">
         <span> Let's plan ! </span>
