@@ -41,8 +41,13 @@
 .Landing-Item img {
   width: 95%;
 }
-.a img {
+
+.a a{
   width: 80%;
+  margin: auto;
+}
+.a img {
+  width: 100%;
 }
 
 .a img:hover {
