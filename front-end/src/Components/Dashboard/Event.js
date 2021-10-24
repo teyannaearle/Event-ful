@@ -20,7 +20,9 @@ function Event({ event, deleteEvent }) {
       item = <>&#127875;</>;
     } else if (name.includes("sweet" || "quince")){
       item = <>&#128131;</> ;
-    } else {
+    } else if (name.includes("brid")){
+      item = <>&#x1F470;</> 
+    }else {
       item = <>&#127882;</>;
     }
 
