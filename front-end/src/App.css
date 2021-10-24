@@ -810,6 +810,16 @@ span.press {
 }
 /* EditBooked*/
 
+.task-head {
+  margin-bottom: 10px;
+  /* margin-top: 10px; */
+}
+
+.task-blue {
+  padding: 0;
+  height: max-content;
+  padding-bottom: 20px;
+}
 .directions {
   font-size: larger;
   text-align: center;
@@ -1703,6 +1713,24 @@ span.press {
 }
 
 @media only screen and (max-width: 320px) {
+  /* EVENT PAGE */
+
+  .eventpage-container {
+    font-size: small;
+  }
+
+  .checklist-button {
+    font-size: small;
+  }
+
+  .check,
+  .x {
+    font-size: small;
+  }
+
+  .book-buttons button {
+    width: 80px;
+  }
   /* VENDOR INDEX */
   #zip-form {
     flex-direction: column;
@@ -1748,6 +1776,24 @@ span.press {
 
   .eventcheckbox-pg section {
     width: 95%;
+  }
+
+  /* LANDING / SIGN IN - UP */
+
+  .Landing .col-h {
+    width: 100%;
+  }
+
+  .signIn-container {
+    width: 100%;
+  }
+
+  .newForm input {
+    width: 90%;
+  }
+
+  .Landing {
+    margin-top: 0;
   }
 }
 

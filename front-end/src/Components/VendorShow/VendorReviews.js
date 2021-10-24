@@ -4,7 +4,7 @@ import VendorReview from "./VendorReview";
 function VendorReviews({ reviews }) {
   return (
     <div className="reviews">
-      <h2 className="show-header"> Reviews </h2>
+      <h2 className="show-header">( Reviews ) </h2>
       <div className="reviews-ul">
         <span>
       {reviews.map((review, i) => {

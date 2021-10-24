@@ -91,8 +91,8 @@ export default function Event({ formatter, user_id }) {
         </h1>
         <div className="eventpage-container ">
           <div id="checklist-container" className="evenpg-containers drop">
-            <h2 className="col-h">Booked ?</h2>
-            <h2 className="col-h">Find Vendors</h2>
+            <h2 className="col-h">( Booked ? )</h2>
+            <h2 className="col-h">( Find Vendors )</h2>
             <Checklist
               categories={categories}
               user_id={user_id}
@@ -103,7 +103,7 @@ export default function Event({ formatter, user_id }) {
           </div>
 
           <div id="budget-container" className="evenpg-containers drop">
-            <h2 className="col-h">Budget: {formatter.format(budget)}</h2>
+            <h2 className="col-h">( Budget: {formatter.format(budget)} )</h2>
             <Budget
               categories={categories}
               budget={budget}
@@ -113,7 +113,7 @@ export default function Event({ formatter, user_id }) {
           </div>
 
           <div id="countdown-container" className="evenpg-containers drop">
-            <h2 className="col-h">Countdown to {CapitalizeEvent(eventName)} !</h2>
+            <h2 className="col-h">( Countdown to {CapitalizeEvent(eventName)} !)</h2>
             <Timer user_id={user_id} />
           </div>
         </div>
