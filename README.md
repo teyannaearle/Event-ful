@@ -6,8 +6,8 @@
 
 [Back-end](https://eventful-capstone.herokuapp.com/)
 
-![Dashboard Page](./assets/dashboard.png)
-![Event Page](./assets/event.png)
+![Dashboard Page](./assets/dashboard.jpeg)
+![Event Page](./assets/event.jpeg)
 
 ## Table of Content
 * Overview
