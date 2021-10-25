@@ -20,7 +20,7 @@ export default function Favorite({ vendors, vendor, deleteFav }) {
           vendors.length === 1 ? "one-li" : null
         }`}
       >
-        <h2 className="col-h">( {vendor.vendor_name} )</h2>
+        <h2 className="col-h"> {vendor.vendor_name} </h2>
         <img
           src={vendor.vendor_image}
           alt={vendor.vendor_name}
