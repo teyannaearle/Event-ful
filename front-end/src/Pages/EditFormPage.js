@@ -1,12 +1,16 @@
-import EditForm from "../Components/Dashboard/EditEvent"
+import EditForm from "../Components/Dashboard/EditEvent";
 
 import React from "react";
+import NavBar from "../Components/NavBar/NavBar";
 
 function EditFormPage({ setUpdateEvent, user_id }) {
   return (
-    <div className="edit-page page">
-      <EditForm setUpdateEvent={setUpdateEvent} user_id={user_id} />
-    </div>
+    <>
+      <NavBar />
+      <div className="edit-page page">
+        <EditForm setUpdateEvent={setUpdateEvent} user_id={user_id} />
+      </div>
+    </>
   );
 }
 

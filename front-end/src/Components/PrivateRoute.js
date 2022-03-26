@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { UserContext } from "../Providers/UserProvider";
+// import { UserContext } from "../Providers/UserProvider";
 
 const PrivateRoute = ({
   component: Component,
@@ -19,13 +19,15 @@ const PrivateRoute = ({
   setCity,
   ...rest
 }) => {
-  const currentUser = useContext(UserContext);
+  const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn"))
+
+  // const currentUser = useContext(UserContext);
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        (!!currentUser.currentUser ) ? (
+        (loggedIn) ? (
           <Component
             {...props}
             deleteEvent={deleteEvent}

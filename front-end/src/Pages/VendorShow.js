@@ -5,6 +5,7 @@ import VendorReviews from "../Components/VendorShow/VendorReviews";
 import VendorShowInfo from "../Components/VendorShow/VendorShowInfo";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
+import NavBar from "../Components/NavBar/NavBar";
 
 export default function VendorShow({ user_id }) {
   const [business, setbusiness] = useState({
@@ -48,6 +49,7 @@ export default function VendorShow({ user_id }) {
 
   return (
     <>
+    <NavBar />
       <button
         className="pg-buttons back-button"
         onClick={() => history.goBack()}

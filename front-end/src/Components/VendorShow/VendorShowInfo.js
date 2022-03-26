@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { UserContext } from "../../Providers/UserProvider";
 import { useState } from "react";
 import Ratings from "react-ratings-declarative";
 import { Carousel } from "react-responsive-carousel";
@@ -13,16 +14,24 @@ function VendorShowInfo({ business, user_id, category }) {
   const [favorite, setFavorite] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [hover, setHover] = useState(false);
+  const loggedInUser = useContext(UserContext);
+  const accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
     try {
-      axios.get(`${API}/favorites/${user_id}`).then((res) => {
+      axios.get(`${API}/favorites/${user_id}` , {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      }).then((res) => {
+        if (res.data.message[0]){
         let index = res.data.message.findIndex(
           (elem) => elem.vendor_name === business.name
         );
         if (index > -1) {
           setFavorite(true);
         }
+      }
       });
     } catch (e) {
       console.warn(e);
@@ -31,15 +40,19 @@ function VendorShowInfo({ business, user_id, category }) {
     return () => {
       setFavorite(false);
     };
-  }, [business.name, user_id]);
+  }, [business.name, user_id, accessToken]);
 
   const handleFav = () => {
     setFavorite(!favorite);
     if (!favorite === false) {
       try {
         axios
-          .delete(`${API}/favorites/${user_id}/${business.name}`)
-          .then((res) => setPressed(false));
+          .delete(`${API}/favorites/${user_id}/${business.name}` , {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          })
+          .then((res) => setPressed(false) );
       } catch (e) {
         console.warn(e);
       }
@@ -57,8 +70,13 @@ function VendorShowInfo({ business, user_id, category }) {
       };
       try {
         axios
-          .post(`${API}/favorites/${user_id}`, body)
+          .post(`${API}/favorites/${user_id}`, body, {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          }, body)
           .then((res) => setPressed(true));
+          // .then((res) => console.log("success"));
       } catch (e) {
         console.warn(e);
       }
@@ -71,7 +89,7 @@ function VendorShowInfo({ business, user_id, category }) {
     if (hover && !favorite) {
       color = "#666";
     } else if (favorite) {
-      color = "white";
+      // color = "white";
       color = "red";
     } else {
       color = "#aaa";

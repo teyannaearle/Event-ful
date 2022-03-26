@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { apiURL } from "../../util/apiURL.js";
 import { ToastContainer, toast } from "react-toastify";
+import { UserContext } from "../../Providers/UserProvider";
 import "react-toastify/dist/ReactToastify.css";
 
 const API = apiURL();
@@ -14,6 +15,8 @@ export default function NewChecklistForm({
   setCreated,
   setEventId,
 }) {
+  const loggedInUser = useContext(UserContext);
+  const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
   const [eventForm, setEventForm] = useState({
     catering: false,
     djs: false,
@@ -37,7 +40,10 @@ export default function NewChecklistForm({
           task_name: checked,
         };
         axios
-          .post(`${API}/checklist/${user_id}/${id}`, category)
+          .post(`${API}/checklist/${user_id}/${id}`, category, {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            }})
           .then((res) => {
             setUpdateEvent(true);
           })

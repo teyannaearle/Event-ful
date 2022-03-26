@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../Providers/UserProvider";
 import { useParams, useHistory } from "react-router-dom";
 import Checklist from "../Components/EventPage/Checklist";
 import Budget from "../Components/EventPage/Budget";
@@ -6,6 +7,7 @@ import Timer from "../Components/EventPage/Timer";
 import { apiURL } from "../util/apiURL";
 import CapitalizeEvent from "../Components/CapitalizeEvent";
 import axios from "axios";
+import NavBar from "../Components/NavBar/NavBar";
 
 const api = apiURL();
 
@@ -16,11 +18,16 @@ export default function Event({ formatter, user_id }) {
   const [budget, setBudget] = useState(0);
   const [shownCost, setShownCost] = useState({});
   const history = useHistory();
+  const loggedInUser = useContext(UserContext);
+  const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
     if (user_id) {
       try {
-        axios.get(`${api}/events/${user_id}/${event_id}`).then((response) => {
+        axios.get(`${api}/events/${user_id}/${event_id}` , {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          }}).then((response) => {
           const data = response.data.payload;
           setEventName(data.event_name);
           setBudget(data.event_budget);
@@ -31,7 +38,10 @@ export default function Event({ formatter, user_id }) {
 
       try {
         axios
-          .get(`${api}/checklist/${user_id}/${event_id}`)
+          .get(`${api}/checklist/${user_id}/${event_id}`, {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            }})
           .then((response) => {
             const data = response.data.payload;
             const vendorCategories = data.map((point) => {
@@ -61,12 +71,15 @@ export default function Event({ formatter, user_id }) {
       setShownCost({});
       setCategories([]);
     };
-  }, [event_id, user_id]);
+  }, [event_id, user_id, accessToken]);
 
   const updateCost = (body, category) => {
     try {
       axios
-        .put(`${api}/checklist/cost/${user_id}/${event_id}`, body)
+        .put(`${api}/checklist/cost/${user_id}/${event_id}`, body, {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          }})
         .then((response) => {
           setShownCost({ ...shownCost, [category]: body.task_cost });
         });
@@ -77,6 +90,7 @@ export default function Event({ formatter, user_id }) {
 
   return (
     <>
+    <NavBar />
       <button
         className="pg-buttons back-button"
         onClick={() => history.push("/dashboard")}

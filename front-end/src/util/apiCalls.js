@@ -1,14 +1,14 @@
 import axios from "axios";
-
-const apiKey = process.env.REACT_APP_API_KEY;
+const yelpApiKey = process.env.REACT_APP_YELP_KEY
 const proxy = "https://morning-spire-06380.herokuapp.com";
 const yelpBase = "https://api.yelp.com/v3/businesses";
+
 
 const config = () => {
   return {
     headers: {
-      Authorization: `Bearer ${apiKey}`,
-      withCredentials: true,
+      Authorization: `Bearer ${yelpApiKey}`,
+      withCredentials: true
     },
   };
 };
@@ -25,17 +25,30 @@ const getVendorsZip = async (category, zip) => {
   }
 };
 
-const getVendorsLongLag = async (lng, lat, category) => {
+const getVendorsCity= async (city, category) => {
   try {
     const { data } = await axios.get(
-      `${proxy}/${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
+      `https://cors-anywhere.herokuapp.com/${yelpBase}/search?term=${category}&location=${city}&category=${category}&radius=16093`,
       config()
     );
     return data;
+
   } catch (e) {
     return console.warn(e);
   }
 };
+// const getVendorsLongLag = async (lng, lat, category) => {
+//   try {
+//     const { data } = await axios.get(
+//       `https://cors-anywhere.herokuapp.com/${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
+//       config()
+//     );
+//     return data;
+
+//   } catch (e) {
+//     return console.warn(e);
+//   }
+// };
 
 const getVendor = async (id) => {
   try {
@@ -60,7 +73,7 @@ const getReviews = async (id) => {
 
 const api = {
   getVendorsZip,
-  getVendorsLongLag,
+  getVendorsCity,
   getVendor,
   getReviews,
 };

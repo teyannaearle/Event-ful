@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../Providers/UserProvider";
 import { useParams } from "react-router-dom";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { apiURL } from "../../util/apiURL";
@@ -11,10 +12,16 @@ function Timer({ user_id }) {
   const [time, setTime] = useState("");
   const [updated, setUpdated] = useState(false);
   const { event_id } = useParams();
+  const loggedInUser = useContext(UserContext);
+  const accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
     try {
-      axios.get(`${api}/events/${user_id}/${event_id}`).then((response) => {
+      axios.get(`${api}/events/${user_id}/${event_id}` , {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      }).then((response) => {
         const data = response.data.payload;
         setDate(data.event_date.slice(0, 10));
         setTime(data.event_time);
@@ -29,7 +36,7 @@ function Timer({ user_id }) {
       setTime("");
       setUpdated(false);
     };
-  }, [event_id, user_id]);
+  }, [event_id, user_id, accessToken]);
 
   const minuteSeconds = 60;
   const hourSeconds = 3600;

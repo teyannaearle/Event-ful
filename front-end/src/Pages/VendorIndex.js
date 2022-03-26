@@ -4,19 +4,20 @@ import api from "../util/apiCalls";
 import VendorList from "../Components/VendorIndex/VendorList";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
-import axios from "axios";
+// import axios from "axios";
+import NavBar from "../Components/NavBar/NavBar";
 
-const apiKey = process.env.REACT_APP_API_KEY;
-const proxy = "https://morning-spire-06380.herokuapp.com";
-const yelpBase = "https://api.yelp.com/v3/businesses";
-const config = () => {
-  return {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      withCredentials: true,
-    },
-  };
-};
+// const apiKey = process.env.REACT_APP_API_KEY;
+// const proxy = "https://morning-spire-06380.herokuapp.com";
+// const yelpBase = "https://api.yelp.com/v3/businesses";
+// const config = () => {
+//   return {
+//     headers: {
+//       Authorization: `Bearer ${apiKey}`,
+//       withCredentials: true,
+//     },
+//   };
+// };
 
 export default function VendorIndex({ lat, lng, city }) {
   const [vendors, setVendors] = useState([]);
@@ -25,29 +26,43 @@ export default function VendorIndex({ lat, lng, city }) {
   const { category } = useParams();
 
   useEffect(() => {
-    try{
-      axios.get(
-        `${proxy}/${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
-        config()
-      )
-      .then(res => { 
-        const {data} = res
-        if (data.businesses[0].id){
-          setVendors(data.businesses)
+    (async () => {
+      if (city) {
+        const data = await api.getVendorsCity(city,category);
+        if (data.businesses[0].id) {
+          setVendors(data.businesses);
         }
-        setSearched(true)
-      })
-      
-    } catch (e) {
-      return console.warn(e);
-    }
+        setSearched(true);
+      }
+    })();
+    return () => {
+      setVendors([]);
+      setSearched(false);
+    };
+  }, [category, city]);
+  // useEffect(() => {
+  //   try {
+  //     axios
+  //       .get(
+  //         `${proxy}/${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
+  //         config()
+  //       )
+  //       .then((res) => {
+  //         const { data } = res;
+  //         if (data.businesses[0].id) {
+  //           setVendors(data.businesses);
+  //         }
+  //         setSearched(true);
+  //       });
+  //   } catch (e) {
+  //     return console.warn(e);
+  //   }
 
-    // return () => {
-    //   setVendors([])
-    //   setSearched(false)
-    // }
-
-  }, [category, lng, lat]);
+  //   return () => {
+  //     setVendors([])
+  //     setSearched(false)
+  //   }
+  // }, [category, lng, lat]);
 
   const handleZipChange = (e) => {
     setZip(e.target.value);
@@ -57,6 +72,7 @@ export default function VendorIndex({ lat, lng, city }) {
     e.preventDefault();
 
     const data = await api.getVendorsZip(category, zip);
+    console.log(data)
     if (data[0].id) {
       setVendors(data);
     }
@@ -92,29 +108,32 @@ export default function VendorIndex({ lat, lng, city }) {
   };
 
   return (
-    <div className="page indexpg-container">
-      <div>
-        {category ? (
-          <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1>
-        ) : null}
-       <p> ( near {searched && zip ? zip : city} ) </p>
-        <form onSubmit={handleSubmit} id="zip-form">
-          <input
-            className="three-d pg-input"
-            type="text"
-            placeholder="5 Digit Zip Code"
-            onChange={handleZipChange}
-            value={zip}
-            id="zip-search"
-            required
-            pattern="[0-9]{5}"
-          />
-          <button type="submit" className="pg-buttons">
-            Search
-          </button>
-        </form>
+    <>
+      <NavBar />
+      <div className="page indexpg-container">
+        <div>
+          {category ? (
+            <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1>
+          ) : null}
+          <p> ( near {searched && zip ? zip : city} ) </p>
+          <form onSubmit={handleSubmit} id="zip-form">
+            <input
+              className="three-d pg-input"
+              type="text"
+              placeholder="5 Digit Zip Code"
+              onChange={handleZipChange}
+              value={zip}
+              id="zip-search"
+              required
+              pattern="[0-9]{5}"
+            />
+            <button type="submit" className="pg-buttons">
+              Search
+            </button>
+          </form>
+        </div>
+        {vendorsList()}
       </div>
-      {vendorsList()}
-    </div>
+    </>
   );
 }

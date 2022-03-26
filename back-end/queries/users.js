@@ -30,11 +30,11 @@ const getOneUser = async (email) => {
 };
 
 //create
-const createNewUser = async (email, password) => {
+const createNewUser = async (email, userName) => {
   try {
     const newUser = await db.one(
-      "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
-      [email, password]
+      "INSERT INTO users (email, userName) VALUES ($1, $2) RETURNING *",
+      [email, userName]
     );
     return newUser;
   } catch (err) {

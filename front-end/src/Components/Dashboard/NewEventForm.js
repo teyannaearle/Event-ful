@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL.js";
 import NewChecklistForm from "./NewChecklistForm.js";
 import Form from "./Form.js";
+import { UserContext } from "../../Providers/UserProvider";
+
 
 const API = apiURL();
 
 function NewEventForm({ user_id, created, setCreated }) {
+  const loggedInUser = useContext(UserContext);
+  const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
   const [eventId, setEventId] = useState(null);
   const [myEvent, setEvent] = useState({
     event_name: "",
@@ -17,7 +21,10 @@ function NewEventForm({ user_id, created, setCreated }) {
 
   const addEvent = () => {
     try {
-      axios.post(`${API}/events/${user_id}`, myEvent).then((res) => {
+      axios.post(`${API}/events/${user_id}`, myEvent, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        }}).then((res) => {
         const id = res.data.payload.event_id;
         setEventId(id);
       });

@@ -21,11 +21,16 @@ export default function SignUp() {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    try {
+    try { 
       let res = await userSignUp(input.userName, input.email, input.password);
-      if (res === null) {
-        const newUser = { email: input.email, password: input.password };
-        let result = await axios.post(`${API}/users`, newUser);
+      const { email, userName, accessToken} = res
+      if (res.email) {
+        const newUser = { email, userName, accessToken };
+        let result = await axios.post(`${API}/users`, newUser, {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        });
         if (result.data.success) {
           history.push("/dashboard");
         } else {
@@ -65,7 +70,7 @@ export default function SignUp() {
                 onChange={handleChange}
                 placeholder="Email"
               />
-              <label htmlFor="PassWord">
+              <label htmlFor="Password">
                 Select a Password (min 6 characters)
               </label>{" "}
               <input
@@ -74,6 +79,7 @@ export default function SignUp() {
                 value={input.password}
                 onChange={handleChange}
                 placeholder="Password"
+                autoComplete="off"
               />{" "}
             </span>
             <button type="submit" className="Login SignUp pg-buttons">

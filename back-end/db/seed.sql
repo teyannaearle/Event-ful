@@ -1,8 +1,8 @@
-\c partyplanning_dev;
+\c eventful_application;
 
-INSERT INTO users ( password, email, created_at) VALUES
-('fakepassword' ,'fakeemail@email.com','2020-10-19 10:23:54'),
-('password' ,'email@email.com','2020-10-19 10:23:54');
+INSERT INTO users (userName , email, created_at) VALUES
+('tey' ,'fakeemail@email.com','2020-10-19 10:23:54'),
+('dustin' ,'email@email.com','2020-10-19 10:23:54');
 
 INSERT INTO events ( event_name , event_budget, event_date, event_time, user_id ) VALUES
 ('Linda''s Baby Shower' , 1000, '2021-10-30', '00:30:00', 1),

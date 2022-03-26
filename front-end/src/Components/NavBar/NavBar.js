@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import "./NavBar.css";
 import { userSignOut } from "../../Services/Firebase";
 
-export default function NavBar({setSignedOut}) {
+export default function NavBar() {
   const [vendorClicked, setVendorClicked] = useState(false);
   const history = useHistory();
   const handleVendorClick = () => {
@@ -31,7 +31,6 @@ export default function NavBar({setSignedOut}) {
     try {
       let res = await userSignOut();
       if (res === null) {
-        setSignedOut(true)
         history.push("/")
       }
     } catch (e) {

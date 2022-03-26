@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../Providers/UserProvider";
 import Favorite from "./Favorite";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
@@ -14,11 +15,17 @@ export default function FavoriteList({ user_id }) {
     clicked: false,
     category: "",
   });
+  const loggedInUser = useContext(UserContext);
+  const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
     if (user_id) {
       axios
-        .get(`${API}/favorites/${user_id}`)
+        .get(`${API}/favorites/${user_id}` , {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        })
         .then(
           (res) => {
             setFavoriteVendors(res.data.message);
@@ -34,11 +41,15 @@ export default function FavoriteList({ user_id }) {
     return () => {
       setFavoriteVendors([]);
     };
-  }, [user_id]);
+  }, [user_id, accessToken]);
 
   const deleteFav = (name) => {
     try {
-      axios.delete(`${API}/favorites/${user_id}/${name}`).then((res) => {
+      axios.delete(`${API}/favorites/${user_id}/${name}` , {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      }).then((res) => {
         const faveCopy = [...favoriteVendors];
         const index = faveCopy.findIndex(
           (vendor) => vendor.vendor_name === name

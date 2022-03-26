@@ -1,13 +1,16 @@
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 import { apiURL } from "../../util/apiURL";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../Providers/UserProvider";
 
 const api = apiURL();
 
 function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
   const [bookedStatus, setBookedStatus] = useState({});
   const history = useHistory();
+  const loggedInUser = useContext(UserContext);
+  const accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
     const booked = {};
@@ -32,7 +35,11 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
     if (!bookedStatus[category] === false) {
       try {
         axios
-          .delete(`${api}/booked/${user_id}/${event_id}/${category}`)
+          .delete(`${api}/booked/${user_id}/${event_id}/${category}` , {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          })
           .then((res) => {
             let checklistBody = {
               task_cost: 0,
@@ -47,7 +54,11 @@ function Checklist({ categories, user_id, event_id, updateCost, eventName }) {
 
     try {
       axios
-        .put(`${api}/checklist/${user_id}/${event_id}`, body)
+        .put(`${api}/checklist/${user_id}/${event_id}`, body , {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        })
         .then((response) => {
           setBookedStatus({
             ...bookedStatus,

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef , useContext} from "react";
+import { UserContext } from "../../Providers/UserProvider";
 import { useParams } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -13,13 +14,15 @@ function EditEvent({ setUpdateEvent, user_id }) {
   const { event_id } = useParams();
   const history = useHistory();
   const head = useRef("");
+  const loggedInUser = useContext(UserContext);
+  const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   const [event, setEvent] = useState({
     event_name: "",
     event_budget: 0,
     event_date: "",
     event_time: "",
-  });
+  }); 
 
   const [checklist, setChecklist] = useState({
     catering: false,
@@ -54,7 +57,11 @@ function EditEvent({ setUpdateEvent, user_id }) {
   useEffect(() => {
     if (user_id) {
       try {
-        axios.get(`${API}/events/${user_id}/${event_id}`).then((res) => {
+        axios.get(`${API}/events/${user_id}/${event_id}` , {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        }).then((res) => {
           const response = res.data.payload;
           setEvent({
             event_name: response.event_name,
@@ -77,12 +84,16 @@ function EditEvent({ setUpdateEvent, user_id }) {
         event_time: "",
       });
     };
-  }, [user_id, event_id, setUpdateEvent]);
+  }, [user_id, event_id, setUpdateEvent, accessToken]);
 
   useEffect(() => {
     if (user_id) {
       try {
-        axios.get(`${API}/checklist/${user_id}/${event_id}`).then((res) => {
+        axios.get(`${API}/checklist/${user_id}/${event_id}` , {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        }).then((res) => {
           let initial = initialState.current;
           res.data.payload.map((service) => {
             return (initial[service.task_name] = true);
@@ -109,11 +120,16 @@ function EditEvent({ setUpdateEvent, user_id }) {
         party_clown: false,
       });
     };
-  }, [user_id, event_id]);
+  }, [user_id, event_id, accessToken]);
 
-  const updateEvent = () => {
+  const updateEvent = (event, event_id) => {
+
     axios
-      .put(`${API}/events/${user_id}/${event_id}`, event)
+      .put(`${API}/events/${user_id}/${event_id}`, event, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      })
       .then(
         (res) => {
           setUpdateEvent(true);
@@ -121,7 +137,11 @@ function EditEvent({ setUpdateEvent, user_id }) {
           for (const name of categories) {
             if (initialState.current[name] && !checklist[name]) {
               axios
-                .delete(`${API}/checklist/${user_id}/${event_id}/${name}`)
+                .delete(`${API}/checklist/${user_id}/${event_id}/${name}` , {
+                  headers: {
+                    Authorization: "Bearer " + accessToken,
+                  },
+                })
                 .then(
                   (res) => {},
                   (c) => console.warn("catch", c)
@@ -134,7 +154,11 @@ function EditEvent({ setUpdateEvent, user_id }) {
                 task_name: name,
               };
               axios
-                .post(`${API}/checklist/${user_id}/${event_id}`, category)
+                .post(`${API}/checklist/${user_id}/${event_id}`, category, {
+                  headers: {
+                    Authorization: "Bearer " + accessToken,
+                  },
+                })
                 .then(
                   (res) => {},
                   (c) => console.warn("catch", c)

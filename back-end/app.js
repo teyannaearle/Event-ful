@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
+const middleware = require("./middleware")
 const bookedController = require("./Controllers/bookedcontroller.js")
 const checklistController = require("./Controllers/checklistcontroller.js")
 const eventsController = require("./Controllers/eventController.js")
@@ -14,6 +15,8 @@ const app = express();
 // MIDDLEWARE
 app.use(cors());
 app.use(express.json()); // Parse incoming JSON
+app.use(middleware.decodeToken)
+
 
 // ROUTES
 app.get("/", (req, res) => {

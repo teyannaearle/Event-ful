@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, useHistory } from "react-router";
 import CategorySwitch from "../Components/CategorySwitch";
 import Vendor from "../Components/VendorIndex/Vendor";
@@ -6,12 +6,14 @@ import api from "../util/apiCalls";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import Loading from "../Components/Loading";
+import { UserContext } from "../Providers/UserProvider";
+import NavBar from "../Components/NavBar/NavBar";
 
 const API = apiURL();
 
 const parseNum = (str) => +str.replace(/[^.\d]/g, "");
 
-function EditBooked({ lat, lng, formatter, user_id }) {
+function EditBooked({ city, formatter, user_id }) {
   const { event_id, category } = useParams();
   const [vendors, setVendors] = useState([]);
   const [vendor, setVendor] = useState("");
@@ -22,6 +24,9 @@ function EditBooked({ lat, lng, formatter, user_id }) {
   const [searched, setSearched] = useState(false);
   const [selected, setSelected] = useState(false);
   const history = useHistory();
+  const loggedInUser = useContext(UserContext);
+  const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
+
 
   useEffect(() => {
     let vendorCategories = [];
@@ -30,7 +35,11 @@ function EditBooked({ lat, lng, formatter, user_id }) {
     if (user_id) {
       try {
         axios
-          .get(`${API}/checklist/${user_id}/${event_id}`)
+          .get(`${API}/checklist/${user_id}/${event_id}` , {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          })
           .then((response) => {
             const data = response.data.payload;
             vendorCategories = data.map((point) => {
@@ -55,13 +64,17 @@ function EditBooked({ lat, lng, formatter, user_id }) {
     return () => {
       setBookedStatus({});
     };
-  }, [event_id, user_id]);
+  }, [event_id, user_id, accessToken]);
 
   useEffect(() => {
     if (bookedStatus[category] === true) {
       try {
         axios
-          .get(`${API}/booked/category/${category}/${user_id}/${event_id}`)
+          .get(`${API}/booked/category/${category}/${user_id}/${event_id}` , {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          })
           .then((res) => {
             let result = res.data.payload;
             setSelected(true);
@@ -82,18 +95,18 @@ function EditBooked({ lat, lng, formatter, user_id }) {
       setVendor("");
       setCost(0);
     };
-  }, [category, event_id, user_id, bookedStatus]);
+  }, [category, event_id, user_id, bookedStatus, accessToken]);
 
   useEffect(() => {
     (async () => {
-      if (!searched && lat && lng) {
-        const data = await api.getVendorsLongLag(lng, lat, category);
+      if (!searched && city) {
+        const data = await api.getVendorsCity(city, category);
         if (data.businesses[0].id) {
           setVendors(data.businesses);
         }
       }
     })();
-  }, [category, lng, lat, searched]);
+  }, [category, city, searched]);
 
   const handleZipChange = (e) => {
     setZip(e.target.value);
@@ -121,7 +134,11 @@ function EditBooked({ lat, lng, formatter, user_id }) {
     };
 
     try {
-      axios.put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody);
+      axios.put(`${API}/checklist/cost/${user_id}/${event_id}`, checklistBody, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      });
     } catch (e) {
       console.error(e);
     }
@@ -132,7 +149,11 @@ function EditBooked({ lat, lng, formatter, user_id }) {
     };
 
     try {
-      axios.put(`${API}/booked/cost/${user_id}/${event_id}`, bookedBody);
+      axios.put(`${API}/booked/cost/${user_id}/${event_id}`, bookedBody, {
+        headers: {
+          Authorization: "Bearer " + accessToken,
+        },
+      });
     } catch (e) {
       console.error(e);
     }
@@ -161,11 +182,19 @@ function EditBooked({ lat, lng, formatter, user_id }) {
     if (!vendor) {
       try {
         axios
-          .post(`${API}/booked/${user_id}/${event_id}`, bookedbody)
+          .post(`${API}/booked/${user_id}/${event_id}`, bookedbody, {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          })
           .then((res) => {
             try {
               axios
-                .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
+                .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody, {
+                  headers: {
+                    Authorization: "Bearer " + accessToken,
+                  },
+                })
                 .then((res) => {
                   setVendor(selected);
                   setVendors([]);
@@ -182,11 +211,19 @@ function EditBooked({ lat, lng, formatter, user_id }) {
     } else {
       try {
         axios
-          .put(`${API}/booked/${user_id}/${event_id}`, bookedbody)
+          .put(`${API}/booked/${user_id}/${event_id}`, bookedbody, {
+            headers: {
+              Authorization: "Bearer " + accessToken,
+            },
+          })
           .then((res) => {
             try {
               axios
-                .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody)
+                .put(`${API}/checklist/${user_id}/${event_id}`, checklistBody, {
+                  headers: {
+                    Authorization: "Bearer " + accessToken,
+                  },
+                })
                 .then((res) => {
                   setVendor(selected);
                   setVendors([]);
@@ -266,7 +303,7 @@ function EditBooked({ lat, lng, formatter, user_id }) {
 
   const directions = () => {
     let direction = "";
-    if ((!vendor && !searched && lat && lng) || searched) {
+    if ((!vendor && !searched && city) || searched) {
       direction = (
         <p className="directions">
           Browse below or search by zip code to select the vendor that you've
@@ -289,7 +326,7 @@ function EditBooked({ lat, lng, formatter, user_id }) {
           another zip code.{" "}
         </p>
       );
-    } else if (!lng && !lat) {
+    } else if (!city) {
       direction = (
         <p className="directions">
           Search by zip code above to select the vendor that you've booked
@@ -302,6 +339,7 @@ function EditBooked({ lat, lng, formatter, user_id }) {
 
   return (
     <>
+    <NavBar />
       <button
         className="pg-buttons back-button"
         onClick={() => history.goBack()}

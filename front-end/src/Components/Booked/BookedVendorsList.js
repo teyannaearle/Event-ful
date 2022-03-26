@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../Providers/UserProvider";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import BookedVendor from "./BookedVendor";
@@ -9,15 +10,19 @@ const API = apiURL();
 export default function BookedVendorList({ user_id }) {
   const [bookedVendors, setBookedVendors] = useState([]);
   const { event_id } = useParams();
+  const loggedInUser = useContext(UserContext);
+  const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
     if (user_id) {
       axios
-        .get(`${API}/booked/${user_id}/${event_id}`)
+        .get(`${API}/booked/${user_id}/${event_id}` , {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        })
         .then(
           (res) => {
-            console.log("got booked api response");
-            console.log(res);
             if (res.data.payload.length > 0) {
               setBookedVendors(res.data.payload);
             }
@@ -33,7 +38,7 @@ export default function BookedVendorList({ user_id }) {
     return () => {
       setBookedVendors([]);
     };
-  }, [user_id, event_id]);
+  }, [user_id, event_id, accessToken]);
 
   return (
     <div className="booked-section">

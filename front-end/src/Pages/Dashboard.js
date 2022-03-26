@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import EventList from "../Components/Dashboard/EventList";
-import Loading from "../Components/Loading";
 import NewEventForm from "../Components/Dashboard/NewEventForm";
+import NavBar from "../Components/NavBar/NavBar";
 
 export default function Dashboard({
   events,
@@ -20,26 +20,25 @@ export default function Dashboard({
   }, [setUpdateEvent]);
 
   return (
-    <div className="page">
-      {user_id ? (
-        <>
-          <h1 className="pg-head">{`${formattedName}'s Dashboard`} </h1>
-          <NewEventForm
-            user_id={user_id}
-            created={created}
-            setCreated={setCreated}
-          />
-          <>
-            <EventList
-              events={events}
-              deleteEvent={deleteEvent}
+    <>
+      <NavBar />
+      <div className="page">
+      <>
+            <h1 className="pg-head">{formattedName ? `${formattedName}'s Dashboard` : `Dashboard`} </h1>
+            <NewEventForm
               user_id={user_id}
+              created={created}
+              setCreated={setCreated}
             />
+            <>
+              <EventList
+                events={events}
+                deleteEvent={deleteEvent}
+                user_id={user_id}
+              />
+            </>
           </>
-        </>
-      ) : (
-        <Loading />
-      )}
-    </div>
+      </div>
+    </>
   );
 }

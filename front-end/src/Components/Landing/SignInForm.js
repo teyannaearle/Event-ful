@@ -23,8 +23,32 @@ function SignInForm() {
     e.preventDefault();
     try {
       let res = await userSignIn(input.email, input.password);
-      if (res === null) {
-        history.push("/dashboard");
+      if (res.email) {
+        const { email, accessToken } = res;
+
+        try {
+          await axios
+            .get(`${API}/users/${email}`, {
+              headers: {
+                Authorization: "Bearer " + accessToken,
+              },
+            })
+            .then((res) => {
+              if (res.data.success) {
+                history.push("/dashboard");
+              } else {
+                toast.error("Something Went Wrong. Please try again", {
+                  toastId: "customId",
+                });
+                setInput({
+                  email: "",
+                  password: "",
+                });
+              }
+            });
+        } catch (error) {
+          console.error(error);
+        }
       } else {
         toast.error("Wrong email or password. Please try again", {
           toastId: "customId",
@@ -43,24 +67,48 @@ function SignInForm() {
     try {
       let res = await userGoogleSignIn();
       if (res.email) {
-        const { email } = res;
-        let checkUser = await axios.get(`${API}/users/${email}`);
-        if (checkUser.data.success) {
-          history.push("/dashboard");
-        } else {
-          const newUser = { email: res.email, password: "password" };
-          let result = await axios.post(`${API}/users`, newUser);
-          if (result.data.success) {
-            history.push("/dashboard");
-          } else {
-            console.warn("could not add new user to backend database");
-          }
+        const { email, accessToken, displayName } = res
+        const userName = displayName
+        try {
+          await axios
+            .get(`${API}/users/${email}`, {
+              headers: {
+                Authorization: "Bearer " + accessToken,
+              },
+            })
+            .then((res) => {
+              if (res.data.success) {
+                history.push("/dashboard");
+              } else {
+                signUp(email, accessToken, userName);
+              }
+            });
+        } catch (error) {
+          console.error(error);
         }
-      } else {
-        console.warn("Google user could not sign in");
       }
     } catch (error) {
       console.warn(error);
+    }
+  };
+
+
+  const signUp = async (email, accessToken, userName) => {
+    let newUser = { email, userName };
+    try {
+      await axios
+        .post(`${API}/users/`, newUser, {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        })
+        .then((res) => {
+          if (res.data.success) {
+            history.push("/dashboard");
+          }
+        });
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -85,8 +133,8 @@ function SignInForm() {
               name="password"
               value={input.password}
               onChange={handleChange}
-              placeholder="Password"
-              autoComplete="on"
+              placeholder="Password" 
+              autoComplete="off"
             />{" "}
           </span>
           <button type="submit" className="Login pg-buttons">
@@ -103,11 +151,7 @@ function SignInForm() {
         </button>
         <div className="divider"></div>
         <Link to="/SignUp" className="SignUp-But">
-          <p>
-            {" "}
-            Dont have an account? 
-            Click Here to make one!
-          </p>
+          <p> Dont have an account? Click Here to make one!</p>
         </Link>
       </div>
       <ToastContainer autoClose={false} position="center" />
