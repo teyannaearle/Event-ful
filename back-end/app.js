@@ -15,13 +15,15 @@ const app = express();
 // MIDDLEWARE
 app.use(cors());
 app.use(express.json()); // Parse incoming JSON
-app.use(middleware.decodeToken)
+// app.use(middleware.decodeToken)
 
 
 // ROUTES
 app.get("/", (req, res) => {
   res.send("Hello, world!");
 });
+
+app.use(middleware.decodeToken)
 
 app.use("/events", eventsController)
 
