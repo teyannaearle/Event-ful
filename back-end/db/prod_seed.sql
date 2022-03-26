@@ -1,4 +1,4 @@
-\c dda2ivrdt7akio;
+\c d196u9i59i3geu;
 
 INSERT INTO users (userName , email, created_at) VALUES
 ('tey' ,'fakeemail@email.com','2020-10-19 10:23:54'),

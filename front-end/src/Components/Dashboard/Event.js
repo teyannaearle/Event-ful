@@ -26,7 +26,6 @@ function Event({ event, deleteEvent }) {
       console.log("yes")
       item = <>&#127891;</>
     } else {
-      console.log("no")
       item = <>&#127882;</>;
     }
 
