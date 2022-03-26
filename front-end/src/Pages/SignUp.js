@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const API = apiURL();
 
-export default function SignUp() {
+export default function SignUp({getId}) {
   const history = useHistory();
   const [input, setInput] = useState({
     userName: "",
@@ -24,8 +24,6 @@ export default function SignUp() {
     try { 
       let res = await userSignUp(input.userName, input.email, input.password);
       if (res.email) {
-        console.log("Res")
-        console.log(res)
         const { email, userName, accessToken} = res
         const newUser = { email, userName, accessToken };
         let result = await axios.post(`${API}/users`, newUser, {
@@ -34,6 +32,7 @@ export default function SignUp() {
           },
         });
         if (result.data.success) {
+          getId(email, accessToken)
           history.push("/dashboard");
         } else {
           console.warn("could not add new user to backend database");

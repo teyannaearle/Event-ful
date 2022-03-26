@@ -70,9 +70,7 @@ export default function VendorIndex({ lat, lng, city }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const data = await api.getVendorsZip(category, zip);
-    console.log(data)
     if (data[0].id) {
       setVendors(data);
     }
