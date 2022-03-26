@@ -42,7 +42,7 @@ export default function SignUp() {
           });
         }
       } else {
-        toast.error("An account for this user may already exist.", {
+        toast.error("Oh No! Something seems to have gone wrong. Please review your information or try again later.", {
           toastId: "customId",
         });
       }

@@ -37,7 +37,8 @@ function App() {
   });
 
   const accessToken = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
-
+ 
+  
   useEffect(() => {
     try {
       axios
@@ -64,6 +65,8 @@ function App() {
             Authorization: "Bearer " + accessToken,
           },
         });
+      console.log("userInfo")
+        console.log(checkUser)
         if (checkUser.data.success) {
           setUserId(checkUser.data.payload.user_id);
         }
