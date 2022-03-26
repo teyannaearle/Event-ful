@@ -2,9 +2,9 @@
 ## Full Stack Party Planning App
 ### Capstone Project
 
-[Live Site](https://eventful-capstone.netlify.app/)
+[Live Site](https://eventful-application.netlify.app)
 
-[Back-end](https://eventful-capstone.herokuapp.com/)
+[Back-end](https://eventful-application.herokuapp.com)
 
 ![Event Page](./assets/event.jpeg)
 ![Dashboard Page](./assets/dashboard.jpeg)
