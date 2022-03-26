@@ -23,8 +23,10 @@ export default function SignUp() {
     event.preventDefault();
     try { 
       let res = await userSignUp(input.userName, input.email, input.password);
-      const { email, userName, accessToken} = res
       if (res.email) {
+        console.log("Res")
+        console.log(res)
+        const { email, userName, accessToken} = res
         const newUser = { email, userName, accessToken };
         let result = await axios.post(`${API}/users`, newUser, {
           headers: {
@@ -35,12 +37,12 @@ export default function SignUp() {
           history.push("/dashboard");
         } else {
           console.warn("could not add new user to backend database");
-          toast.error("Oh No! Something seems to have gone wrong on our end. Please try again later.", {
+          toast.error("Oh No! Something seems to have gone wrong. Please try again later.", {
             toastId: "customId",
           });
         }
       } else {
-        toast.error("Please enter all required info", {
+        toast.error("An account for this user may already exist.", {
           toastId: "customId",
         });
       }
