@@ -19,10 +19,11 @@ import NavBar from "../Components/NavBar/NavBar";
 //   };
 // };
 
-export default function VendorIndex({ lat, lng, city }) {
+export default function VendorIndex({ city }) {
   const [vendors, setVendors] = useState([]);
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false);
+  // const [loading, setLoading] = useState(true)
   const { category } = useParams();
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function VendorIndex({ lat, lng, city }) {
         const data = await api.getVendorsCity(city,category);
         if (data.businesses[0].id) {
           setVendors(data.businesses);
+          // setLoading(false)
         }
         setSearched(true);
       }
@@ -38,6 +40,7 @@ export default function VendorIndex({ lat, lng, city }) {
     return () => {
       setVendors([]);
       setSearched(false);
+      // setLoading(true)
     };
   }, [category, city]);
   // useEffect(() => {
@@ -77,9 +80,11 @@ export default function VendorIndex({ lat, lng, city }) {
     setSearched(true);
   };
 
+
+
   const vendorsList = () => {
     let result = "";
-    if (!lat && !searched) {
+    if (!city && !searched) {
       result = (
         <>
           {" "}
@@ -97,13 +102,17 @@ export default function VendorIndex({ lat, lng, city }) {
           another zip code.{" "}
         </h2>
       );
-    } else if (lat && !vendors[0]) {
+    } else if (city && !vendors[0]) {
       result = <Loading />;
     } else {
       result = <VendorList vendors={vendors} category={category} />;
     }
     return result;
   };
+
+  // useEffect(()=>{
+  //   vendorsList()
+  // },[loading, vendorsList])
 
   return (
     <>

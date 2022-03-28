@@ -9,7 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const API = apiURL();
 
-function SignInForm({getId}) {
+function SignInForm() {
   const history = useHistory();
   const [input, setInput] = useState({
     email: "",
@@ -104,7 +104,6 @@ function SignInForm({getId}) {
         })
         .then((res) => {
           if (res.data.success) {
-            getId(email, accessToken)
             history.push("/dashboard");
           }
         });

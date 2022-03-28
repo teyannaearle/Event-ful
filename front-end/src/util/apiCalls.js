@@ -28,7 +28,7 @@ const getVendorsZip = async (category, zip) => {
 const getVendorsCity= async (city, category) => {
   try {
     const { data } = await axios.get(
-      `https://cors-anywhere.herokuapp.com/${yelpBase}/search?term=${category}&location=${city}&category=${category}&radius=16093`,
+      `${proxy}/${yelpBase}/search?term=${category}&location=${city}&category=${category}&radius=16093`,
       config()
     );
     return data;

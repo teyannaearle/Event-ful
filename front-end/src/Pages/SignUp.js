@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const API = apiURL();
 
-export default function SignUp({getId}) {
+export default function SignUp() {
   const history = useHistory();
   const [input, setInput] = useState({
     userName: "",
@@ -32,7 +32,6 @@ export default function SignUp({getId}) {
           },
         });
         if (result.data.success) {
-          getId(email, accessToken)
           history.push("/dashboard");
         } else {
           console.warn("could not add new user to backend database");

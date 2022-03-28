@@ -37,9 +37,9 @@ function App() {
   });
 
   const accessToken = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
- 
   
   useEffect(() => {
+
     try {
       axios
         .get(
@@ -56,32 +56,18 @@ function App() {
     }
   }, []);
 
-  const getId = async (email, accessToken) => {
-    let id = await axios.get(`${API}/users/${email}`, {
-      headers: {
-        Authorization: "Bearer " + accessToken,
-      },
-    });
-
-    if (id.data.success){
-      setUserId(id.data.payload.user_id)
-    }
-  }
-
   useEffect(() => {
     (async () => {
       if (loggedInUser.currentUser) {
-      //   const { email, accessToken }= loggedInUser.currentUser
-      //   let checkUser = await axios.get(`${API}/users/${email}`, {
-      //     headers: {
-      //       Authorization: "Bearer " + accessToken,
-      //     },
-      //   });
-      // console.log("userInfo")
-      //   console.log(checkUser)
-      //   if (checkUser.data.success) {
-      //     setUserId(checkUser.data.payload.user_id);
-      //   }
+        const { email, accessToken }= loggedInUser.currentUser
+        let checkUser = await axios.get(`${API}/users/${email}`, {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        });
+        if (checkUser.data.success) {
+          setUserId(checkUser.data.payload.user_id);
+        }
 
         const name = loggedInUser.currentUser.displayName
           ? loggedInUser.currentUser.displayName
@@ -153,12 +139,12 @@ function App() {
 
           <Route path="/signup">
           <Banner />
-            <SignUp getId={getId} />
+            <SignUp />
           </Route>
 
           <Route path="/signin">
           <Banner />
-            <SignIn getId={getId} />
+            <SignIn />
           </Route>
 
           <PrivateRoute
