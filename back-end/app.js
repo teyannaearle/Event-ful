@@ -14,7 +14,7 @@ const app = express();
 
 // MIDDLEWARE
 app.use(cors({
-  origin: "*"
+  origin: "https://eventful-application.netlify.app"
 }));
 app.use(express.json()); // Parse incoming JSON
 // app.use(middleware.decodeToken)
