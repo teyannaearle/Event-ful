@@ -68,6 +68,7 @@ function App() {
           },
         });
         if (checkUser.data.success) {
+          console.log(checkUser.data.payload.user_id)
           setUserId(checkUser.data.payload.user_id);
         }
 
