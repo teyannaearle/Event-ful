@@ -37,18 +37,18 @@ function App() {
   });
 
   const accessToken = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
-  
-  useEffect(() => {
 
+  useEffect(() => {
     try {
       axios
         .get(
-          "https://morning-spire-06380.herokuapp.com/https://api.freegeoip.app/json?apikey=94974ea0-347f-11ec-a667-11ee2dd024a0"
+          `https://ipinfo.io/json?token=90229ead70bb3e`
+          // "https://morning-spire-06380.herokuapp.com/https://api.freegeoip.app/json?apikey=94974ea0-347f-11ec-a667-11ee2dd024a0"
         )
         .then((res) => {
-
-          console.log(res.data.city)
-          setCity(`${res.data.city}, ${res.data.region_name}`);
+          setCity(`${res.data.city}, ${res.data.region}`);
+          // console.log(res.data.city)
+          // setCity(`${res.data.city}, ${res.data.region_name}`);
         });
     } catch (e) {
       console.warn(e);
@@ -68,7 +68,6 @@ function App() {
           },
         });
         if (checkUser.data.success) {
-          console.log(checkUser.data.payload.user_id)
           setUserId(checkUser.data.payload.user_id);
         }
 

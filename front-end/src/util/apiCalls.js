@@ -1,6 +1,6 @@
 import axios from "axios";
 const yelpApiKey = process.env.REACT_APP_YELP_KEY
-const proxy = "https://morning-spire-06380.herokuapp.com";
+const proxy = "https://teysprox.herokuapp.com";
 const yelpBase = "https://api.yelp.com/v3/businesses";
 
 
