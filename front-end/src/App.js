@@ -46,6 +46,8 @@ function App() {
           "https://morning-spire-06380.herokuapp.com/https://api.freegeoip.app/json?apikey=94974ea0-347f-11ec-a667-11ee2dd024a0"
         )
         .then((res) => {
+
+          console.log(res.data.city)
           setCity(`${res.data.city}, ${res.data.region_name}`);
         });
     } catch (e) {
