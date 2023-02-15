@@ -4,9 +4,9 @@ import { useParams } from "react-router";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
-import "../../css/EditEvent.css";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "./EditEvent.css";
+// import "react-toastify/dist/ReactToastify.css";
 
 const API = apiURL();
 
