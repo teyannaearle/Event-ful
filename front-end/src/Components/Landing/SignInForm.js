@@ -154,7 +154,7 @@ function SignInForm() {
           <p> Dont have an account? Click Here to make one!</p>
         </Link>
       </div>
-      <ToastContainer autoClose={false} position="center" />
+      <ToastContainer position="bottom-right" theme="light"/>
     </div>
   );
 }
