@@ -35,12 +35,12 @@ export default function SignUp() {
           history.push("/dashboard");
         } else {
           console.warn("could not add new user to backend database");
-          toast.error("Oh No! Something seems to have gone wrong. Please try again later.", {
+          toast.error("Error: Please try again later.", {
             toastId: "customId",
           });
         }
       } else {
-        toast.error("Oh No! Something seems to have gone wrong. Please review your information or try again later.", {
+        toast.error("Error: Please review your information or try again later.", {
           toastId: "customId",
         });
       }
@@ -89,7 +89,7 @@ export default function SignUp() {
               Sign Up
             </button>
           </form>
-          <ToastContainer autoClose={false} position="center" />
+          <ToastContainer position="bottom-right" theme="light" />
         </div>
       </div>
     </div>

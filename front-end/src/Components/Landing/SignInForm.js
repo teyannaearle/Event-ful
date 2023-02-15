@@ -37,7 +37,7 @@ function SignInForm() {
               if (res.data.success) {
                 history.push("/dashboard");
               } else {
-                toast.error("Something Went Wrong. Please try again", {
+                toast.error("Error: Something Went Wrong. Please try again", {
                   toastId: "customId",
                 });
                 setInput({
@@ -50,7 +50,7 @@ function SignInForm() {
           console.error(error);
         }
       } else {
-        toast.error("Wrong email or password. Please try again", {
+        toast.error("Error: Wrong email or password. Please try again", {
           toastId: "customId",
         });
         setInput({
@@ -67,8 +67,8 @@ function SignInForm() {
     try {
       let res = await userGoogleSignIn();
       if (res.email) {
-        const { email, accessToken, displayName } = res
-        const userName = displayName
+        const { email, accessToken, displayName } = res;
+        const userName = displayName;
         try {
           await axios
             .get(`${API}/users/${email}`, {
@@ -91,7 +91,6 @@ function SignInForm() {
       console.warn(error);
     }
   };
-
 
   const signUp = async (email, accessToken, userName) => {
     let newUser = { email, userName };
@@ -133,7 +132,7 @@ function SignInForm() {
               name="password"
               value={input.password}
               onChange={handleChange}
-              placeholder="Password" 
+              placeholder="Password"
               autoComplete="off"
             />{" "}
           </span>
@@ -154,7 +153,7 @@ function SignInForm() {
           <p> Dont have an account? Click Here to make one!</p>
         </Link>
       </div>
-      <ToastContainer position="bottom-right" theme="light"/>
+      <ToastContainer position="bottom-right" theme="light" />
     </div>
   );
 }

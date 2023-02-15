@@ -27,7 +27,8 @@ html,
 
 .Toastify__toast-theme--light {
   /* background-color: rgba(98, 145, 189, 1); */
-  color: black
+  color: black;
+  font-size: smaller
 }
 
 .drop {
