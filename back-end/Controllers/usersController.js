@@ -44,9 +44,9 @@ users.get("/:email", async (req, res) => {
 
 // CREATE
 users.post("/", async (req, res) => {
-  const { email, userName } = req.body;
+  const { email, displayName} = req.body;
   try {
-    const newUser = await createNewUser(email, userName);
+    const newUser = await createNewUser(email, displayName);
     if (newUser.user_id) {
       console.log("success creating new user");
       res.status(200).json({

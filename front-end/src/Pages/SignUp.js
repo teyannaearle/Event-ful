@@ -21,11 +21,12 @@ export default function SignUp() {
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-    try { 
+    try {
       let res = await userSignUp(input.userName, input.email, input.password);
+      console.log(res)
       if (res.email) {
-        const { email, userName, accessToken} = res
-        const newUser = { email, userName, accessToken };
+        const { email, displayName, accessToken } = res;
+        const newUser = { email, displayName, accessToken };
         let result = await axios.post(`${API}/users`, newUser, {
           headers: {
             Authorization: "Bearer " + accessToken,
@@ -39,10 +40,17 @@ export default function SignUp() {
             toastId: "customId",
           });
         }
-      } else {
-        toast.error("Error: Please review your information or try again later.", {
+      } else if (res === "auth/email-already-in-use") {
+        toast.error("Error: Email already in use.", {
           toastId: "customId",
         });
+      } else {
+        toast.error(
+          "Error: Please review your information or try again later.",
+          {
+            toastId: "customId",
+          }
+        );
       }
     } catch (error) {
       alert(error);

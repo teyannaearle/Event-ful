@@ -5,7 +5,7 @@ CREATE DATABASE eventful_application;
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY, 
-    userName  VARCHAR (255), 
+    displayName  VARCHAR (255), 
     email VARCHAR (255) UNIQUE NOT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
