@@ -40,7 +40,7 @@ export default function NavBar() {
 
   return (
     <nav className="NavBarItems drop">
-      <Link to="/" className="navbar-logo">
+      <Link to="/dashboard" className="navbar-logo">
         <h1> Event(ful) &#127881;</h1>
       </Link>
 
