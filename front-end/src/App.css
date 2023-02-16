@@ -1544,6 +1544,9 @@ span.press {
 }
 
 @media only screen and (max-width: 500px) {
+  .pg-head{
+    font-size: large;
+  }
   .new-checkbox {
     width: 100%;
   }
@@ -1709,6 +1712,10 @@ span.press {
     grid-row-gap: 40px;
   }
 
+  .none {
+    font-size: medium;
+  }
+
   /*EVENT PAGE*/
 
   #checklist-container {
@@ -1801,9 +1808,6 @@ span.press {
 }
 
 @media only screen and (max-width: 320px) {
-  .pg-head{
-    font-size: large;
-  }
   /* EVENT PAGE */
 
   .eventpage-container {
