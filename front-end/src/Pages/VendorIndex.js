@@ -139,19 +139,20 @@ export default function VendorIndex({ city }) {
     <>
       <NavBar />
       <div className="page indexpg-container">
-        <div>
+        <div className="top-container">
           {category ? (
             <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1>
           ) : null}
           <p> ( near {submittedSearch ? prevZip : city} ) </p>
+          <div  className="search-container">
           <form onSubmit={handleSubmit} id="zip-form">
             <input
-              className="three-d pg-input"
+              className="three-d pg-input zip-search"
               type="text"
-              placeholder="5 Digit Zip Code"
+              placeholder="Search by 5 Digit Zip Code"
               onChange={handleZipChange}
               value={zip}
-              id="zip-search"
+              // id="zip-search"
               required
               pattern="[0-9]{5}"
             />
@@ -160,18 +161,18 @@ export default function VendorIndex({ city }) {
             </button>
           </form>
 
-          OR 
-
-          <form onSubmit={handleVendorSearch} >
+          <form onSubmit={handleVendorSearch} id="ven-form">
             <input 
-            placeholder="Vendor Name"
+            className="three-d pg-input zip-search"
+            placeholder="Search By Vendor Name"
             type="text"
             onChange={handleVendorChange}
             /> 
-            <button type="submit">
-              Search By Name
+            <button type="submit" className="pg-buttons">
+              Search
             </button>
           </form>
+          </div>
         </div>
         {vendorsList()}
       </div>

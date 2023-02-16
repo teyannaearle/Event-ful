@@ -740,10 +740,15 @@ span.press {
   font-size: large;
 }
 
-#zip-search {
+.search-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.zip-search {
   width: 200px;
   margin-right: 10px;
-  font-size: medium;
+  font-size: small;
   background-color: white;
 }
 
@@ -753,6 +758,15 @@ span.press {
   justify-content: center;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+#ven-form{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 .ven-ul {
@@ -1454,6 +1468,18 @@ span.press {
   }
 
   /* VENDOR INDEX */
+  
+  .search-container{
+    flex-direction: column;
+  }
+  #zip-form{
+    margin-bottom: 5px;
+  }
+  
+  #ven-form{
+    margin-left: 0px;
+  }
+
   .ven-ul {
     grid-template-columns: 90%;
     margin: auto;
@@ -1738,7 +1764,7 @@ span.press {
     align-items: center;
   }
 
-  #zip-search {
+  .zip-search {
     margin-bottom: 10px;
   }
 

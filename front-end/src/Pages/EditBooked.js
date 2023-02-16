@@ -366,15 +366,14 @@ function EditBooked({ city, formatter, user_id }) {
       </button>
       <div className="page indexpg-container">
         <h1>{CategorySwitch(category)}</h1>
-
+        <div  className="search-container">
         <form onSubmit={handleZipSubmit} id="zip-form">
           <input
-            className="three-d pg-input"
+            className="three-d pg-input zip-search"
             type="text"
-            placeholder="5 Digit Zip Code"
+            placeholder="Search By 5 Digit Zip Code"
             onChange={handleZipChange}
             value={zip}
-            id="zip-search"
             required
             pattern="[0-9]{5}"
           />
@@ -382,17 +381,19 @@ function EditBooked({ city, formatter, user_id }) {
             Search
           </button>
         </form>
-        OR
-        <form onSubmit={handleVendorSearch}>
+     
+        <form onSubmit={handleVendorSearch} id="ven-form">
             <input 
-            placeholder="Vendor Name"
+            placeholder="Search By Vendor Name"
             type="text"
             onChange={handleVendorChange}
+            className="three-d pg-input zip-search"
             /> 
-            <button type="submit">
-              Search By Name
+            <button type="submit" className="pg-buttons">
+              Search
             </button>
           </form>
+          </div>
         {directions()}
         {vendor && !searched ? vendorShow() : vendorsShow()}
       </div>
