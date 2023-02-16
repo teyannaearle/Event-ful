@@ -1545,7 +1545,7 @@ span.press {
 
 @media only screen and (max-width: 500px) {
   .pg-head{
-    font-size: large;
+    font-size: x-large;
   }
   .new-checkbox {
     width: 100%;
