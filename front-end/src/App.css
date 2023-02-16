@@ -770,7 +770,7 @@ span.press {
 }
 
 .ven-ul {
-  width: 100%;
+  width: 90%;
   display: grid;
   grid-template-columns: 30% 30% 30%;
   justify-content: center;
@@ -819,8 +819,9 @@ span.press {
 }
 
 .ven-img {
+  padding-top: 10px;
   padding-bottom: 10px;
-  width: 90%;
+  width: 80%;
   height: 250px;
 }
 /* EditBooked*/
@@ -1335,7 +1336,7 @@ span.press {
   /* VENDOR INDEX */
   .ven-ul {
     grid-template-columns: 45% 45%;
-    width: 90%;
+    width: 80%;
     margin: auto;
   }
 
@@ -1390,6 +1391,12 @@ span.press {
 }
 
 @media only screen and (max-width: 1000px) {
+    /* VENDOR INDEX */
+    .ven-ul {
+      grid-template-columns: 45% 45%;
+      width: 90%;
+      margin: auto;
+    }
   /* EVENT PAGE */
 
   .eventpage-container {
@@ -1481,7 +1488,7 @@ span.press {
   }
 
   .ven-ul {
-    grid-template-columns: 90%;
+    grid-template-columns: 80%;
     margin: auto;
   }
 

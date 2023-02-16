@@ -14,9 +14,8 @@ function Vendor({ vendor, selected }) {
             : "ven-li"
         }`}
       >
-        <h2 className="task-head col-h"> {vendor.name}  </h2>
+        <h2 className="task-head col-h"> {vendor.name} </h2>
         <img src={vendor.image_url} alt={vendor.name} className="ven-img" />
-        <p>Phone: {vendor.display_phone}</p>
         <div className="flex-row">
           <Ratings
             rating={vendor.rating}
@@ -30,6 +29,8 @@ function Vendor({ vendor, selected }) {
             <Ratings.Widget widgetDimension="15px" />
           </Ratings>
         </div>
+        <h4> Contact Information </h4>
+        <p>Phone: {vendor.display_phone}</p>
       </li>
     </>
   );
