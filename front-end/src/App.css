@@ -1659,6 +1659,20 @@ span.press {
   }
   .reviews .show-header {
     width: 100%;
+    font-size: medium;
+  }
+
+  #vendor-showpage {
+    width: 90%;
+    margin: auto;
+  }
+
+  .show-header{
+    font-size: medium;
+  }
+
+  .ven-info {
+    font-size: medium;
   }
 
   /* BOOKED PAGE */
@@ -1810,6 +1824,16 @@ span.press {
   /* VENDOR SHOW */
   #vendor-showpage h1 {
     text-align: center;
+    font-size: large;
+  }
+
+  #vendor-showpage {
+    width: 90%;
+    margin: auto;
+  }
+
+  .show-header{
+    font-size: medium;
   }
 
   /* EVENT FORM */
