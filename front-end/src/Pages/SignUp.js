@@ -23,7 +23,6 @@ export default function SignUp() {
     event.preventDefault();
     try {
       let res = await userSignUp(input.userName, input.email, input.password);
-      console.log(res)
       if (res.email) {
         const { email, displayName, accessToken } = res;
         const newUser = { email, displayName, accessToken };
@@ -97,9 +96,9 @@ export default function SignUp() {
               Sign Up
             </button>
           </form>
-          <ToastContainer position="bottom-right" theme="light" />
         </div>
       </div>
+      <ToastContainer position="bottom-right" theme="light" />
     </div>
   );
 }

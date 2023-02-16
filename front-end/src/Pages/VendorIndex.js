@@ -36,7 +36,6 @@ export default function VendorIndex({ city }) {
         if (data.businesses[0].id) {
           setVendors(data.businesses);
           // setLoading(false)
-          console.log(data.businesses)
         }
         setSearched(true);
       }
