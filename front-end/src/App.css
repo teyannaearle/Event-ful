@@ -1772,7 +1772,7 @@ span.press {
 
 @media only screen and (max-width: 320px) {
   .pg-head{
-    font-size: x-large;
+    font-size: large;
   }
   /* EVENT PAGE */
 
