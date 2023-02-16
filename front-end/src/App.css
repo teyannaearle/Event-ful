@@ -726,7 +726,8 @@ span.press {
 }
 
 .indexpg-container h2 {
-  text-align: center;
+  text-align: center;  
+  font-size: large;
 }
 
 .indexpg-container .pg-head {
@@ -1460,6 +1461,12 @@ span.press {
   .reviews-ul span {
     grid-template-columns: 100%;
   }
+
+    /* EVENT PAGE */
+    .indexpg-container h2 {
+     font-size: medium;
+    }
+
 }
 
 @media only screen and (max-width: 700px) {
@@ -1576,6 +1583,9 @@ span.press {
     width: 80%;
   }
   /*DASHBOARD*/
+  .plan{
+    top: 65%
+  }
   .plan-ev {
     font-size: medium;
   }
@@ -1713,6 +1723,16 @@ span.press {
     margin-right: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    font-size: small;
+  }
+
+
+  .col-h {
+    font-size: medium;
+  }
+
+  .update{
+    font-size: medium;
   }
 
   #countdown-container .col-h {
@@ -1744,9 +1764,16 @@ span.press {
     width: 80%;
     margin-bottom: 20px;
   }
+  /* Vendor Index */
+  .indexpg-container h2 {
+    font-size: small;
+  }
 }
 
 @media only screen and (max-width: 320px) {
+  .pg-head{
+    font-size: x-large;
+  }
   /* EVENT PAGE */
 
   .eventpage-container {
@@ -1778,6 +1805,8 @@ span.press {
   #zip-form button {
     width: 80%;
   }
+
+ 
   /* VENDOR SHOW */
   #vendor-showpage h1 {
     text-align: center;
