@@ -146,7 +146,9 @@ function VendorShowInfo({ business, user_id, category }) {
           <div>
             <h2> Contact Information </h2>
             <p>{business.price}</p>
-            <p>{business.display_phone}</p>
+            <span>📞 <a href={`tel:${business.display_phone}`}>{business.display_phone}</a></span> 
+
+            {/* <p>{business.display_phone}</p> */}
 
             {business.location.display_address.map((point, i) => (
               <p key={i}>{point}</p>

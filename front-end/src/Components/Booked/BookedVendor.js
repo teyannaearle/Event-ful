@@ -18,7 +18,8 @@ export default function BookedVendor({ vendor }) {
         className="ven-img"
       />
       <h3> Contact Information </h3>
-      <p>Phone: {formatPhone(vendor.vendor_phone_number)}</p>
+     <span>Phone: 📞 <a href={`tel:${vendor.vendor_phone_number}`}>{formatPhone(vendor.vendor_phone_number)}</a></span> 
+      {/* <p>Phone: {formatPhone(vendor.vendor_phone_number)}</p> */}
       <p>Address: {vendor.vendor_address}</p>
       <h3>Amount: ${vendor.amount}</h3>
       <div className="book-fav"></div>

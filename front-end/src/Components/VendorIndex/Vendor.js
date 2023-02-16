@@ -30,7 +30,8 @@ function Vendor({ vendor, selected }) {
           </Ratings>
         </div>
         <h4> Contact Information </h4>
-        <p>Phone: {vendor.display_phone}</p>
+        <span>Phone: 📞 <a href={`tel:${vendor.display_phone}`}>{vendor.display_phone}</a></span> 
+        {/* <p>Phone: {vendor.display_phone}</p> */}
       </li>
     </>
   );

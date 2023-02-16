@@ -37,7 +37,8 @@ export default function Favorite({ vendors, vendor, deleteFav }) {
         </div>
         <p>( {CategorySwitch(vendor.vendor_category)} )</p>
         <h4> Contact Information </h4>
-        <p>Phone: {formatPhone(vendor.vendor_phone_number)}</p>
+        <span>Phone: 📞 <a href={`tel:${vendor.vendor_phone_number}`}>{formatPhone(vendor.vendor_phone_number)}</a></span> 
+        {/* <p>Phone: {formatPhone(vendor.vendor_phone_number)}</p> */}
         <p>Address: {vendor.vendor_address}</p>
       </li>
     </>
