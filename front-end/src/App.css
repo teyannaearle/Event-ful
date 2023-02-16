@@ -1673,10 +1673,23 @@ span.press {
   }
 
 
-
   .ven-info {
     font-size: medium;
   }
+
+  .review{
+    font-size: small;
+    height: max-content;
+  }
+
+  /* .rev-text{
+    font-size: x-small;
+  } */
+
+  .reviewers img{
+    height: 80px;
+  }
+
 
   /* BOOKED PAGE */
   .single-ven {
@@ -1835,22 +1848,11 @@ span.press {
     margin: auto;
   }
 
-  .show-header{
+  /* .show-header{
     font-size: medium;
-  }
+  } */
 
-  .review{
-    font-size: small;
-  }
-
-  .rev-text{
-    font-size: x-small;
-  }
-
-  .reviewers img{
-    height: 80px;
-  }
-
+ 
   /* EVENT FORM */
 
   .eventform-container {
