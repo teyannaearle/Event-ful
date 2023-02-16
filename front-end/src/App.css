@@ -1617,6 +1617,11 @@ span.press {
     width: 100%;
   }
 
+  #ven-show-head{
+    font-size: medium;
+  }
+
+
   .heart {
     margin-top: 2px;
   }
@@ -1667,9 +1672,7 @@ span.press {
     margin: auto;
   }
 
-  .show-header{
-    font-size: medium;
-  }
+
 
   .ven-info {
     font-size: medium;
@@ -1834,6 +1837,10 @@ span.press {
 
   .show-header{
     font-size: medium;
+  }
+
+  .review{
+    font-size: small;
   }
 
   /* EVENT FORM */

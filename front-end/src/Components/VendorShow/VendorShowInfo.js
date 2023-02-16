@@ -113,7 +113,7 @@ function VendorShowInfo({ business, user_id, category }) {
               onMouseLeave={() => setHover(!hover)}
             ></i>
           </div>
-          <h1>{business.name} </h1>
+          <h1 id="ven-show-head">{business.name} </h1>
         </span>
       </span>
       <div className="flex-row show-header2 drop">
