@@ -121,6 +121,7 @@ function EditBooked({ city, formatter, user_id }) {
     }
     setSearched(true);
     setSelected(false);
+    setZip("")
   };
 
   const handleFormChange = (e) => {
@@ -323,7 +324,7 @@ function EditBooked({ city, formatter, user_id }) {
     if ((!vendor && !searched && city) || searched) {
       direction = (
         <p className="directions">
-          Browse below or search by zip code to select the vendor that you've
+          Browse below or search above to select the vendor that you've
           booked
         </p>
       );
@@ -331,7 +332,7 @@ function EditBooked({ city, formatter, user_id }) {
       direction = (
         <>
           <p className="directions">
-           ( If you have changed vendors, search by zip code above to select the
+           ( If you have changed vendors, search above to select the
             vendor that you've booked ){" "}
           </p>
         </>
@@ -346,7 +347,7 @@ function EditBooked({ city, formatter, user_id }) {
     } else if (!city) {
       direction = (
         <p className="directions">
-          Search by zip code above to select the vendor that you've booked
+          Search above to select the vendor that you've booked
         </p>
       );
     }
@@ -388,6 +389,7 @@ function EditBooked({ city, formatter, user_id }) {
             type="text"
             onChange={handleVendorChange}
             className="three-d pg-input zip-search"
+            value={vendorSearch}
             /> 
             <button type="submit" className="pg-buttons">
               Search

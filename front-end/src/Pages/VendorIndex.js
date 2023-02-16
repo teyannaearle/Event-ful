@@ -86,6 +86,7 @@ export default function VendorIndex({ city }) {
     }
     setSearched(true);
     setSubmittedSearch(true)
+    setZip("")
     setPrevZip(zip)
   };
 
@@ -167,6 +168,7 @@ export default function VendorIndex({ city }) {
             placeholder="Search By Vendor Name"
             type="text"
             onChange={handleVendorChange}
+            value={vendorSearch}
             /> 
             <button type="submit" className="pg-buttons">
               Search
