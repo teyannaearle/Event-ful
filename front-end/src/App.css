@@ -1847,6 +1847,10 @@ span.press {
     font-size: x-small;
   }
 
+  .reviewers img{
+    height: 80px;
+  }
+
   /* EVENT FORM */
 
   .eventform-container {
