@@ -23,6 +23,7 @@ function EditBooked({ city, formatter, user_id }) {
   const [zip, setZip] = useState("");
   const [searched, setSearched] = useState(false);
   const [selected, setSelected] = useState(false);
+  const [vendorSearch, setVendorSearch] = useState("")
   const history = useHistory();
   const loggedInUser = useContext(UserContext);
   const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
@@ -125,6 +126,22 @@ function EditBooked({ city, formatter, user_id }) {
   const handleFormChange = (e) => {
     setCost(e.target.value);
   };
+  
+  const handleVendorChange = (e) => {
+    setVendorSearch(e.target.value)
+  }
+
+  const handleVendorSearch = async (e) =>{
+    e.preventDefault()
+    const data = await api.getVendorsByName(vendorSearch, city, category);
+    console.log(data)
+    if (data.businesses[0].id){
+      setVendors(data.businesses);
+    }
+    setSearched(true)
+    setVendorSearch("")
+  }
+
 
   const handleCostSubmission = (e) => {
     e.preventDefault();
@@ -365,6 +382,17 @@ function EditBooked({ city, formatter, user_id }) {
             Search
           </button>
         </form>
+        OR
+        <form onSubmit={handleVendorSearch}>
+            <input 
+            placeholder="Vendor Name"
+            type="text"
+            onChange={handleVendorChange}
+            /> 
+            <button type="submit">
+              Search By Name
+            </button>
+          </form>
         {directions()}
         {vendor && !searched ? vendorShow() : vendorsShow()}
       </div>

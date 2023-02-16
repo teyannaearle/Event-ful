@@ -1,14 +1,13 @@
 import axios from "axios";
-const yelpApiKey = process.env.REACT_APP_YELP_KEY
+const yelpApiKey = process.env.REACT_APP_YELP_KEY;
 const proxy = "https://teysprox.herokuapp.com";
 const yelpBase = "https://api.yelp.com/v3/businesses";
-
 
 const config = () => {
   return {
     headers: {
       Authorization: `Bearer ${yelpApiKey}`,
-      withCredentials: true
+      withCredentials: true,
     },
   };
 };
@@ -25,14 +24,25 @@ const getVendorsZip = async (category, zip) => {
   }
 };
 
-const getVendorsCity= async (city, category) => {
+const getVendorsCity = async (city, category) => {
   try {
     const { data } = await axios.get(
       `${proxy}/${yelpBase}/search?term=${category}&location=${city}&category=${category}&radius=16093`,
       config()
     );
     return data;
+  } catch (e) {
+    return console.warn(e);
+  }
+};
 
+const getVendorsByName = async (venName, city, category) => {
+  try {
+    const { data } = await axios.get(
+      `${proxy}/${yelpBase}/search?location=${city}&category=${category}&term=${venName},${category}`,
+      config()
+    );
+    return data;
   } catch (e) {
     return console.warn(e);
   }
@@ -76,6 +86,7 @@ const api = {
   getVendorsCity,
   getVendor,
   getReviews,
+  getVendorsByName,
 };
 
 export default api;

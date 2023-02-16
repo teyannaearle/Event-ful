@@ -22,7 +22,10 @@ import NavBar from "../Components/NavBar/NavBar";
 export default function VendorIndex({ city }) {
   const [vendors, setVendors] = useState([]);
   const [zip, setZip] = useState("");
+  const [vendorSearch, setVendorSearch] = useState("")
   const [searched, setSearched] = useState(false);
+  const [submittedSearch , setSubmittedSearch ] = useState(false);
+  const [prevZip, setPrevZip] = useState("")
   // const [loading, setLoading] = useState(true)
   const { category } = useParams();
 
@@ -71,6 +74,10 @@ export default function VendorIndex({ city }) {
     setZip(e.target.value);
   };
 
+  const handleVendorChange = (e) => {
+    setVendorSearch(e.target.value)
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await api.getVendorsZip(category, zip);
@@ -78,7 +85,20 @@ export default function VendorIndex({ city }) {
       setVendors(data);
     }
     setSearched(true);
+    setSubmittedSearch(true)
+    setPrevZip(zip)
   };
+
+  const handleVendorSearch = async (e) =>{
+    e.preventDefault()
+    const data = await api.getVendorsByName(vendorSearch, city, category);
+    console.log(data)
+    if (data.businesses[0].id){
+      setVendors(data.businesses);
+    }
+    setSearched(true)
+    setVendorSearch("")
+  }
 
 
 
@@ -104,7 +124,8 @@ export default function VendorIndex({ city }) {
       );
     } else if (city && !vendors[0]) {
       result = <Loading />;
-    } else {
+    } 
+    else {
       result = <VendorList vendors={vendors} category={category} />;
     }
     return result;
@@ -122,7 +143,7 @@ export default function VendorIndex({ city }) {
           {category ? (
             <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1>
           ) : null}
-          <p> ( near {searched && zip ? zip : city} ) </p>
+          <p> ( near {submittedSearch ? prevZip : city} ) </p>
           <form onSubmit={handleSubmit} id="zip-form">
             <input
               className="three-d pg-input"
@@ -136,6 +157,19 @@ export default function VendorIndex({ city }) {
             />
             <button type="submit" className="pg-buttons">
               Search
+            </button>
+          </form>
+
+          OR 
+
+          <form onSubmit={handleVendorSearch} >
+            <input 
+            placeholder="Vendor Name"
+            type="text"
+            onChange={handleVendorChange}
+            /> 
+            <button type="submit">
+              Search By Name
             </button>
           </form>
         </div>
