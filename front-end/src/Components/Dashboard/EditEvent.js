@@ -397,7 +397,7 @@ function EditEvent({ setUpdateEvent, user_id }) {
             <button className="pg-buttons">Save Changes</button>
           </div>
         </form>
-        <ToastContainer autoClose={false} position="bottom-center" />
+        <ToastContainer position="bottom-right" theme="light" />
       </div>
     </>
   );
