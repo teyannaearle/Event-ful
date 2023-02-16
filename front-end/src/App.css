@@ -1843,6 +1843,10 @@ span.press {
     font-size: small;
   }
 
+  .rev-text{
+    font-size: x-small;
+  }
+
   /* EVENT FORM */
 
   .eventform-container {
