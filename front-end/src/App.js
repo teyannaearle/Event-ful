@@ -19,6 +19,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import Banner from "./Components/Banner";
 import axios from "axios";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 
