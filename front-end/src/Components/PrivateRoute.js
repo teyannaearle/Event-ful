@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-// import { UserContext } from "../Providers/UserProvider";
 
 const PrivateRoute = ({
   component: Component,
@@ -20,8 +19,6 @@ const PrivateRoute = ({
   ...rest
 }) => {
   const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn"))
-
-  // const currentUser = useContext(UserContext);
 
   return (
     <Route

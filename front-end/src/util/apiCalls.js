@@ -47,18 +47,6 @@ const getVendorsByName = async (venName, city, category) => {
     return console.warn(e);
   }
 };
-// const getVendorsLongLag = async (lng, lat, category) => {
-//   try {
-//     const { data } = await axios.get(
-//       `https://cors-anywhere.herokuapp.com/${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
-//       config()
-//     );
-//     return data;
-
-//   } catch (e) {
-//     return console.warn(e);
-//   }
-// };
 
 const getVendor = async (id) => {
   try {

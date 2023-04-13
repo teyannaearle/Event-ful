@@ -23,7 +23,6 @@ function Event({ event, deleteEvent }) {
     } else if (name.includes("brid")){
       item = <>&#x1F470;</> 
     } else if (name.includes("grad") || name.includes("commencement")){
-      console.log("yes")
       item = <>&#127891;</>
     } else {
       item = <>&#127882;</>;

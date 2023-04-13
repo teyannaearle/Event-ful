@@ -18,18 +18,6 @@ export const UserProvider = ({ children }) => {
     });
   }, [history]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (currentUser) {
-  //       const email = currentUser.email;
-  //       let checkUser = await axios.get(`${API}/users/${email}`);
-  //       if (checkUser.data.success) {
-  //         currentUser.user_id = checkUser.data.payload.user_id;
-  //       }
-  //     }
-  //   })();
-  // }, [currentUser]);
-
   return (
     <UserContext.Provider value={{currentUser}}>{children}</UserContext.Provider>
   );

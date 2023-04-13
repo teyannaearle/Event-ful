@@ -8,10 +8,10 @@ import { ToastContainer, toast } from "react-toastify";
 
 const API = apiURL();
 
-export default function SignUp({setSignedUp}) {
+export default function SignUp({setUserId}) {
   const history = useHistory();
   const [input, setInput] = useState({
-    userName: "",
+    display_name: "",
     email: "",
     password: "",
   });
@@ -23,7 +23,7 @@ export default function SignUp({setSignedUp}) {
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      let res = await userSignUp(input.userName, input.email, input.password);
+      let res = await userSignUp(input.display_name.trim(), input.email, input.password);
       if (res.email) {
         const { email, displayName, accessToken } = res;
         const newUser = { email, displayName, accessToken };
@@ -33,7 +33,7 @@ export default function SignUp({setSignedUp}) {
           },
         });
         if (result.data.success) {
-          setSignedUp(true)
+          setUserId(result.data.user_id)
           history.push("/dashboard");
         } else { 
           console.warn("could not add new user to backend database");
@@ -62,15 +62,15 @@ export default function SignUp({setSignedUp}) {
     <div className="Landing-Container">
       <div className="SignIn-Form ">
         <p> &nbsp; </p>
-        <div className=" newForm three-d">
+        <div className="newForm three-d">
           &nbsp;
           <form onSubmit={handleSignUp}>
             <span className="SignIn-Labels">
-              <label htmlFor="userName">Please Enter Your Name</label>
+              <label htmlFor="display_name">Please Enter Your Name</label>
               <input
                 type="text"
-                id="userName"
-                value={input.userName}
+                id="display_name"
+                value={input.display_name}
                 onChange={handleChange}
                 placeholder="Name"
               />{" "}

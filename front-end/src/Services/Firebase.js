@@ -13,12 +13,12 @@ import {
 
 export const auth = getAuth();
 
-export const userSignUp = async (userName, email, password) => {
+export const userSignUp = async (display_name, email, password) => {
   let result = null;
   try {
     await createUserWithEmailAndPassword(auth, email, password).then(
       (userCred) => {
-        updateProfile(userCred.user, {displayName: userName})
+        updateProfile(userCred.user, userCred.user.displayName = display_name)
         result = userCred.user;
         localStorage.setItem("loggedIn", true);
       }

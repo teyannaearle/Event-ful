@@ -110,7 +110,6 @@ booked.post("/:user_id/:event_id", async (req, res) => {
 // DELETE
 booked.delete("/:user_id/:event_id/:category", async (req, res) => {
   const { user_id, event_id, category } = req.params;
-  // const vendorName = req.body.vendor_name;
   try {
     const deletedBookedVendor = await deleteBookedVendor(
       user_id,

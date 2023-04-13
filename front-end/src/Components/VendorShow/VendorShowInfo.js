@@ -76,7 +76,6 @@ function VendorShowInfo({ business, user_id, category }) {
             },
           }, body)
           .then((res) => setPressed(true));
-          // .then((res) => console.log("success"));
       } catch (e) {
         console.warn(e);
       }
@@ -89,7 +88,6 @@ function VendorShowInfo({ business, user_id, category }) {
     if (hover && !favorite) {
       color = "#666";
     } else if (favorite) {
-      // color = "white";
       color = "red";
     } else {
       color = "#aaa";

@@ -31,7 +31,7 @@ export default function Dashboard({
               setCreated={setCreated}
               setUpdateEvent={setUpdateEvent}
             />
-            <>//
+            <>
               <EventList
                 events={events}
                 deleteEvent={deleteEvent}

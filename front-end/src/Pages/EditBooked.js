@@ -135,7 +135,6 @@ function EditBooked({ city, formatter, user_id }) {
   const handleVendorSearch = async (e) =>{
     e.preventDefault()
     const data = await api.getVendorsByName(vendorSearch, city, category);
-    console.log(data)
     if (data.businesses[0].id){
       setVendors(data.businesses);
     }

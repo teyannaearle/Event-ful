@@ -4,20 +4,8 @@ import api from "../util/apiCalls";
 import VendorList from "../Components/VendorIndex/VendorList";
 import Loading from "../Components/Loading";
 import CategorySwitch from "../Components/CategorySwitch";
-// import axios from "axios";
 import NavBar from "../Components/NavBar/NavBar";
 
-// const apiKey = process.env.REACT_APP_API_KEY;
-// const proxy = "https://morning-spire-06380.herokuapp.com";
-// const yelpBase = "https://api.yelp.com/v3/businesses";
-// const config = () => {
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${apiKey}`,
-//       withCredentials: true,
-//     },
-//   };
-// };
 
 export default function VendorIndex({ city }) {
   const [vendors, setVendors] = useState([]);
@@ -26,7 +14,6 @@ export default function VendorIndex({ city }) {
   const [searched, setSearched] = useState(false);
   const [submittedSearch , setSubmittedSearch ] = useState(false);
   const [prevZip, setPrevZip] = useState("")
-  // const [loading, setLoading] = useState(true)
   const { category } = useParams();
 
   useEffect(() => {
@@ -35,7 +22,6 @@ export default function VendorIndex({ city }) {
         const data = await api.getVendorsCity(city,category);
         if (data.businesses[0].id) {
           setVendors(data.businesses);
-          // setLoading(false)
         }
         setSearched(true);
       }
@@ -43,32 +29,8 @@ export default function VendorIndex({ city }) {
     return () => {
       setVendors([]);
       setSearched(false);
-      // setLoading(true)
     };
   }, [category, city]);
-  // useEffect(() => {
-  //   try {
-  //     axios
-  //       .get(
-  //         `${proxy}/${yelpBase}/search?term=${category}&longitude=${lng}&latitude=${lat}&category=${category}&radius=16093`,
-  //         config()
-  //       )
-  //       .then((res) => {
-  //         const { data } = res;
-  //         if (data.businesses[0].id) {
-  //           setVendors(data.businesses);
-  //         }
-  //         setSearched(true);
-  //       });
-  //   } catch (e) {
-  //     return console.warn(e);
-  //   }
-
-  //   return () => {
-  //     setVendors([])
-  //     setSearched(false)
-  //   }
-  // }, [category, lng, lat]);
 
   const handleZipChange = (e) => {
     setZip(e.target.value);
@@ -93,7 +55,6 @@ export default function VendorIndex({ city }) {
   const handleVendorSearch = async (e) =>{
     e.preventDefault()
     const data = await api.getVendorsByName(vendorSearch, city, category);
-    console.log(data)
     if (data.businesses[0].id){
       setVendors(data.businesses);
     }
@@ -132,10 +93,6 @@ export default function VendorIndex({ city }) {
     return result;
   };
 
-  // useEffect(()=>{
-  //   vendorsList()
-  // },[loading, vendorsList])
-
   return (
     <>
       <NavBar />
@@ -153,7 +110,6 @@ export default function VendorIndex({ city }) {
               placeholder="Search by 5 Digit Zip Code"
               onChange={handleZipChange}
               value={zip}
-              // id="zip-search"
               required
               pattern="[0-9]{5}"
             />

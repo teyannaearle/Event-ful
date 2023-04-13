@@ -27,7 +27,6 @@ const API = apiURL();
 
 function App() {
   const loggedInUser = useContext(UserContext);
-  const [signedUp, setSignedUp] = useState(false)
   const [user_id, setUserId] = useState(null);
   const [created, setCreated] = useState(false);
   const [events, setEvents] = useState([]);
@@ -46,12 +45,9 @@ function App() {
       axios
         .get(
           `https://ipinfo.io/json?token=90229ead70bb3e`
-          // "https://morning-spire-06380.herokuapp.com/https://api.freegeoip.app/json?apikey=94974ea0-347f-11ec-a667-11ee2dd024a0"
         )
         .then((res) => {
           setCity(`${res.data.city}, ${res.data.region}`);
-          // console.log(res.data.city)
-          // setCity(`${res.data.city}, ${res.data.region_name}`);
         });
     } catch (e) {
       console.warn(e);
@@ -72,23 +68,24 @@ function App() {
         });
         if (checkUser.data.success) {
           setUserId(checkUser.data.payload.user_id);
-        }
+        } 
 
-        const name = loggedInUser.currentUser.displayName
-          ? loggedInUser.currentUser.displayName
+        if (loggedInUser.currentUser.displayName){
+          const username = loggedInUser.currentUser.displayName
               .split(" ")[0][0]
               .toUpperCase() +
             loggedInUser.currentUser.displayName.split(" ")[0].substring(1)
-          : null
+          
+            setFormattedName(username);
+        } 
 
-        setFormattedName(name);
       }
     })();
     return () => {
       setUserId(null)
       setFormattedName("")
     };
-  }, [loggedInUser, signedUp]);
+  }, [loggedInUser]);
 
   useEffect(() => {
     if (user_id) {
@@ -143,7 +140,7 @@ function App() {
 
           <Route path="/signup">
           <Banner />
-            <SignUp setSignedUp={setSignedUp}/>
+            <SignUp setUserId={setUserId}/>
           </Route>
 
           <Route path="/signin">

@@ -5,7 +5,7 @@ CREATE DATABASE dc3gl1k97e2rv1;
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY, 
-    displayName  VARCHAR (255), 
+    display_name  VARCHAR (255), 
     email VARCHAR (255) UNIQUE NOT NULL, 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
