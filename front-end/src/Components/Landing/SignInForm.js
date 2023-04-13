@@ -9,7 +9,7 @@ import "./SignInForm.css";
 
 const API = apiURL();
 
-function SignInForm() {
+function SignInForm({setUserId}) {
   const history = useHistory();
   const [input, setInput] = useState({
     email: "",
@@ -68,7 +68,6 @@ function SignInForm() {
       let res = await userGoogleSignIn();
       if (res.email) {
         const { email, accessToken, displayName } = res;
-        const userName = displayName;
         try {
           await axios
             .get(`${API}/users/${email}`, {
@@ -80,7 +79,7 @@ function SignInForm() {
               if (res.data.success) {
                 history.push("/dashboard");
               } else {
-                signUp(email, accessToken, userName);
+                signUp(email, accessToken, displayName);
               }
             });
         } catch (error) {
@@ -92,8 +91,8 @@ function SignInForm() {
     }
   };
 
-  const signUp = async (email, accessToken, userName) => {
-    let newUser = { email, userName };
+  const signUp = async (email, accessToken, displayName) => {
+    let newUser = { email, displayName };
     try {
       await axios
         .post(`${API}/users/`, newUser, {
@@ -103,13 +102,14 @@ function SignInForm() {
         })
         .then((res) => {
           if (res.data.success) {
+            setUserId(res.data.payload.user_id)
             history.push("/dashboard");
           }
         });
     } catch (error) {
       console.error(error);
     }
-  };
+  }; 
 
   return (
     <div className="SignIn-Form ">

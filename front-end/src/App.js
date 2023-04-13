@@ -145,7 +145,7 @@ function App() {
 
           <Route path="/signin">
           <Banner />
-            <SignIn />
+            <SignIn setUserId={setUserId}/>
           </Route>
 
           <PrivateRoute
