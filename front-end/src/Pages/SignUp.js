@@ -5,9 +5,10 @@ import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import { ToastContainer, toast } from "react-toastify";
 
+
 const API = apiURL();
 
-export default function SignUp() {
+export default function SignUp({setSignedUp}) {
   const history = useHistory();
   const [input, setInput] = useState({
     userName: "",
@@ -32,8 +33,9 @@ export default function SignUp() {
           },
         });
         if (result.data.success) {
+          setSignedUp(true)
           history.push("/dashboard");
-        } else {
+        } else { 
           console.warn("could not add new user to backend database");
           toast.error("Error: Please try again later.", {
             toastId: "customId",

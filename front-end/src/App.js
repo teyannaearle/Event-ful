@@ -27,6 +27,7 @@ const API = apiURL();
 
 function App() {
   const loggedInUser = useContext(UserContext);
+  const [signedUp, setSignedUp] = useState(false)
   const [user_id, setUserId] = useState(null);
   const [created, setCreated] = useState(false);
   const [events, setEvents] = useState([]);
@@ -87,7 +88,7 @@ function App() {
       setUserId(null)
       setFormattedName("")
     };
-  }, [loggedInUser]);
+  }, [loggedInUser, signedUp]);
 
   useEffect(() => {
     if (user_id) {
@@ -130,7 +131,6 @@ function App() {
     }
   };
 
-
   return (
     <div className="site">
       <Router>
@@ -143,7 +143,7 @@ function App() {
 
           <Route path="/signup">
           <Banner />
-            <SignUp />
+            <SignUp setSignedUp={setSignedUp}/>
           </Route>
 
           <Route path="/signin">

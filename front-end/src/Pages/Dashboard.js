@@ -29,8 +29,9 @@ export default function Dashboard({
               user_id={user_id}
               created={created}
               setCreated={setCreated}
+              setUpdateEvent={setUpdateEvent}
             />
-            <>
+            <>//
               <EventList
                 events={events}
                 deleteEvent={deleteEvent}

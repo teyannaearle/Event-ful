@@ -8,7 +8,7 @@ import { UserContext } from "../../Providers/UserProvider";
 
 const API = apiURL();
 
-function NewEventForm({ user_id, created, setCreated }) {
+function NewEventForm({ user_id, created, setCreated, setUpdateEvent }) {
   const loggedInUser = useContext(UserContext);
   const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
   const [eventId, setEventId] = useState(null);
@@ -53,6 +53,7 @@ function NewEventForm({ user_id, created, setCreated }) {
           created={created}
           setCreated={setCreated}
           user_id={user_id}
+          setUpdateEvent={setUpdateEvent}
         />
       ) : (
         <Form
