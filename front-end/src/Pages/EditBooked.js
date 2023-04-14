@@ -24,6 +24,7 @@ function EditBooked({ city, formatter, user_id }) {
   const [searched, setSearched] = useState(false);
   const [selected, setSelected] = useState(false);
   const [vendorSearch, setVendorSearch] = useState("")
+  const [prevLoc, setPrevLoc] = useState("")
   const history = useHistory();
   const loggedInUser = useContext(UserContext);
   const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
@@ -115,13 +116,18 @@ function EditBooked({ city, formatter, user_id }) {
 
   const handleZipSubmit = async (e) => {
     e.preventDefault();
-    const data = await api.getVendorsZip(category, zip);
-    if (data[0].id) {
+    let location = zip ? zip : city
+    let term = vendorSearch ? vendorSearch : category
+    const data = await api.getVendorsZip(category, location, term);
+    // const data = await api.getVendorsZip(category, zip);
+    if (data.length >= 1) {
       setVendors(data);
     }
     setSearched(true);
     setSelected(false);
     setZip("")
+    setVendorSearch("")
+    setPrevLoc(zip ? zip : city)
   };
 
   const handleFormChange = (e) => {
@@ -132,15 +138,15 @@ function EditBooked({ city, formatter, user_id }) {
     setVendorSearch(e.target.value)
   }
 
-  const handleVendorSearch = async (e) =>{
-    e.preventDefault()
-    const data = await api.getVendorsByName(vendorSearch, city, category);
-    if (data.businesses[0].id){
-      setVendors(data.businesses);
-    }
-    setSearched(true)
-    setVendorSearch("")
-  }
+  // const handleVendorSearch = async (e) =>{
+  //   e.preventDefault()
+  //   const data = await api.getVendorsByName(vendorSearch, city, category);
+  //   if (data.businesses[0].id){
+  //     setVendors(data.businesses);
+  //   }
+  //   setSearched(true)
+  //   setVendorSearch("")
+  // }
 
 
   const handleCostSubmission = (e) => {
@@ -366,6 +372,7 @@ function EditBooked({ city, formatter, user_id }) {
       </button>
       <div className="page indexpg-container">
         <h1>{CategorySwitch(category)}</h1>
+        <p> ( near {searched ? prevLoc : city} ) </p>
         <div  className="search-container">
         <form onSubmit={handleZipSubmit} id="zip-form">
           <input
@@ -374,15 +381,15 @@ function EditBooked({ city, formatter, user_id }) {
             placeholder="Search By 5 Digit Zip Code"
             onChange={handleZipChange}
             value={zip}
-            required
+            // required
             pattern="[0-9]{5}"
           />
-          <button type="submit" className="pg-buttons">
+          {/* <button type="submit" className="pg-buttons">
             Search
           </button>
-        </form>
-     
-        <form onSubmit={handleVendorSearch} id="ven-form">
+        </form> */}
+{/*      
+        <form onSubmit={handleVendorSearch} id="ven-form"> */}
             <input 
             placeholder="Search By Vendor Name"
             type="text"
@@ -390,7 +397,7 @@ function EditBooked({ city, formatter, user_id }) {
             className="three-d pg-input zip-search"
             value={vendorSearch}
             /> 
-            <button type="submit" className="pg-buttons">
+            <button type="submit" className="pg-buttons searchbar-button">
               Search
             </button>
           </form>

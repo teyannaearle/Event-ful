@@ -133,7 +133,7 @@ export default function VendorIndex({ city }) {
             onChange={handleVendorChange}
             value={vendorSearch}
             /> 
-            <button type="submit" className="pg-buttons">
+            <button type="submit" className="pg-buttons searchbar-button">
               Search
             </button>
           </form>

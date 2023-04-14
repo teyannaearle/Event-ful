@@ -49,17 +49,17 @@ const getVendorsCity = async (city, category) => {
   }
 };
 
-const getVendorsByName = async (venName, city, category) => {
-  try {
-    const { data } = await axios.get(
-      `${proxy}/${yelpBase}/search?location=${city}&category=${category}&term=${venName},${category}`,
-      config()
-    );
-    return data;
-  } catch (e) {
-    return console.warn(e);
-  }
-};
+// const getVendorsByName = async (venName, city, category) => {
+//   try {
+//     const { data } = await axios.get(
+//       `${proxy}/${yelpBase}/search?location=${city}&category=${category}&term=${venName},${category}`,
+//       config()
+//     );
+//     return data;
+//   } catch (e) {
+//     return console.warn(e);
+//   }
+// };
 
 const getVendor = async (id) => {
   try {
@@ -87,7 +87,7 @@ const api = {
   getVendorsCity,
   getVendor,
   getReviews,
-  getVendorsByName,
+  // getVendorsByName,
 };
 
 export default api;
