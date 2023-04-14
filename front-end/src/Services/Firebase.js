@@ -18,10 +18,9 @@ export const userSignUp = async (display_name, email, password) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password).then(
       (userCred) => {
-        console.log(userCred)
         updateProfile(userCred.user, userCred.user.displayName = display_name)
         result = userCred.user;
-        localStorage.setItem("loggedIn", true);
+        sessionStorage.setItem("loggedIn", true);
       }
     );
   } catch (error) {
@@ -36,7 +35,7 @@ export const userSignIn = async (email, password) => {
     await signInWithEmailAndPassword(auth, email, password).then(
       (userCred) => {
         result = userCred.user;
-        localStorage.setItem("loggedIn", true);
+        sessionStorage.setItem("loggedIn", true);
       }
     );
   } catch (e) {
@@ -52,7 +51,7 @@ export const userGoogleSignIn = async () => {
   try {
     await signInWithPopup(auth, googleProvider).then((userCred) => {
       result = userCred.user;
-      localStorage.setItem("loggedIn", true);
+      sessionStorage.setItem("loggedIn", true);
     });
   } catch (error) {
     result = error.code;
@@ -64,7 +63,7 @@ export const userSignOut = async () => {
   let result = null;
   try {
     await signOut(auth).then(() => {
-      localStorage.setItem("loggedIn", false);
+      sessionStorage.setItem("loggedIn", false);
     });
   } catch (e) {
     result = e.code;

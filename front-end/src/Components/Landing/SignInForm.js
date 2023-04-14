@@ -34,6 +34,7 @@ function SignInForm({setUserId}) {
             })
             .then((res) => {
               if (res.data.success) {
+                setUserId(res.data.payload.user_id)
                 history.push("/dashboard");
               } else {
                 toast.error("Error: Something Went Wrong. Please try again", {
@@ -76,6 +77,7 @@ function SignInForm({setUserId}) {
             })
             .then((res) => {
               if (res.data.success) {
+                setUserId(res.data.payload.user_id)
                 history.push("/dashboard");
               } else {
                 signUp(email, accessToken, displayName);

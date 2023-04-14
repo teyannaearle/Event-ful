@@ -33,7 +33,7 @@ export default function SignUp({setUserId}) {
           },
         });
         if (result.data.success) {
-          setUserId(result.data.user_id)
+          setUserId(result.data.payload.user_id)
           history.push("/dashboard");
         } else { 
           console.warn("could not add new user to backend database");

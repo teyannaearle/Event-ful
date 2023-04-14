@@ -18,7 +18,7 @@ const PrivateRoute = ({
   setCity,
   ...rest
 }) => {
-  const loggedIn = JSON.parse(window.localStorage.getItem("loggedIn"))
+  const loggedIn = JSON.parse(window.sessionStorage.getItem("loggedIn"))
 
   return (
     <Route

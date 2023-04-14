@@ -45,7 +45,6 @@ export default function VendorIndex({ city }) {
     let location = zip ? zip : city
     let term = vendorSearch ? vendorSearch : category
     const data = await api.getVendorsZip(category, location, term);
-    console.log(data)
     if (data.length >= 1){
       setVendors(data);
     }
