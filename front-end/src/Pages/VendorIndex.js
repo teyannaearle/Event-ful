@@ -13,7 +13,7 @@ export default function VendorIndex({ city }) {
   const [vendorSearch, setVendorSearch] = useState("")
   const [searched, setSearched] = useState(false);
   const [submittedSearch , setSubmittedSearch ] = useState(false);
-  const [prevZip, setPrevZip] = useState("")
+  const [prevLoc, setPrevLoc] = useState("")
   const { category } = useParams();
 
   useEffect(() => {
@@ -42,25 +42,32 @@ export default function VendorIndex({ city }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await api.getVendorsZip(category, zip);
-    if (data[0].id) {
+    let location = zip ? zip : city
+    let term = vendorSearch ? vendorSearch : category
+    const data = await api.getVendorsZip(category, location, term);
+    console.log(data)
+    if (data.length >= 1){
       setVendors(data);
     }
+    // if (data[0].id) {
+    //   setVendors(data);
+    // }
     setSearched(true);
     setSubmittedSearch(true)
-    setZip("")
-    setPrevZip(zip)
-  };
-
-  const handleVendorSearch = async (e) =>{
-    e.preventDefault()
-    const data = await api.getVendorsByName(vendorSearch, city, category);
-    if (data.businesses[0].id){
-      setVendors(data.businesses);
-    }
-    setSearched(true)
     setVendorSearch("")
-  }
+    setZip("")
+    setPrevLoc(zip ? zip : city)
+  }; 
+
+  // const handleVendorSearch = async (e) =>{
+  //   e.preventDefault()
+  //   const data = await api.getVendorsByName(vendorSearch, city, category);
+  //   if (data.businesses[0].id){
+  //     setVendors(data.businesses);
+  //   }
+  //   setSearched(true)
+  //   setVendorSearch("")
+  // }
 
 
 
@@ -101,7 +108,7 @@ export default function VendorIndex({ city }) {
           {category ? (
             <h1 className="flex-row pg-head"> {CategorySwitch(category)} </h1>
           ) : null}
-          <p> ( near {submittedSearch ? prevZip : city} ) </p>
+          <p> ( near {submittedSearch ? prevLoc : city} ) </p>
           <div  className="search-container">
           <form onSubmit={handleSubmit} id="zip-form">
             <input
@@ -110,15 +117,15 @@ export default function VendorIndex({ city }) {
               placeholder="Search by 5 Digit Zip Code"
               onChange={handleZipChange}
               value={zip}
-              required
+              // required
               pattern="[0-9]{5}"
             />
-            <button type="submit" className="pg-buttons">
+            {/* <button type="submit" className="pg-buttons">
               Search
             </button>
           </form>
 
-          <form onSubmit={handleVendorSearch} id="ven-form">
+          <form onSubmit={handleVendorSearch} id="ven-form"> */}
             <input 
             className="three-d pg-input zip-search"
             placeholder="Search By Vendor Name"
