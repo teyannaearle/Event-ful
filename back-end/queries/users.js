@@ -27,7 +27,23 @@ const getOneUser = async (email) => {
       return err;
     }
   }
-};
+}; 
+
+const getOneUserById = async (user_id) => {
+  try {
+    const oneUserById = await db.one("SELECT * FROM users WHERE user_id=$1", [user_id]);
+    return oneUserById;
+  } catch (err) {
+    if (err instanceof QRE && err.code === qrec.noData) {
+      return null;
+    } else {
+      console.log("query caught an error");
+      console.log(err);
+      return err;
+    }
+  }
+}; 
+
 
 //create
 const createNewUser = async (email, display_name) => {
@@ -44,6 +60,7 @@ const createNewUser = async (email, display_name) => {
 
 module.exports = {
   getOneUser,
+  getOneUserById,
   createNewUser,
   allUsers
 };

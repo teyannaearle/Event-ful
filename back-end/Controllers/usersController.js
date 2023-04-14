@@ -3,7 +3,7 @@ const users = express.Router({ mergeParams: true });
 
 // validation, error handling
 
-const { getOneUser, createNewUser, allUsers } = require("../queries/users");
+const { getOneUser, createNewUser, allUsers, getOneUserById } = require("../queries/users");
 
 const db = require("../db/dbConfig");
 
@@ -19,7 +19,7 @@ users.get("/", async (req, res)  => {
 
 // SHOW ONE USER
 users.get("/:email", async (req, res) => {
-  const { email } = req.params;
+  const { email } = req.params; 
   try {
     const oneUser = await getOneUser(email);
     console.log(oneUser);
@@ -41,6 +41,34 @@ users.get("/:email", async (req, res) => {
     });
   }
 });
+
+// SHOW ONE USER BY ID
+
+users.get("/id/:user_id", async (req, res) => {
+  const { user_id } = req.params; 
+  try {
+    const oneUser = await getOneUserById(user_id);
+    console.log(oneUser);
+    if (oneUser) {
+      res.status(200).json({
+        success: true,
+        payload: oneUser,
+      });
+    } else {
+      res.status(200).json({
+        success: false,
+        payload: `No registered user found with id ${user_id}`,
+      });
+    }
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      payload: e,
+    });
+  }
+});
+
+
 
 // CREATE
 users.post("/", async (req, res) => {

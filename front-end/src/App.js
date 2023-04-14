@@ -69,7 +69,6 @@ function App() {
         if (checkUser.data.success) {
           setUserId(checkUser.data.payload.user_id);
         } 
-
         if (loggedInUser.currentUser.displayName){
           const username = loggedInUser.currentUser.displayName
               .split(" ")[0][0]
@@ -104,12 +103,34 @@ function App() {
         .catch((e) => {
           console.error(e);
         });
+
+        axios
+        .get(`${API}/users/id/${user_id}`, {  headers: {
+          Authorization: "Bearer " + accessToken,
+        },})
+        .then(
+          (res) => {
+            if (formattedName === ""){
+              let username = res.data.payload.display_name
+              .split(" ")[0][0]
+              .toUpperCase() +
+              res.data.payload.display_name.split(" ")[0].substring(1)
+              setFormattedName(username) 
+            }
+          },
+          (e) => {
+            console.error(e);
+          }
+        )
+        .catch((e) => {
+          console.error(e);
+        });
     }
 
     return () => {
       setEvents([])
     }
-  }, [user_id, updateEvent, created, accessToken]);
+  }, [user_id, updateEvent, created, accessToken, formattedName]);
 
   const deleteEvent = async (event_id) => {
     try {

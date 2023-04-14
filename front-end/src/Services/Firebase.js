@@ -18,6 +18,7 @@ export const userSignUp = async (display_name, email, password) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password).then(
       (userCred) => {
+        console.log(userCred)
         updateProfile(userCred.user, userCred.user.displayName = display_name)
         result = userCred.user;
         localStorage.setItem("loggedIn", true);

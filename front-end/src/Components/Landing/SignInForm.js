@@ -25,7 +25,6 @@ function SignInForm({setUserId}) {
       let res = await userSignIn(input.email, input.password);
       if (res.email) {
         const { email, accessToken } = res;
-
         try {
           await axios
             .get(`${API}/users/${email}`, {
