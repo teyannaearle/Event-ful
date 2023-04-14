@@ -22,13 +22,13 @@ export default function Landing() {
             </Link>
           </div>
         </span>
-        <h2  className="col-h">( Our Mission )</h2>
+        <h2 className="col-h">( Our Mission )</h2>
         <span>
           <p>
-            Here at Event(ful), we simplify all your planning needs and keep all
-            of your event details in one location. From selecting a photographer
-            to choosing your hors d’ oeuvres, its all right where you need it to
-            be for your big day! Let’s get planning!
+            Here at Event(ful), we simplify all of your planning needs and keep
+            all of your event details in one location. From finding vendors to
+            keeping track of your budget, its all right where you need it to be
+            for your big day! Let’s get planning!
           </p>
         </span>
       </div>
