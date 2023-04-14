@@ -126,6 +126,7 @@ function SignInForm({setUserId}) {
               value={input.email}
               onChange={handleChange}
               placeholder="Email"
+              required
             />{" "}
             <label htmlFor="Password">Please Enter Your Password</label>
             <input
@@ -135,6 +136,7 @@ function SignInForm({setUserId}) {
               onChange={handleChange}
               placeholder="Password"
               autoComplete="off"
+              required
             />{" "}
           </span>
           <button type="submit" className="Login pg-buttons">

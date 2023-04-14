@@ -73,6 +73,7 @@ export default function SignUp({setUserId}) {
                 value={input.display_name}
                 onChange={handleChange}
                 placeholder="Name"
+                required
               />{" "}
               <label htmlFor="Email">Please Enter your Email</label>
               <input
@@ -81,6 +82,7 @@ export default function SignUp({setUserId}) {
                 value={input.email}
                 onChange={handleChange}
                 placeholder="Email"
+                required
               />
               <label htmlFor="Password">
                 Select a Password (min 6 characters)
@@ -92,6 +94,7 @@ export default function SignUp({setUserId}) {
                 onChange={handleChange}
                 placeholder="Password"
                 autoComplete="off"
+                required
               />{" "}
             </span>
             <button type="submit" className="Login SignUp pg-buttons">
