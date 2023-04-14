@@ -4,7 +4,6 @@
 
 [Live Site](https://eventful-application.netlify.app)
 
-[Back-end](https://eventful-application.herokuapp.com)
 
 ![Event Page](./assets/event.jpeg)
 ![Dashboard Page](./assets/dashboard.jpeg)
