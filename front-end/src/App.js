@@ -87,7 +87,7 @@ function App() {
   }, [loggedInUser]);
 
   useEffect(() => {
-    if (user_id) {
+    if (user_id && accessToken) {
       axios
         .get(`${API}/events/${user_id}`, {  headers: {
           Authorization: "Bearer " + accessToken,

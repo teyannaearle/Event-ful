@@ -34,7 +34,7 @@ function EditBooked({ city, formatter, user_id }) {
     let vendorCategories = [];
     let booked = {};
 
-    if (user_id) {
+    if (user_id && accessToken) {
       try {
         axios
           .get(`${API}/checklist/${user_id}/${event_id}` , {

@@ -19,7 +19,7 @@ export default function FavoriteList({ user_id }) {
   const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
-    if (user_id) {
+    if (user_id && accessToken) {
       axios
         .get(`${API}/favorites/${user_id}` , {
           headers: {

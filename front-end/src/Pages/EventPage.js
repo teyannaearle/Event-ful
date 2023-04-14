@@ -22,7 +22,7 @@ export default function Event({ formatter, user_id }) {
   const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
-    if (user_id) {
+    if (user_id && accessToken) {
       try {
         axios.get(`${api}/events/${user_id}/${event_id}` , {
           headers: {

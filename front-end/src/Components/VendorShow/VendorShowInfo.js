@@ -18,23 +18,25 @@ function VendorShowInfo({ business, user_id, category }) {
   const accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
-    try {
-      axios.get(`${API}/favorites/${user_id}` , {
-        headers: {
-          Authorization: "Bearer " + accessToken,
-        },
-      }).then((res) => {
-        if (res.data.message[0]){
-        let index = res.data.message.findIndex(
-          (elem) => elem.vendor_name === business.name
-        );
-        if (index > -1) {
-          setFavorite(true);
+    if (user_id && accessToken){
+      try {
+        axios.get(`${API}/favorites/${user_id}` , {
+          headers: {
+            Authorization: "Bearer " + accessToken,
+          },
+        }).then((res) => {
+          if (res.data.message[0]){
+          let index = res.data.message.findIndex(
+            (elem) => elem.vendor_name === business.name
+          );
+          if (index > -1) {
+            setFavorite(true);
+          }
         }
+        });
+      } catch (e) {
+        console.warn(e);
       }
-      });
-    } catch (e) {
-      console.warn(e);
     }
 
     return () => {

@@ -14,7 +14,7 @@ export default function BookedVendorList({ user_id }) {
   const  accessToken  = loggedInUser.currentUser ? loggedInUser.currentUser.accessToken : null
 
   useEffect(() => {
-    if (user_id) {
+    if (user_id && accessToken) {
       axios
         .get(`${API}/booked/${user_id}/${event_id}` , {
           headers: {

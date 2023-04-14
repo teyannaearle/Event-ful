@@ -54,7 +54,7 @@ function EditEvent({ setUpdateEvent, user_id }) {
   });
 
   useEffect(() => {
-    if (user_id) {
+    if (user_id && accessToken) {
       try {
         axios.get(`${API}/events/${user_id}/${event_id}` , {
           headers: {
@@ -86,7 +86,7 @@ function EditEvent({ setUpdateEvent, user_id }) {
   }, [user_id, event_id, setUpdateEvent, accessToken]);
 
   useEffect(() => {
-    if (user_id) {
+    if (user_id && accessToken) {
       try {
         axios.get(`${API}/checklist/${user_id}/${event_id}` , {
           headers: {
