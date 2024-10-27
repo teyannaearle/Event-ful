@@ -18,14 +18,17 @@ const app = express();
 // }));
 
 const corsOptions = {
-  origin: 'https://eventful-application.netlify.app', // specify your frontend's URL
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // if you’re using cookies or other credentials
+  origin: 'https://eventful-application.netlify.app', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
 
+app.options('*', cors(corsOptions)); 
+
 app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://eventful-application.netlify.app');
   res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
   res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
   next();
