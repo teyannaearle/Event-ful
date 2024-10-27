@@ -1,6 +1,6 @@
 \c eventful_application;
 
-INSERT INTO users (userName , email, created_at) VALUES
+INSERT INTO users (display_name , email, created_at) VALUES
 ('tey' ,'fakeemail@email.com','2020-10-19 10:23:54'),
 ('dustin' ,'email@email.com','2020-10-19 10:23:54');
 
