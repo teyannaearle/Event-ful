@@ -13,9 +13,19 @@ const usersController = require("./Controllers/usersController")
 const app = express();
 
 // MIDDLEWARE
-app.use(cors({
-  origin: ["https://eventful-application.netlify.app", "http://localhost:3000"]
-}));
+// app.use(cors({
+//   origin: ["https://eventful-application.netlify.app", "http://localhost:3000"]
+// }));
+
+const corsOptions = {
+  origin: 'https://eventful-application.netlify.app', // specify your frontend's URL
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // if you’re using cookies or other credentials
+};
+
+app.use(cors(corsOptions));
+
+
 app.use(express.json()); // Parse incoming JSON
 // app.use(middleware.decodeToken)
 
