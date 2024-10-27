@@ -20,6 +20,7 @@ const app = express();
 const corsOptions = {
   origin: 'https://eventful-application.netlify.app', 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: '*',
   credentials: true,
 };
 
