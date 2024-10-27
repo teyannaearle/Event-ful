@@ -13,27 +13,28 @@ const usersController = require("./Controllers/usersController")
 const app = express();
 
 // MIDDLEWARE
-// app.use(cors({
-//   origin: ["https://eventful-application.netlify.app", "http://localhost:3000"]
-// }));
+app.use(cors({
+  origin: ["https://eventful-application.netlify.app", "http://localhost:3000"],
+  credentials: true
+}));
 
-const corsOptions = {
-  origin: 'https://eventful-application.netlify.app', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: '*',
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: 'https://eventful-application.netlify.app', 
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: 'Authorization',
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
-app.options('*', cors(corsOptions)); 
+// app.options('*', cors(corsOptions)); 
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://eventful-application.netlify.app');
-  res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
-  res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', 'https://eventful-application.netlify.app');
+//   res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+//   res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+//   next();
+// });
 
 
 app.use(express.json()); // Parse incoming JSON
