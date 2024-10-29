@@ -60,7 +60,7 @@ function App() {
   useEffect(() => {
     (async () => {
       if (loggedInUser.currentUser) {
-        const { email, accessToken }= loggedInUser.currentUser
+        const { email, accessToken } = loggedInUser.currentUser
         let checkUser = await axios.get(`${API}/users/${email}`, {
           headers: {
             Authorization: "Bearer " + accessToken,
