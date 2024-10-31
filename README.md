@@ -2,9 +2,7 @@
 ## Full Stack Party Planning App
 ### Capstone Project
 
-
-![Event Page](./assets/event.jpeg)
-![Dashboard Page](./assets/dashboard.jpeg)
+![hippo](https://github.com/teyannaearle/portfolio/blob/main/src/assets/eventful.gif)
 
 
 ## Table of Content
